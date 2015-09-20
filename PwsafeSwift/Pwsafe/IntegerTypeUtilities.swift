@@ -1,0 +1,50 @@
+//
+//  IntegerTypesUtilities.swift
+//  PwsafeSwift
+//
+//  Created by Anton Selyanin on 13/09/15.
+//  Copyright © 2015 Anton Selyanin. All rights reserved.
+//
+
+import Foundation
+
+extension UInt32: ByteArrayConvertible {
+    init(littleEndianBytes bytes: [UInt8]) {
+        var result: UInt32 = 0
+        for byte in bytes.prefix(sizeof(UInt32)).reverse() {
+            result = result << 8 | UInt32(byte)
+        }
+        self = result
+    }
+    
+    func toLittleEndianBytes() -> [UInt8] {
+        return [
+            UInt8(truncatingBitPattern: self),
+            UInt8(truncatingBitPattern: self >> 8),
+            UInt8(truncatingBitPattern: self >> 16),
+            UInt8(truncatingBitPattern: self >> 24)
+        ]
+    }
+}
+
+extension UInt16: ByteArrayConvertible {
+    init(littleEndianBytes bytes: [UInt8]) {
+        var result: UInt16 = 0
+        for byte in bytes.prefix(sizeof(UInt16)).reverse() {
+            result = result << 8 | UInt16(byte)
+        }
+        self = result
+    }
+
+    func toLittleEndianBytes() -> [UInt8] {
+        return [
+            UInt8(truncatingBitPattern: self),
+            UInt8(truncatingBitPattern: self >> 8)
+        ]
+    }
+}
+
+protocol ByteArrayConvertible {
+    init(littleEndianBytes bytes: [UInt8])
+    func toLittleEndianBytes() -> [UInt8]
+}
