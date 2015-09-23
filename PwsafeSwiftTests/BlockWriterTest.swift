@@ -44,71 +44,32 @@ class BlockWriterTest: QuickSpec {
                 writer.finishBlock()
                 
                 expect(writer.data.count).to(equal(32))
-//                expect(writer.data.prefix(4))
-                
-                
-//                expect(writer.data).to(equal([1, 2, 3, 4]))
-//                
-//                expect(writer.data.count).to(equal(16))
-//                
-//                let result = [UInt8](writer.data.suffix(4))
-//                expect(result).to(equal([8, 7, 6, 5]))
-           }
+                let byteArray = [UInt8](writer.data.prefix(4))
+                expect(byteArray).to(equal([1, 2, 3, 4]))
+                let uintDataArray = [UInt8](writer.data[16..<20])
+                expect(uintDataArray).to(equal([8, 7, 6, 5]))
+            }
             
+            it ("should write raw field") {
+                var writer = BlockWriter()
+                
+                writer.writeRawField(type: 0x01, data: [0x05, 0x06, 0x07, 0x08])
+                
+                expect(writer.data.count).to(equal(16))
+                expect(writer.data[0..<4].toArray()).to(equal([0x04, 0x00, 0x00, 0x00]))
+                expect(writer.data[4]).to(equal(0x01))
+                expect(writer.data[5..<9].toArray()).to(equal([0x05, 0x06, 0x07, 0x08]))
+            }
+            
+            it ("should write empty raw field") {
+                var writer = BlockWriter()
+                
+                writer.writeRawField(type: 0xff)
+                
+                expect(writer.data.count).to(equal(16))
+                expect(writer.data[0..<4].toArray()).to(equal([0x00, 0x00, 0x00, 0x00]))
+                expect(writer.data[4]).to(equal(0xff))
+            }
         }
-/*
-        describe("BlockReader") {
-            it("should read data to array") {
-                let data:[UInt8] = [1, 2, 3, 4, 5, 6, 7]
-                var reader = BlockReader(data: data)
-                
-                expect(reader.readBytes(3)).to(equal([1, 2, 3]))
-                expect(reader.readBytes(4)).to(equal([4, 5, 6, 7]))
-                expect(reader.readBytes(1)).to(beNil())
-            }
-            
-            it("should read UInt32 little-endian") {
-                let data:[UInt8] = [0x04, 0x03, 0x02, 0x01, 0xFF]
-                var reader = BlockReader(data: data)
-                
-                let result: UInt32? = reader.readUInt32LE()
-                
-                expect(result).to(equal(0x01020304))
-                expect(reader.readUInt32LE()).to(beNil())
-            }
-            
-            it("should read UInt16 little-endian") {
-                let data:[UInt8] = [0x02, 0x01, 0xFF]
-                var reader = BlockReader(data: data)
-                
-                let result: UInt16? = reader.readUInt16LE()
-                
-                expect(result).to(equal(0x0102))
-                expect(reader.readUInt16LE()).to(beNil())
-            }
-            
-            it("should read UInt8") {
-                let data:[UInt8] = [1, 23]
-                var reader = BlockReader(data: data)
-                
-                expect(reader.readUInt8()).to(equal(0x01))
-                expect(reader.readUInt8()).to(equal(23))
-                expect(reader.readUInt8()).to(beNil())
-            }
-            
-            it("should read block") {
-                let data:[UInt8] = [
-                    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                ]
-                var reader = BlockReader(data: data)
-                
-                expect(reader.readBytes(1)).to(equal([1]))
-                expect(reader.nextBlock()).to(equal(true))
-                expect(reader.readBytes(1)).to(equal([2]))
-                expect(reader.nextBlock()).to(equal(false))
-            }
-
-*/
     }
 }
