@@ -8,6 +8,22 @@
 
 import Foundation
 
+
+protocol ByteArrayConvertible {
+    init(littleEndianBytes bytes: [UInt8])
+    func toLittleEndianBytes() -> [UInt8]
+}
+
+extension UInt8: ByteArrayConvertible {
+    init(littleEndianBytes bytes: [UInt8]) {
+        self = bytes.first ?? 0
+    }
+    
+    func toLittleEndianBytes() -> [UInt8] {
+        return [self]
+    }
+}
+
 extension UInt32: ByteArrayConvertible {
     init(littleEndianBytes bytes: [UInt8]) {
         var result: UInt32 = 0
@@ -42,9 +58,4 @@ extension UInt16: ByteArrayConvertible {
             UInt8(truncatingBitPattern: self >> 8)
         ]
     }
-}
-
-protocol ByteArrayConvertible {
-    init(littleEndianBytes bytes: [UInt8])
-    func toLittleEndianBytes() -> [UInt8]
 }

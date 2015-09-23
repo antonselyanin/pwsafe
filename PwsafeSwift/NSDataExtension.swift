@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+extension NSData {
+    convenience init(bytes:[UInt8]) {
+        self.init(bytes: bytes, length:bytes.count)
+    }
+}

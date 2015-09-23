@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+extension String {
+    func utf8Bytes() -> [UInt8] {
+        return utf8.map {$0}
+    }
+}

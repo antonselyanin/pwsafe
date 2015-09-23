@@ -13,10 +13,6 @@ private let BlockSize = 16
 struct BlockWriter {
     private(set) var data = [UInt8]()
     
-    init() {
-        
-    }
-    
     mutating func write(bytes: [UInt8]) {
         data.appendContentsOf(bytes)
     }
@@ -28,8 +24,18 @@ struct BlockWriter {
     mutating func finishBlock() {
         let remainder = data.count % BlockSize
         if remainder > 0 {
-            let remainderArray = [UInt8](count: BlockSize - remainder, repeatedValue: 0)
+            var remainderArray = [UInt8](count: BlockSize - remainder, repeatedValue: 0)
+            arc4random_buf(&remainderArray, remainderArray.count)
             data.appendContentsOf(remainderArray)
         }
+    }
+}
+
+extension BlockWriter {
+    mutating func writeRawField(type type: UInt8, data: [UInt8] = []) {
+        write(UInt32(data.count))
+        write(type)
+        write(data)
+        finishBlock()
     }
 }

@@ -2,27 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="71fda3af-5b55-4713-82a8-0a2ca4b60fcf" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PwsafeSwift/Pwsafe.playground/Resources/tom.psafe3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PwsafeSwiftTests/test.psafe3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PwsafeSwift/Assets.xcassets/Contents.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PwsafeSwift/BlockReader.swift" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PwsafeSwift/Blowfish/Blowfish.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PwsafeSwift/Blowfish/Blowfish.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PwsafeSwift/NSInputStreamExtensions.swift" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PwsafeSwift/Pwsafe/EncryptedPwsafe.swift" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PwsafeSwift/Pwsafe/PwsafeHeader.swift" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PwsafeSwift/PwsafeSwift-Bridging-Header.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PwsafeSwiftTests/BlockReaderTest.swift" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PwsafeSwiftTests/BlowfishTest.swift" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PwsafeSwiftTests/Bridging.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PwsafeSwiftTests/NSDataExtension.swift" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PwsafeSwiftTests/NSStreamExtensionsTest.swift" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PwsafeSwiftTests/PwsafeTest.swift" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/PwsafeSwiftTests/PwsafeSwiftTests.swift" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PwsafeSwift.xcodeproj/project.xcworkspace/xcuserdata/anton.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/PwsafeSwift.xcodeproj/project.xcworkspace/xcuserdata/anton.xcuserdatad/UserInterfaceState.xcuserstate" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PwsafeSwift/NSDataExtension.swift" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PwsafeSwift/PwsafeParsing.swift" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PwsafeSwift/StringExtension.swift" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PwsafeSwift/Assets.xcassets/Data.dataset/Contents.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PwsafeSwift/Assets.xcassets/Data.dataset/tom.psafe3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PwsafeSwift/Assets.xcassets/sample.pwsafe.dataset/Contents.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PwsafeSwift/Pwsafe.playground/Resources/Safe files/tom.psafe3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PwsafeSwift/Pwsafe.playground/Resources/untitled folder/IMG_1661.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PwsafeSwift/Pwsafe/EncryptedPwsafe.swift" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/PwsafeSwift/Pwsafe/PwsafeHeader.swift" afterPath="$PROJECT_DIR$/PwsafeSwift/Pwsafe/PwsafeStructs.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PwsafeSwift.xcworkspace/xcuserdata/anton.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/PwsafeSwift.xcworkspace/xcuserdata/anton.xcuserdatad/UserInterfaceState.xcuserstate" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/PwsafeSwift.iml" afterPath="$PROJECT_DIR$/.idea/PwsafeSwift.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PwsafeSwift.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/PwsafeSwift.xcodeproj/project.pbxproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PwsafeSwift.xcodeproj/xcuserdata/anton.xcuserdatad/xcschemes/PwsafeSwift.xcscheme" afterPath="$PROJECT_DIR$/PwsafeSwift.xcodeproj/xcuserdata/anton.xcuserdatad/xcschemes/PwsafeSwift.xcscheme" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PwsafeSwift/Base.lproj/Main.storyboard" afterPath="$PROJECT_DIR$/PwsafeSwift/Base.lproj/Main.storyboard" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PwsafeSwift/BlockWriter.swift" afterPath="$PROJECT_DIR$/PwsafeSwift/BlockWriter.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PwsafeSwift/Pwsafe/IntegerTypeUtilities.swift" afterPath="$PROJECT_DIR$/PwsafeSwift/Pwsafe/IntegerTypeUtilities.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PwsafeSwiftTests/BlockWriterTest.swift" afterPath="$PROJECT_DIR$/PwsafeSwiftTests/BlockWriterTest.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PwsafeSwiftTests/PwsafeTest.swift" afterPath="$PROJECT_DIR$/PwsafeSwiftTests/PwsafeTest.swift" />
     </list>
     <ignored path="PwsafeSwift.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -53,16 +49,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BlowfishTest.swift" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PwsafeSwiftTests/BlowfishTest.swift">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Bridging.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PwsafeSwiftTests/Bridging.h">
           <provider selected="true" editor-type-id="text-editor">
@@ -77,7 +63,7 @@
         <entry file="file://$PROJECT_DIR$/PwsafeSwift/BlockReader.swift">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+              <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -86,18 +72,8 @@
       <file leaf-file-name="BlockReaderTest.swift" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PwsafeSwiftTests/BlockReaderTest.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.22633745">
-              <caret line="11" column="44" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Swift.swift" pinned="false" current-in-tab="false">
-        <entry file="mock:///Swift.swift">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="2181" column="14" selection-start-line="2181" selection-start-column="14" selection-end-line="2181" selection-end-column="14" />
+            <state vertical-scroll-proportion="0.37138927">
+              <caret line="18" column="33" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -112,6 +88,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/PwsafeSwift/BlockReader.swift" />
+        <option value="$PROJECT_DIR$/PwsafeSwiftTests/BlockReaderTest.swift" />
       </list>
     </option>
   </component>
@@ -121,8 +98,8 @@
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="193" />
-    <option name="y" value="93" />
+    <option name="x" value="171" />
+    <option name="y" value="89" />
     <option name="width" value="1440" />
     <option name="height" value="873" />
   </component>
@@ -239,6 +216,11 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
       <method />
     </configuration>
     <configuration default="false" name="PwsafeSwift" type="AppleRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="PwsafeSwift" TARGET_NAME="PwsafeSwift" CONFIG_NAME="Debug" SCHEME_NAME="PwsafeSwift" RUN_TARGET_PROJECT_NAME="PwsafeSwift" RUN_TARGET_NAME="PwsafeSwift" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
@@ -299,8 +281,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="193" y="93" width="1440" height="873" extended-state="0" />
-    <editor active="true" />
+    <frame x="171" y="89" width="1440" height="873" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24947146" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -342,15 +324,31 @@
     <entry file="file://$PROJECT_DIR$/PwsafeSwift/NSInputStreamExtensions.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PwsafeSwiftTests/BlowfishTest.swift">
+    <entry file="file://$PROJECT_DIR$/PwsafeSwiftTests/Bridging.h">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PwsafeSwift/BlockReader.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PwsafeSwift/NSInputStreamExtensions.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -374,7 +372,7 @@
     <entry file="file://$PROJECT_DIR$/PwsafeSwift/BlockReader.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -387,18 +385,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PwsafeSwiftTests/BlowfishTest.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/PwsafeSwiftTests/BlockReaderTest.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22633745">
-          <caret line="11" column="44" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.37138927">
+          <caret line="18" column="33" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
           <folding />
         </state>
       </provider>

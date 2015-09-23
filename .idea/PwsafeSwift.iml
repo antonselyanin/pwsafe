@@ -151,19 +151,21 @@
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Base.lproj/LaunchScreen.storyboard" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Base.lproj/Main.storyboard" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/BlockReader.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Blowfish/Blowfish.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Blowfish/Blowfish.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/BlockWriter.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Info.plist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/NSDataExtension.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/NSInputStreamExtensions.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Pwsafe.playground" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Pwsafe/EncryptedPwsafe.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Pwsafe/PwsafeHeader.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/PwsafeSwift-Bridging-Header.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Pwsafe/IntegerTypeUtilities.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Pwsafe/PwsafeStructs.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/PwsafeParsing.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/StringExtension.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/ViewController.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/BlockReaderTest.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/BlowfishTest.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/BlockWriterTest.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Bridging.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Info.plist" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/IntegerTypeUtilitiesTest.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/NSDataExtension.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/NSStreamExtensionsTest.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/PwsafeTest.swift" isTestSource="false" />
