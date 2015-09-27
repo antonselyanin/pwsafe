@@ -11,7 +11,7 @@ class PwsafeParsingTest: QuickSpec {
                 let safeData = NSData(contentsOfURL: safeUrl)!
                 
                 let pwsafe = try! readPwsafe(safeData, password: "tom")
-                expect(pwsafe.header.version).to(equal(0x030b))
+                expect(pwsafe.header.valueByKey(HeaderKeys.Version)).to(equal(0x030b))
             }
         }
         

@@ -78,7 +78,8 @@ func parseRawPwsafeRecords(let data: [UInt8]) throws -> [[RawField]] {
             throw PwsafeParseError.CorruptedData
         }
         
-        if fieldType == PwsafeHeaderFieldType.EndOfEntry.rawValue {
+        //todo: magic constant?
+        if fieldType == 0xff {
             rawRecords.append(rawFields)
             rawFields = [RawField]()
         } else {
@@ -91,30 +92,12 @@ func parseRawPwsafeRecords(let data: [UInt8]) throws -> [[RawField]] {
     return rawRecords
 }
 
-func parsePwsafeHeader(let data: [UInt8]) throws -> PwsafeHeader {
-    var version: UInt16?
-    var uuid: NSUUID?
-    
+func parsePwsafeHeader(let data: [UInt8]) throws -> PwsafeRecord<HeaderRecord> {
     guard let headerFields = try parseRawPwsafeRecords(data).first else {
         throw PwsafeParseError.CorruptedData
     }
     
-    for record in headerFields {
-        switch record.typeCode {
-        case PwsafeHeaderFieldType.Version.rawValue:
-            version = UInt16(littleEndianBytes: record.bytes)
-        case PwsafeHeaderFieldType.UUID.rawValue:
-            uuid = NSUUID(UUIDBytes: record.bytes)
-        default:
-            break;
-        }
-    }
-    
-    if let version = version, let uuid = uuid {
-        return PwsafeHeader(version: version, uuid: uuid, rawRecords: headerFields)
-    }
-    
-    throw PwsafeParseError.CorruptedData
+    return PwsafeRecord<HeaderRecord>(rawFields: headerFields)
 }
 
 func stretchKey(password: [UInt8], salt: [UInt8], iterations: Int) -> [UInt8] {

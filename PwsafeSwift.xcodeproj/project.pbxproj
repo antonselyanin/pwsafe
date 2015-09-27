@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3A03FED61BAD894F00741D62 /* BlockWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A03FED51BAD894F00741D62 /* BlockWriter.swift */; settings = {ASSET_TAGS = (); }; };
 		3A03FED81BAD89BD00741D62 /* BlockWriterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A03FED71BAD89BD00741D62 /* BlockWriterTest.swift */; settings = {ASSET_TAGS = (); }; };
+		3A1ADF131BB461050091C376 /* FieldValueExtractors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1ADF121BB461050091C376 /* FieldValueExtractors.swift */; settings = {ASSET_TAGS = (); }; };
+		3A1ADF161BB464540091C376 /* FieldValueExtractorsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1ADF151BB464540091C376 /* FieldValueExtractorsTest.swift */; settings = {ASSET_TAGS = (); }; };
 		3A2AA15A1B6E0BEC009E0422 /* tom.psafe3 in Resources */ = {isa = PBXBuildFile; fileRef = 3A2AA1591B6E0BEC009E0422 /* tom.psafe3 */; };
 		3A2AA15C1B6E0F2E009E0422 /* PwsafeParsingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2AA15B1B6E0F2E009E0422 /* PwsafeParsingTest.swift */; };
 		3A556A791B73B5A400E45151 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A556A781B73B5A400E45151 /* Security.framework */; };
@@ -49,13 +51,14 @@
 		2EB9FFBF122AD3687D9B0285 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		3A03FED51BAD894F00741D62 /* BlockWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockWriter.swift; sourceTree = "<group>"; };
 		3A03FED71BAD89BD00741D62 /* BlockWriterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockWriterTest.swift; sourceTree = "<group>"; };
+		3A1ADF121BB461050091C376 /* FieldValueExtractors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldValueExtractors.swift; sourceTree = "<group>"; };
+		3A1ADF151BB464540091C376 /* FieldValueExtractorsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldValueExtractorsTest.swift; sourceTree = "<group>"; };
 		3A2AA1591B6E0BEC009E0422 /* tom.psafe3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tom.psafe3; sourceTree = "<group>"; };
 		3A2AA15B1B6E0F2E009E0422 /* PwsafeParsingTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeParsingTest.swift; sourceTree = "<group>"; };
 		3A556A621B73B1EE00E45151 /* libcommonCrypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcommonCrypto.tbd; path = usr/lib/system/libcommonCrypto.tbd; sourceTree = SDKROOT; };
 		3A556A781B73B5A400E45151 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3A5A22E21BA4498600025E31 /* BlockReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockReader.swift; sourceTree = "<group>"; };
 		3A5E0BF01B9C80DA0026D8EE /* test.psafe3 */ = {isa = PBXFileReference; lastKnownFileType = file; name = test.psafe3; path = ../test.psafe3; sourceTree = "<group>"; };
-		3A5E0BF21B9DCF460026D8EE /* Bridging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
 		3A8D2C931B691AE50030494F /* PwsafeSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PwsafeSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A8D2C961B691AE50030494F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A8D2C981B691AE50030494F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -65,7 +68,6 @@
 		3A8D2CA21B691AE50030494F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A8D2CA71B691AE50030494F /* PwsafeSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PwsafeSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A8D2CAD1B691AE50030494F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3A8D2CB61B691B5A0030494F /* Pwsafe.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Pwsafe.playground; sourceTree = "<group>"; };
 		3A94418F1BA5520600B00514 /* IntegerTypeUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IntegerTypeUtilities.swift; path = Pwsafe/IntegerTypeUtilities.swift; sourceTree = "<group>"; };
 		3A9441911BA5A42B00B00514 /* IntegerTypeUtilitiesTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegerTypeUtilitiesTest.swift; sourceTree = "<group>"; };
 		3A9D30B91BAF05D3009A0330 /* NSDataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDataExtension.swift; sourceTree = "<group>"; };
@@ -115,6 +117,19 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		3A1ADF141BB462100091C376 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				3AB2DAD01B7A39E90051F3A8 /* NSDataExtension.swift */,
+				3A9EF3071B6E6D23002E3689 /* NSStreamExtensionsTest.swift */,
+				3A9441911BA5A42B00B00514 /* IntegerTypeUtilitiesTest.swift */,
+				58AAA3D501354728866A8906 /* BlockReaderTest.swift */,
+				3A03FED71BAD89BD00741D62 /* BlockWriterTest.swift */,
+				3A9D30C01BB06073009A0330 /* ArraySliceExtension.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
 		3A2AA1581B6E0BEC009E0422 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,12 +165,11 @@
 				3A9EF2FE1B6E5B0B002E3689 /* Pwsafe */,
 				3A8D2C961B691AE50030494F /* AppDelegate.swift */,
 				3A8D2C981B691AE50030494F /* ViewController.swift */,
+				3A9EF3051B6E6A10002E3689 /* NSInputStreamExtensions.swift */,
 				3A8D2C9A1B691AE50030494F /* Main.storyboard */,
 				3A8D2C9D1B691AE50030494F /* Assets.xcassets */,
 				3A8D2C9F1B691AE50030494F /* LaunchScreen.storyboard */,
 				3A8D2CA21B691AE50030494F /* Info.plist */,
-				3A8D2CB61B691B5A0030494F /* Pwsafe.playground */,
-				3A9EF3051B6E6A10002E3689 /* NSInputStreamExtensions.swift */,
 			);
 			path = PwsafeSwift;
 			sourceTree = "<group>";
@@ -163,16 +177,11 @@
 		3A8D2CAA1B691AE50030494F /* PwsafeSwiftTests */ = {
 			isa = PBXGroup;
 			children = (
+				3A1ADF141BB462100091C376 /* Utilities */,
 				3A2AA1581B6E0BEC009E0422 /* Resources */,
 				3A2AA15B1B6E0F2E009E0422 /* PwsafeParsingTest.swift */,
-				3AB2DAD01B7A39E90051F3A8 /* NSDataExtension.swift */,
+				3A1ADF151BB464540091C376 /* FieldValueExtractorsTest.swift */,
 				3A8D2CAD1B691AE50030494F /* Info.plist */,
-				3A9EF3071B6E6D23002E3689 /* NSStreamExtensionsTest.swift */,
-				3A5E0BF21B9DCF460026D8EE /* Bridging.h */,
-				3A9441911BA5A42B00B00514 /* IntegerTypeUtilitiesTest.swift */,
-				58AAA3D501354728866A8906 /* BlockReaderTest.swift */,
-				3A03FED71BAD89BD00741D62 /* BlockWriterTest.swift */,
-				3A9D30C01BB06073009A0330 /* ArraySliceExtension.swift */,
 			);
 			path = PwsafeSwiftTests;
 			sourceTree = "<group>";
@@ -195,6 +204,7 @@
 				3A9D30BF1BAF239B009A0330 /* Utilities */,
 				3A9EF3011B6E5FC8002E3689 /* PwsafeStructs.swift */,
 				3A9D30BD1BAF10D4009A0330 /* PwsafeParsing.swift */,
+				3A1ADF121BB461050091C376 /* FieldValueExtractors.swift */,
 			);
 			name = Pwsafe;
 			sourceTree = "<group>";
@@ -422,6 +432,7 @@
 				3A9EF3061B6E6A10002E3689 /* NSInputStreamExtensions.swift in Sources */,
 				3A9D30BE1BAF10D4009A0330 /* PwsafeParsing.swift in Sources */,
 				3A9441901BA5520600B00514 /* IntegerTypeUtilities.swift in Sources */,
+				3A1ADF131BB461050091C376 /* FieldValueExtractors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,6 +441,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A9441921BA5A42B00B00514 /* IntegerTypeUtilitiesTest.swift in Sources */,
+				3A1ADF161BB464540091C376 /* FieldValueExtractorsTest.swift in Sources */,
 				3A03FED81BAD89BD00741D62 /* BlockWriterTest.swift in Sources */,
 				3A9D30B81BAF0571009A0330 /* NSDataExtension.swift in Sources */,
 				3A2AA15C1B6E0F2E009E0422 /* PwsafeParsingTest.swift in Sources */,
@@ -598,7 +610,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = anton.PwsafeSwiftTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = PwsafeSwiftTests/Bridging.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PwsafeSwift.app/PwsafeSwift";
 			};
 			name = Debug;
@@ -612,7 +624,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = anton.PwsafeSwiftTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = PwsafeSwiftTests/Bridging.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PwsafeSwift.app/PwsafeSwift";
 			};
 			name = Release;

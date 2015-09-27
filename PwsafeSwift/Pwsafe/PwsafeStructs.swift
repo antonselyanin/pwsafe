@@ -11,8 +11,8 @@ import Foundation
 public struct Pwsafe {
     // todo: password?
     public let name: String
-    public let header: PwsafeHeader
-    public let records: [PwsafeRecord]
+    public let header: PwsafeRecord<HeaderRecord>
+    public let records: [PwsafeRecord<PasswordRecord>]
 }
 
 public struct RawField {
@@ -20,43 +20,64 @@ public struct RawField {
     let bytes: [UInt8]
 }
 
-/*
-Currently
-Name                        Value        Type    Implemented      Comments
---------------------------------------------------------------------------
-Version                     0x00        2 bytes       Y              [1]
-UUID                        0x01        UUID          Y              [2]
-Non-default preferences     0x02        Text          Y              [3]
-Tree Display Status         0x03        Text          Y              [4]
-Timestamp of last save      0x04        time_t        Y              [5]
-Who performed last save     0x05        Text          Y   [DEPRECATED 6]
-What performed last save    0x06        Text          Y              [7]
-Last saved by user          0x07        Text          Y              [8]
-Last saved on host          0x08        Text          Y              [9]
-Database Name               0x09        Text          Y              [10]
-Database Description        0x0a        Text          Y              [11]
-Database Filters            0x0b        Text          Y              [12]
-Reserved                    0x0c        -                            [13]
-Reserved                    0x0d        -                            [13]
-Reserved                    0x0e        -                            [13]
-Recently Used Entries       0x0f        Text                         [14]
-Named Password Policies     0x10        Text                         [15]
-Empty Groups                0x11        Text                         [16]
-Yubico                      0x12        Text                         [13]
-End of Entry                0xff        [empty]       Y              [17]
-*/
-public struct PwsafeHeader {
-    public let version: UInt16
-    public let uuid: NSUUID
-    
-    public let rawRecords: [RawField]
+public struct FieldKey<RecordType, ValueType> {
+    let code: UInt8
+    let extractor: (bytes: [UInt8]) -> ValueType?
 }
 
-public enum PwsafeHeaderFieldType: UInt8 {
+public protocol HeaderRecord {}
+public protocol PasswordRecord {}
+
+private func headerKey<T>(code: PwsafeHeaderFieldType, extractor: (bytes: [UInt8]) -> T?) -> FieldKey<HeaderRecord, T> {
+    return FieldKey<HeaderRecord, T>(code: code.rawValue, extractor: extractor)
+}
+
+public final class HeaderKeys {
+    public static let Version = headerKey(.Version, extractor: uint16Extractor)
+    public static let UUID = headerKey(.UUID, extractor: uuidExtractor)
+    public static let WhatPerformedLastSave = headerKey(.WhatPerformedLastSave, extractor: stringExtractor)
+    public static let DatabaseName = headerKey(.DatabaseName, extractor: stringExtractor)
+    public static let DatabaseDescription = headerKey(.DatabaseDescription, extractor: stringExtractor)
+}
+
+public struct PwsafeRecord<RecordType> {
+    public let rawFields: [RawField]
+    
+    func valueByKey<ValueType>(key: FieldKey<RecordType, ValueType>) -> ValueType? {
+        for field in rawFields {
+            if field.typeCode == key.code {
+                return key.extractor(bytes: field.bytes)
+            }
+        }
+        
+        return nil;
+    }
+}
+
+
+enum PwsafeHeaderFieldType: UInt8 {
     case Version = 0x00
     case UUID = 0x01
-    
-    case EndOfEntry = 0xff
+    case NonDefaultPreferences = 0x03
+    case TreeDisplayStatus = 0x04
+    case WhoPerformedLastSave = 0x05 // deprecated by the specification
+    case WhatPerformedLastSave = 0x06
+    case LastSavedByUser = 0x07
+    case LastSavedOnHost = 0x08
+    case DatabaseName = 0x09
+    case DatabaseDescription = 0x0a
+    case DatabaseFilters = 0x0b
+    case Reserved1 = 0x0c
+    case Reserved2 = 0x0d
+    case Reserved3 = 0x0e
+    case RecentlyUsedEntries = 0x0f
+    case NamedPasswordPolicies = 0x10
+    case EmptyGroups = 0x11
+    case Yubico = 0x12
+}
+
+enum PwsafeRecordFieldType: UInt8 {
+    case UUID = 0x01
 }
 
 /*
@@ -91,13 +112,13 @@ Entry keyboard shortcut     0x19        4 bytes       Y              [20]
 End of Entry                0xff        [empty]       Y              [21]
 */
 
-public struct PwsafeRecord {
-    public let uuid: NSUUID
-    public let title: String
-    public let password: String
-    
-    public let rawRecords: [RawField]
-}
+//public struct PwsafeRecord {
+//    public let uuid: NSUUID
+//    public let title: String
+//    public let password: String
+//    
+//    public let rawRecords: [RawField]
+//}
 
 public enum PwsafeParseError: ErrorType {
     case CorruptedData
