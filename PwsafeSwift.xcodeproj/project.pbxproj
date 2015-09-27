@@ -23,12 +23,14 @@
 		3A8D2CA11B691AE50030494F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A8D2C9F1B691AE50030494F /* LaunchScreen.storyboard */; };
 		3A9441901BA5520600B00514 /* IntegerTypeUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A94418F1BA5520600B00514 /* IntegerTypeUtilities.swift */; settings = {ASSET_TAGS = (); }; };
 		3A9441921BA5A42B00B00514 /* IntegerTypeUtilitiesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9441911BA5A42B00B00514 /* IntegerTypeUtilitiesTest.swift */; settings = {ASSET_TAGS = (); }; };
+		3A9CCC261BB7F5F60032BF26 /* PwsafeHeaderRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9CCC251BB7F5F60032BF26 /* PwsafeHeaderRecord.swift */; settings = {ASSET_TAGS = (); }; };
+		3A9CCC281BB7F6710032BF26 /* PwsafePasswordRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9CCC271BB7F6710032BF26 /* PwsafePasswordRecord.swift */; settings = {ASSET_TAGS = (); }; };
 		3A9D30B81BAF0571009A0330 /* NSDataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB2DAD01B7A39E90051F3A8 /* NSDataExtension.swift */; settings = {ASSET_TAGS = (); }; };
 		3A9D30BA1BAF05D3009A0330 /* NSDataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9D30B91BAF05D3009A0330 /* NSDataExtension.swift */; settings = {ASSET_TAGS = (); }; };
 		3A9D30BC1BAF1038009A0330 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9D30BB1BAF1038009A0330 /* StringExtension.swift */; settings = {ASSET_TAGS = (); }; };
 		3A9D30BE1BAF10D4009A0330 /* PwsafeParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9D30BD1BAF10D4009A0330 /* PwsafeParsing.swift */; settings = {ASSET_TAGS = (); }; };
 		3A9D30C11BB06073009A0330 /* ArraySliceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9D30C01BB06073009A0330 /* ArraySliceExtension.swift */; settings = {ASSET_TAGS = (); }; };
-		3A9EF3021B6E5FC8002E3689 /* PwsafeStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9EF3011B6E5FC8002E3689 /* PwsafeStructs.swift */; };
+		3A9EF3021B6E5FC8002E3689 /* Pwsafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9EF3011B6E5FC8002E3689 /* Pwsafe.swift */; };
 		3A9EF3061B6E6A10002E3689 /* NSInputStreamExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9EF3051B6E6A10002E3689 /* NSInputStreamExtensions.swift */; };
 		3A9EF3081B6E6D23002E3689 /* NSStreamExtensionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9EF3071B6E6D23002E3689 /* NSStreamExtensionsTest.swift */; };
 		58AAA7355D8C4B7C8C55727A /* BlockReaderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA3D501354728866A8906 /* BlockReaderTest.swift */; };
@@ -70,11 +72,13 @@
 		3A8D2CAD1B691AE50030494F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A94418F1BA5520600B00514 /* IntegerTypeUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IntegerTypeUtilities.swift; path = Pwsafe/IntegerTypeUtilities.swift; sourceTree = "<group>"; };
 		3A9441911BA5A42B00B00514 /* IntegerTypeUtilitiesTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegerTypeUtilitiesTest.swift; sourceTree = "<group>"; };
+		3A9CCC251BB7F5F60032BF26 /* PwsafeHeaderRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeHeaderRecord.swift; sourceTree = "<group>"; };
+		3A9CCC271BB7F6710032BF26 /* PwsafePasswordRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafePasswordRecord.swift; sourceTree = "<group>"; };
 		3A9D30B91BAF05D3009A0330 /* NSDataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDataExtension.swift; sourceTree = "<group>"; };
 		3A9D30BB1BAF1038009A0330 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		3A9D30BD1BAF10D4009A0330 /* PwsafeParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeParsing.swift; sourceTree = "<group>"; };
 		3A9D30C01BB06073009A0330 /* ArraySliceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArraySliceExtension.swift; sourceTree = "<group>"; };
-		3A9EF3011B6E5FC8002E3689 /* PwsafeStructs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PwsafeStructs.swift; path = Pwsafe/PwsafeStructs.swift; sourceTree = "<group>"; };
+		3A9EF3011B6E5FC8002E3689 /* Pwsafe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Pwsafe.swift; path = Pwsafe/Pwsafe.swift; sourceTree = "<group>"; };
 		3A9EF3051B6E6A10002E3689 /* NSInputStreamExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSInputStreamExtensions.swift; sourceTree = "<group>"; };
 		3A9EF3071B6E6D23002E3689 /* NSStreamExtensionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSStreamExtensionsTest.swift; sourceTree = "<group>"; };
 		3AB2DAD01B7A39E90051F3A8 /* NSDataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDataExtension.swift; path = PwsafeSwiftTests/NSDataExtension.swift; sourceTree = SOURCE_ROOT; };
@@ -202,9 +206,11 @@
 			isa = PBXGroup;
 			children = (
 				3A9D30BF1BAF239B009A0330 /* Utilities */,
-				3A9EF3011B6E5FC8002E3689 /* PwsafeStructs.swift */,
+				3A9EF3011B6E5FC8002E3689 /* Pwsafe.swift */,
 				3A9D30BD1BAF10D4009A0330 /* PwsafeParsing.swift */,
 				3A1ADF121BB461050091C376 /* FieldValueExtractors.swift */,
+				3A9CCC251BB7F5F60032BF26 /* PwsafeHeaderRecord.swift */,
+				3A9CCC271BB7F6710032BF26 /* PwsafePasswordRecord.swift */,
 			);
 			name = Pwsafe;
 			sourceTree = "<group>";
@@ -424,8 +430,10 @@
 			files = (
 				3A8D2C991B691AE50030494F /* ViewController.swift in Sources */,
 				3A8D2C971B691AE50030494F /* AppDelegate.swift in Sources */,
+				3A9CCC281BB7F6710032BF26 /* PwsafePasswordRecord.swift in Sources */,
 				3A9D30BA1BAF05D3009A0330 /* NSDataExtension.swift in Sources */,
-				3A9EF3021B6E5FC8002E3689 /* PwsafeStructs.swift in Sources */,
+				3A9EF3021B6E5FC8002E3689 /* Pwsafe.swift in Sources */,
+				3A9CCC261BB7F5F60032BF26 /* PwsafeHeaderRecord.swift in Sources */,
 				3A03FED61BAD894F00741D62 /* BlockWriter.swift in Sources */,
 				3A9D30BC1BAF1038009A0330 /* StringExtension.swift in Sources */,
 				3A5A22E31BA4498600025E31 /* BlockReader.swift in Sources */,
