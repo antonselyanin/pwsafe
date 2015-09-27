@@ -11,7 +11,6 @@
 		3A03FED81BAD89BD00741D62 /* BlockWriterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A03FED71BAD89BD00741D62 /* BlockWriterTest.swift */; settings = {ASSET_TAGS = (); }; };
 		3A1ADF131BB461050091C376 /* FieldValueExtractors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1ADF121BB461050091C376 /* FieldValueExtractors.swift */; settings = {ASSET_TAGS = (); }; };
 		3A1ADF161BB464540091C376 /* FieldValueExtractorsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1ADF151BB464540091C376 /* FieldValueExtractorsTest.swift */; settings = {ASSET_TAGS = (); }; };
-		3A2AA15A1B6E0BEC009E0422 /* tom.psafe3 in Resources */ = {isa = PBXBuildFile; fileRef = 3A2AA1591B6E0BEC009E0422 /* tom.psafe3 */; };
 		3A2AA15C1B6E0F2E009E0422 /* PwsafeParsingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2AA15B1B6E0F2E009E0422 /* PwsafeParsingTest.swift */; };
 		3A556A791B73B5A400E45151 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A556A781B73B5A400E45151 /* Security.framework */; };
 		3A5A22E31BA4498600025E31 /* BlockReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A22E21BA4498600025E31 /* BlockReader.swift */; settings = {ASSET_TAGS = (); }; };
@@ -55,7 +54,6 @@
 		3A03FED71BAD89BD00741D62 /* BlockWriterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockWriterTest.swift; sourceTree = "<group>"; };
 		3A1ADF121BB461050091C376 /* FieldValueExtractors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldValueExtractors.swift; sourceTree = "<group>"; };
 		3A1ADF151BB464540091C376 /* FieldValueExtractorsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldValueExtractorsTest.swift; sourceTree = "<group>"; };
-		3A2AA1591B6E0BEC009E0422 /* tom.psafe3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tom.psafe3; sourceTree = "<group>"; };
 		3A2AA15B1B6E0F2E009E0422 /* PwsafeParsingTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeParsingTest.swift; sourceTree = "<group>"; };
 		3A556A621B73B1EE00E45151 /* libcommonCrypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcommonCrypto.tbd; path = usr/lib/system/libcommonCrypto.tbd; sourceTree = SDKROOT; };
 		3A556A781B73B5A400E45151 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -138,7 +136,6 @@
 			isa = PBXGroup;
 			children = (
 				3A5E0BF01B9C80DA0026D8EE /* test.psafe3 */,
-				3A2AA1591B6E0BEC009E0422 /* tom.psafe3 */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -323,7 +320,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A2AA15A1B6E0BEC009E0422 /* tom.psafe3 in Resources */,
 				3A5E0BF11B9C95520026D8EE /* test.psafe3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
