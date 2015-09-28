@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3A8D2C921B691AE50030494F"
-               BuildableName = "PwsafeSwift.app"
+               BlueprintIdentifier = "3AA5E6BA1BB994BA003C164D"
+               BuildableName = "PwsafeSwift.framework"
                BlueprintName = "PwsafeSwift"
                ReferencedContainer = "container:PwsafeSwift.xcodeproj">
             </BuildableReference>
@@ -42,8 +42,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3A8D2C921B691AE50030494F"
-            BuildableName = "PwsafeSwift.app"
+            BlueprintIdentifier = "3AA5E6BA1BB994BA003C164D"
+            BuildableName = "PwsafeSwift.framework"
             BlueprintName = "PwsafeSwift"
             ReferencedContainer = "container:PwsafeSwift.xcodeproj">
          </BuildableReference>
@@ -61,16 +61,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3A8D2C921B691AE50030494F"
-            BuildableName = "PwsafeSwift.app"
+            BlueprintIdentifier = "3AA5E6BA1BB994BA003C164D"
+            BuildableName = "PwsafeSwift.framework"
             BlueprintName = "PwsafeSwift"
             ReferencedContainer = "container:PwsafeSwift.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -80,16 +79,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3A8D2C921B691AE50030494F"
-            BuildableName = "PwsafeSwift.app"
+            BlueprintIdentifier = "3AA5E6BA1BB994BA003C164D"
+            BuildableName = "PwsafeSwift.framework"
             BlueprintName = "PwsafeSwift"
             ReferencedContainer = "container:PwsafeSwift.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
