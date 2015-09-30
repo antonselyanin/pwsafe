@@ -9,7 +9,7 @@
 import Foundation
 
 /*
-Currently
+3.3 Field types for database Records:
 Name                        Value        Type    Implemented      Comments
 --------------------------------------------------------------------------
 UUID                        0x01        UUID          Y              [1]
