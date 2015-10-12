@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CryptoSwift
 
 public enum PwsafeParseError: ErrorType {
     case CorruptedData
@@ -33,33 +32,28 @@ public func readPwsafe(data: NSData, password: String) throws -> Pwsafe {
 func decryptPwsafeRecords(pwsafe: EncryptedPwsafe, password: String) throws -> [[RawField]] {
     let stretchedKey = stretchKey(password.utf8Bytes(),
         salt: pwsafe.salt,
-        iterations: Int(pwsafe.iter))
+        iterations: Int(pwsafe.iter + 1)) // todo: why +1 ?????
     
-    var keyHash: [UInt8] = [UInt8](count: 32, repeatedValue: 0)
-    let keyHashData = Hash.sha256(NSData(bytes: stretchedKey)).calculate()!
-    keyHashData.getBytes(&keyHash, length: keyHash.count)
+    let keyHash = sha256(stretchedKey)
     
     if keyHash != pwsafe.passwordHash {
         throw PwsafeParseError.CorruptedData
     }
     
-    let recordsKeyCryptor = Twofish(key: stretchedKey, blockMode:CipherBlockMode.ECB)!
-    let recordsKey = try recordsKeyCryptor.decrypt(pwsafe.b12, padding:nil)
-    let hmacKey = try recordsKeyCryptor.decrypt(pwsafe.b34, padding:nil)
+    let recordsKeyCryptor = Twofish2(key: stretchedKey, blockMode: ECBMode())!
+    let recordsKey = try recordsKeyCryptor.decrypt(pwsafe.b12)
+    let hmacKey = try recordsKeyCryptor.decrypt(pwsafe.b34)
     
-    let recordsCryptor = Twofish(key: recordsKey, iv: pwsafe.iv, blockMode:CipherBlockMode.CBC)!
+    let recordsCryptor = Twofish2(key: recordsKey, iv: pwsafe.iv, blockMode: CBCMode())!
     
-    let decryptedData = try recordsCryptor.decrypt(pwsafe.encryptedData, padding: nil)
+    let decryptedData = try recordsCryptor.decrypt(pwsafe.encryptedData)
     let pwsafeRecords = try parseRawPwsafeRecords(decryptedData)
     
-    let plainRecordData = pwsafeRecords.flatten().reduce([UInt8]()) {
-        $0 + $1.bytes
+    let hmacer = Hmac(key: hmacKey)
+    for field in pwsafeRecords.lazy.flatten() {
+        hmacer.update(field.bytes)
     }
-    
-    guard let hmac = Authenticator.HMAC(key: hmacKey, variant: .sha256).authenticate(plainRecordData) else {
-        //todo: failed to calculate HMAC?
-        throw PwsafeParseError.CorruptedData
-    }
+    let hmac = hmacer.final()
     
     if hmac != pwsafe.hmac {
         throw PwsafeParseError.CorruptedData
@@ -146,29 +140,21 @@ func parseRawPwsafeRecords(let data: [UInt8]) throws -> [[RawField]] {
 }
 
 func stretchKey(password: [UInt8], salt: [UInt8], iterations: Int) -> [UInt8] {
-    var resultData = NSData(bytes: password + salt)
+    return sha256(password + salt, iterations: iterations)
+}
+
+func sha256(input: [UInt8], iterations: Int = 1) -> [UInt8] {
+    //todo: check CC error? status?
     
-    for _ in 0...iterations {
-        resultData = Hash.sha256(resultData).calculate()!
+    let inputData = NSMutableData(bytes: input)
+    var resultData = [UInt8](count:Int(CC_SHA256_DIGEST_LENGTH), repeatedValue: 0)
+    
+    for _ in 0..<iterations {
+        CC_SHA256(inputData.bytes, UInt32(inputData.length), &resultData)
+        inputData.replaceBytesInRange(NSMakeRange(0, resultData.count), withBytes: resultData);
+        inputData.length = resultData.count
     }
     
-    var bytes: [UInt8] = [UInt8](count: 32, repeatedValue: 0)
-    resultData.getBytes(&bytes, length: bytes.count)
-    
-    return bytes
+    return resultData
 }
 
-/*
-func stretchKeyFast(password: [UInt8], salt: [UInt8], iterations: Int) -> [UInt8] {
-let inputData = NSMutableData(bytes: password + salt)
-var resultData = [UInt8](count:Int(CC_SHA256_DIGEST_LENGTH), repeatedValue: 0)
-
-for _ in 0...iterations {
-CC_SHA256(inputData.bytes, UInt32(inputData.length), &resultData)
-inputData.replaceBytesInRange(NSMakeRange(0, resultData.count), withBytes: resultData);
-inputData.length = resultData.count
-}
-
-return resultData
-}
-*/
