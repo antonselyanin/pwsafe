@@ -57,14 +57,7 @@ final class Twofish2 {
         let defaultIV = [UInt8](count: Twofish2.blockSize, repeatedValue: 0)
         self.init(key: key, iv: defaultIV, blockMode: blockMode)
     }
-    
-    convenience init?(key:String, iv:String, blockMode:BlockMode = CBCMode()) {
-        if let kkey = key.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)?.arrayOfBytes(), let iiv = iv.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)?.arrayOfBytes() {
-            self.init(key: kkey, iv: iiv, blockMode: blockMode)
-        }
-        return nil
-    }
-    
+        
     /**
     Encrypt message. If padding is necessary, then PKCS7 padding is added and needs to be removed after decryption.
     

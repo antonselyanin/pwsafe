@@ -1,7 +1,6 @@
 import Quick
 import Nimble
 @testable import PwsafeSwift
-import CryptoSwift
 
 class PwsafeParsingTest: QuickSpec {
     override func spec() {

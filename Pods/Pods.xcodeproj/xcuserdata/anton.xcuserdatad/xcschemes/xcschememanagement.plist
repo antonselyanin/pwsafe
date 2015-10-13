@@ -4,22 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>CryptoSwift.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Nimble.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Pods-PwsafeSwiftTests.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -32,27 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>00399347C140699110EF7A892A4B3E3C</key>
+		<key>30EBAB06AE457F38F461B03BF1456071</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>13452F34FE840645CBF8401654086489</key>
+		<key>C5DB5104FED3C10F78978AFC810982B9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>54F5647F7C023F3E5BD9FEB09A489555</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9D75ED47E5B80FF267BC9EF42D85BCFA</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9EB9AA26E1EEA3CAD69B669B7E7694CB</key>
+		<key>C7D5E0F3691CB4052CF07BC0D2B6694A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

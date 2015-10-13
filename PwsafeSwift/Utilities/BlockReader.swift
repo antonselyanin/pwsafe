@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CryptoSwift
 
 struct BlockReader {
     private let data: [UInt8]

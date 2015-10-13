@@ -73,7 +73,7 @@ struct EncryptedPwsafe {
     let hmac: [UInt8]
 }
 
-//todo: write tests
+//todo: write tests, clean up
 func readEncryptedPwsafe(data: NSData) throws -> EncryptedPwsafe {
     let stream = NSInputStream(data: data)
     stream.open()
@@ -96,6 +96,10 @@ func readEncryptedPwsafe(data: NSData) throws -> EncryptedPwsafe {
     
     let encryptedData = [UInt8](remainder[0..<(remainder.count - tailLength)])
     let eof = [UInt8](remainder[encryptedData.count..<(remainder.count - 32)])
+    if eof != "PWS3-EOFPWS3-EOF".utf8Bytes() {
+        throw PwsafeParseError.CorruptedData
+    }
+    
     let hmac = [UInt8](remainder[remainder.count - 32 ..< remainder.count])
     
     return EncryptedPwsafe(
