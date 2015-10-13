@@ -106,7 +106,7 @@ func readEncryptedPwsafe(data: NSData) throws -> EncryptedPwsafe {
         salt: salt,
         iter: iter,
         passwordHash: passwordHash,
-        b12: b12, b34: b34,// b4: b4,
+        b12: b12, b34: b34,
         iv: iv,
         encryptedData: encryptedData,
         hmac: hmac)
@@ -150,13 +150,12 @@ func stretchKey(password: [UInt8], salt: [UInt8], iterations: Int) -> [UInt8] {
 func sha256(input: [UInt8], iterations: Int = 1) -> [UInt8] {
     //todo: check CC error? status?
     
-    let inputData = NSMutableData(bytes: input)
+    var inputData = input
     var resultData = [UInt8](count:Int(CC_SHA256_DIGEST_LENGTH), repeatedValue: 0)
     
     for _ in 0..<iterations {
-        CC_SHA256(inputData.bytes, UInt32(inputData.length), &resultData)
-        inputData.replaceBytesInRange(NSMakeRange(0, resultData.count), withBytes: resultData);
-        inputData.length = resultData.count
+        CC_SHA256(inputData, UInt32(inputData.count), &resultData)
+        inputData.replaceRange(inputData.indices, with: resultData)
     }
     
     return resultData

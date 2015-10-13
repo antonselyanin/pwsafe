@@ -46,9 +46,9 @@ enum PwsafeHeaderFieldType: UInt8 {
     case DatabaseName = 0x09
     case DatabaseDescription = 0x0a
     case DatabaseFilters = 0x0b
-    case Reserved1 = 0x0c
-    case Reserved2 = 0x0d
-    case Reserved3 = 0x0e
+    //case Reserved1 = 0x0c
+    //case Reserved2 = 0x0d
+    //case Reserved3 = 0x0e
     case RecentlyUsedEntries = 0x0f
     case NamedPasswordPolicies = 0x10
     case EmptyGroups = 0x11

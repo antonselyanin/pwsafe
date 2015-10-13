@@ -95,7 +95,7 @@ func parseKeyValue(input: String) -> [String:String] {
 }
 
 func parseTestData(record: [String:String]) -> TwofishTestData? {
-    if let id = record["I"], let key = record["KEY"], let ct = record["CT"], let pt = record["PT"] {
+    if let id = record["I"], key = record["KEY"], ct = record["CT"], pt = record["PT"] {
         return TwofishTestData(
             id: id,
             key: hexStringToUInt8Array(key),
