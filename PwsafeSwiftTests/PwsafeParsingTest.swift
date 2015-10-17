@@ -9,7 +9,7 @@ class PwsafeParsingTest: QuickSpec {
                 let safeUrl = NSBundle(forClass: self.dynamicType).URLForResource("test", withExtension: "psafe3")!
                 let safeData = NSData(contentsOfURL: safeUrl)!
                 
-                let pwsafe = try! readPwsafe(safeData, password: "test")
+                let pwsafe = try! Pwsafe(data: safeData, password: "test")
                 
                 let header = pwsafe.header
                 

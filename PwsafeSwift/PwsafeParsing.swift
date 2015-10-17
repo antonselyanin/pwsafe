@@ -12,21 +12,21 @@ public enum PwsafeParseError: ErrorType {
     case CorruptedData
 }
 
-public func readPwsafe(data: NSData, password: String) throws -> Pwsafe {
-    let pwsafe = try readEncryptedPwsafe(data)
-    let pwsafeRecords = try decryptPwsafeRecords(pwsafe, password: password)
-    
-    guard let headerFields = pwsafeRecords.first else {
-        throw PwsafeParseError.CorruptedData
+public extension Pwsafe {
+    init(data: NSData, password: String) throws {
+        let pwsafe = try readEncryptedPwsafe(data)
+        let pwsafeRecords = try decryptPwsafeRecords(pwsafe, password: password)
+        
+        guard let headerFields = pwsafeRecords.first else {
+            throw PwsafeParseError.CorruptedData
+        }
+        
+        self.header = PwsafeHeaderRecord(rawFields: headerFields)
+        
+        self.passwordRecords = pwsafeRecords[1..<pwsafeRecords.count].map {
+            PwsafePasswordRecord(rawFields: $0)
+        }
     }
-    
-    let header = PwsafeHeaderRecord(rawFields: headerFields)
-    
-    let passwordRecords = pwsafeRecords[1..<pwsafeRecords.count].map {
-        PwsafePasswordRecord(rawFields: $0)
-    }
-    
-    return Pwsafe(name: "", header: header, passwordRecords: passwordRecords)
 }
 
 func decryptPwsafeRecords(pwsafe: EncryptedPwsafe, password: String) throws -> [[RawField]] {
@@ -40,11 +40,11 @@ func decryptPwsafeRecords(pwsafe: EncryptedPwsafe, password: String) throws -> [
         throw PwsafeParseError.CorruptedData
     }
     
-    let recordsKeyCryptor = Twofish2(key: stretchedKey, blockMode: ECBMode())!
+    let recordsKeyCryptor = Twofish(key: stretchedKey, blockMode: ECBMode())!
     let recordsKey = try recordsKeyCryptor.decrypt(pwsafe.b12)
     let hmacKey = try recordsKeyCryptor.decrypt(pwsafe.b34)
     
-    let recordsCryptor = Twofish2(key: recordsKey, iv: pwsafe.iv, blockMode: CBCMode())!
+    let recordsCryptor = Twofish(key: recordsKey, iv: pwsafe.iv, blockMode: CBCMode())!
     
     let decryptedData = try recordsCryptor.decrypt(pwsafe.encryptedData)
     let pwsafeRecords = try parseRawPwsafeRecords(decryptedData)

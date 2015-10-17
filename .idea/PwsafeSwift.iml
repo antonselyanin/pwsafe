@@ -4,40 +4,6 @@
     <content url="file:///Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/system/libcommonCrypto.tbd">
       <sourceFolder url="file:///Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/system/libcommonCrypto.tbd" isTestSource="false" />
     </content>
-    <content url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift">
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/AES.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/ArrayExtension.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/Authenticator.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/BitExtension.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/CRC.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/ChaCha20.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/Cipher.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/CipherBlockMode.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/Generics.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/HMAC.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/Hash.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/HashProtocol.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/IntExtension.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/IntegerConvertible.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/MD5.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/NSDataExtension.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/NSDataSequence.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/Operators.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/PKCS5.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/PKCS7.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/Padding.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/Poly1305.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/SHA1.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/SHA2.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/StringExtension.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/Twofish.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/TwofishTables.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/UInt16Extension.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/UInt32Extension.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/UInt64Extension.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/UInt8Extension.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../OpenSource/CryptoSwift/CryptoSwift/Utils.swift" isTestSource="false" />
-    </content>
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/Podfile" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Adapters/AdapterProtocols.swift" isTestSource="false" />
@@ -54,6 +20,7 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Matchers/BeAnInstanceOf.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Matchers/BeCloseTo.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Matchers/BeEmpty.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Matchers/BeginWith.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Matchers/BeGreaterThan.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Matchers/BeGreaterThanOrEqualTo.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Matchers/BeIdenticalTo.swift" isTestSource="false" />
@@ -61,15 +28,19 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Matchers/BeLessThanOrEqual.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Matchers/BeLogical.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Matchers/BeNil.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Matchers/BeginWith.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Matchers/Contain.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Matchers/EndWith.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Matchers/Equal.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Matchers/HaveCount.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Matchers/Match.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Matchers/MatcherProtocols.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Matchers/RaisesException.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Matchers/ThrowError.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Nimble.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/objc/DSL.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/objc/DSL.m" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/objc/NMBExceptionCapture.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/objc/NMBExceptionCapture.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/ObjCExpectation.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Utils/Functional.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Utils/Poll.swift" isTestSource="false" />
@@ -78,10 +49,6 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Wrappers/AsyncMatcherWrapper.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Wrappers/MatcherFunc.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/Wrappers/ObjCMatcher.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/objc/DSL.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/objc/DSL.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/objc/NMBExceptionCapture.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Nimble/Nimble/objc/NMBExceptionCapture.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Quick/Quick/Callsite.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Quick/Quick/Configuration/Configuration.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Quick/Quick/Configuration/QuickConfiguration.h" isTestSource="false" />
@@ -105,15 +72,7 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/Quick/Quick/QuickSpec.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Quick/Quick/World.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Quick/Quick/World.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/CryptoSwift/CryptoSwift-Private.xcconfig" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/CryptoSwift/CryptoSwift-dummy.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/CryptoSwift/CryptoSwift-prefix.pch" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/CryptoSwift/CryptoSwift-umbrella.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/CryptoSwift/CryptoSwift.modulemap" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/CryptoSwift/CryptoSwift.xcconfig" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/CryptoSwift/Info.plist" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Nimble/Info.plist" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Nimble/Nimble-Private.xcconfig" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Nimble/Nimble-dummy.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Nimble/Nimble-prefix.pch" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Nimble/Nimble-umbrella.h" isTestSource="false" />
@@ -129,48 +88,47 @@
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-PwsafeSwiftTests/Pods-PwsafeSwiftTests.debug.xcconfig" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-PwsafeSwiftTests/Pods-PwsafeSwiftTests.modulemap" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods-PwsafeSwiftTests/Pods-PwsafeSwiftTests.release.xcconfig" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods/Info.plist" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods/Pods-acknowledgements.markdown" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods/Pods-acknowledgements.plist" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods/Pods-dummy.m" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods/Pods-frameworks.sh" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods/Pods-resources.sh" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods/Pods-umbrella.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods/Pods.debug.xcconfig" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods/Pods.modulemap" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Pods/Pods.release.xcconfig" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Quick/Info.plist" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Quick/Quick-Private.xcconfig" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Quick/Quick-dummy.m" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Quick/Quick-prefix.pch" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Quick/Quick-umbrella.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Quick/Quick.modulemap" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Pods/Target Support Files/Quick/Quick.xcconfig" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/AppDelegate.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Assets.xcassets" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Base.lproj/LaunchScreen.storyboard" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Base.lproj/Main.storyboard" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/BlockReader.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/BlockWriter.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Crypto/ByteUtils.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Crypto/CipherBlockMode.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Crypto/Hmac.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Crypto/Twofish.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Crypto/TwofishTables.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/FieldValueExtractors.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Info.plist" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/NSDataExtension.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/NSInputStreamExtensions.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Pwsafe.playground" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Pwsafe/IntegerTypeUtilities.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Pwsafe/PwsafeStructs.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Pwsafe.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/PwsafeHeaderRecord.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/PwsafeParsing.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/StringExtension.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/ViewController.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/BlockReaderTest.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/BlockWriterTest.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Bridging.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/PwsafePasswordRecord.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/PwsafeSwift.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Utilities/ArrayExtension.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Utilities/BlockReader.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Utilities/BlockWriter.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Utilities/IntegerTypeUtilities.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Utilities/NSDataExtension.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Utilities/NSInputStreamExtensions.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Utilities/StringExtension.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Crypto/CipherBlockModeTest.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Crypto/ECB_TBL.TXT" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Crypto/TwofishTests.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/FieldValueExtractorsTest.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Info.plist" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/IntegerTypeUtilitiesTest.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/NSDataExtension.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/NSStreamExtensionsTest.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/PwsafeTest.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Resources/tom.psafe3" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/test.psafe3" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/PwsafeParsingTest.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Resources/test.psafe3" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Utilities/ArrayExtensionTest.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Utilities/ArraySliceExtension.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Utilities/BlockReaderTest.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Utilities/BlockWriterTest.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Utilities/IntegerTypeUtilitiesTest.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Utilities/NSDataExtension.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Utilities/NSStreamExtensionsTest.swift" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

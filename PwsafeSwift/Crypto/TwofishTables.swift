@@ -3,7 +3,7 @@
 //  CryptoSwift
 //
 //  Created by Anton Selyanin on 15/08/15.
-//  Copyright © 2015 Marcin Krzyzanowski. All rights reserved.
+//  Copyright © 2015 Anton Selyanin. All rights reserved.
 //
 
 import Foundation

@@ -3,12 +3,12 @@
 //  CryptoSwift
 //
 //  Created by Anton Selyanin on 13/08/15.
-//  Copyright © 2015 Marcin Krzyzanowski. All rights reserved.
+//  Copyright © 2015 Anton Selyanin. All rights reserved.
 //
 
 import Foundation
 
-final class Twofish2 {
+final class Twofish {
     enum Error: ErrorType {
         case BlockSizeExceeded
     }
@@ -54,7 +54,7 @@ final class Twofish2 {
     
     convenience init?(key:[UInt8], blockMode:BlockMode = CBCMode()) {
         // default IV is all 0x00...
-        let defaultIV = [UInt8](count: Twofish2.blockSize, repeatedValue: 0)
+        let defaultIV = [UInt8](count: Twofish.blockSize, repeatedValue: 0)
         self.init(key: key, iv: defaultIV, blockMode: blockMode)
     }
         
@@ -67,7 +67,7 @@ final class Twofish2 {
     */
     
     func encrypt(bytes:[UInt8]) throws -> [UInt8] {
-        let blocks = bytes.toChunks(Twofish2.blockSize)
+        let blocks = bytes.toChunks(Twofish.blockSize)
         return try blockMode.encryptInput(blocks, iv: self.iv, cipherOperation: encryptBlock)
     }
     
@@ -81,11 +81,11 @@ final class Twofish2 {
     }
     
     func decrypt(bytes:[UInt8]) throws -> [UInt8] {
-        if bytes.count % Twofish2.blockSize != 0 {
+        if bytes.count % Twofish.blockSize != 0 {
             throw Error.BlockSizeExceeded
         }
         
-        let blocks = bytes.toChunks(Twofish2.blockSize)
+        let blocks = bytes.toChunks(Twofish.blockSize)
         return try blockMode.decryptInput(blocks, iv: self.iv, cipherOperation: decryptBlock)
     }
     

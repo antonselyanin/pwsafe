@@ -9,9 +9,13 @@
 import Foundation
 
 public struct Pwsafe {
-    public let name: String
     public let header: PwsafeHeaderRecord
     public let passwordRecords: [PwsafePasswordRecord]
+    
+    init(header: PwsafeHeaderRecord, passwordRecords: [PwsafePasswordRecord]) {
+        self.header = header
+        self.passwordRecords = passwordRecords
+    }
 }
 
 public struct PwsafePasswordRecord: PwsafeRecord {
@@ -30,13 +34,10 @@ public protocol PwsafeRecord {
 
 public extension PwsafeRecord {
     func valueByKey<ValueType>(key: FieldKey<Self, ValueType>) -> ValueType? {
-        for field in rawFields {
-            if field.typeCode == key.code {
-                return key.extractor(bytes: field.bytes)
-            }
-        }
-        
-        return nil;
+        return rawFields.lazy
+            .filter {$0.typeCode == key.code}
+            .flatMap {key.extractor(bytes: $0.bytes)}
+            .first
     }
 }
 

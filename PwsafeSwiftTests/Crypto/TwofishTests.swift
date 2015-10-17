@@ -14,7 +14,7 @@ final class TwofishTests: XCTestCase {
 
     func testTwofish_encrypt_decrypt_128bit_key() {
         let keyArray:[UInt8] = [UInt8](count: 16, repeatedValue: 0)
-        let cryptor = Twofish2(key: keyArray, blockMode: ECBMode())!
+        let cryptor = Twofish(key: keyArray, blockMode: ECBMode())!
         
         let pt = [UInt8](count: 16, repeatedValue: 0)
         let ct = try! cryptor.encrypt(pt)
@@ -29,7 +29,7 @@ final class TwofishTests: XCTestCase {
     
     func testTwofish_encrypt_decrypt_256bit_key() {
         let keyArray:[UInt8] = [UInt8](count: 32, repeatedValue: 0)
-        let cryptor = Twofish2(key: keyArray, blockMode: ECBMode())!
+        let cryptor = Twofish(key: keyArray, blockMode: ECBMode())!
         
         let pt = [UInt8](count: 16, repeatedValue: 0)
         let ct = try! cryptor.encrypt(pt)
@@ -48,7 +48,7 @@ final class TwofishTests: XCTestCase {
         let testSamples = items.map(parseKeyValue).map(parseTestData).flatMap { $0 }
         
         for testData in testSamples {
-            let cryptor = Twofish2(key: testData.key, blockMode: ECBMode())!
+            let cryptor = Twofish(key: testData.key, blockMode: ECBMode())!
             
             let ct = try! cryptor.encrypt(testData.plainText)
             XCTAssertEqual(ct, testData.cipherText, "encryption failed for sample \(testData.id)")
