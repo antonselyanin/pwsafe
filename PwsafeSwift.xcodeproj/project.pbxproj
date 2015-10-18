@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		3A03FED81BAD89BD00741D62 /* BlockWriterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A03FED71BAD89BD00741D62 /* BlockWriterTest.swift */; settings = {ASSET_TAGS = (); }; };
-		3A1ADF161BB464540091C376 /* FieldValueExtractorsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1ADF151BB464540091C376 /* FieldValueExtractorsTest.swift */; settings = {ASSET_TAGS = (); }; };
+		3A1ADF161BB464540091C376 /* FieldValueSerializersTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1ADF151BB464540091C376 /* FieldValueSerializersTest.swift */; settings = {ASSET_TAGS = (); }; };
 		3A20A86E1BCBC2E400241946 /* TwofishTables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20A86C1BCBC2E400241946 /* TwofishTables.swift */; settings = {ASSET_TAGS = (); }; };
 		3A20A86F1BCBC2E400241946 /* Twofish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20A86D1BCBC2E400241946 /* Twofish.swift */; settings = {ASSET_TAGS = (); }; };
 		3A20A8711BCBC54800241946 /* ByteUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20A8701BCBC54800241946 /* ByteUtils.swift */; settings = {ASSET_TAGS = (); }; };
 		3A20A8741BCBD65400241946 /* TwofishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20A8721BCBD65400241946 /* TwofishTests.swift */; settings = {ASSET_TAGS = (); }; };
 		3A20A8751BCBD65400241946 /* ECB_TBL.TXT in Resources */ = {isa = PBXBuildFile; fileRef = 3A20A8731BCBD65400241946 /* ECB_TBL.TXT */; settings = {ASSET_TAGS = (); }; };
 		3A20A87A1BCC1D7C00241946 /* Hmac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20A8791BCC1D7C00241946 /* Hmac.swift */; settings = {ASSET_TAGS = (); }; };
-		3A2AA15C1B6E0F2E009E0422 /* PwsafeParsingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2AA15B1B6E0F2E009E0422 /* PwsafeParsingTest.swift */; };
+		3A2AA15C1B6E0F2E009E0422 /* PwsafeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2AA15B1B6E0F2E009E0422 /* PwsafeTest.swift */; };
 		3A5E0BF11B9C95520026D8EE /* test.psafe3 in Resources */ = {isa = PBXBuildFile; fileRef = 3A5E0BF01B9C80DA0026D8EE /* test.psafe3 */; settings = {ASSET_TAGS = (); }; };
 		3A9441921BA5A42B00B00514 /* IntegerTypeUtilitiesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9441911BA5A42B00B00514 /* IntegerTypeUtilitiesTest.swift */; settings = {ASSET_TAGS = (); }; };
 		3A9D30B81BAF0571009A0330 /* NSDataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB2DAD01B7A39E90051F3A8 /* NSDataExtension.swift */; settings = {ASSET_TAGS = (); }; };
@@ -28,12 +28,15 @@
 		3AA5E6CD1BB994E6003C164D /* IntegerTypeUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A94418F1BA5520600B00514 /* IntegerTypeUtilities.swift */; settings = {ASSET_TAGS = (); }; };
 		3AA5E6CE1BB994E6003C164D /* NSDataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9D30B91BAF05D3009A0330 /* NSDataExtension.swift */; settings = {ASSET_TAGS = (); }; };
 		3AA5E6CF1BB994E6003C164D /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9D30BB1BAF1038009A0330 /* StringExtension.swift */; settings = {ASSET_TAGS = (); }; };
-		3AA5E6D01BB994E6003C164D /* FieldValueExtractors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1ADF121BB461050091C376 /* FieldValueExtractors.swift */; settings = {ASSET_TAGS = (); }; };
+		3AA5E6D01BB994E6003C164D /* FieldValueSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1ADF121BB461050091C376 /* FieldValueSerializer.swift */; settings = {ASSET_TAGS = (); }; };
 		3AA5E6D11BB994E6003C164D /* Pwsafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9EF3011B6E5FC8002E3689 /* Pwsafe.swift */; settings = {ASSET_TAGS = (); }; };
 		3AA5E6D21BB994E6003C164D /* PwsafeHeaderRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9CCC251BB7F5F60032BF26 /* PwsafeHeaderRecord.swift */; settings = {ASSET_TAGS = (); }; };
 		3AA5E6D31BB994E6003C164D /* PwsafeParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9D30BD1BAF10D4009A0330 /* PwsafeParsing.swift */; settings = {ASSET_TAGS = (); }; };
 		3AA5E6D41BB994E6003C164D /* PwsafePasswordRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9CCC271BB7F6710032BF26 /* PwsafePasswordRecord.swift */; settings = {ASSET_TAGS = (); }; };
 		3AA5E6F91BB9A13B003C164D /* PwsafeSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA5E6BB1BB994BA003C164D /* PwsafeSwift.framework */; };
+		3AD1BCF31BD2A95200288DA9 /* PwsafeStoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1BCF21BD2A95200288DA9 /* PwsafeStoring.swift */; settings = {ASSET_TAGS = (); }; };
+		3AD1BCF51BD2C99A00288DA9 /* PwsafeParsingInternalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1BCF41BD2C99A00288DA9 /* PwsafeParsingInternalTest.swift */; settings = {ASSET_TAGS = (); }; };
+		3AD1BCF71BD39FC400288DA9 /* PwsafeRecordTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1BCF61BD39FC400288DA9 /* PwsafeRecordTest.swift */; settings = {ASSET_TAGS = (); }; };
 		3AFFBAE21BC1072C00F447F7 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFBAE11BC1072C00F447F7 /* ArrayExtension.swift */; settings = {ASSET_TAGS = (); }; };
 		3AFFBAE41BC1080B00F447F7 /* ArrayExtensionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFBAE31BC1080B00F447F7 /* ArrayExtensionTest.swift */; settings = {ASSET_TAGS = (); }; };
 		3AFFBAE71BC16F9A00F447F7 /* CipherBlockMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFBAE61BC16F9A00F447F7 /* CipherBlockMode.swift */; settings = {ASSET_TAGS = (); }; };
@@ -57,15 +60,15 @@
 		2EB9FFBF122AD3687D9B0285 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		3A03FED51BAD894F00741D62 /* BlockWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockWriter.swift; sourceTree = "<group>"; };
 		3A03FED71BAD89BD00741D62 /* BlockWriterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockWriterTest.swift; sourceTree = "<group>"; };
-		3A1ADF121BB461050091C376 /* FieldValueExtractors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldValueExtractors.swift; sourceTree = "<group>"; };
-		3A1ADF151BB464540091C376 /* FieldValueExtractorsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldValueExtractorsTest.swift; sourceTree = "<group>"; };
+		3A1ADF121BB461050091C376 /* FieldValueSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldValueSerializer.swift; sourceTree = "<group>"; };
+		3A1ADF151BB464540091C376 /* FieldValueSerializersTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldValueSerializersTest.swift; sourceTree = "<group>"; };
 		3A20A86C1BCBC2E400241946 /* TwofishTables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwofishTables.swift; sourceTree = "<group>"; };
 		3A20A86D1BCBC2E400241946 /* Twofish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Twofish.swift; sourceTree = "<group>"; };
 		3A20A8701BCBC54800241946 /* ByteUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ByteUtils.swift; sourceTree = "<group>"; };
 		3A20A8721BCBD65400241946 /* TwofishTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwofishTests.swift; sourceTree = "<group>"; };
 		3A20A8731BCBD65400241946 /* ECB_TBL.TXT */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ECB_TBL.TXT; sourceTree = "<group>"; };
 		3A20A8791BCC1D7C00241946 /* Hmac.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hmac.swift; sourceTree = "<group>"; };
-		3A2AA15B1B6E0F2E009E0422 /* PwsafeParsingTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeParsingTest.swift; sourceTree = "<group>"; };
+		3A2AA15B1B6E0F2E009E0422 /* PwsafeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeTest.swift; sourceTree = "<group>"; };
 		3A556A621B73B1EE00E45151 /* libcommonCrypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcommonCrypto.tbd; path = usr/lib/system/libcommonCrypto.tbd; sourceTree = SDKROOT; };
 		3A556A781B73B5A400E45151 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3A5A22E21BA4498600025E31 /* BlockReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockReader.swift; sourceTree = "<group>"; };
@@ -87,6 +90,9 @@
 		3AA5E6BB1BB994BA003C164D /* PwsafeSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PwsafeSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AA5E6BD1BB994BA003C164D /* PwsafeSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PwsafeSwift.h; sourceTree = "<group>"; };
 		3AB2DAD01B7A39E90051F3A8 /* NSDataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDataExtension.swift; sourceTree = "<group>"; };
+		3AD1BCF21BD2A95200288DA9 /* PwsafeStoring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeStoring.swift; sourceTree = "<group>"; };
+		3AD1BCF41BD2C99A00288DA9 /* PwsafeParsingInternalTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeParsingInternalTest.swift; sourceTree = "<group>"; };
+		3AD1BCF61BD39FC400288DA9 /* PwsafeRecordTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeRecordTest.swift; sourceTree = "<group>"; };
 		3AFFBAE11BC1072C00F447F7 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		3AFFBAE31BC1080B00F447F7 /* ArrayExtensionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTest.swift; sourceTree = "<group>"; };
 		3AFFBAE61BC16F9A00F447F7 /* CipherBlockMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherBlockMode.swift; sourceTree = "<group>"; };
@@ -176,11 +182,12 @@
 			children = (
 				3AFFBAE51BC16DFF00F447F7 /* Crypto */,
 				3A9D30BF1BAF239B009A0330 /* Utilities */,
-				3A1ADF121BB461050091C376 /* FieldValueExtractors.swift */,
+				3A1ADF121BB461050091C376 /* FieldValueSerializer.swift */,
 				3A9EF3011B6E5FC8002E3689 /* Pwsafe.swift */,
 				3A9CCC251BB7F5F60032BF26 /* PwsafeHeaderRecord.swift */,
-				3A9D30BD1BAF10D4009A0330 /* PwsafeParsing.swift */,
 				3A9CCC271BB7F6710032BF26 /* PwsafePasswordRecord.swift */,
+				3A9D30BD1BAF10D4009A0330 /* PwsafeParsing.swift */,
+				3AD1BCF21BD2A95200288DA9 /* PwsafeStoring.swift */,
 				3A8D2CA21B691AE50030494F /* Info.plist */,
 				3AA5E6BD1BB994BA003C164D /* PwsafeSwift.h */,
 			);
@@ -193,9 +200,11 @@
 				3AFFBAE81BC1738C00F447F7 /* Crypto */,
 				3A2AA1581B6E0BEC009E0422 /* Resources */,
 				3A1ADF141BB462100091C376 /* Utilities */,
-				3A1ADF151BB464540091C376 /* FieldValueExtractorsTest.swift */,
+				3A1ADF151BB464540091C376 /* FieldValueSerializersTest.swift */,
+				3A2AA15B1B6E0F2E009E0422 /* PwsafeTest.swift */,
+				3AD1BCF41BD2C99A00288DA9 /* PwsafeParsingInternalTest.swift */,
+				3AD1BCF61BD39FC400288DA9 /* PwsafeRecordTest.swift */,
 				3A8D2CAD1B691AE50030494F /* Info.plist */,
-				3A2AA15B1B6E0F2E009E0422 /* PwsafeParsingTest.swift */,
 			);
 			path = PwsafeSwiftTests;
 			sourceTree = "<group>";
@@ -410,13 +419,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A9441921BA5A42B00B00514 /* IntegerTypeUtilitiesTest.swift in Sources */,
-				3A1ADF161BB464540091C376 /* FieldValueExtractorsTest.swift in Sources */,
+				3A1ADF161BB464540091C376 /* FieldValueSerializersTest.swift in Sources */,
+				3AD1BCF71BD39FC400288DA9 /* PwsafeRecordTest.swift in Sources */,
 				3AFFBAE41BC1080B00F447F7 /* ArrayExtensionTest.swift in Sources */,
 				3AFFBAEA1BC1741800F447F7 /* CipherBlockModeTest.swift in Sources */,
 				3A20A8741BCBD65400241946 /* TwofishTests.swift in Sources */,
+				3AD1BCF51BD2C99A00288DA9 /* PwsafeParsingInternalTest.swift in Sources */,
 				3A03FED81BAD89BD00741D62 /* BlockWriterTest.swift in Sources */,
 				3A9D30B81BAF0571009A0330 /* NSDataExtension.swift in Sources */,
-				3A2AA15C1B6E0F2E009E0422 /* PwsafeParsingTest.swift in Sources */,
+				3A2AA15C1B6E0F2E009E0422 /* PwsafeTest.swift in Sources */,
 				3A9EF3081B6E6D23002E3689 /* NSStreamExtensionsTest.swift in Sources */,
 				58AAA7355D8C4B7C8C55727A /* BlockReaderTest.swift in Sources */,
 				3A9D30C11BB06073009A0330 /* ArraySliceExtension.swift in Sources */,
@@ -433,6 +444,7 @@
 				3AA5E6CE1BB994E6003C164D /* NSDataExtension.swift in Sources */,
 				3AA5E6D21BB994E6003C164D /* PwsafeHeaderRecord.swift in Sources */,
 				3A20A87A1BCC1D7C00241946 /* Hmac.swift in Sources */,
+				3AD1BCF31BD2A95200288DA9 /* PwsafeStoring.swift in Sources */,
 				3AA5E6CF1BB994E6003C164D /* StringExtension.swift in Sources */,
 				3AA5E6CD1BB994E6003C164D /* IntegerTypeUtilities.swift in Sources */,
 				3AA5E6CC1BB994E6003C164D /* BlockWriter.swift in Sources */,
@@ -440,7 +452,7 @@
 				3AA5E6CA1BB994E6003C164D /* NSInputStreamExtensions.swift in Sources */,
 				3AA5E6D31BB994E6003C164D /* PwsafeParsing.swift in Sources */,
 				3AFFBAE71BC16F9A00F447F7 /* CipherBlockMode.swift in Sources */,
-				3AA5E6D01BB994E6003C164D /* FieldValueExtractors.swift in Sources */,
+				3AA5E6D01BB994E6003C164D /* FieldValueSerializer.swift in Sources */,
 				3AA5E6D41BB994E6003C164D /* PwsafePasswordRecord.swift in Sources */,
 				3AFFBAE21BC1072C00F447F7 /* ArrayExtension.swift in Sources */,
 				3A20A8711BCBC54800241946 /* ByteUtils.swift in Sources */,

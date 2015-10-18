@@ -28,7 +28,7 @@ class PwsafeTest: QuickSpec {
             
             xit("should create new structure with required fields") {
                 let pwsafe = Pwsafe()
-//                expect(pwsafe.header.uuid).notTo(beNil())                
+                expect(pwsafe.header.uuid).notTo(beNil())                
             }
         }
         

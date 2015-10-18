@@ -70,40 +70,70 @@ public enum PwsafePasswordFieldType: UInt8 {
 }
 
 public extension PwsafePasswordRecord {
-    public static let UUID = key(.UUID, extractor: uuidExtractor)
-    public static let Group = key(.Group, extractor: stringExtractor)
-    public static let Title = key(.Title, extractor: stringExtractor)
-    public static let Username = key(.Username, extractor: stringExtractor)
-    public static let Notes = key(.Notes, extractor: stringExtractor)
-    public static let Password = key(.Password, extractor: stringExtractor)
+    public static let UUID = key(.UUID, UUIDSerializer())
+    public static let Group = key(.Group, StringSerializer())
+    public static let Title = key(.Title, StringSerializer())
+    public static let Username = key(.Username, StringSerializer())
+    public static let Notes = key(.Notes, StringSerializer())
+    public static let Password = key(.Password, StringSerializer())
 }
 
 public extension PwsafePasswordRecord {
     public var uuid: NSUUID? {
-        return valueByKey(PwsafePasswordRecord.UUID)
+        get {
+            return valueForKey(PwsafePasswordRecord.UUID)
+        }
+        set {
+            setValue(newValue, forKey: PwsafePasswordRecord.UUID)
+        }
     }
     
     public var group: String? {
-        return valueByKey(PwsafePasswordRecord.Group)
+        get {
+            return valueForKey(PwsafePasswordRecord.Group)
+        }
+        set {
+            setValue(newValue, forKey: PwsafePasswordRecord.Group)
+        }
     }
     
     public var title: String? {
-        return valueByKey(PwsafePasswordRecord.Title)
+        get {
+            return valueForKey(PwsafePasswordRecord.Title)
+        }
+        set {
+            setValue(newValue, forKey: PwsafePasswordRecord.Title)
+        }
     }
     
     public var username: String? {
-        return valueByKey(PwsafePasswordRecord.Username)
+        get {
+            return valueForKey(PwsafePasswordRecord.Username)
+        }
+        set {
+            setValue(newValue, forKey: PwsafePasswordRecord.Username)
+        }
     }
 
     public var notes: String? {
-        return valueByKey(PwsafePasswordRecord.Notes)
+        get {
+            return valueForKey(PwsafePasswordRecord.Notes)
+        }
+        set {
+            setValue(newValue, forKey: PwsafePasswordRecord.Notes)
+        }
     }
 
     public var password: String? {
-        return valueByKey(PwsafePasswordRecord.Password)
+        return valueForKey(PwsafePasswordRecord.Password)
     }
 }
 
-private func key<T>(code: PwsafePasswordFieldType, extractor: (bytes: [UInt8]) -> T?) -> FieldKey<PwsafePasswordRecord, T> {
-    return FieldKey<PwsafePasswordRecord, T>(code: code.rawValue, extractor: extractor)
+private func key<T, S: FieldValueSerializer where S.Value == T>
+    (code: PwsafePasswordFieldType, _ serializer: S) -> FieldKey<PwsafePasswordRecord, T> {
+        return FieldKey<PwsafePasswordRecord, T>(
+            code: code.rawValue,
+            fromByteArray: serializer.fromByteArray,
+            toByteArray: serializer.toByteArray)
 }
+

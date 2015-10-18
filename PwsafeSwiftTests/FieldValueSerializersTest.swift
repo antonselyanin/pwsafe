@@ -1,5 +1,5 @@
 //
-//  FieldValueExtractorsTest.swift
+//  FieldValueSerializersTest.swift
 //  PwsafeSwift
 //
 //  Created by Anton Selyanin on 24/09/15.
@@ -13,25 +13,40 @@ import Quick
 
 class FieldValueSerializersTest: QuickSpec {
     override func spec() {
-        describe("uuidExtractor") {
+        describe("UUIDSerializer") {
             it("should extract UUID from bytes") {
-                let extracted = uuidExtractor(bytes: [UInt8](count: 16, repeatedValue: 0x12))
-                let expected = NSUUID(UUIDString: "12121212-1212-1212-1212-121212121212")
-                expect(extracted).to(equal(expected))
+                let serializer = UUIDSerializer()
+                let expectedValue = NSUUID(UUIDString: "12121212-1212-1212-1212-121212121212")!
+                let expectedBytes = [UInt8](count: 16, repeatedValue: 0x12)
+                
+                let value = serializer.fromByteArray(expectedBytes)!
+                expect(value).to(equal(expectedValue))
+                
+                let bytes: [UInt8] = serializer.toByteArray(expectedValue)
+                expect(bytes).to(equal(expectedBytes))
             }
             
             it("should fill with zeros if not enough bytes") {
-                let extracted = uuidExtractor(bytes: [UInt8](count: 4, repeatedValue: 0x12))
-                let expected = NSUUID(UUIDString: "12121212-0000-0000-0000-000000000000")
-                expect(extracted).to(equal(expected))
+                let serializer = UUIDSerializer()
+                let expectedValue = NSUUID(UUIDString: "12121212-0000-0000-0000-000000000000")!
+                let inputBytes = [UInt8](count: 4, repeatedValue: 0x12)
+                let expectedBytes = inputBytes + [UInt8](count: 12, repeatedValue: 0)
+                
+                let value = serializer.fromByteArray(inputBytes)!
+                expect(value).to(equal(expectedValue))
+                
+                let bytes: [UInt8] = serializer.toByteArray(expectedValue)
+                expect(bytes).to(equal(expectedBytes))
+
             }
         }
         
-        describe("stringExtractor") {
+        describe("StringSerializer") {
             it("should create from utf8 bytes") {
+                let serializer = StringSerializer()
                 let testString = "test string 😎"
                 let bytes = testString.utf8Bytes()
-                let extracted = stringExtractor(bytes: bytes)
+                let extracted = serializer.fromByteArray(bytes)
                 expect(extracted).to(equal(testString))
             }
         }

@@ -7,3 +7,10 @@
 //
 
 import Foundation
+
+extension Pwsafe {
+    public func toData(withPassword password: String) throws -> NSData {
+        //todo: implement
+        return NSData()
+    }
+}

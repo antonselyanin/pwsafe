@@ -56,28 +56,47 @@ enum PwsafeHeaderFieldType: UInt8 {
 }
 
 public extension PwsafeHeaderRecord {
-    public static let Version = key(.Version, extractor: uint16Extractor)
-    public static let UUID = key(.UUID, extractor: uuidExtractor)
-    public static let WhatPerformedLastSave = key(.WhatPerformedLastSave, extractor: stringExtractor)
-    public static let DatabaseName = key(.DatabaseName, extractor: stringExtractor)
-    public static let DatabaseDescription = key(.DatabaseDescription, extractor: stringExtractor)
+    public static let Version = key(.Version, ByteArrayConvertibleSerializer<UInt16>())
+    public static let UUID = key(.UUID, UUIDSerializer())
+    public static let WhatPerformedLastSave = key(.WhatPerformedLastSave, StringSerializer())
+    public static let DatabaseName = key(.DatabaseName, StringSerializer())
+    public static let DatabaseDescription = key(.DatabaseDescription, StringSerializer())
 }
 
 public extension PwsafeHeaderRecord {
     public var version: UInt16? {
-        return valueByKey(PwsafeHeaderRecord.Version)
+        get {
+            return valueForKey(PwsafeHeaderRecord.Version)
+        }
+        set {
+            setValue(newValue, forKey: PwsafeHeaderRecord.Version)
+        }
     }
     
     public var uuid: NSUUID? {
-        return valueByKey(PwsafeHeaderRecord.UUID)
+        get {
+            return valueForKey(PwsafeHeaderRecord.UUID)
+        }
+        set {
+            setValue(newValue, forKey: PwsafeHeaderRecord.UUID)
+        }
     }
     
     public var databaseName: String? {
-        return valueByKey(PwsafeHeaderRecord.DatabaseName)
+        get {
+            return valueForKey(PwsafeHeaderRecord.DatabaseName)
+        }
+        set {
+            setValue(newValue, forKey: PwsafeHeaderRecord.DatabaseName)
+        }
     }
 }
 
-private func key<T>(code: PwsafeHeaderFieldType, extractor: (bytes: [UInt8]) -> T?) -> FieldKey<PwsafeHeaderRecord, T> {
-    return FieldKey<PwsafeHeaderRecord, T>(code: code.rawValue, extractor: extractor)
+private func key<T, S: FieldValueSerializer where S.Value == T>
+    (code: PwsafeHeaderFieldType, _ serializer: S) -> FieldKey<PwsafeHeaderRecord, T> {
+    return FieldKey<PwsafeHeaderRecord, T>(
+        code: code.rawValue,
+        fromByteArray: serializer.fromByteArray,
+        toByteArray: serializer.toByteArray)
 }
 
