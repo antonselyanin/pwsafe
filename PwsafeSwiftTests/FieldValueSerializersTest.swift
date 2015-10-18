@@ -11,7 +11,7 @@ import Nimble
 import Quick
 @testable import PwsafeSwift
 
-class FieldValueExtractorsTest: QuickSpec {
+class FieldValueSerializersTest: QuickSpec {
     override func spec() {
         describe("uuidExtractor") {
             it("should extract UUID from bytes") {

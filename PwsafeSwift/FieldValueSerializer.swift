@@ -8,6 +8,14 @@
 
 import Foundation
 
+public protocol FieldValueSerializer {
+    typealias Value
+    
+    func toByteArray(value: Value) -> [UInt8]
+    func fromByteArray(array: [UInt8]) -> Value?
+}
+
+
 func uint16Extractor(bytes bytes: [UInt8]) -> UInt16? {
     return UInt16(littleEndianBytes: bytes)
 }
