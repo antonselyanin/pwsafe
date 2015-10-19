@@ -8,6 +8,8 @@
 
 import Foundation
 
+let PwsafeKeyStretchIterations: UInt32 = 2048
+
 extension Pwsafe {
     public func toData(withPassword password: String) throws -> NSData {
         let output = NSOutputStream.outputStreamToMemory()
@@ -38,7 +40,7 @@ extension Pwsafe {
 
 func encryptPwsafeRecords(records: [[RawField]], password: String) throws -> EncryptedPwsafe {
     let salt = generateRandomBytes(32)
-    let iter: UInt32 = 2048
+    let iter: UInt32 = PwsafeKeyStretchIterations
     
     let stretchedKey = stretchKey(password.utf8Bytes(),
         salt: salt,
