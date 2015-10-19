@@ -4,7 +4,7 @@ import PwsafeSwift
 
 class PwsafeTest: QuickSpec {
     override func spec() {
-        describe("Pwsafe") {
+        describe("Pwsafe parsing") {
             it("should load pwsafe") {
                 let safeUrl = NSBundle(forClass: self.dynamicType).URLForResource("test", withExtension: "psafe3")!
                 let safeData = NSData(contentsOfURL: safeUrl)!
@@ -25,13 +25,47 @@ class PwsafeTest: QuickSpec {
                 expect(record.notes).to(equal("Notes 😜"))
                 expect(record.password).to(equal("password"))
             }
-            
-            xit("should create new structure with required fields") {
+        }
+        //todo: add test for failures!
+        
+        describe("Pwsafe creation") {
+            it("should create new structure with required fields") {
                 let pwsafe = Pwsafe()
-                expect(pwsafe.header.uuid).notTo(beNil())                
+                expect(pwsafe.header.uuid).notTo(beNil())
             }
         }
         
-        //todo: add test for failures!
+        describe("Pwsafe storing") {
+            it("should create new structure with required fields") {
+                var header = PwsafeHeaderRecord()
+                header.uuid = NSUUID()
+                header.version = 0x030b
+                header.databaseName = "Database Name"
+                
+                var record0 = PwsafePasswordRecord()
+                record0.uuid = NSUUID()
+                record0.group = "group 0"
+                record0.title = "title 0"
+                record0.username = "username 0"
+                record0.password = "password 0"
+
+                var record1 = PwsafePasswordRecord()
+                record1.uuid = NSUUID()
+                record1.group = "group 1"
+                record1.title = "title 1"
+                record1.username = "username 1"
+                record1.password = "password 1"
+                
+                let pwsafe = Pwsafe(header: header, passwordRecords: [record0, record1])
+                
+                let data = try! pwsafe.toData(withPassword: "test")
+                
+                let parsedPwsafe = try! Pwsafe(data: data, password: "test")
+                
+                expect(parsedPwsafe).to(equal(pwsafe))
+//                assert(pwsafe == parsedPwsafe)
+                print("duh!")
+            }
+        }
     }
 }

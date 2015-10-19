@@ -24,9 +24,7 @@ struct BlockWriter {
     mutating func finishBlock() {
         let remainder = data.count % BlockSize
         if remainder > 0 {
-            var remainderArray = [UInt8](count: BlockSize - remainder, repeatedValue: 0)
-            arc4random_buf(&remainderArray, remainderArray.count)
-            data.appendContentsOf(remainderArray)
+            data.appendContentsOf(generateRandomBytes(BlockSize - remainder))
         }
     }
 }

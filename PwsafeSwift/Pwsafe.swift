@@ -16,9 +16,9 @@ public struct Pwsafe {
         self.init(header: PwsafeHeaderRecord(rawFields: []), passwordRecords: [])
     }
 
-    init(header: PwsafeHeaderRecord, passwordRecords: [PwsafePasswordRecord]) {
+    public init(var header: PwsafeHeaderRecord, passwordRecords: [PwsafePasswordRecord]) {
         if header.uuid == nil {
-//            header.uuid = NSUUID()
+            header.uuid = NSUUID()
         }
         
         self.header = header
@@ -32,6 +32,10 @@ public struct PwsafeHeaderRecord: PwsafeRecord {
     public init(rawFields: [RawField]) {
         self.rawFields = rawFields
     }
+    
+    public init() {
+        self.init(rawFields: [])
+    }
 }
 
 public struct PwsafePasswordRecord: PwsafeRecord {
@@ -40,9 +44,13 @@ public struct PwsafePasswordRecord: PwsafeRecord {
     public init(rawFields: [RawField]) {
         self.rawFields = rawFields
     }
+    
+    public init() {
+        self.init(rawFields: [])
+    }
 }
 
-public protocol PwsafeRecord {
+public protocol PwsafeRecord: Equatable {
     var rawFields: [RawField] { get set }
 
     func valueForKey<ValueType>(key: FieldKey<Self, ValueType>) -> ValueType?
@@ -91,4 +99,20 @@ public struct FieldKey<RecordType, ValueType> {
     public let code: UInt8
     public let fromByteArray: (bytes: [UInt8]) -> ValueType?
     public let toByteArray: (value: ValueType) -> [UInt8]
+}
+
+extension Pwsafe: Equatable {}
+public func ==(lhs: Pwsafe, rhs: Pwsafe) -> Bool {
+    return lhs.header == rhs.header
+        && lhs.passwordRecords == rhs.passwordRecords
+}
+
+public func ==<T: PwsafeRecord>(lhs: T, rhs: T) -> Bool {
+    return lhs.rawFields == rhs.rawFields
+}
+
+extension RawField: Equatable {}
+public func ==(lhs: RawField, rhs: RawField) -> Bool {
+    return lhs.typeCode == rhs.typeCode
+        && lhs.bytes == rhs.bytes
 }

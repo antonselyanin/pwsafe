@@ -2,7 +2,7 @@ import Quick
 import Nimble
 import PwsafeSwift
 
-class NSStreamExtensionsTest: QuickSpec {
+class NSStreamExtensionTest: QuickSpec {
     override func spec() {
         describe("NSInputStream") {
             it("should read data to array") {

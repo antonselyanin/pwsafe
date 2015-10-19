@@ -35,3 +35,9 @@ func rotateRight(x:UInt32, n:UInt32) -> UInt32 {
 func rotateRight(x:UInt64, n:UInt64) -> UInt64 {
     return ((x >> n) | (x << (64 - n)))
 }
+
+func generateRandomBytes(count: Int) -> [UInt8] {
+    var bytes = [UInt8](count: count, repeatedValue: 0)
+    arc4random_buf(&bytes, bytes.count)
+    return bytes
+}

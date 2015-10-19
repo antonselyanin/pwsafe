@@ -125,7 +125,12 @@ public extension PwsafePasswordRecord {
     }
 
     public var password: String? {
-        return valueForKey(PwsafePasswordRecord.Password)
+        get {
+            return valueForKey(PwsafePasswordRecord.Password)
+        }
+        set {
+            setValue(newValue, forKey: PwsafePasswordRecord.Password)
+        }
     }
 }
 
