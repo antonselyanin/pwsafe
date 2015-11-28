@@ -6,9 +6,7 @@ class PwsafeTest: QuickSpec {
     override func spec() {
         describe("Pwsafe parsing") {
             it("should load pwsafe") {
-                let safeUrl = NSBundle(forClass: self.dynamicType).URLForResource("test", withExtension: "psafe3")!
-                let safeData = NSData(contentsOfURL: safeUrl)!
-                
+                let safeData = NSData.loadResourceFile("test")!
                 let pwsafe = try! Pwsafe(data: safeData, password: "test")
                 
                 let header = pwsafe.header
@@ -24,6 +22,17 @@ class PwsafeTest: QuickSpec {
                 expect(record.username).to(equal("user"))
                 expect(record.notes).to(equal("Notes 😜"))
                 expect(record.password).to(equal("password"))
+            }
+            
+            it("should throw error if password is incorrect") {
+                let safeData = NSData.loadResourceFile("test")!
+                do {
+                    let _ = try Pwsafe(data: safeData, password: "wrong")
+                } catch PwsafeError.CorruptedData {
+                    // caught the correct error
+                } catch let error {
+                    fail("failed with error \(error)")
+                }
             }
         }
         //todo: add test for failures!
@@ -63,8 +72,6 @@ class PwsafeTest: QuickSpec {
                 let parsedPwsafe = try! Pwsafe(data: data, password: "test")
                 
                 expect(parsedPwsafe).to(equal(pwsafe))
-//                assert(pwsafe == parsedPwsafe)
-                print("duh!")
             }
         }
     }

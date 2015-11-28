@@ -101,26 +101,30 @@
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Crypto/Hmac.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Crypto/Twofish.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Crypto/TwofishTables.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/FieldValueExtractors.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/FieldValueSerializer.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Info.plist" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Pwsafe.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/PwsafeHeaderRecord.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/PwsafeParsing.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/PwsafePasswordRecord.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/PwsafeStoring.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/PwsafeSwift.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Utilities/ArrayExtension.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Utilities/BlockReader.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Utilities/BlockWriter.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Utilities/IntegerTypeUtilities.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Utilities/NSDataExtension.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Utilities/NSInputStreamExtensions.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Utilities/NSInputStreamExtension.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Utilities/NSOutputStreamExtension.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwift/Utilities/StringExtension.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Crypto/CipherBlockModeTest.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Crypto/ECB_TBL.TXT" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Crypto/TwofishTests.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/FieldValueExtractorsTest.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/FieldValueSerializersTest.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Info.plist" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/PwsafeParsingTest.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/PwsafeParsingInternalTest.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/PwsafeRecordTest.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/PwsafeTest.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Resources/test.psafe3" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Utilities/ArrayExtensionTest.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Utilities/ArraySliceExtension.swift" isTestSource="false" />
@@ -128,7 +132,7 @@
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Utilities/BlockWriterTest.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Utilities/IntegerTypeUtilitiesTest.swift" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Utilities/NSDataExtension.swift" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Utilities/NSStreamExtensionsTest.swift" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PwsafeSwiftTests/Utilities/NSStreamExtensionTest.swift" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

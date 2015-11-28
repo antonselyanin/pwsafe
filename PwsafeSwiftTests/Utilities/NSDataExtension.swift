@@ -13,3 +13,10 @@ extension NSData {
         self.init(bytes: bytes, length:bytes.count)
     }
 }
+
+extension NSData {
+    static func loadResourceFile(resource: String) -> NSData? {
+        let safeUrl = NSBundle(forClass: PwsafeTest.self).URLForResource(resource, withExtension: "psafe3")!
+        return NSData(contentsOfURL: safeUrl)
+    }
+}
