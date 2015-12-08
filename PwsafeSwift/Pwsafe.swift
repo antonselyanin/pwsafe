@@ -16,12 +16,14 @@ public struct Pwsafe {
         self.init(header: PwsafeHeaderRecord(rawFields: []), passwordRecords: [])
     }
 
-    public init(var header: PwsafeHeaderRecord, passwordRecords: [PwsafePasswordRecord]) {
-        if header.uuid == nil {
-            header.uuid = NSUUID()
+    public init(header: PwsafeHeaderRecord, passwordRecords: [PwsafePasswordRecord]) {
+        var validatedHeader = header
+        
+        if validatedHeader.uuid == nil {
+            validatedHeader.uuid = NSUUID()
         }
         
-        self.header = header
+        self.header = validatedHeader
         self.passwordRecords = passwordRecords
     }
 }
@@ -29,24 +31,16 @@ public struct Pwsafe {
 public struct PwsafeHeaderRecord: PwsafeRecord {
     public var rawFields: [RawField]
     
-    public init(rawFields: [RawField]) {
+    public init(rawFields: [RawField] = []) {
         self.rawFields = rawFields
-    }
-    
-    public init() {
-        self.init(rawFields: [])
     }
 }
 
 public struct PwsafePasswordRecord: PwsafeRecord {
     public var rawFields: [RawField]
 
-    public init(rawFields: [RawField]) {
+    public init(rawFields: [RawField] = []) {
         self.rawFields = rawFields
-    }
-    
-    public init() {
-        self.init(rawFields: [])
     }
 }
 

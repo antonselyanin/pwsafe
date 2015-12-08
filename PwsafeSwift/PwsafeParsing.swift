@@ -8,11 +8,6 @@
 
 import Foundation
 
-public enum PwsafeError: ErrorType {
-    case CorruptedData
-    case InternalError
-}
-
 let PwsafeStartTag = "PWS3"
 let PwsafeEndTag = "PWS3-EOFPWS3-EOF"
 let PwsafeEndRecordTypeCode: UInt8 = 0xff
