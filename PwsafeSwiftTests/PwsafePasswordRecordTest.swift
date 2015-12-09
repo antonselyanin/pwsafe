@@ -19,7 +19,7 @@ class PwsafePasswordRecordTest: QuickSpec {
                 record = PwsafePasswordRecord(rawFields: [])
             }
             
-            it("should have uuid") {
+            it("should be initialized with default uuid") {
                 expect(record.uuid).notTo(beNil())
             }
             

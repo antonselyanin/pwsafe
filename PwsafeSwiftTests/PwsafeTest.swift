@@ -74,5 +74,61 @@ class PwsafeTest: QuickSpec {
                 expect(parsedPwsafe).to(equal(pwsafe))
             }
         }
+        
+        describe("accessing password records by UUID") {
+            let recordUUID0 = NSUUID()
+            let recordUUID1 = NSUUID()
+            
+            var header = PwsafeHeaderRecord()
+            header.uuid = NSUUID()
+            header.version = 0x030b
+            header.databaseName = "Database Name"
+            
+            var record0 = PwsafePasswordRecord()
+            record0.uuid = recordUUID0
+            record0.group = "group 0"
+            record0.title = "title 0"
+            record0.username = "username 0"
+            record0.password = "password 0"
+            
+            var record1 = PwsafePasswordRecord()
+            record1.uuid = recordUUID1
+            record1.group = "group 1"
+            record1.title = "title 1"
+            record1.username = "username 1"
+            record1.password = "password 1"
+
+            it("should get records by UUID") {
+                let pwsafe = Pwsafe(header: header, passwordRecords: [record0])
+                expect(pwsafe[recordUUID0]).to(equal(record0))
+            }
+            
+            it("should add new record with UUID") {
+                var pwsafe = Pwsafe(header: header, passwordRecords: [record0])
+                pwsafe[recordUUID1] = record1
+                expect(pwsafe[recordUUID1]).to(equal(record1))
+            }
+
+            it("should update record") {
+                var updateRecord = PwsafePasswordRecord()
+                updateRecord.uuid = recordUUID0
+                updateRecord.group = "update group"
+                updateRecord.title = "update title"
+                updateRecord.username = "update username"
+                updateRecord.password = "update username"
+
+                var pwsafe = Pwsafe(header: header, passwordRecords: [record0])
+                pwsafe[recordUUID0] = updateRecord
+                
+                expect(pwsafe[recordUUID0]).to(equal(updateRecord))
+            }
+            
+            it("should remove record") {
+                var pwsafe = Pwsafe(header: header, passwordRecords: [record0])
+                pwsafe[recordUUID0] = nil
+                
+                expect(pwsafe[recordUUID0]).to(beNil())
+            }
+        }
     }
 }

@@ -9,22 +9,37 @@
 import Foundation
 
 public struct Pwsafe {
-    public let header: PwsafeHeaderRecord
-    public let passwordRecords: [PwsafePasswordRecord]
+    public internal(set) var header: PwsafeHeaderRecord
+    public internal(set) var passwordRecords: [PwsafePasswordRecord]
 
-    public init() {
-        self.init(header: PwsafeHeaderRecord(rawFields: []), passwordRecords: [])
+    public init(header: PwsafeHeaderRecord = PwsafeHeaderRecord(rawFields: []), passwordRecords: [PwsafePasswordRecord] = []) {
+        self.header = header
+        self.passwordRecords = passwordRecords
     }
-
-    public init(header: PwsafeHeaderRecord, passwordRecords: [PwsafePasswordRecord]) {
-        var validatedHeader = header
-        
-        if validatedHeader.uuid == nil {
-            validatedHeader.uuid = NSUUID()
+    
+    public subscript(uuid: NSUUID) -> PwsafePasswordRecord? {
+        get {
+            return passwordRecords
+                .lazy
+                .filter {$0.uuid == uuid}
+                .first
         }
         
-        self.header = validatedHeader
-        self.passwordRecords = passwordRecords
+        set(newValue) {
+            let index = passwordRecords.indexOf { $0.uuid == uuid }
+            
+            if let newValue = newValue {
+                if let index = index {
+                    passwordRecords[index] = newValue
+                } else {
+                    passwordRecords.append(newValue)
+                }
+            } else {
+                if let index = index {
+                    passwordRecords.removeAtIndex(index)
+                }
+            }
+        }
     }
 }
 
@@ -33,6 +48,9 @@ public struct PwsafeHeaderRecord: PwsafeRecord {
     
     public init(rawFields: [RawField] = []) {
         self.rawFields = rawFields
+        if uuid == nil {
+            uuid = NSUUID()
+        }
     }
 }
 
@@ -41,6 +59,9 @@ public struct PwsafePasswordRecord: PwsafeRecord {
 
     public init(rawFields: [RawField] = []) {
         self.rawFields = rawFields
+        if uuid == nil {
+            uuid = NSUUID()
+        }
     }
 }
 
