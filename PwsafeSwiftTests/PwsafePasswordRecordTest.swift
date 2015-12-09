@@ -10,13 +10,17 @@ import Quick
 import Nimble
 import PwsafeSwift
 
-class PwsafeRecordTest: QuickSpec {
+class PwsafePasswordRecordTest: QuickSpec {
     override func spec() {
         describe("PwsafePasswordRecord") {
             var record: PwsafePasswordRecord!
             
             beforeEach {
                 record = PwsafePasswordRecord(rawFields: [])
+            }
+            
+            it("should have uuid") {
+                expect(record.uuid).notTo(beNil())
             }
             
             it("setValue should set value") {
