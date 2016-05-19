@@ -73,14 +73,15 @@ public extension PwsafeHeaderRecord {
         }
     }
     
-    public var uuid: NSUUID? {
-        get {
-            return valueForKey(PwsafeHeaderRecord.UUID)
-        }
-        set {
-            setValue(newValue, forKey: PwsafeHeaderRecord.UUID)
-        }
-    }
+    //todo: clean up
+//    public var uuid: NSUUID? {
+//        get {
+//            return valueForKey(PwsafeHeaderRecord.UUID)
+//        }
+//        set {
+//            setValue(newValue, forKey: PwsafeHeaderRecord.UUID)
+//        }
+//    }
     
     public var databaseName: String? {
         get {

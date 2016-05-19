@@ -8,7 +8,7 @@
 
 import Quick
 import Nimble
-import PwsafeSwift
+@testable import PwsafeSwift
 
 class PwsafePasswordRecordTest: QuickSpec {
     override func spec() {
@@ -16,11 +16,7 @@ class PwsafePasswordRecordTest: QuickSpec {
             var record: PwsafePasswordRecord!
             
             beforeEach {
-                record = PwsafePasswordRecord(rawFields: [])
-            }
-            
-            it("should be initialized with default uuid") {
-                expect(record.uuid).notTo(beNil())
+                record = PwsafePasswordRecord(uuid: NSUUID())
             }
             
             it("setValue should set value") {
@@ -38,6 +34,17 @@ class PwsafePasswordRecordTest: QuickSpec {
                 record.setValue("title", forKey: PwsafePasswordRecord.Title)
                 record.setValue(nil, forKey: PwsafePasswordRecord.Title)
                 expect(record.valueForKey(PwsafePasswordRecord.Title)).to(beNil())
+            }
+        }
+        
+        describe("PwsafePasswordRecord: RawFieldsArrayConvertible") {
+            it("should add UUID to rawFields") {
+                let uuid = NSUUID()
+                let uuidRawField = RawField(
+                    typeCode: PwsafePasswordFieldType.UUID.rawValue,
+                    bytes: PwsafePasswordRecord.UUID.toByteArray(value: uuid))
+                let record = PwsafePasswordRecord(rawFields: [uuidRawField])
+                //todo: expect uuid in rawFields
             }
         }
     }

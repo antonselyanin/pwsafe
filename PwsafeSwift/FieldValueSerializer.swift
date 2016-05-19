@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol FieldValueSerializer {
-    typealias Value
+    associatedtype Value
     
     func toByteArray(value: Value) -> [UInt8]
     func fromByteArray(array: [UInt8]) -> Value?
@@ -34,12 +34,14 @@ struct UUIDSerializer: FieldValueSerializer {
         return bytes
     }
     
-    func fromByteArray(var array: [UInt8]) -> NSUUID? {
-        if array.count < 16 {
-            array.appendContentsOf([UInt8](count: 16 - array.count, repeatedValue: 0))
+    func fromByteArray(array: [UInt8]) -> NSUUID? {
+        var bytesArray = array
+        
+        if bytesArray.count < 16 {
+            bytesArray.appendContentsOf([UInt8](count: 16 - array.count, repeatedValue: 0))
         }
         
-        return NSUUID(UUIDBytes: array)
+        return NSUUID(UUIDBytes: bytesArray)
     }
 }
 

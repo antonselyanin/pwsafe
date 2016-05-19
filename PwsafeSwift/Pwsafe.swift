@@ -12,7 +12,7 @@ public struct Pwsafe {
     public internal(set) var header: PwsafeHeaderRecord
     public internal(set) var passwordRecords: [PwsafePasswordRecord]
 
-    public init(header: PwsafeHeaderRecord = PwsafeHeaderRecord(rawFields: []), passwordRecords: [PwsafePasswordRecord] = []) {
+    public init(header: PwsafeHeaderRecord = PwsafeHeaderRecord(uuid: NSUUID()), passwordRecords: [PwsafePasswordRecord] = []) {
         self.header = header
         self.passwordRecords = passwordRecords
     }
@@ -41,48 +41,82 @@ public struct Pwsafe {
             }
         }
     }
+    
+    public mutating func addOrUpdateRecord(record: PwsafePasswordRecord) {
+        self[record.uuid] = record
+    }
 }
 
 public struct PwsafeHeaderRecord: PwsafeRecord {
-    public var rawFields: [RawField]
+    public let uuid: NSUUID
+    var fields: FieldsContainer<PwsafeHeaderRecord>
     
-    public init(rawFields: [RawField] = []) {
-        self.rawFields = rawFields
-        if uuid == nil {
-            uuid = NSUUID()
-        }
+    public init(uuid: NSUUID = NSUUID()) {
+        self.uuid = uuid
+        self.fields = FieldsContainer(fields: [])
+    }
+    
+    init(rawFields: [RawField] = []) {
+        var fields = FieldsContainer<PwsafeHeaderRecord>(fields: rawFields)
+        self.uuid = fields.valueForKey(PwsafeHeaderRecord.UUID) ?? NSUUID()
+        fields.setValue(nil, forKey: PwsafeHeaderRecord.UUID)
+        self.fields = fields
+    }
+    
+    public func valueForKey<ValueType>(key: FieldKey<PwsafeHeaderRecord, ValueType>) -> ValueType? {
+        return fields.valueForKey(key)
+    }
+    
+    public mutating func setValue<ValueType>(value: ValueType?, forKey key: FieldKey<PwsafeHeaderRecord, ValueType>) {
+        fields.setValue(value, forKey: key)
     }
 }
 
 public struct PwsafePasswordRecord: PwsafeRecord {
-    public var rawFields: [RawField]
-
-    public init(rawFields: [RawField] = []) {
-        self.rawFields = rawFields
-        if uuid == nil {
-            uuid = NSUUID()
-        }
+    public let uuid: NSUUID
+    var fields: FieldsContainer<PwsafePasswordRecord>
+    
+    public init(uuid: NSUUID = NSUUID()) {
+        self.uuid = uuid
+        self.fields = FieldsContainer(fields: [])
+    }
+    
+    init(rawFields: [RawField] = []) {
+        var fields = FieldsContainer<PwsafePasswordRecord>(fields: rawFields)
+        self.uuid = fields.valueForKey(PwsafePasswordRecord.UUID) ?? NSUUID()
+        fields.setValue(nil, forKey: PwsafePasswordRecord.UUID)
+        self.fields = fields
+    }
+    
+    public func valueForKey<ValueType>(key: FieldKey<PwsafePasswordRecord, ValueType>) -> ValueType? {
+        return fields.valueForKey(key)
+    }
+    
+    public mutating func setValue<ValueType>(value: ValueType?, forKey key: FieldKey<PwsafePasswordRecord, ValueType>) {
+        fields.setValue(value, forKey: key)
     }
 }
 
 public protocol PwsafeRecord: Equatable {
-    var rawFields: [RawField] { get set }
-
+    var uuid: NSUUID { get }
+    
     func valueForKey<ValueType>(key: FieldKey<Self, ValueType>) -> ValueType?
     
     mutating func setValue<ValueType>(value: ValueType?, forKey: FieldKey<Self, ValueType>)
 }
 
-public extension PwsafeRecord {
-    func valueForKey<ValueType>(key: FieldKey<Self, ValueType>) -> ValueType? {
-        return rawFields.lazy
+struct FieldsContainer<RecordType> {
+    var fields: [RawField]
+    
+    func valueForKey<ValueType>(key: FieldKey<RecordType, ValueType>) -> ValueType? {
+        return fields.lazy
             .filter {$0.typeCode == key.code}
             .flatMap {key.fromByteArray(bytes: $0.bytes)}
             .first
     }
     
-    mutating func setValue<ValueType>(value: ValueType?, forKey: FieldKey<Self, ValueType>) {
-        let index = rawFields.indexOf({$0.typeCode == forKey.code})
+    mutating func setValue<ValueType>(value: ValueType?, forKey: FieldKey<RecordType, ValueType>) {
+        let index = fields.indexOf({$0.typeCode == forKey.code})
         
         if let value = value {
             let newValue = RawField(
@@ -90,12 +124,12 @@ public extension PwsafeRecord {
                 bytes: forKey.toByteArray(value: value))
             
             if let index = index {
-                rawFields[index] = newValue
+                fields[index] = newValue
             } else {
-                rawFields.append(newValue)
+                fields.append(newValue)
             }
         } else if let index = index {
-            rawFields.removeAtIndex(index)
+            fields.removeAtIndex(index)
         }
     }
 }
@@ -122,8 +156,19 @@ public func ==(lhs: Pwsafe, rhs: Pwsafe) -> Bool {
         && lhs.passwordRecords == rhs.passwordRecords
 }
 
+//todo: remove?
 public func ==<T: PwsafeRecord>(lhs: T, rhs: T) -> Bool {
-    return lhs.rawFields == rhs.rawFields
+    return lhs.uuid.isEqual(rhs.uuid)
+}
+
+public func ==(lhs: PwsafeHeaderRecord, rhs: PwsafeHeaderRecord) -> Bool {
+    return lhs.uuid.isEqual(rhs.uuid)
+        && lhs.fields.fields == rhs.fields.fields
+}
+
+public func ==(lhs: PwsafePasswordRecord, rhs: PwsafePasswordRecord) -> Bool {
+    return lhs.uuid.isEqual(rhs.uuid)
+        && lhs.fields.fields == rhs.fields.fields
 }
 
 extension RawField: Equatable {}

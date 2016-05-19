@@ -37,6 +37,27 @@ extension Pwsafe {
     }
 }
 
+protocol RawFieldsArrayConvertible {
+    var rawFields: [RawField] { get }
+}
+
+//todo: add tests
+extension PwsafePasswordRecord: RawFieldsArrayConvertible {
+    var rawFields: [RawField] {
+        var outputFields = self.fields
+        outputFields.setValue(uuid, forKey: PwsafePasswordRecord.UUID)
+        return outputFields.fields
+    }
+}
+
+//todo: add tests
+extension PwsafeHeaderRecord: RawFieldsArrayConvertible {
+    var rawFields: [RawField] {
+        var outputFields = self.fields
+        outputFields.setValue(uuid, forKey: PwsafeHeaderRecord.UUID)
+        return outputFields.fields
+    }
+}
 
 func encryptPwsafeRecords(records: [[RawField]], password: String) throws -> EncryptedPwsafe {
     let salt = generateRandomBytes(32)

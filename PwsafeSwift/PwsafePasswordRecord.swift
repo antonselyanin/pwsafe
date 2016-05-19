@@ -79,14 +79,15 @@ public extension PwsafePasswordRecord {
 }
 
 public extension PwsafePasswordRecord {
-    public var uuid: NSUUID? {
-        get {
-            return valueForKey(PwsafePasswordRecord.UUID)
-        }
-        set {
-            setValue(newValue, forKey: PwsafePasswordRecord.UUID)
-        }
-    }
+    //todo: clean up
+//    public var uuid: NSUUID? {
+//        get {
+//            return valueForKey(PwsafePasswordRecord.UUID)
+//        }
+//        set {
+//            setValue(newValue, forKey: PwsafePasswordRecord.UUID)
+//        }
+//    }
     
     public var group: String? {
         get {

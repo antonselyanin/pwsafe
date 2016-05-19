@@ -18,12 +18,13 @@ class PwsafeHeaderRecordTest: QuickSpec {
             var record: PwsafeHeaderRecord!
             
             beforeEach {
-                record = PwsafeHeaderRecord(rawFields: [])
+                record = PwsafeHeaderRecord(uuid: NSUUID())
             }
             
-            it("should be initialized with default uuid") {
-                expect(record.uuid).notTo(beNil())
-            }
+            //todo: clean up
+//            it("should be initialized with default uuid") {
+//                expect(record.uuid).notTo(beNil())
+//            }
         }
     }
 }

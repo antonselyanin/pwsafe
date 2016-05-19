@@ -19,12 +19,12 @@ extension Array {
 func rangeSequence(range: Range<Int>, stride: Int) -> AnySequence<Range<Int>> {
     var current = range.startIndex
     
-    let generator = anyGenerator({
+    let generator = AnyGenerator {
         () -> Range<Int>? in
         let prev = current
         current = min(current + stride, range.endIndex)
         return prev < range.endIndex ? prev..<current : nil
-    })
+    }
     
     return AnySequence(generator)
 }
