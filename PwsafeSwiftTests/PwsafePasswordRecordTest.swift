@@ -42,7 +42,7 @@ class PwsafePasswordRecordTest: QuickSpec {
                 let uuid = NSUUID()
                 let uuidRawField = RawField(
                     typeCode: PwsafePasswordFieldType.UUID.rawValue,
-                    bytes: PwsafePasswordRecord.UUID.toByteArray(value: uuid))
+                    bytes: PwsafePasswordRecord.UUID.serializer.toByteArray(value: uuid))
                 let record = PwsafePasswordRecord(rawFields: [uuidRawField])
                 //todo: expect uuid in rawFields
             }

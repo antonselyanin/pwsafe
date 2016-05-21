@@ -34,6 +34,7 @@ Yubico                      0x12        Text                         [13]
 End of Entry                0xff        [empty]       Y              [17]
 */
 
+//todo: rename to PwsafeHeaderFieldCode/PwsafeHeaderField?
 enum PwsafeHeaderFieldType: UInt8 {
     case Version = 0x00
     case UUID = 0x01
@@ -56,11 +57,11 @@ enum PwsafeHeaderFieldType: UInt8 {
 }
 
 public extension PwsafeHeaderRecord {
-    public static let Version = key(.Version, ByteArrayConvertibleSerializer<UInt16>())
-    public static let UUID = key(.UUID, UUIDSerializer())
-    public static let WhatPerformedLastSave = key(.WhatPerformedLastSave, StringSerializer())
-    public static let DatabaseName = key(.DatabaseName, StringSerializer())
-    public static let DatabaseDescription = key(.DatabaseDescription, StringSerializer())
+    public static let Version = key(.Version, ValueSerializers.uint16Values)
+    public static let UUID = key(.UUID, ValueSerializers.uuids)
+    public static let WhatPerformedLastSave = key(.WhatPerformedLastSave, ValueSerializers.strings)
+    public static let DatabaseName = key(.DatabaseName, ValueSerializers.strings)
+    public static let DatabaseDescription = key(.DatabaseDescription, ValueSerializers.strings)
 }
 
 public extension PwsafeHeaderRecord {
@@ -93,11 +94,16 @@ public extension PwsafeHeaderRecord {
     }
 }
 
-private func key<T, S: FieldValueSerializer where S.Value == T>
-    (code: PwsafeHeaderFieldType, _ serializer: S) -> FieldKey<PwsafeHeaderRecord, T> {
-    return FieldKey<PwsafeHeaderRecord, T>(
-        code: code.rawValue,
-        fromByteArray: serializer.fromByteArray,
-        toByteArray: serializer.toByteArray)
+//private extension FieldKey {
+//    private static func key<Value, Serializer: ValueSerializer where Serializer.Value == Value>
+//        (code: PwsafeHeaderFieldType, _ serializer: Serializer) -> FieldKey<PwsafeHeaderRecord, Value> {
+//        return FieldKey<PwsafeHeaderRecord, Value>(code: code.rawValue,
+//            fromByteArray: serializer.fromByteArray,
+//            toByteArray: serializer.toByteArray)
+//    }
+//}
+
+private func key<Value>(code: PwsafeHeaderFieldType, _ serializer: ValueSerializer<Value>) -> FieldKey<PwsafeHeaderRecord, Value> {
+    return FieldKey<PwsafeHeaderRecord, Value>(code: code.rawValue, serializer: serializer)
 }
 

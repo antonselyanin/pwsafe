@@ -111,7 +111,7 @@ struct FieldsContainer<RecordType> {
     func valueForKey<ValueType>(key: FieldKey<RecordType, ValueType>) -> ValueType? {
         return fields.lazy
             .filter {$0.typeCode == key.code}
-            .flatMap {key.fromByteArray(bytes: $0.bytes)}
+            .flatMap {key.serializer.fromByteArray(bytes: $0.bytes)}
             .first
     }
     
@@ -121,7 +121,7 @@ struct FieldsContainer<RecordType> {
         if let value = value {
             let newValue = RawField(
                 typeCode: forKey.code,
-                bytes: forKey.toByteArray(value: value))
+                bytes: forKey.serializer.toByteArray(value: value))
             
             if let index = index {
                 fields[index] = newValue
@@ -142,12 +142,6 @@ public struct RawField {
         self.typeCode = typeCode
         self.bytes = bytes
     }
-}
-
-public struct FieldKey<RecordType, ValueType> {
-    public let code: UInt8
-    public let fromByteArray: (bytes: [UInt8]) -> ValueType?
-    public let toByteArray: (value: ValueType) -> [UInt8]
 }
 
 extension Pwsafe: Equatable {}

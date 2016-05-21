@@ -70,12 +70,12 @@ public enum PwsafePasswordFieldType: UInt8 {
 }
 
 public extension PwsafePasswordRecord {
-    public static let UUID = key(.UUID, UUIDSerializer())
-    public static let Group = key(.Group, StringSerializer())
-    public static let Title = key(.Title, StringSerializer())
-    public static let Username = key(.Username, StringSerializer())
-    public static let Notes = key(.Notes, StringSerializer())
-    public static let Password = key(.Password, StringSerializer())
+    public static let UUID = key(.UUID, ValueSerializers.uuids)
+    public static let Group = key(.Group, ValueSerializers.strings)
+    public static let Title = key(.Title, ValueSerializers.strings)
+    public static let Username = key(.Username, ValueSerializers.strings)
+    public static let Notes = key(.Notes, ValueSerializers.strings)
+    public static let Password = key(.Password, ValueSerializers.strings)
 }
 
 public extension PwsafePasswordRecord {
@@ -135,11 +135,8 @@ public extension PwsafePasswordRecord {
     }
 }
 
-private func key<T, S: FieldValueSerializer where S.Value == T>
-    (code: PwsafePasswordFieldType, _ serializer: S) -> FieldKey<PwsafePasswordRecord, T> {
-        return FieldKey<PwsafePasswordRecord, T>(
-            code: code.rawValue,
-            fromByteArray: serializer.fromByteArray,
-            toByteArray: serializer.toByteArray)
+private func key<Value>
+    (code: PwsafePasswordFieldType, _ serializer: ValueSerializer<Value>) -> FieldKey<PwsafePasswordRecord, Value> {
+        return FieldKey<PwsafePasswordRecord, Value>(code: code.rawValue, serializer: serializer)
 }
 
