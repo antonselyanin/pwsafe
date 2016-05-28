@@ -47,56 +47,6 @@ public struct Pwsafe {
     }
 }
 
-public struct PwsafeHeaderRecord: PwsafeRecord {
-    public let uuid: NSUUID
-    var fields: FieldsContainer<PwsafeHeaderRecord>
-    
-    public init(uuid: NSUUID = NSUUID()) {
-        self.uuid = uuid
-        self.fields = FieldsContainer(fields: [])
-    }
-    
-    init(rawFields: [RawField] = []) {
-        var fields = FieldsContainer<PwsafeHeaderRecord>(fields: rawFields)
-        self.uuid = fields.valueForKey(PwsafeHeaderRecord.UUID) ?? NSUUID()
-        fields.setValue(nil, forKey: PwsafeHeaderRecord.UUID)
-        self.fields = fields
-    }
-    
-    public func valueForKey<ValueType>(key: FieldKey<PwsafeHeaderRecord, ValueType>) -> ValueType? {
-        return fields.valueForKey(key)
-    }
-    
-    public mutating func setValue<ValueType>(value: ValueType?, forKey key: FieldKey<PwsafeHeaderRecord, ValueType>) {
-        fields.setValue(value, forKey: key)
-    }
-}
-
-public struct PwsafePasswordRecord: PwsafeRecord {
-    public let uuid: NSUUID
-    var fields: FieldsContainer<PwsafePasswordRecord>
-    
-    public init(uuid: NSUUID = NSUUID()) {
-        self.uuid = uuid
-        self.fields = FieldsContainer(fields: [])
-    }
-    
-    init(rawFields: [RawField] = []) {
-        var fields = FieldsContainer<PwsafePasswordRecord>(fields: rawFields)
-        self.uuid = fields.valueForKey(PwsafePasswordRecord.UUID) ?? NSUUID()
-        fields.setValue(nil, forKey: PwsafePasswordRecord.UUID)
-        self.fields = fields
-    }
-    
-    public func valueForKey<ValueType>(key: FieldKey<PwsafePasswordRecord, ValueType>) -> ValueType? {
-        return fields.valueForKey(key)
-    }
-    
-    public mutating func setValue<ValueType>(value: ValueType?, forKey key: FieldKey<PwsafePasswordRecord, ValueType>) {
-        fields.setValue(value, forKey: key)
-    }
-}
-
 public protocol PwsafeRecord: Equatable {
     var uuid: NSUUID { get }
     
@@ -148,21 +98,6 @@ extension Pwsafe: Equatable {}
 public func ==(lhs: Pwsafe, rhs: Pwsafe) -> Bool {
     return lhs.header == rhs.header
         && lhs.passwordRecords == rhs.passwordRecords
-}
-
-//todo: remove?
-public func ==<T: PwsafeRecord>(lhs: T, rhs: T) -> Bool {
-    return lhs.uuid.isEqual(rhs.uuid)
-}
-
-public func ==(lhs: PwsafeHeaderRecord, rhs: PwsafeHeaderRecord) -> Bool {
-    return lhs.uuid.isEqual(rhs.uuid)
-        && lhs.fields.fields == rhs.fields.fields
-}
-
-public func ==(lhs: PwsafePasswordRecord, rhs: PwsafePasswordRecord) -> Bool {
-    return lhs.uuid.isEqual(rhs.uuid)
-        && lhs.fields.fields == rhs.fields.fields
 }
 
 extension RawField: Equatable {}

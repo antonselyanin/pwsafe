@@ -69,6 +69,31 @@ public enum PwsafePasswordFieldType: UInt8 {
     case EntryKeyboardShortcut = 0x19
 }
 
+public struct PwsafePasswordRecord: PwsafeRecord {
+    public let uuid: NSUUID
+    var fields: FieldsContainer<PwsafePasswordRecord>
+    
+    public init(uuid: NSUUID = NSUUID()) {
+        self.uuid = uuid
+        self.fields = FieldsContainer(fields: [])
+    }
+    
+    init(rawFields: [RawField] = []) {
+        var fields = FieldsContainer<PwsafePasswordRecord>(fields: rawFields)
+        self.uuid = fields.valueForKey(PwsafePasswordRecord.UUID) ?? NSUUID()
+        fields.setValue(nil, forKey: PwsafePasswordRecord.UUID)
+        self.fields = fields
+    }
+    
+    public func valueForKey<ValueType>(key: FieldKey<PwsafePasswordRecord, ValueType>) -> ValueType? {
+        return fields.valueForKey(key)
+    }
+    
+    public mutating func setValue<ValueType>(value: ValueType?, forKey key: FieldKey<PwsafePasswordRecord, ValueType>) {
+        fields.setValue(value, forKey: key)
+    }
+}
+
 public extension PwsafePasswordRecord {
     public static let UUID = key(.UUID, ValueSerializers.uuids)
     public static let Group = key(.Group, ValueSerializers.strings)
@@ -79,16 +104,6 @@ public extension PwsafePasswordRecord {
 }
 
 public extension PwsafePasswordRecord {
-    //todo: clean up
-//    public var uuid: NSUUID? {
-//        get {
-//            return valueForKey(PwsafePasswordRecord.UUID)
-//        }
-//        set {
-//            setValue(newValue, forKey: PwsafePasswordRecord.UUID)
-//        }
-//    }
-    
     public var group: String? {
         get {
             return valueForKey(PwsafePasswordRecord.Group)
@@ -133,6 +148,12 @@ public extension PwsafePasswordRecord {
             setValue(newValue, forKey: PwsafePasswordRecord.Password)
         }
     }
+}
+
+extension PwsafePasswordRecord: Equatable {}
+public func ==(lhs: PwsafePasswordRecord, rhs: PwsafePasswordRecord) -> Bool {
+    return lhs.uuid.isEqual(rhs.uuid)
+        && lhs.fields.fields == rhs.fields.fields
 }
 
 private func key<Value>

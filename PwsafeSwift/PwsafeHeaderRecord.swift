@@ -56,6 +56,31 @@ enum PwsafeHeaderFieldType: UInt8 {
     case Yubico = 0x12
 }
 
+public struct PwsafeHeaderRecord: PwsafeRecord {
+    public let uuid: NSUUID
+    var fields: FieldsContainer<PwsafeHeaderRecord>
+    
+    public init(uuid: NSUUID = NSUUID()) {
+        self.uuid = uuid
+        self.fields = FieldsContainer(fields: [])
+    }
+    
+    init(rawFields: [RawField] = []) {
+        var fields = FieldsContainer<PwsafeHeaderRecord>(fields: rawFields)
+        self.uuid = fields.valueForKey(PwsafeHeaderRecord.UUID) ?? NSUUID()
+        fields.setValue(nil, forKey: PwsafeHeaderRecord.UUID)
+        self.fields = fields
+    }
+    
+    public func valueForKey<ValueType>(key: FieldKey<PwsafeHeaderRecord, ValueType>) -> ValueType? {
+        return fields.valueForKey(key)
+    }
+    
+    public mutating func setValue<ValueType>(value: ValueType?, forKey key: FieldKey<PwsafeHeaderRecord, ValueType>) {
+        fields.setValue(value, forKey: key)
+    }
+}
+
 public extension PwsafeHeaderRecord {
     public static let Version = key(.Version, ValueSerializers.uint16Values)
     public static let UUID = key(.UUID, ValueSerializers.uuids)
@@ -74,16 +99,6 @@ public extension PwsafeHeaderRecord {
         }
     }
     
-    //todo: clean up
-//    public var uuid: NSUUID? {
-//        get {
-//            return valueForKey(PwsafeHeaderRecord.UUID)
-//        }
-//        set {
-//            setValue(newValue, forKey: PwsafeHeaderRecord.UUID)
-//        }
-//    }
-    
     public var databaseName: String? {
         get {
             return valueForKey(PwsafeHeaderRecord.DatabaseName)
@@ -92,6 +107,12 @@ public extension PwsafeHeaderRecord {
             setValue(newValue, forKey: PwsafeHeaderRecord.DatabaseName)
         }
     }
+}
+
+extension PwsafeHeaderRecord: Equatable {}
+public func ==(lhs: PwsafeHeaderRecord, rhs: PwsafeHeaderRecord) -> Bool {
+    return lhs.uuid.isEqual(rhs.uuid)
+        && lhs.fields.fields == rhs.fields.fields
 }
 
 //private extension FieldKey {
