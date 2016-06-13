@@ -78,7 +78,7 @@ public struct PwsafePasswordRecord: PwsafeRecord {
         self.fields = FieldsContainer(fields: [])
     }
     
-    init(rawFields: [RawField] = []) {
+    init(rawFields: [RawField]) {
         var fields = FieldsContainer<PwsafePasswordRecord>(fields: rawFields)
         self.uuid = fields.valueForKey(PwsafePasswordRecord.UUID) ?? NSUUID()
         fields.setValue(nil, forKey: PwsafePasswordRecord.UUID)
@@ -101,6 +101,8 @@ public extension PwsafePasswordRecord {
     public static let Username = key(.Username, ValueSerializers.strings)
     public static let Notes = key(.Notes, ValueSerializers.strings)
     public static let Password = key(.Password, ValueSerializers.strings)
+    public static let URL = key(.URL, ValueSerializers.strings)
+    public static let Email = key(.EmailAddress, ValueSerializers.strings)
 }
 
 public extension PwsafePasswordRecord {
@@ -148,6 +150,24 @@ public extension PwsafePasswordRecord {
             setValue(newValue, forKey: PwsafePasswordRecord.Password)
         }
     }
+    
+    public var url: String? {
+        get {
+            return valueForKey(PwsafePasswordRecord.URL)
+        }
+        set {
+            setValue(newValue, forKey: PwsafePasswordRecord.URL)
+        }
+    }
+    
+    public var email: String? {
+        get {
+            return valueForKey(PwsafePasswordRecord.Email)
+        }
+        set {
+            setValue(newValue, forKey: PwsafePasswordRecord.Email)
+        }
+    }
 }
 
 extension PwsafePasswordRecord: Equatable {}
@@ -158,6 +178,6 @@ public func ==(lhs: PwsafePasswordRecord, rhs: PwsafePasswordRecord) -> Bool {
 
 private func key<Value>
     (code: PwsafePasswordFieldType, _ serializer: ValueSerializer<Value>) -> FieldKey<PwsafePasswordRecord, Value> {
-        return FieldKey<PwsafePasswordRecord, Value>(code: code.rawValue, serializer: serializer)
+        return FieldKey(code: code.rawValue, serializer: serializer)
 }
 

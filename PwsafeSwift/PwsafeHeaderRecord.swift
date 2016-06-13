@@ -115,16 +115,7 @@ public func ==(lhs: PwsafeHeaderRecord, rhs: PwsafeHeaderRecord) -> Bool {
         && lhs.fields.fields == rhs.fields.fields
 }
 
-//private extension FieldKey {
-//    private static func key<Value, Serializer: ValueSerializer where Serializer.Value == Value>
-//        (code: PwsafeHeaderFieldType, _ serializer: Serializer) -> FieldKey<PwsafeHeaderRecord, Value> {
-//        return FieldKey<PwsafeHeaderRecord, Value>(code: code.rawValue,
-//            fromByteArray: serializer.fromByteArray,
-//            toByteArray: serializer.toByteArray)
-//    }
-//}
-
 private func key<Value>(code: PwsafeHeaderFieldType, _ serializer: ValueSerializer<Value>) -> FieldKey<PwsafeHeaderRecord, Value> {
-    return FieldKey<PwsafeHeaderRecord, Value>(code: code.rawValue, serializer: serializer)
+    return FieldKey(code: code.rawValue, serializer: serializer)
 }
 
