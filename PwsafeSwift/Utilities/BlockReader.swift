@@ -58,9 +58,9 @@ struct BlockReader {
     }
     
     mutating func nextBlock() -> Bool {
-        if !hasMoreData {
-            return false
-        }
+        guard hasMoreData else { return false }
+        
+        guard position % blockSize != 0 else { return true }
         
         position += blockSize - position % blockSize
         

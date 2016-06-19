@@ -35,6 +35,7 @@ class PwsafeTest: QuickSpec {
                 }
             }
         }
+        
         //todo: add test for failures!
         
         describe("Pwsafe creation") {

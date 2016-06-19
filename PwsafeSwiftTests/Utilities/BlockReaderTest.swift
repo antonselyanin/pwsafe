@@ -61,6 +61,23 @@ class BlockReaderTest: QuickSpec {
                 expect(reader.readBytes(1)).to(equal([2]))
                 expect(reader.nextBlock()).to(equal(false))
             }
+
+            it("should not skip next block if we read a whole block") {
+                // Given
+                let data:[UInt8] = [
+                    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    ]
+                var reader = BlockReader(data: data, blockSize: 16)
+                
+                // When
+                reader.readBytes(16)
+                expect(reader.nextBlock()).to(equal(true))
+                
+                // Then
+                expect(reader.readBytes(1)).to(equal([2]))
+                expect(reader.nextBlock()).to(equal(false))
+            }
         }
     }
 }
