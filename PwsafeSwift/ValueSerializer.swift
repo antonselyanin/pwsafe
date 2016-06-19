@@ -15,15 +15,15 @@ public struct ValueSerializer<Value> {
 }
 
 public enum ValueSerializers {
-    static let strings: ValueSerializer<String> = ValueSerializer<String>(
+    public static let strings: ValueSerializer<String> = ValueSerializer<String>(
         toByteArray: stringToByteArray,
         fromByteArray: stringFromByteArray)
 
-    static let uuids: ValueSerializer<NSUUID> = ValueSerializer<NSUUID>(
+    public static let uuids: ValueSerializer<NSUUID> = ValueSerializer<NSUUID>(
         toByteArray: uuidToByteArray,
         fromByteArray: uuidFromByteArray)
     
-    static let uint16Values: ValueSerializer<UInt16> = ValueSerializer<UInt16>(
+    public static let uint16Values: ValueSerializer<UInt16> = ValueSerializer<UInt16>(
         toByteArray: byteArrayConvertiblesToByteArray,
         fromByteArray: byteArrayConvertiblesFromByteArray)
 }
