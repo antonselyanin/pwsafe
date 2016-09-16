@@ -4,17 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Nimble.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-PwsafeSwiftTests.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Quick.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -22,17 +12,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>40FF1C77152F384080A1A02E90A36DA9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6FB576564248D348FD61162D376DBB94</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F71BFF1F0FA7B87FEC9E10DCE644A335</key>
+		<key>0C23E4F3AF9D6BA3F2103BACA9F6F21B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

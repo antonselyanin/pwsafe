@@ -20,6 +20,8 @@
 		3A686C851C19DD9400247D42 /* FieldsContainerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A686C841C19DD9400247D42 /* FieldsContainerTest.swift */; };
 		3A6A39C41C17265E00696EC6 /* PwsafeHeaderRecordTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6A39C31C17265E00696EC6 /* PwsafeHeaderRecordTest.swift */; };
 		3A76F9DE1C16E41200BE5D40 /* PwsafeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A76F9DD1C16E41200BE5D40 /* PwsafeError.swift */; };
+		3A803A791D8C443500E19D0B /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A803A771D8C428000E19D0B /* Quick.framework */; };
+		3A803A7A1D8C443900E19D0B /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A803A751D8C427A00E19D0B /* Nimble.framework */; };
 		3A9441921BA5A42B00B00514 /* IntegerTypeUtilitiesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9441911BA5A42B00B00514 /* IntegerTypeUtilitiesTest.swift */; };
 		3A9D30B81BAF0571009A0330 /* NSDataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB2DAD01B7A39E90051F3A8 /* NSDataExtension.swift */; };
 		3A9D30C11BB06073009A0330 /* ArraySliceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9D30C01BB06073009A0330 /* ArraySliceExtension.swift */; };
@@ -81,6 +83,8 @@
 		3A686C841C19DD9400247D42 /* FieldsContainerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldsContainerTest.swift; sourceTree = "<group>"; };
 		3A6A39C31C17265E00696EC6 /* PwsafeHeaderRecordTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeHeaderRecordTest.swift; sourceTree = "<group>"; };
 		3A76F9DD1C16E41200BE5D40 /* PwsafeError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeError.swift; sourceTree = "<group>"; };
+		3A803A751D8C427A00E19D0B /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
+		3A803A771D8C428000E19D0B /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		3A8D2CA21B691AE50030494F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A8D2CA71B691AE50030494F /* PwsafeSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PwsafeSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A8D2CAD1B691AE50030494F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -119,6 +123,8 @@
 			files = (
 				3AA5E6F91BB9A13B003C164D /* PwsafeSwift.framework in Frameworks */,
 				AEB69FAC95D8A397073417BD /* Pods_PwsafeSwiftTests.framework in Frameworks */,
+				3A803A791D8C443500E19D0B /* Quick.framework in Frameworks */,
+				3A803A7A1D8C443900E19D0B /* Nimble.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +256,8 @@
 		527A385101D931EB4205EF17 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A803A771D8C428000E19D0B /* Quick.framework */,
+				3A803A751D8C427A00E19D0B /* Nimble.framework */,
 				3A556A781B73B5A400E45151 /* Security.framework */,
 				3A556A621B73B1EE00E45151 /* libcommonCrypto.tbd */,
 				67F0581AD2048530C3C74999 /* Pods.framework */,
@@ -573,6 +581,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 128B9DD537E22F439520DF44 /* Pods-PwsafeSwiftTests.debug.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = PwsafeSwiftTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = anton.PwsafeSwiftTests;
@@ -585,6 +597,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1F2B6F5756549B8D3A643465 /* Pods-PwsafeSwiftTests.release.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = PwsafeSwiftTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = anton.PwsafeSwiftTests;
@@ -601,6 +617,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = PwsafeSwift/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -624,6 +644,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = PwsafeSwift/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
