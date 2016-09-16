@@ -48,7 +48,6 @@
 		3AFFBAE71BC16F9A00F447F7 /* CipherBlockMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFBAE61BC16F9A00F447F7 /* CipherBlockMode.swift */; };
 		3AFFBAEA1BC1741800F447F7 /* CipherBlockModeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFBAE91BC1741800F447F7 /* CipherBlockModeTest.swift */; };
 		58AAA7355D8C4B7C8C55727A /* BlockReaderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA3D501354728866A8906 /* BlockReaderTest.swift */; };
-		AEB69FAC95D8A397073417BD /* Pods_PwsafeSwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F2AE68A917F5646480B609F /* Pods_PwsafeSwiftTests.framework */; };
 		EA32B6AC1CF076A900DFAB9D /* FieldKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA32B6AB1CF076A900DFAB9D /* FieldKey.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,8 +62,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		128B9DD537E22F439520DF44 /* Pods-PwsafeSwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PwsafeSwiftTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PwsafeSwiftTests/Pods-PwsafeSwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
-		1F2B6F5756549B8D3A643465 /* Pods-PwsafeSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PwsafeSwiftTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PwsafeSwiftTests/Pods-PwsafeSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
 		3A03FED51BAD894F00741D62 /* BlockWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockWriter.swift; sourceTree = "<group>"; };
 		3A03FED71BAD89BD00741D62 /* BlockWriterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockWriterTest.swift; sourceTree = "<group>"; };
 		3A1ADF121BB461050091C376 /* ValueSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueSerializer.swift; sourceTree = "<group>"; };
@@ -112,7 +109,6 @@
 		3AFFBAE91BC1741800F447F7 /* CipherBlockModeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherBlockModeTest.swift; sourceTree = "<group>"; };
 		58AAA3D501354728866A8906 /* BlockReaderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockReaderTest.swift; sourceTree = "<group>"; };
 		67F0581AD2048530C3C74999 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8F2AE68A917F5646480B609F /* Pods_PwsafeSwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PwsafeSwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA32B6AB1CF076A900DFAB9D /* FieldKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,7 +118,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AA5E6F91BB9A13B003C164D /* PwsafeSwift.framework in Frameworks */,
-				AEB69FAC95D8A397073417BD /* Pods_PwsafeSwiftTests.framework in Frameworks */,
 				3A803A791D8C443500E19D0B /* Quick.framework in Frameworks */,
 				3A803A7A1D8C443900E19D0B /* Nimble.framework in Frameworks */,
 			);
@@ -167,7 +162,6 @@
 				3A8D2C941B691AE50030494F /* Products */,
 				3A8D2C951B691AE50030494F /* PwsafeSwift */,
 				3A8D2CAA1B691AE50030494F /* PwsafeSwiftTests */,
-				66A2CC9AE6180631DB98A8AD /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -261,18 +255,8 @@
 				3A556A781B73B5A400E45151 /* Security.framework */,
 				3A556A621B73B1EE00E45151 /* libcommonCrypto.tbd */,
 				67F0581AD2048530C3C74999 /* Pods.framework */,
-				8F2AE68A917F5646480B609F /* Pods_PwsafeSwiftTests.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		66A2CC9AE6180631DB98A8AD /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				128B9DD537E22F439520DF44 /* Pods-PwsafeSwiftTests.debug.xcconfig */,
-				1F2B6F5756549B8D3A643465 /* Pods-PwsafeSwiftTests.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,12 +277,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A8D2CB31B691AE50030494F /* Build configuration list for PBXNativeTarget "PwsafeSwiftTests" */;
 			buildPhases = (
-				714555232AA0580D37C166DA /* [CP] Check Pods Manifest.lock */,
 				3A8D2CA31B691AE50030494F /* Sources */,
 				3A8D2CA41B691AE50030494F /* Frameworks */,
 				3A8D2CA51B691AE50030494F /* Resources */,
-				A4B95F12C3DB596BD8C1BBA8 /* [CP] Embed Pods Frameworks */,
-				86E1E35253FAE4EF6DD90589 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -383,54 +364,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		714555232AA0580D37C166DA /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		86E1E35253FAE4EF6DD90589 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PwsafeSwiftTests/Pods-PwsafeSwiftTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A4B95F12C3DB596BD8C1BBA8 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PwsafeSwiftTests/Pods-PwsafeSwiftTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3A8D2CA31B691AE50030494F /* Sources */ = {
@@ -579,14 +512,13 @@
 		};
 		3A8D2CB41B691AE50030494F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 128B9DD537E22F439520DF44 /* Pods-PwsafeSwiftTests.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = PwsafeSwiftTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS)";
 				PRODUCT_BUNDLE_IDENTIFIER = anton.PwsafeSwiftTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -595,14 +527,13 @@
 		};
 		3A8D2CB51B691AE50030494F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1F2B6F5756549B8D3A643465 /* Pods-PwsafeSwiftTests.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = PwsafeSwiftTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS)";
 				PRODUCT_BUNDLE_IDENTIFIER = anton.PwsafeSwiftTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
