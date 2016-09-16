@@ -1,15 +1,15 @@
 PODS:
-  - Nimble (3.2.0)
-  - Quick (0.9.1)
+  - Nimble (4.0.1)
+  - Quick (0.9.3)
 
 DEPENDENCIES:
-  - Nimble (~> 3.2.0)
-  - Quick (~> 0.9.1)
+  - Nimble (= 4.0.1)
+  - Quick (~> 0.9.3)
 
 SPEC CHECKSUMS:
-  Nimble: 703854335d181df169bbca9c97117b5cf8c47c1d
-  Quick: a5221fc21788b6aeda934805e68b061839bc3165
+  Nimble: 0f3c8b8b084cda391209c3c5efbb48bedeeb920a
+  Quick: 13a2a2b19a5d8e3ed4fd0c36ee46597fd77ebf71
 
-PODFILE CHECKSUM: 3f3b9cdabf42f9a7eb2ee02a90987e2d89ba3f38
+PODFILE CHECKSUM: 8791595b23a41d929484a272fc1af6c7c0ddeb71
 
 COCOAPODS: 1.0.1
