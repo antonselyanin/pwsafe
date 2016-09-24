@@ -6,17 +6,17 @@ class PwsafeTest: QuickSpec {
     override func spec() {
         describe("Pwsafe parsing") {
             it("should load pwsafe") {
-                let safeData = NSData.loadResourceFile("test")!
+                let safeData = Data.loadResourceFile("test")!
                 let pwsafe = try! Pwsafe(data: safeData, password: "test")
                 
                 let header = pwsafe.header
                 
                 expect(header.version).to(equal(0x030d))
-                expect(header.uuid).to(equal(NSUUID(UUIDString: "CFE1BCD4-6A0E-4BF5-8BF8-E5F1991515E2")))
+                expect(header.uuid).to(equal(UUID(uuidString: "CFE1BCD4-6A0E-4BF5-8BF8-E5F1991515E2")))
                 
                 let record = pwsafe.passwordRecords[0]
                 
-                expect(record.uuid).to(equal(NSUUID(UUIDString: "CA1051B0-B42E-6241-1656-A874D307CCD1")))
+                expect(record.uuid).to(equal(UUID(uuidString: "CA1051B0-B42E-6241-1656-A874D307CCD1")))
                 expect(record.group).to(equal("group"))
                 expect(record.title).to(equal("Title"))
                 expect(record.username).to(equal("user"))
@@ -25,10 +25,10 @@ class PwsafeTest: QuickSpec {
             }
             
             it("should throw error if password is incorrect") {
-                let safeData = NSData.loadResourceFile("test")!
+                let safeData = Data.loadResourceFile("test")!
                 do {
                     let _ = try Pwsafe(data: safeData, password: "wrong")
-                } catch PwsafeError.CorruptedData {
+                } catch PwsafeError.corruptedData {
                     // caught the correct error
                 } catch let error {
                     fail("failed with error \(error)")
@@ -47,17 +47,17 @@ class PwsafeTest: QuickSpec {
         
         describe("Pwsafe storing") {
             it("should create new structure with required fields") {
-                var header = PwsafeHeaderRecord(uuid: NSUUID())
+                var header = PwsafeHeaderRecord(uuid: UUID())
                 header.version = 0x030b
                 header.databaseName = "Database Name"
                 
-                var record0 = PwsafePasswordRecord(uuid: NSUUID())
+                var record0 = PwsafePasswordRecord(uuid: UUID())
                 record0.group = "group 0"
                 record0.title = "title 0"
                 record0.username = "username 0"
                 record0.password = "password 0"
 
-                var record1 = PwsafePasswordRecord(uuid: NSUUID())
+                var record1 = PwsafePasswordRecord(uuid: UUID())
                 record1.group = "group 1"
                 record1.title = "title 1"
                 record1.username = "username 1"
@@ -74,10 +74,10 @@ class PwsafeTest: QuickSpec {
         }
         
         describe("accessing password records by UUID") {
-            let recordUUID0 = NSUUID()
-            let recordUUID1 = NSUUID()
+            let recordUUID0 = UUID()
+            let recordUUID1 = UUID()
             
-            var header = PwsafeHeaderRecord(uuid: NSUUID())
+            var header = PwsafeHeaderRecord(uuid: UUID())
             header.version = 0x030b
             header.databaseName = "Database Name"
             

@@ -15,12 +15,12 @@ class Hmac {
         CCHmacInit(&context, UInt32(kCCHmacAlgSHA256), key, key.count);
     }
     
-    func update(data: [UInt8]) {
+    func update(_ data: [UInt8]) {
         CCHmacUpdate(&context, data, data.count)
     }
     
     func final() -> [UInt8] {
-        var result = [UInt8](count: Int(CC_SHA256_DIGEST_LENGTH), repeatedValue: 0)
+        var result = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
         CCHmacFinal(&context, &result)
         return result
     }

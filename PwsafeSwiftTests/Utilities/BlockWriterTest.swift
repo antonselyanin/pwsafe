@@ -31,7 +31,7 @@ class BlockWriterTest: QuickSpec {
             
             it("should write byte array size of one block") {
                 var writer = BlockWriter()
-                writer.write([UInt8](count:16, repeatedValue: 0))
+                writer.write([UInt8](repeating: 0, count: 16))
                 writer.finishBlock();
                 expect(writer.data.count).to(equal(16))
             }

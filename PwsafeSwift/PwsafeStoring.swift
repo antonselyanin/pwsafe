@@ -11,8 +11,8 @@ import Foundation
 let PwsafeKeyStretchIterations: UInt32 = 2048
 
 extension Pwsafe {
-    public func toData(withPassword password: String) throws -> NSData {
-        let output = NSOutputStream.outputStreamToMemory()
+    public func toData(withPassword password: String) throws -> Data {
+        let output = OutputStream.toMemory()
         output.open()
         
         let records = [header.rawFields] + passwordRecords.map {$0.rawFields}
@@ -29,8 +29,8 @@ extension Pwsafe {
         output.write(PwsafeEndTag.utf8Bytes())
         output.write(encryptedPwsafe.hmac)
         
-        guard let data = output.propertyForKey(NSStreamDataWrittenToMemoryStreamKey) as? NSData else {
-            throw PwsafeError.InternalError
+        guard let data = output.property(forKey: Stream.PropertyKey.dataWrittenToMemoryStreamKey) as? Data else {
+            throw PwsafeError.internalError
         }
         
         return data
@@ -59,7 +59,7 @@ extension PwsafeHeaderRecord: RawFieldsArrayConvertible {
     }
 }
 
-func encryptPwsafeRecords(records: [[RawField]], password: String) throws -> EncryptedPwsafe {
+func encryptPwsafeRecords(_ records: [[RawField]], password: String) throws -> EncryptedPwsafe {
     let salt = generateRandomBytes(32)
     let iter: UInt32 = PwsafeKeyStretchIterations
     
@@ -80,7 +80,7 @@ func encryptPwsafeRecords(records: [[RawField]], password: String) throws -> Enc
     let encryptedData = try recordsCryptor.encrypt(pwsafeRecordsToBlockData(records))
     
     let hmacer = Hmac(key: hmacKey)
-    for field in records.lazy.flatten() {
+    for field in records.lazy.joined() {
         hmacer.update(field.bytes)
     }
     let hmac = hmacer.final()
@@ -95,7 +95,7 @@ func encryptPwsafeRecords(records: [[RawField]], password: String) throws -> Enc
         hmac: hmac)
 }
 
-func pwsafeRecordsToBlockData(records: [[RawField]]) -> [UInt8] {
+func pwsafeRecordsToBlockData(_ records: [[RawField]]) -> [UInt8] {
     var blockWriter = BlockWriter()
     
     for record in records {

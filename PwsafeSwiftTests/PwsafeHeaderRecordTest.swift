@@ -18,7 +18,7 @@ class PwsafeHeaderRecordTest: QuickSpec {
             var record: PwsafeHeaderRecord!
             
             beforeEach {
-                record = PwsafeHeaderRecord(uuid: NSUUID())
+                record = PwsafeHeaderRecord(uuid: UUID())
             }
             
             //todo: clean up

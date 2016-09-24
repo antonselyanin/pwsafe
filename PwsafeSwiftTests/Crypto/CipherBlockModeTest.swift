@@ -14,7 +14,7 @@ import Quick
 class CipherBlockModeTest: QuickSpec {
     override func spec() {
         
-        func invert(input: [UInt8]) -> [UInt8]? {
+        func invert(_ input: [UInt8]) -> [UInt8]? {
             return input.map(~)
         }
         
@@ -28,7 +28,7 @@ class CipherBlockModeTest: QuickSpec {
                 
                 let decrypted = try! mode.decryptInput(encrypted.toChunks(3), iv: nil, cipherOperation: invert)
                 
-                expect(decrypted).to(equal(Array(input.flatten())))
+                expect(decrypted).to(equal(Array(input.joined())))
             }
         }
     }

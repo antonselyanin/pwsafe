@@ -13,12 +13,12 @@ let PwsafeEndTag = "PWS3-EOFPWS3-EOF"
 let PwsafeEndRecordTypeCode: UInt8 = 0xff
 
 public extension Pwsafe {
-    init(data: NSData, password: String) throws {
+    init(data: Data, password: String) throws {
         let pwsafe = try readEncryptedPwsafe(data)
         let pwsafeRecords = try decryptPwsafeRecords(pwsafe, password: password)
         
         guard let headerFields = pwsafeRecords.first else {
-            throw PwsafeError.CorruptedData
+            throw PwsafeError.corruptedData
         }
         
         self.header = PwsafeHeaderRecord(rawFields: headerFields)
@@ -41,14 +41,14 @@ struct EncryptedPwsafe {
 }
 
 //todo: write tests, clean up
-func readEncryptedPwsafe(data: NSData) throws -> EncryptedPwsafe {
-    let stream = NSInputStream(data: data)
+func readEncryptedPwsafe(_ data: Data) throws -> EncryptedPwsafe {
+    let stream = InputStream(data: data)
     stream.open()
     
     let tag = stream.readBytes(4)!
     
     if PwsafeStartTag.utf8Bytes() != tag {
-        throw PwsafeError.CorruptedData
+        throw PwsafeError.corruptedData
     }
     
     let salt = stream.readBytes(32)!
@@ -64,7 +64,7 @@ func readEncryptedPwsafe(data: NSData) throws -> EncryptedPwsafe {
     let encryptedData = [UInt8](remainder[0..<(remainder.count - tailLength)])
     let eof = [UInt8](remainder[encryptedData.count..<(remainder.count - 32)])
     if eof != PwsafeEndTag.utf8Bytes() {
-        throw PwsafeError.CorruptedData
+        throw PwsafeError.corruptedData
     }
     
     let hmac = [UInt8](remainder[remainder.count - 32 ..< remainder.count])
@@ -79,7 +79,7 @@ func readEncryptedPwsafe(data: NSData) throws -> EncryptedPwsafe {
         hmac: hmac)
 }
 
-func decryptPwsafeRecords(pwsafe: EncryptedPwsafe, password: String) throws -> [[RawField]] {
+func decryptPwsafeRecords(_ pwsafe: EncryptedPwsafe, password: String) throws -> [[RawField]] {
     let stretchedKey = stretchKey(password.utf8Bytes(),
         salt: pwsafe.salt,
         iterations: Int(pwsafe.iter + 1)) // todo: why +1 ?????
@@ -87,7 +87,7 @@ func decryptPwsafeRecords(pwsafe: EncryptedPwsafe, password: String) throws -> [
     let keyHash = sha256(stretchedKey)
     
     if keyHash != pwsafe.passwordHash {
-        throw PwsafeError.CorruptedData
+        throw PwsafeError.corruptedData
     }
     
     let recordsKeyCryptor = Twofish(key: stretchedKey, blockMode: ECBMode())!
@@ -100,33 +100,33 @@ func decryptPwsafeRecords(pwsafe: EncryptedPwsafe, password: String) throws -> [
     let pwsafeRecords = try parseRawPwsafeRecords(decryptedData)
     
     let hmacer = Hmac(key: hmacKey)
-    for field in pwsafeRecords.lazy.flatten() {
+    for field in pwsafeRecords.lazy.joined() {
         hmacer.update(field.bytes)
     }
     let hmac = hmacer.final()
     
     if hmac != pwsafe.hmac {
-        throw PwsafeError.CorruptedData
+        throw PwsafeError.corruptedData
     }
     
     return pwsafeRecords
 }
 
-func parseRawPwsafeRecords(let data: [UInt8]) throws -> [[RawField]] {
+func parseRawPwsafeRecords(_ data: [UInt8]) throws -> [[RawField]] {
     var reader = BlockReader(data: data)
     var rawRecords = [[RawField]]()
     var rawFields = [RawField]()
     while reader.hasMoreData {
         guard let fieldLength = reader.readUInt32LE() else {
-            throw PwsafeError.CorruptedData
+            throw PwsafeError.corruptedData
         }
         
         guard let fieldType = reader.readUInt8() else {
-            throw PwsafeError.CorruptedData
+            throw PwsafeError.corruptedData
         }
         
         guard let fieldData = reader.readBytes(Int(fieldLength)) else {
-            throw PwsafeError.CorruptedData
+            throw PwsafeError.corruptedData
         }
         
         if fieldType == PwsafeEndRecordTypeCode {
@@ -142,19 +142,19 @@ func parseRawPwsafeRecords(let data: [UInt8]) throws -> [[RawField]] {
     return rawRecords
 }
 
-func stretchKey(password: [UInt8], salt: [UInt8], iterations: Int) -> [UInt8] {
+func stretchKey(_ password: [UInt8], salt: [UInt8], iterations: Int) -> [UInt8] {
     return sha256(password + salt, iterations: iterations)
 }
 
-func sha256(input: [UInt8], iterations: Int = 1) -> [UInt8] {
+func sha256(_ input: [UInt8], iterations: Int = 1) -> [UInt8] {
     //todo: check CC error? status?
     
     var inputData = input
-    var resultData = [UInt8](count:Int(CC_SHA256_DIGEST_LENGTH), repeatedValue: 0)
+    var resultData = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
     
     for _ in 0..<iterations {
         CC_SHA256(inputData, UInt32(inputData.count), &resultData)
-        inputData.replaceRange(inputData.indices, with: resultData)
+        inputData.replaceSubrange(inputData.indices, with: resultData)
     }
     
     return resultData

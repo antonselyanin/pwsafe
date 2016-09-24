@@ -13,9 +13,7 @@ struct BlockReader {
     private var position: Int = 0
     private let blockSize: Int
     var hasMoreData: Bool {
-        get {
-            return position < data.count
-        }
+        return position < data.count
     }
 
     init(data: [UInt8], blockSize: Int = 16 ) {
@@ -23,7 +21,7 @@ struct BlockReader {
         self.blockSize = blockSize
     }
     
-    mutating func readBytes(count:Int) -> [UInt8]? {
+    mutating func readBytes(_ count:Int) -> [UInt8]? {
         if position + count > data.count {
             return nil
         }
@@ -34,27 +32,21 @@ struct BlockReader {
     }
     
     mutating func readUInt32LE() -> UInt32? {
-        if let bytes = readBytes(4) {
-            return UInt32(littleEndianBytes: bytes)
-        }
+        guard let bytes = readBytes(4) else { return nil }
         
-        return nil
+        return UInt32(littleEndianBytes: bytes)
     }
     
     mutating func readUInt16LE() -> UInt16? {
-        if let bytes = readBytes(2) {
-            return UInt16(littleEndianBytes: bytes)
-        }
+        guard let bytes = readBytes(2) else { return nil }
         
-        return nil
+        return UInt16(littleEndianBytes: bytes)
     }
 
     mutating func readUInt8() -> UInt8? {
-        if let bytes = readBytes(1) {
-            return UInt8(bytes[0])
-        }
-        
-        return nil
+        guard let bytes = readBytes(1) else { return nil }
+
+        return UInt8(bytes[0])
     }
     
     mutating func nextBlock() -> Bool {

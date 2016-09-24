@@ -12,21 +12,21 @@ public struct Pwsafe {
     public internal(set) var header: PwsafeHeaderRecord
     public internal(set) var passwordRecords: [PwsafePasswordRecord]
 
-    public init(header: PwsafeHeaderRecord = PwsafeHeaderRecord(uuid: NSUUID()), passwordRecords: [PwsafePasswordRecord] = []) {
+    public init(header: PwsafeHeaderRecord = PwsafeHeaderRecord(uuid: UUID()), passwordRecords: [PwsafePasswordRecord] = []) {
         self.header = header
         self.passwordRecords = passwordRecords
     }
     
-    public subscript(uuid: NSUUID) -> PwsafePasswordRecord? {
+    public subscript(uuid: UUID) -> PwsafePasswordRecord? {
         get {
             return passwordRecords
                 .lazy
-                .filter {$0.uuid == uuid}
+                .filter {$0.uuid as UUID == uuid}
                 .first
         }
         
         set(newValue) {
-            let index = passwordRecords.indexOf { $0.uuid == uuid }
+            let index = passwordRecords.index { $0.uuid as UUID == uuid }
             
             if let newValue = newValue {
                 if let index = index {
@@ -36,42 +36,42 @@ public struct Pwsafe {
                 }
             } else {
                 if let index = index {
-                    passwordRecords.removeAtIndex(index)
+                    passwordRecords.remove(at: index)
                 }
             }
         }
     }
     
-    public mutating func addOrUpdateRecord(record: PwsafePasswordRecord) {
-        self[record.uuid] = record
+    public mutating func addOrUpdateRecord(_ record: PwsafePasswordRecord) {
+        self[record.uuid as UUID] = record
     }
 }
 
 public protocol PwsafeRecord: Equatable {
-    var uuid: NSUUID { get }
+    var uuid: UUID { get }
     
-    func valueForKey<ValueType>(key: FieldKey<Self, ValueType>) -> ValueType?
+    func valueForKey<ValueType>(_ key: FieldKey<Self, ValueType>) -> ValueType?
     
-    mutating func setValue<ValueType>(value: ValueType?, forKey: FieldKey<Self, ValueType>)
+    mutating func setValue<ValueType>(_ value: ValueType?, forKey: FieldKey<Self, ValueType>)
 }
 
 struct FieldsContainer<RecordType> {
     var fields: [RawField]
     
-    func valueForKey<ValueType>(key: FieldKey<RecordType, ValueType>) -> ValueType? {
+    func valueForKey<ValueType>(_ key: FieldKey<RecordType, ValueType>) -> ValueType? {
         return fields.lazy
             .filter {$0.typeCode == key.code}
-            .flatMap {key.serializer.fromByteArray(bytes: $0.bytes)}
+            .flatMap {key.serializer.fromByteArray($0.bytes)}
             .first
     }
     
-    mutating func setValue<ValueType>(value: ValueType?, forKey: FieldKey<RecordType, ValueType>) {
-        let index = fields.indexOf({$0.typeCode == forKey.code})
+    mutating func setValue<ValueType>(_ value: ValueType?, forKey: FieldKey<RecordType, ValueType>) {
+        let index = fields.index(where: {$0.typeCode == forKey.code})
         
         if let value = value {
             let newValue = RawField(
                 typeCode: forKey.code,
-                bytes: forKey.serializer.toByteArray(value: value))
+                bytes: forKey.serializer.toByteArray(value))
             
             if let index = index {
                 fields[index] = newValue
@@ -79,7 +79,7 @@ struct FieldsContainer<RecordType> {
                 fields.append(newValue)
             }
         } else if let index = index {
-            fields.removeAtIndex(index)
+            fields.remove(at: index)
         }
     }
 }

@@ -10,8 +10,8 @@ import Foundation
 
 
 public struct ValueSerializer<Value> {
-    let toByteArray: (value: Value) -> [UInt8]
-    let fromByteArray: (bytes: [UInt8]) -> Value?
+    let toByteArray: (_ value: Value) -> [UInt8]
+    let fromByteArray: (_ bytes: [UInt8]) -> Value?
 }
 
 public enum ValueSerializers {
@@ -19,7 +19,7 @@ public enum ValueSerializers {
         toByteArray: stringToByteArray,
         fromByteArray: stringFromByteArray)
 
-    public static let uuids: ValueSerializer<NSUUID> = ValueSerializer<NSUUID>(
+    public static let uuids: ValueSerializer<UUID> = ValueSerializer<UUID>(
         toByteArray: uuidToByteArray,
         fromByteArray: uuidFromByteArray)
     
@@ -28,36 +28,36 @@ public enum ValueSerializers {
         fromByteArray: byteArrayConvertiblesFromByteArray)
 }
 
-private func byteArrayConvertiblesToByteArray<T: ByteArrayConvertible>(value: T) -> [UInt8] {
+private func byteArrayConvertiblesToByteArray<T: ByteArrayConvertible>(_ value: T) -> [UInt8] {
     return value.toLittleEndianBytes()
 }
 
-private func byteArrayConvertiblesFromByteArray<T: ByteArrayConvertible>(array: [UInt8]) -> T? {
+private func byteArrayConvertiblesFromByteArray<T: ByteArrayConvertible>(_ array: [UInt8]) -> T? {
     return T(littleEndianBytes: array)
 }
 
-private func uuidToByteArray(value: NSUUID) -> [UInt8] {
-    var bytes = [UInt8](count: 16, repeatedValue: 0)
-    value.getUUIDBytes(&bytes)
+private func uuidToByteArray(_ value: UUID) -> [UInt8] {
+    var bytes = [UInt8](repeating: 0, count: 16)
+    (value as NSUUID).getBytes(&bytes)
     return bytes
 }
 
-private func uuidFromByteArray(array: [UInt8]) -> NSUUID? {
+private func uuidFromByteArray(_ array: [UInt8]) -> UUID? {
     var bytesArray = array
     
     if bytesArray.count < 16 {
-        bytesArray.appendContentsOf([UInt8](count: 16 - array.count, repeatedValue: 0))
+        bytesArray.append(contentsOf: [UInt8](repeating: 0, count: 16 - array.count))
     }
     
-    return NSUUID(UUIDBytes: bytesArray)
+    return (NSUUID(uuidBytes: bytesArray) as UUID)
 }
 
-private func stringToByteArray(value: String) -> [UInt8] {
+private func stringToByteArray(_ value: String) -> [UInt8] {
     return value.utf8Bytes()
 }
 
-private func stringFromByteArray(array: [UInt8]) -> String? {
-    if let str = NSString(bytes: array, length: array.count, encoding: NSUTF8StringEncoding) {
+private func stringFromByteArray(_ array: [UInt8]) -> String? {
+    if let str = NSString(bytes: array, length: array.count, encoding: String.Encoding.utf8.rawValue) {
         return String(str)
     }
     

@@ -71,7 +71,7 @@ class BlockReaderTest: QuickSpec {
                 var reader = BlockReader(data: data, blockSize: 16)
                 
                 // When
-                reader.readBytes(16)
+                let _ = reader.readBytes(16)
                 expect(reader.nextBlock()).to(equal(true))
                 
                 // Then

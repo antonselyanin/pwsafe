@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum PwsafeError: ErrorType {
-    case CorruptedData
-    case InternalError
+public enum PwsafeError: Error {
+    case corruptedData
+    case internalError
 }

@@ -27,7 +27,7 @@ extension UInt8: ByteArrayConvertible {
 extension UInt32: ByteArrayConvertible {
     init(littleEndianBytes bytes: [UInt8]) {
         var result: UInt32 = 0
-        for byte in bytes.prefix(sizeof(UInt32)).reverse() {
+        for byte in bytes.prefix(MemoryLayout<UInt32>.size).reversed() {
             result = result << 8 | UInt32(byte)
         }
         self = result
@@ -46,7 +46,7 @@ extension UInt32: ByteArrayConvertible {
 extension UInt16: ByteArrayConvertible {
     init(littleEndianBytes bytes: [UInt8]) {
         var result: UInt16 = 0
-        for byte in bytes.prefix(sizeof(UInt16)).reverse() {
+        for byte in bytes.prefix(MemoryLayout<UInt16>.size).reversed() {
             result = result << 8 | UInt16(byte)
         }
         self = result

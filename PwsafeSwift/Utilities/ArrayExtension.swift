@@ -10,20 +10,20 @@ import Foundation
 
 
 extension Array {
-    func toChunks(chunkSize: Int) -> [[Element]] {
+    func toChunks(_ chunkSize: Int) -> [[Element]] {
         return rangeSequence(0..<count, stride: chunkSize).map{ Array(self[$0]) }
     }
 }
 
 //too fancy?
-func rangeSequence(range: Range<Int>, stride: Int) -> AnySequence<Range<Int>> {
-    var current = range.startIndex
+func rangeSequence(_ range: Range<Int>, stride: Int) -> AnySequence<CountableRange<Int>> {
+    var current = range.lowerBound
     
-    let generator = AnyGenerator {
-        () -> Range<Int>? in
+    let generator = AnyIterator {
+        () -> CountableRange<Int>? in
         let prev = current
-        current = min(current + stride, range.endIndex)
-        return prev < range.endIndex ? prev..<current : nil
+        current = min(current + stride, range.upperBound)
+        return prev < range.upperBound ? prev..<current : nil
     }
     
     return AnySequence(generator)

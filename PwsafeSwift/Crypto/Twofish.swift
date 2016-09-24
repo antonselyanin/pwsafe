@@ -9,8 +9,8 @@
 import Foundation
 
 final class Twofish {
-    enum Error: ErrorType {
-        case BlockSizeExceeded
+    enum Error: Swift.Error {
+        case blockSizeExceeded
     }
     
     enum TwofishVariant:Int {
@@ -33,10 +33,10 @@ final class Twofish {
         }
     }
 
-    private let key:[UInt8]
-    private let iv:[UInt8]?
+    fileprivate let key:[UInt8]
+    fileprivate let iv:[UInt8]?
     
-    private var skey:twofish_key
+    fileprivate var skey:twofish_key
 
     init?(key:[UInt8], iv:[UInt8], blockMode:BlockMode = CBCMode()) {
         self.key = key
@@ -54,7 +54,7 @@ final class Twofish {
     
     convenience init?(key:[UInt8], blockMode:BlockMode = CBCMode()) {
         // default IV is all 0x00...
-        let defaultIV = [UInt8](count: Twofish.blockSize, repeatedValue: 0)
+        let defaultIV = [UInt8](repeating: 0, count: Twofish.blockSize)
         self.init(key: key, iv: defaultIV, blockMode: blockMode)
     }
         
@@ -66,32 +66,32 @@ final class Twofish {
     - returns: Encrypted data
     */
     
-    func encrypt(bytes:[UInt8]) throws -> [UInt8] {
+    func encrypt(_ bytes:[UInt8]) throws -> [UInt8] {
         let blocks = bytes.toChunks(Twofish.blockSize)
         return try blockMode.encryptInput(blocks, iv: self.iv, cipherOperation: encryptBlock)
     }
     
-    private func encryptBlock(block:[UInt8]) -> [UInt8]? {
+    fileprivate func encryptBlock(_ block:[UInt8]) -> [UInt8]? {
         //todo: fix out block size???
-        var out:[UInt8] = [UInt8](count: 16, repeatedValue: 0)
+        var out:[UInt8] = [UInt8](repeating: 0, count: 16)
         
         twofish_ecb_encrypt(block, ct: &out, skey: skey)
         
         return out
     }
     
-    func decrypt(bytes:[UInt8]) throws -> [UInt8] {
+    func decrypt(_ bytes:[UInt8]) throws -> [UInt8] {
         if bytes.count % Twofish.blockSize != 0 {
-            throw Error.BlockSizeExceeded
+            throw Error.blockSizeExceeded
         }
         
         let blocks = bytes.toChunks(Twofish.blockSize)
         return try blockMode.decryptInput(blocks, iv: self.iv, cipherOperation: decryptBlock)
     }
     
-    private func decryptBlock(block:[UInt8]) -> [UInt8]? {
+    fileprivate func decryptBlock(_ block:[UInt8]) -> [UInt8]? {
         //todo: fix out block size???
-        var out:[UInt8] = [UInt8](count: 16, repeatedValue: 0)
+        var out:[UInt8] = [UInt8](repeating: 0, count: 16)
     
         twofish_ecb_decrypt(block, pt:&out, skey: skey)
         
@@ -101,19 +101,19 @@ final class Twofish {
 }
 
 enum CryptResult:Int {
-    case CRYPT_OK = 0           /* Result OK */
-    case CRYPT_ERROR            /* Generic Error */
-    case CRYPT_NOP              /* Not a failure but no operation was performed */
+    case crypt_OK = 0           /* Result OK */
+    case crypt_ERROR            /* Generic Error */
+    case crypt_NOP              /* Not a failure but no operation was performed */
     
-    case CRYPT_INVALID_KEYSIZE  /* Invalid key size given */
-    case CRYPT_INVALID_ROUNDS   /* Invalid number of rounds */
-    case CRYPT_FAIL_TESTVECTOR  /* Algorithm failed test vectors */
+    case crypt_INVALID_KEYSIZE  /* Invalid key size given */
+    case crypt_INVALID_ROUNDS   /* Invalid number of rounds */
+    case crypt_FAIL_TESTVECTOR  /* Algorithm failed test vectors */
     
-    case CRYPT_BUFFER_OVERFLOW  /* Not enough space for output */
+    case crypt_BUFFER_OVERFLOW  /* Not enough space for output */
     
-    case CRYPT_MEM              /* Out of memory */
+    case crypt_MEM              /* Out of memory */
     
-    case CRYPT_INVALID_ARG      /* Generic invalid argument */
+    case crypt_INVALID_ARG      /* Generic invalid argument */
 };
 
 /**
@@ -151,20 +151,20 @@ let qord:[[UInt8]] = [
     [ 1, 0, 1, 1, 0 ]
 ];
 
-func sbox(i:Int, _ x:Int) -> UInt8 {
+func sbox(_ i:Int, _ x:Int) -> UInt8 {
     return SBOX[i][x & 255]
 }
 
-func sbox(i:Int, _ x:UInt8) -> UInt8 {
+func sbox(_ i:Int, _ x:UInt8) -> UInt8 {
     return sbox(i, Int(x))
 }
 
-func mds_column_mult(x:UInt8, _ i:Int) -> UInt32 {
+func mds_column_mult(_ x:UInt8, _ i:Int) -> UInt32 {
     return mds_tab[i][Int(x)]
 }
 
 /* Computes [y0 y1 y2 y3] = MDS . [x0 x1 x2 x3] */
-func mds_mult(inp:[UInt8], inout _ out:[UInt8])
+func mds_mult(_ inp:[UInt8], _ out:inout [UInt8])
 {
     var tmp:UInt32 = 0
     for x in 0..<4 {
@@ -174,23 +174,23 @@ func mds_mult(inp:[UInt8], inout _ out:[UInt8])
 }
 
 /* computes [y0 y1 y2 y3] = RS . [x0 x1 x2 x3 x4 x5 x6 x7] */
-func rs_mult(inp:[UInt8], inputStartIndex:Int, inout _ out:[UInt8], startIndex:Int)
+func rs_mult(_ inp:[UInt8], inputStartIndex:Int, _ out:inout [UInt8], startIndex:Int)
 {
-    let tmp1 = rs_tab0[Int(inp[0 + inputStartIndex])]
-        ^ rs_tab1[Int(inp[1 + inputStartIndex])]
-        ^ rs_tab2[Int(inp[2 + inputStartIndex])]
-        ^ rs_tab3[Int(inp[3 + inputStartIndex])]
-    let tmp2 = rs_tab4[Int(inp[4 + inputStartIndex])]
-        ^ rs_tab5[Int(inp[5 + inputStartIndex])]
-        ^ rs_tab6[Int(inp[6 + inputStartIndex])]
-        ^ rs_tab7[Int(inp[7 + inputStartIndex])]
-    storeUInt32(tmp1 ^ tmp2, &out, startIndex:startIndex)
+    var tmp1 = rs_tab0[Int(inp[0 + inputStartIndex])]
+    tmp1 ^= rs_tab1[Int(inp[1 + inputStartIndex])]
+    tmp1 ^= rs_tab2[Int(inp[2 + inputStartIndex])]
+    tmp1 ^= rs_tab3[Int(inp[3 + inputStartIndex])]
+    tmp1 ^= rs_tab4[Int(inp[4 + inputStartIndex])]
+    tmp1 ^= rs_tab5[Int(inp[5 + inputStartIndex])]
+    tmp1 ^= rs_tab6[Int(inp[6 + inputStartIndex])]
+    tmp1 ^= rs_tab7[Int(inp[7 + inputStartIndex])]
+    storeUInt32(tmp1, &out, startIndex:startIndex)
 }
 
 /* computes h(x) */
-func h_func(inp:[UInt8], inout _ out:[UInt8],_ M:[UInt8],_ k:Int,_ offset:Int)
+func h_func(_ inp:[UInt8], _ out:inout [UInt8],_ M:[UInt8],_ k:Int,_ offset:Int)
 {
-    var y = [UInt8](count: 4, repeatedValue: 0)
+    var y = [UInt8](repeating: 0, count: 4)
     for x in 0..<4 {
         y[x] = inp[x]
     }
@@ -218,22 +218,22 @@ func h_func(inp:[UInt8], inout _ out:[UInt8],_ M:[UInt8],_ k:Int,_ offset:Int)
     mds_mult(y, &out);
 }
 
-func byte(x: UInt32, n: Int) -> Int {
+func byte(_ x: UInt32, n: Int) -> Int {
     return Int(x >> UInt32(8 * n)) & 0xFF
 }
 
 /* the G function */
-func g_func(x:UInt32, _ skey:twofish_key) -> UInt32 {
+func g_func(_ x:UInt32, _ skey:twofish_key) -> UInt32 {
     return skey.S[0][byte(x, n: 0)] ^ skey.S[1][byte(x, n: 1)] ^ skey.S[2][byte(x, n: 2)] ^ skey.S[3][byte(x, n: 3)]
 }
 
-func g1_func(x:UInt32, _ skey:twofish_key) -> UInt32 {
+func g1_func(_ x:UInt32, _ skey:twofish_key) -> UInt32 {
     return skey.S[1][byte(x, n: 0)] ^ skey.S[2][byte(x, n: 1)] ^ skey.S[3][byte(x, n: 2)] ^ skey.S[0][byte(x, n: 3)]
 }
 
 class twofish_key {
-    var S:[[UInt32]] = [[UInt32]](count: 4, repeatedValue: [UInt32](count: 256, repeatedValue: 0))
-    var K = [UInt32](count: 40, repeatedValue: 0)
+    var S:[[UInt32]] = [[UInt32]](repeating: [UInt32](repeating: 0, count: 256), count: 4)
+    var K = [UInt32](repeating: 0, count: 40)
     
     init() {}
 }
@@ -246,20 +246,20 @@ Initialize the Twofish block cipher
 @param skey The key in as scheduled by this function.
 @return CRYPT_OK if successful
 */
-func twofish_setup(key:[UInt8], keylen:Int, num_rounds:Int, skey:twofish_key) -> CryptResult
+func twofish_setup(_ key:[UInt8], keylen:Int, num_rounds:Int, skey:twofish_key) -> CryptResult
 {
-    var S:[[UInt8]] = [[UInt8]](count: 4, repeatedValue: [UInt8](count: 4, repeatedValue: 0))
-    var M = [UInt8](count: 32, repeatedValue: 0)
-    var tmp = [UInt8](count: 4, repeatedValue: 0)
-    var tmp2 = [UInt8](count: 4, repeatedValue: 0)
+    var S:[[UInt8]] = [[UInt8]](repeating: [UInt8](repeating: 0, count: 4), count: 4)
+    var M = [UInt8](repeating: 0, count: 32)
+    var tmp = [UInt8](repeating: 0, count: 4)
+    var tmp2 = [UInt8](repeating: 0, count: 4)
     
     /* invalid arguments? */
     if (num_rounds != 16 && num_rounds != 0) {
-        return .CRYPT_INVALID_ROUNDS
+        return .crypt_INVALID_ROUNDS
     }
     
     if (keylen != 16 && keylen != 24 && keylen != 32) {
-        return .CRYPT_INVALID_KEYSIZE
+        return .crypt_INVALID_KEYSIZE
     }
     
     /* k = keysize/64 [but since our keysize is in bytes...] */
@@ -304,7 +304,7 @@ func twofish_setup(key:[UInt8], keylen:Int, num_rounds:Int, skey:twofish_key) ->
     }
     
     // index hack
-    func S_(index:Int) -> UInt8 {
+    func S_(_ index:Int) -> UInt8 {
         let i = index / 4
         let j = index % 4
         return S[i][j]
@@ -339,7 +339,7 @@ func twofish_setup(key:[UInt8], keylen:Int, num_rounds:Int, skey:twofish_key) ->
             skey.S[3][x] = mds_column_mult(sbox(0, (sbox(1, sbox(1, sbox(0, tmpx1 ^ S_(3)) ^ S_(7)) ^ S_(11)) ^ S_(15))),3)
         }
     }
-    return .CRYPT_OK;
+    return .crypt_OK;
 }
 
 /*
@@ -348,7 +348,7 @@ Encrypts a block of text with Twofish
 @param ct The output ciphertext (16 bytes)
 @param skey The key as scheduled
 */
-func twofish_ecb_encrypt(pt:[UInt8], inout ct:[UInt8], skey:twofish_key)
+func twofish_ecb_encrypt(_ pt:[UInt8], ct:inout [UInt8], skey:twofish_key)
 {
     var a:UInt32
     var b:UInt32
@@ -404,7 +404,7 @@ Decrypts a block of text with Twofish
 @param pt The output plaintext (16 bytes)
 @param skey The key as scheduled
 */
-func twofish_ecb_decrypt(ct:[UInt8], inout pt:[UInt8], skey:twofish_key)
+func twofish_ecb_decrypt(_ ct:[UInt8], pt:inout [UInt8], skey:twofish_key)
 {
     var a:UInt32
     var b:UInt32
@@ -459,11 +459,11 @@ func twofish_ecb_decrypt(ct:[UInt8], inout pt:[UInt8], skey:twofish_key)
 
 //MARK: - Utilities
 
-func loadUInt32(y:[UInt8]) -> UInt32 {
+func loadUInt32(_ y:[UInt8]) -> UInt32 {
     return loadUInt32(y, startIndex: 0)
 }
 
-func loadUInt32(y:[UInt8], startIndex:Int) -> UInt32 {
+func loadUInt32(_ y:[UInt8], startIndex:Int) -> UInt32 {
     let b3 = UInt32(y[3 + startIndex])
     let b2 = UInt32(y[2 + startIndex])
     let b1 = UInt32(y[1 + startIndex])
@@ -475,11 +475,11 @@ func loadUInt32(y:[UInt8], startIndex:Int) -> UInt32 {
         (b0)
 }
 
-func storeUInt32(x:UInt32, inout _ y:[UInt8]) {
+func storeUInt32(_ x:UInt32, _ y:inout [UInt8]) {
     storeUInt32(x, &y, startIndex: 0)
 }
 
-func storeUInt32(x:UInt32, inout _ y:[UInt8], startIndex:Int) {
+func storeUInt32(_ x:UInt32, _ y:inout [UInt8], startIndex:Int) {
     y[3 + startIndex] = UInt8((x >> 24) & 255)
     y[2 + startIndex] = UInt8((x >> 16) & 255)
     y[1 + startIndex] = UInt8((x >> 8) & 255)

@@ -16,7 +16,7 @@ class PwsafePasswordRecordTest: QuickSpec {
             var record: PwsafePasswordRecord!
             
             beforeEach {
-                record = PwsafePasswordRecord(uuid: NSUUID())
+                record = PwsafePasswordRecord(uuid: UUID())
             }
             
             it("setValue should set value") {
@@ -39,7 +39,7 @@ class PwsafePasswordRecordTest: QuickSpec {
         
         describe("test field keys") {
             it("should get and set Title") {
-                var record: PwsafePasswordRecord = PwsafePasswordRecord(uuid: NSUUID())
+                var record: PwsafePasswordRecord = PwsafePasswordRecord(uuid: UUID())
                 
                 record.setValue("title", forKey: PwsafePasswordRecord.Title)
                 expect(record.title).to(equal("title"))
@@ -49,7 +49,7 @@ class PwsafePasswordRecordTest: QuickSpec {
             }
             
             it("should get and set Username") {
-                var record: PwsafePasswordRecord = PwsafePasswordRecord(uuid: NSUUID())
+                var record: PwsafePasswordRecord = PwsafePasswordRecord(uuid: UUID())
                 
                 record.setValue("username", forKey: PwsafePasswordRecord.Username)
                 expect(record.username).to(equal("username"))
@@ -59,7 +59,7 @@ class PwsafePasswordRecordTest: QuickSpec {
             }
             
             it("should get and set Notes") {
-                var record: PwsafePasswordRecord = PwsafePasswordRecord(uuid: NSUUID())
+                var record: PwsafePasswordRecord = PwsafePasswordRecord(uuid: UUID())
                 
                 record.setValue("notes", forKey: PwsafePasswordRecord.Notes)
                 expect(record.notes).to(equal("notes"))
@@ -69,7 +69,7 @@ class PwsafePasswordRecordTest: QuickSpec {
             }
             
             it("should get and set Notes") {
-                var record: PwsafePasswordRecord = PwsafePasswordRecord(uuid: NSUUID())
+                var record: PwsafePasswordRecord = PwsafePasswordRecord(uuid: UUID())
                 
                 record.setValue("url", forKey: PwsafePasswordRecord.URL)
                 expect(record.url).to(equal("url"))
@@ -91,10 +91,10 @@ class PwsafePasswordRecordTest: QuickSpec {
         
         describe("PwsafePasswordRecord: RawFieldsArrayConvertible") {
             it("should add UUID to rawFields") {
-                let uuid = NSUUID()
+                let uuid = UUID()
                 let uuidRawField = RawField(
-                    typeCode: PwsafePasswordFieldType.UUID.rawValue,
-                    bytes: PwsafePasswordRecord.UUID.serializer.toByteArray(value: uuid))
+                    typeCode: PwsafePasswordFieldType.uuid.rawValue,
+                    bytes: PwsafePasswordRecord.UUID.serializer.toByteArray(uuid))
                 let record = PwsafePasswordRecord(rawFields: [uuidRawField])
                 //todo: expect uuid in rawFields
             }

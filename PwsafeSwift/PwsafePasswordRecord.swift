@@ -42,67 +42,67 @@ End of Entry                0xff        [empty]       Y              [21]
 
 
 public enum PwsafePasswordFieldType: UInt8 {
-    case UUID = 0x01
-    case Group = 0x02
-    case Title = 0x03
-    case Username = 0x04
-    case Notes = 0x05
-    case Password = 0x06
-    case CreationTime = 0x07
-    case PasswordModificationTime = 0x08
-    case LastAccessTime = 0x09
-    case PasswordExpiryTime = 0x0a
-    case Reserved = 0x0b
-    case LastModificationTime = 0x0c
-    case URL = 0x0d
-    case Autotype = 0x0e
-    case PasswordHistory = 0x0f
-    case PasswordPolicy = 0x10
-    case PasswordExpiryInterval = 0x11
-    case RunCommand = 0x12
-    case DoubleClickAction = 0x13
-    case EmailAddress = 0x14
-    case ProtectedEntry = 0x15
-    case OwnSymbolsForPassword = 0x16
-    case ShiftDoubleClickAction = 0x17
-    case PasswordPolicyName = 0x18
-    case EntryKeyboardShortcut = 0x19
+    case uuid = 0x01
+    case group = 0x02
+    case title = 0x03
+    case username = 0x04
+    case notes = 0x05
+    case password = 0x06
+    case creationTime = 0x07
+    case passwordModificationTime = 0x08
+    case lastAccessTime = 0x09
+    case passwordExpiryTime = 0x0a
+    case reserved = 0x0b
+    case lastModificationTime = 0x0c
+    case url = 0x0d
+    case autotype = 0x0e
+    case passwordHistory = 0x0f
+    case passwordPolicy = 0x10
+    case passwordExpiryInterval = 0x11
+    case runCommand = 0x12
+    case doubleClickAction = 0x13
+    case emailAddress = 0x14
+    case protectedEntry = 0x15
+    case ownSymbolsForPassword = 0x16
+    case shiftDoubleClickAction = 0x17
+    case passwordPolicyName = 0x18
+    case entryKeyboardShortcut = 0x19
 }
 
 public struct PwsafePasswordRecord: PwsafeRecord {
-    public let uuid: NSUUID
+    public let uuid: Foundation.UUID
     var fields: FieldsContainer<PwsafePasswordRecord>
     
-    public init(uuid: NSUUID = NSUUID()) {
+    public init(uuid: Foundation.UUID = Foundation.UUID()) {
         self.uuid = uuid
         self.fields = FieldsContainer(fields: [])
     }
     
     init(rawFields: [RawField]) {
         var fields = FieldsContainer<PwsafePasswordRecord>(fields: rawFields)
-        self.uuid = fields.valueForKey(PwsafePasswordRecord.UUID) ?? NSUUID()
+        self.uuid = fields.valueForKey(PwsafePasswordRecord.UUID) ?? Foundation.UUID()
         fields.setValue(nil, forKey: PwsafePasswordRecord.UUID)
         self.fields = fields
     }
     
-    public func valueForKey<ValueType>(key: FieldKey<PwsafePasswordRecord, ValueType>) -> ValueType? {
+    public func valueForKey<ValueType>(_ key: FieldKey<PwsafePasswordRecord, ValueType>) -> ValueType? {
         return fields.valueForKey(key)
     }
     
-    public mutating func setValue<ValueType>(value: ValueType?, forKey key: FieldKey<PwsafePasswordRecord, ValueType>) {
+    public mutating func setValue<ValueType>(_ value: ValueType?, forKey key: FieldKey<PwsafePasswordRecord, ValueType>) {
         fields.setValue(value, forKey: key)
     }
 }
 
 public extension PwsafePasswordRecord {
-    public static let UUID = key(.UUID, ValueSerializers.uuids)
-    public static let Group = key(.Group, ValueSerializers.strings)
-    public static let Title = key(.Title, ValueSerializers.strings)
-    public static let Username = key(.Username, ValueSerializers.strings)
-    public static let Notes = key(.Notes, ValueSerializers.strings)
-    public static let Password = key(.Password, ValueSerializers.strings)
-    public static let URL = key(.URL, ValueSerializers.strings)
-    public static let Email = key(.EmailAddress, ValueSerializers.strings)
+    public static let UUID = key(.uuid, ValueSerializers.uuids)
+    public static let Group = key(.group, ValueSerializers.strings)
+    public static let Title = key(.title, ValueSerializers.strings)
+    public static let Username = key(.username, ValueSerializers.strings)
+    public static let Notes = key(.notes, ValueSerializers.strings)
+    public static let Password = key(.password, ValueSerializers.strings)
+    public static let URL = key(.url, ValueSerializers.strings)
+    public static let Email = key(.emailAddress, ValueSerializers.strings)
 }
 
 public extension PwsafePasswordRecord {
@@ -172,12 +172,12 @@ public extension PwsafePasswordRecord {
 
 extension PwsafePasswordRecord: Equatable {}
 public func ==(lhs: PwsafePasswordRecord, rhs: PwsafePasswordRecord) -> Bool {
-    return lhs.uuid.isEqual(rhs.uuid)
+    return lhs.uuid == rhs.uuid
         && lhs.fields.fields == rhs.fields.fields
 }
 
 private func key<Value>
-    (code: PwsafePasswordFieldType, _ serializer: ValueSerializer<Value>) -> FieldKey<PwsafePasswordRecord, Value> {
+    (_ code: PwsafePasswordFieldType, _ serializer: ValueSerializer<Value>) -> FieldKey<PwsafePasswordRecord, Value> {
         return FieldKey(code: code.rawValue, serializer: serializer)
 }
 

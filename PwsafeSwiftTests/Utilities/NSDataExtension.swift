@@ -7,16 +7,18 @@
 //
 
 import Foundation
+//@testable import PwsafeSwift
 
-extension NSData {
-    convenience init(bytes:[UInt8]) {
-        self.init(bytes: bytes, length:bytes.count)
+// import from PwsafeSwift
+extension Data {
+    init(bytes: [UInt8]) {
+        self.init(bytes: bytes, count: bytes.count)
     }
 }
 
-extension NSData {
-    static func loadResourceFile(resource: String) -> NSData? {
-        let safeUrl = NSBundle(forClass: PwsafeTest.self).URLForResource(resource, withExtension: "psafe3")!
-        return NSData(contentsOfURL: safeUrl)
+extension Data {
+    static func loadResourceFile(_ resource: String) -> Data? {
+        let safeUrl = Bundle(for: PwsafeTest.self).url(forResource: resource, withExtension: "psafe3")!
+        return (try? Data(contentsOf: safeUrl))
     }
 }

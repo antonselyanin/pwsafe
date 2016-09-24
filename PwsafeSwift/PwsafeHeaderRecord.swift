@@ -36,57 +36,57 @@ End of Entry                0xff        [empty]       Y              [17]
 
 //todo: rename to PwsafeHeaderFieldCode/PwsafeHeaderField?
 enum PwsafeHeaderFieldType: UInt8 {
-    case Version = 0x00
-    case UUID = 0x01
-    case NonDefaultPreferences = 0x03
-    case TreeDisplayStatus = 0x04
-    case WhoPerformedLastSave = 0x05 // deprecated by the specification
-    case WhatPerformedLastSave = 0x06
-    case LastSavedByUser = 0x07
-    case LastSavedOnHost = 0x08
-    case DatabaseName = 0x09
-    case DatabaseDescription = 0x0a
-    case DatabaseFilters = 0x0b
+    case version = 0x00
+    case uuid = 0x01
+    case nonDefaultPreferences = 0x03
+    case treeDisplayStatus = 0x04
+    case whoPerformedLastSave = 0x05 // deprecated by the specification
+    case whatPerformedLastSave = 0x06
+    case lastSavedByUser = 0x07
+    case lastSavedOnHost = 0x08
+    case databaseName = 0x09
+    case databaseDescription = 0x0a
+    case databaseFilters = 0x0b
     //case Reserved1 = 0x0c
     //case Reserved2 = 0x0d
     //case Reserved3 = 0x0e
-    case RecentlyUsedEntries = 0x0f
-    case NamedPasswordPolicies = 0x10
-    case EmptyGroups = 0x11
-    case Yubico = 0x12
+    case recentlyUsedEntries = 0x0f
+    case namedPasswordPolicies = 0x10
+    case emptyGroups = 0x11
+    case yubico = 0x12
 }
 
 public struct PwsafeHeaderRecord: PwsafeRecord {
-    public let uuid: NSUUID
+    public let uuid: Foundation.UUID
     var fields: FieldsContainer<PwsafeHeaderRecord>
     
-    public init(uuid: NSUUID = NSUUID()) {
+    public init(uuid: Foundation.UUID = Foundation.UUID()) {
         self.uuid = uuid
         self.fields = FieldsContainer(fields: [])
     }
     
     init(rawFields: [RawField] = []) {
         var fields = FieldsContainer<PwsafeHeaderRecord>(fields: rawFields)
-        self.uuid = fields.valueForKey(PwsafeHeaderRecord.UUID) ?? NSUUID()
+        self.uuid = fields.valueForKey(PwsafeHeaderRecord.UUID) ?? Foundation.UUID()
         fields.setValue(nil, forKey: PwsafeHeaderRecord.UUID)
         self.fields = fields
     }
     
-    public func valueForKey<ValueType>(key: FieldKey<PwsafeHeaderRecord, ValueType>) -> ValueType? {
+    public func valueForKey<ValueType>(_ key: FieldKey<PwsafeHeaderRecord, ValueType>) -> ValueType? {
         return fields.valueForKey(key)
     }
     
-    public mutating func setValue<ValueType>(value: ValueType?, forKey key: FieldKey<PwsafeHeaderRecord, ValueType>) {
+    public mutating func setValue<ValueType>(_ value: ValueType?, forKey key: FieldKey<PwsafeHeaderRecord, ValueType>) {
         fields.setValue(value, forKey: key)
     }
 }
 
 public extension PwsafeHeaderRecord {
-    public static let Version = key(.Version, ValueSerializers.uint16Values)
-    public static let UUID = key(.UUID, ValueSerializers.uuids)
-    public static let WhatPerformedLastSave = key(.WhatPerformedLastSave, ValueSerializers.strings)
-    public static let DatabaseName = key(.DatabaseName, ValueSerializers.strings)
-    public static let DatabaseDescription = key(.DatabaseDescription, ValueSerializers.strings)
+    public static let Version = key(.version, ValueSerializers.uint16Values)
+    public static let UUID = key(.uuid, ValueSerializers.uuids)
+    public static let WhatPerformedLastSave = key(.whatPerformedLastSave, ValueSerializers.strings)
+    public static let DatabaseName = key(.databaseName, ValueSerializers.strings)
+    public static let DatabaseDescription = key(.databaseDescription, ValueSerializers.strings)
 }
 
 public extension PwsafeHeaderRecord {
@@ -111,11 +111,11 @@ public extension PwsafeHeaderRecord {
 
 extension PwsafeHeaderRecord: Equatable {}
 public func ==(lhs: PwsafeHeaderRecord, rhs: PwsafeHeaderRecord) -> Bool {
-    return lhs.uuid.isEqual(rhs.uuid)
+    return lhs.uuid == rhs.uuid
         && lhs.fields.fields == rhs.fields.fields
 }
 
-private func key<Value>(code: PwsafeHeaderFieldType, _ serializer: ValueSerializer<Value>) -> FieldKey<PwsafeHeaderRecord, Value> {
+private func key<Value>(_ code: PwsafeHeaderFieldType, _ serializer: ValueSerializer<Value>) -> FieldKey<PwsafeHeaderRecord, Value> {
     return FieldKey(code: code.rawValue, serializer: serializer)
 }
 
