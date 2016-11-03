@@ -56,55 +56,51 @@ enum PwsafeHeaderFieldType: UInt8 {
     case yubico = 0x12
 }
 
-public struct PwsafeHeaderRecord: PwsafeRecord {
-    public let uuid: Foundation.UUID
+public struct PwsafeHeaderRecord: PwsafeRecordExt {
+    public let uuid: UUID
     var fields: FieldsContainer<PwsafeHeaderRecord>
     
-    public init(uuid: Foundation.UUID = Foundation.UUID()) {
+    public init(uuid: UUID = UUID()) {
         self.uuid = uuid
         self.fields = FieldsContainer(fields: [])
     }
     
     init(rawFields: [RawField] = []) {
         var fields = FieldsContainer<PwsafeHeaderRecord>(fields: rawFields)
-        self.uuid = fields.valueForKey(PwsafeHeaderRecord.UUID) ?? Foundation.UUID()
-        fields.setValue(nil, forKey: PwsafeHeaderRecord.UUID)
+        self.uuid = fields.valueForKey(PwsafeHeaderRecord.uuid) ?? UUID()
+        fields.setValue(nil, forKey: PwsafeHeaderRecord.uuid)
         self.fields = fields
-    }
-    
-    public func valueForKey<ValueType>(_ key: FieldKey<PwsafeHeaderRecord, ValueType>) -> ValueType? {
-        return fields.valueForKey(key)
-    }
-    
-    public mutating func setValue<ValueType>(_ value: ValueType?, forKey key: FieldKey<PwsafeHeaderRecord, ValueType>) {
-        fields.setValue(value, forKey: key)
     }
 }
 
 public extension PwsafeHeaderRecord {
-    public static let Version = key(.version, ValueSerializers.uint16Values)
-    public static let UUID = key(.uuid, ValueSerializers.uuids)
-    public static let WhatPerformedLastSave = key(.whatPerformedLastSave, ValueSerializers.strings)
-    public static let DatabaseName = key(.databaseName, ValueSerializers.strings)
-    public static let DatabaseDescription = key(.databaseDescription, ValueSerializers.strings)
+    public static let version = key(.version, ValueSerializers.uint16Values)
+    public static let uuid = key(.uuid, ValueSerializers.uuids)
+    public static let whatPerformedLastSave = key(.whatPerformedLastSave, ValueSerializers.strings)
+    public static let databaseName = key(.databaseName, ValueSerializers.strings)
+    public static let databaseDescription = key(.databaseDescription, ValueSerializers.strings)
+}
+
+private func key<Value>(_ code: PwsafeHeaderFieldType, _ serializer: ValueSerializer<Value>) -> FieldKey<PwsafeHeaderRecord, Value> {
+    return FieldKey(code: code.rawValue, serializer: serializer)
 }
 
 public extension PwsafeHeaderRecord {
     public var version: UInt16? {
         get {
-            return valueForKey(PwsafeHeaderRecord.Version)
+            return valueForKey(PwsafeHeaderRecord.version)
         }
         set {
-            setValue(newValue, forKey: PwsafeHeaderRecord.Version)
+            setValue(newValue, forKey: PwsafeHeaderRecord.version)
         }
     }
     
     public var databaseName: String? {
         get {
-            return valueForKey(PwsafeHeaderRecord.DatabaseName)
+            return valueForKey(PwsafeHeaderRecord.databaseName)
         }
         set {
-            setValue(newValue, forKey: PwsafeHeaderRecord.DatabaseName)
+            setValue(newValue, forKey: PwsafeHeaderRecord.databaseName)
         }
     }
 }
@@ -113,9 +109,5 @@ extension PwsafeHeaderRecord: Equatable {}
 public func ==(lhs: PwsafeHeaderRecord, rhs: PwsafeHeaderRecord) -> Bool {
     return lhs.uuid == rhs.uuid
         && lhs.fields.fields == rhs.fields.fields
-}
-
-private func key<Value>(_ code: PwsafeHeaderFieldType, _ serializer: ValueSerializer<Value>) -> FieldKey<PwsafeHeaderRecord, Value> {
-    return FieldKey(code: code.rawValue, serializer: serializer)
 }
 

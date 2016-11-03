@@ -45,7 +45,7 @@ protocol RawFieldsArrayConvertible {
 extension PwsafePasswordRecord: RawFieldsArrayConvertible {
     var rawFields: [RawField] {
         var outputFields = self.fields
-        outputFields.setValue(uuid, forKey: PwsafePasswordRecord.UUID)
+        outputFields.setValue(uuid, forKey: PwsafePasswordRecord.uuid)
         return outputFields.fields
     }
 }
@@ -54,7 +54,7 @@ extension PwsafePasswordRecord: RawFieldsArrayConvertible {
 extension PwsafeHeaderRecord: RawFieldsArrayConvertible {
     var rawFields: [RawField] {
         var outputFields = self.fields
-        outputFields.setValue(uuid, forKey: PwsafeHeaderRecord.UUID)
+        outputFields.setValue(uuid, forKey: PwsafeHeaderRecord.uuid)
         return outputFields.fields
     }
 }

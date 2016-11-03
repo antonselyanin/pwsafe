@@ -69,103 +69,100 @@ public enum PwsafePasswordFieldType: UInt8 {
     case entryKeyboardShortcut = 0x19
 }
 
-public struct PwsafePasswordRecord: PwsafeRecord {
-    public let uuid: Foundation.UUID
+public struct PwsafePasswordRecord: PwsafeRecordExt {
+    public let uuid: UUID
     var fields: FieldsContainer<PwsafePasswordRecord>
     
-    public init(uuid: Foundation.UUID = Foundation.UUID()) {
+    public init(uuid: UUID = UUID()) {
         self.uuid = uuid
         self.fields = FieldsContainer(fields: [])
     }
     
     init(rawFields: [RawField]) {
         var fields = FieldsContainer<PwsafePasswordRecord>(fields: rawFields)
-        self.uuid = fields.valueForKey(PwsafePasswordRecord.UUID) ?? Foundation.UUID()
-        fields.setValue(nil, forKey: PwsafePasswordRecord.UUID)
+        self.uuid = fields.valueForKey(PwsafePasswordRecord.uuid) ?? UUID()
+        fields.setValue(nil, forKey: PwsafePasswordRecord.uuid)
         self.fields = fields
-    }
-    
-    public func valueForKey<ValueType>(_ key: FieldKey<PwsafePasswordRecord, ValueType>) -> ValueType? {
-        return fields.valueForKey(key)
-    }
-    
-    public mutating func setValue<ValueType>(_ value: ValueType?, forKey key: FieldKey<PwsafePasswordRecord, ValueType>) {
-        fields.setValue(value, forKey: key)
     }
 }
 
 public extension PwsafePasswordRecord {
-    public static let UUID = key(.uuid, ValueSerializers.uuids)
-    public static let Group = key(.group, ValueSerializers.strings)
-    public static let Title = key(.title, ValueSerializers.strings)
-    public static let Username = key(.username, ValueSerializers.strings)
-    public static let Notes = key(.notes, ValueSerializers.strings)
-    public static let Password = key(.password, ValueSerializers.strings)
-    public static let URL = key(.url, ValueSerializers.strings)
-    public static let Email = key(.emailAddress, ValueSerializers.strings)
+    public static let uuid = key(.uuid, ValueSerializers.uuids)
+    public static let group = key(.group, ValueSerializers.strings)
+    public static let title = key(.title, ValueSerializers.strings)
+    public static let username = key(.username, ValueSerializers.strings)
+    public static let notes = key(.notes, ValueSerializers.strings)
+    public static let password = key(.password, ValueSerializers.strings)
+    public static let url = key(.url, ValueSerializers.strings)
+    public static let email = key(.emailAddress, ValueSerializers.strings)
+}
+
+private func key<Value>
+    (_ code: PwsafePasswordFieldType, _ serializer: ValueSerializer<Value>) -> FieldKey<PwsafePasswordRecord, Value> {
+    return FieldKey(code: code.rawValue, serializer: serializer)
 }
 
 public extension PwsafePasswordRecord {
     public var group: String? {
         get {
-            return valueForKey(PwsafePasswordRecord.Group)
+            return valueForKey(PwsafePasswordRecord.group)
         }
         set {
-            setValue(newValue, forKey: PwsafePasswordRecord.Group)
+            setValue(newValue, forKey: PwsafePasswordRecord.group)
         }
     }
     
     public var title: String? {
         get {
-            return valueForKey(PwsafePasswordRecord.Title)
+            return valueForKey(PwsafePasswordRecord.title)
         }
         set {
-            setValue(newValue, forKey: PwsafePasswordRecord.Title)
+            setValue(newValue, forKey: PwsafePasswordRecord.title)
         }
     }
     
     public var username: String? {
         get {
-            return valueForKey(PwsafePasswordRecord.Username)
+            return valueForKey(PwsafePasswordRecord.username)
         }
         set {
-            setValue(newValue, forKey: PwsafePasswordRecord.Username)
+            setValue(newValue, forKey: PwsafePasswordRecord.username)
         }
     }
 
     public var notes: String? {
         get {
-            return valueForKey(PwsafePasswordRecord.Notes)
+            return valueForKey(PwsafePasswordRecord.notes)
         }
         set {
-            setValue(newValue, forKey: PwsafePasswordRecord.Notes)
+            setValue(newValue, forKey: PwsafePasswordRecord.notes)
         }
     }
 
     public var password: String? {
         get {
-            return valueForKey(PwsafePasswordRecord.Password)
+            return valueForKey(PwsafePasswordRecord.password)
         }
         set {
-            setValue(newValue, forKey: PwsafePasswordRecord.Password)
+            setValue(newValue, forKey: PwsafePasswordRecord.password)
         }
     }
     
     public var url: String? {
         get {
-            return valueForKey(PwsafePasswordRecord.URL)
+            return valueForKey(PwsafePasswordRecord.url)
         }
         set {
-            setValue(newValue, forKey: PwsafePasswordRecord.URL)
+            setValue(newValue, forKey: PwsafePasswordRecord.url)
         }
     }
     
     public var email: String? {
         get {
-            return valueForKey(PwsafePasswordRecord.Email)
+            return valueForKey(PwsafePasswordRecord.email)
         }
         set {
-            setValue(newValue, forKey: PwsafePasswordRecord.Email)
+            setValue(newValue, forKey: PwsafePasswordRecord.email)
         }
     }
 }
@@ -175,9 +172,3 @@ public func ==(lhs: PwsafePasswordRecord, rhs: PwsafePasswordRecord) -> Bool {
     return lhs.uuid == rhs.uuid
         && lhs.fields.fields == rhs.fields.fields
 }
-
-private func key<Value>
-    (_ code: PwsafePasswordFieldType, _ serializer: ValueSerializer<Value>) -> FieldKey<PwsafePasswordRecord, Value> {
-        return FieldKey(code: code.rawValue, serializer: serializer)
-}
-

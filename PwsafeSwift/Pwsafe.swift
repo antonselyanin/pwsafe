@@ -47,14 +47,6 @@ public struct Pwsafe {
     }
 }
 
-public protocol PwsafeRecord: Equatable {
-    var uuid: UUID { get }
-    
-    func valueForKey<ValueType>(_ key: FieldKey<Self, ValueType>) -> ValueType?
-    
-    mutating func setValue<ValueType>(_ value: ValueType?, forKey: FieldKey<Self, ValueType>)
-}
-
 struct FieldsContainer<RecordType> {
     var fields: [RawField]
     

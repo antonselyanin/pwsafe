@@ -20,20 +20,20 @@ class PwsafePasswordRecordTest: QuickSpec {
             }
             
             it("setValue should set value") {
-                record.setValue("title", forKey: PwsafePasswordRecord.Title)
-                expect(record.valueForKey(PwsafePasswordRecord.Title)).to(equal("title"))
+                record.setValue("title", forKey: PwsafePasswordRecord.title)
+                expect(record.valueForKey(PwsafePasswordRecord.title)).to(equal("title"))
             }
             
             it("setValue should update value") {
-                record.setValue("title", forKey: PwsafePasswordRecord.Title)
-                record.setValue("updated title", forKey: PwsafePasswordRecord.Title)
-                expect(record.valueForKey(PwsafePasswordRecord.Title)).to(equal("updated title"))
+                record.setValue("title", forKey: PwsafePasswordRecord.title)
+                record.setValue("updated title", forKey: PwsafePasswordRecord.title)
+                expect(record.valueForKey(PwsafePasswordRecord.title)).to(equal("updated title"))
             }
             
             it("setValue with should remove value") {
-                record.setValue("title", forKey: PwsafePasswordRecord.Title)
-                record.setValue(nil, forKey: PwsafePasswordRecord.Title)
-                expect(record.valueForKey(PwsafePasswordRecord.Title)).to(beNil())
+                record.setValue("title", forKey: PwsafePasswordRecord.title)
+                record.setValue(nil, forKey: PwsafePasswordRecord.title)
+                expect(record.valueForKey(PwsafePasswordRecord.title)).to(beNil())
             }
         }
         
@@ -41,51 +41,51 @@ class PwsafePasswordRecordTest: QuickSpec {
             it("should get and set Title") {
                 var record: PwsafePasswordRecord = PwsafePasswordRecord(uuid: UUID())
                 
-                record.setValue("title", forKey: PwsafePasswordRecord.Title)
+                record.setValue("title", forKey: PwsafePasswordRecord.title)
                 expect(record.title).to(equal("title"))
                 
                 record.title = "updated title"
-                expect(record.valueForKey(PwsafePasswordRecord.Title)).to(equal("updated title"))
+                expect(record.valueForKey(PwsafePasswordRecord.title)).to(equal("updated title"))
             }
             
             it("should get and set Username") {
                 var record: PwsafePasswordRecord = PwsafePasswordRecord(uuid: UUID())
                 
-                record.setValue("username", forKey: PwsafePasswordRecord.Username)
+                record.setValue("username", forKey: PwsafePasswordRecord.username)
                 expect(record.username).to(equal("username"))
                 
                 record.username = "updated username"
-                expect(record.valueForKey(PwsafePasswordRecord.Username)).to(equal("updated username"))
+                expect(record.valueForKey(PwsafePasswordRecord.username)).to(equal("updated username"))
             }
             
             it("should get and set Notes") {
                 var record: PwsafePasswordRecord = PwsafePasswordRecord(uuid: UUID())
                 
-                record.setValue("notes", forKey: PwsafePasswordRecord.Notes)
+                record.setValue("notes", forKey: PwsafePasswordRecord.notes)
                 expect(record.notes).to(equal("notes"))
                 
                 record.notes = "updated notes"
-                expect(record.valueForKey(PwsafePasswordRecord.Notes)).to(equal("updated notes"))
+                expect(record.valueForKey(PwsafePasswordRecord.notes)).to(equal("updated notes"))
             }
             
             it("should get and set Notes") {
                 var record: PwsafePasswordRecord = PwsafePasswordRecord(uuid: UUID())
                 
-                record.setValue("url", forKey: PwsafePasswordRecord.URL)
+                record.setValue("url", forKey: PwsafePasswordRecord.url)
                 expect(record.url).to(equal("url"))
                 
                 record.url = "updated url"
-                expect(record.valueForKey(PwsafePasswordRecord.URL)).to(equal("updated url"))
+                expect(record.valueForKey(PwsafePasswordRecord.url)).to(equal("updated url"))
             }
             
             it("should get and set Email") {
                 var record: PwsafePasswordRecord = PwsafePasswordRecord()
                 
-                record.setValue("email@none.none", forKey: PwsafePasswordRecord.Email)
+                record.setValue("email@none.none", forKey: PwsafePasswordRecord.email)
                 expect(record.email).to(equal("email@none.none"))
                 
                 record.email = "updated_email@none.none"
-                expect(record.valueForKey(PwsafePasswordRecord.Email)).to(equal("updated_email@none.none"))
+                expect(record.valueForKey(PwsafePasswordRecord.email)).to(equal("updated_email@none.none"))
             }
         }
         
@@ -94,7 +94,7 @@ class PwsafePasswordRecordTest: QuickSpec {
                 let uuid = UUID()
                 let uuidRawField = RawField(
                     typeCode: PwsafePasswordFieldType.uuid.rawValue,
-                    bytes: PwsafePasswordRecord.UUID.serializer.toByteArray(uuid))
+                    bytes: PwsafePasswordRecord.uuid.serializer.toByteArray(uuid))
                 let record = PwsafePasswordRecord(rawFields: [uuidRawField])
                 //todo: expect uuid in rawFields
             }
