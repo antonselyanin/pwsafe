@@ -42,19 +42,10 @@ protocol RawFieldsArrayConvertible {
 }
 
 //todo: add tests
-extension PwsafePasswordRecord: RawFieldsArrayConvertible {
+extension Record: RawFieldsArrayConvertible {
     var rawFields: [RawField] {
         var outputFields = self.fields
-        outputFields.setValue(uuid, forKey: PwsafePasswordRecord.uuid)
-        return outputFields.fields
-    }
-}
-
-//todo: add tests
-extension PwsafeHeaderRecord: RawFieldsArrayConvertible {
-    var rawFields: [RawField] {
-        var outputFields = self.fields
-        outputFields.setValue(uuid, forKey: PwsafeHeaderRecord.uuid)
+        outputFields.setValue(uuid, forKey: Type.uuid)
         return outputFields.fields
     }
 }

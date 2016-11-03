@@ -56,58 +56,37 @@ enum PwsafeHeaderFieldType: UInt8 {
     case yubico = 0x12
 }
 
-public struct PwsafeHeaderRecord: PwsafeRecordExt {
-    public let uuid: UUID
-    var fields: FieldsContainer<PwsafeHeaderRecord>
+public struct Header: RecordType {
+    private init() {}
     
-    public init(uuid: UUID = UUID()) {
-        self.uuid = uuid
-        self.fields = FieldsContainer(fields: [])
-    }
-    
-    init(rawFields: [RawField] = []) {
-        var fields = FieldsContainer<PwsafeHeaderRecord>(fields: rawFields)
-        self.uuid = fields.valueForKey(PwsafeHeaderRecord.uuid) ?? UUID()
-        fields.setValue(nil, forKey: PwsafeHeaderRecord.uuid)
-        self.fields = fields
-    }
-}
-
-public extension PwsafeHeaderRecord {
-    public static let version = key(.version, ValueSerializers.uint16Values)
     public static let uuid = key(.uuid, ValueSerializers.uuids)
+    
+    public static let version = key(.version, ValueSerializers.uint16Values)
     public static let whatPerformedLastSave = key(.whatPerformedLastSave, ValueSerializers.strings)
     public static let databaseName = key(.databaseName, ValueSerializers.strings)
     public static let databaseDescription = key(.databaseDescription, ValueSerializers.strings)
 }
 
-private func key<Value>(_ code: PwsafeHeaderFieldType, _ serializer: ValueSerializer<Value>) -> FieldKey<PwsafeHeaderRecord, Value> {
+private func key<Value>(_ code: PwsafeHeaderFieldType, _ serializer: ValueSerializer<Value>) -> FieldKey<Header, Value> {
     return FieldKey(code: code.rawValue, serializer: serializer)
 }
 
-public extension PwsafeHeaderRecord {
+public extension RecordProtocol where Type == Header {
     public var version: UInt16? {
         get {
-            return valueForKey(PwsafeHeaderRecord.version)
+            return value(forKey: Header.version)
         }
         set {
-            setValue(newValue, forKey: PwsafeHeaderRecord.version)
+            setValue(newValue, forKey: Header.version)
         }
     }
     
     public var databaseName: String? {
         get {
-            return valueForKey(PwsafeHeaderRecord.databaseName)
+            return value(forKey: Header.databaseName)
         }
         set {
-            setValue(newValue, forKey: PwsafeHeaderRecord.databaseName)
+            setValue(newValue, forKey: Header.databaseName)
         }
     }
 }
-
-extension PwsafeHeaderRecord: Equatable {}
-public func ==(lhs: PwsafeHeaderRecord, rhs: PwsafeHeaderRecord) -> Bool {
-    return lhs.uuid == rhs.uuid
-        && lhs.fields.fields == rhs.fields.fields
-}
-

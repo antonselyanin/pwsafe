@@ -9,19 +9,19 @@
 import Foundation
 
 public struct Pwsafe {
-    public internal(set) var header: PwsafeHeaderRecord
-    public internal(set) var passwordRecords: [PwsafePasswordRecord]
-
-    public init(header: PwsafeHeaderRecord = PwsafeHeaderRecord(uuid: UUID()), passwordRecords: [PwsafePasswordRecord] = []) {
+    public internal(set) var header: HeaderRecord
+    public internal(set) var passwordRecords: [PasswordRecord]
+    
+    public init(header: HeaderRecord = HeaderRecord(uuid: UUID()), passwordRecords: [PasswordRecord] = []) {
         self.header = header
         self.passwordRecords = passwordRecords
     }
     
-    public subscript(uuid: UUID) -> PwsafePasswordRecord? {
+    public subscript(uuid: UUID) -> PasswordRecord? {
         get {
             return passwordRecords
                 .lazy
-                .filter {$0.uuid as UUID == uuid}
+                .filter({ $0.uuid as UUID == uuid })
                 .first
         }
         
@@ -42,7 +42,7 @@ public struct Pwsafe {
         }
     }
     
-    public mutating func addOrUpdateRecord(_ record: PwsafePasswordRecord) {
+    public mutating func addOrUpdateRecord(_ record: PasswordRecord) {
         self[record.uuid as UUID] = record
     }
 }

@@ -18,8 +18,8 @@
 		3A2AA15C1B6E0F2E009E0422 /* PwsafeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2AA15B1B6E0F2E009E0422 /* PwsafeTest.swift */; };
 		3A5E0BF11B9C95520026D8EE /* test.psafe3 in Resources */ = {isa = PBXBuildFile; fileRef = 3A5E0BF01B9C80DA0026D8EE /* test.psafe3 */; };
 		3A686C851C19DD9400247D42 /* FieldsContainerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A686C841C19DD9400247D42 /* FieldsContainerTest.swift */; };
-		3A6A39C41C17265E00696EC6 /* PwsafeHeaderRecordTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6A39C31C17265E00696EC6 /* PwsafeHeaderRecordTest.swift */; };
-		3A7017E21DCA2BC2002CF67A /* PwsafeRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7017E11DCA2BC2002CF67A /* PwsafeRecord.swift */; };
+		3A6A39C41C17265E00696EC6 /* HeaderRecordTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6A39C31C17265E00696EC6 /* HeaderRecordTest.swift */; };
+		3A7017E41DCB88CF002CF67A /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7017E31DCB88CF002CF67A /* Record.swift */; };
 		3A76F9DE1C16E41200BE5D40 /* PwsafeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A76F9DD1C16E41200BE5D40 /* PwsafeError.swift */; };
 		3A803A791D8C443500E19D0B /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A803A771D8C428000E19D0B /* Quick.framework */; };
 		3A803A7A1D8C443900E19D0B /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A803A751D8C427A00E19D0B /* Nimble.framework */; };
@@ -36,13 +36,13 @@
 		3AA5E6CF1BB994E6003C164D /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9D30BB1BAF1038009A0330 /* StringExtension.swift */; };
 		3AA5E6D01BB994E6003C164D /* ValueSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1ADF121BB461050091C376 /* ValueSerializer.swift */; };
 		3AA5E6D11BB994E6003C164D /* Pwsafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9EF3011B6E5FC8002E3689 /* Pwsafe.swift */; };
-		3AA5E6D21BB994E6003C164D /* PwsafeHeaderRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9CCC251BB7F5F60032BF26 /* PwsafeHeaderRecord.swift */; };
+		3AA5E6D21BB994E6003C164D /* HeaderRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9CCC251BB7F5F60032BF26 /* HeaderRecord.swift */; };
 		3AA5E6D31BB994E6003C164D /* PwsafeParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9D30BD1BAF10D4009A0330 /* PwsafeParsing.swift */; };
-		3AA5E6D41BB994E6003C164D /* PwsafePasswordRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9CCC271BB7F6710032BF26 /* PwsafePasswordRecord.swift */; };
+		3AA5E6D41BB994E6003C164D /* PasswordRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9CCC271BB7F6710032BF26 /* PasswordRecord.swift */; };
 		3AA5E6F91BB9A13B003C164D /* PwsafeSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA5E6BB1BB994BA003C164D /* PwsafeSwift.framework */; };
 		3AD1BCF31BD2A95200288DA9 /* PwsafeStoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1BCF21BD2A95200288DA9 /* PwsafeStoring.swift */; };
 		3AD1BCF51BD2C99A00288DA9 /* PwsafeParsingInternalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1BCF41BD2C99A00288DA9 /* PwsafeParsingInternalTest.swift */; };
-		3AD1BCF71BD39FC400288DA9 /* PwsafePasswordRecordTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1BCF61BD39FC400288DA9 /* PwsafePasswordRecordTest.swift */; };
+		3AD1BCF71BD39FC400288DA9 /* PasswordRecordTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1BCF61BD39FC400288DA9 /* PasswordRecordTest.swift */; };
 		3AD1BCF91BD3E6F100288DA9 /* OutputStreamExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1BCF81BD3E6F100288DA9 /* OutputStreamExtension.swift */; };
 		3AFFBAE21BC1072C00F447F7 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFBAE11BC1072C00F447F7 /* ArrayExtension.swift */; };
 		3AFFBAE41BC1080B00F447F7 /* ArrayExtensionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFBAE31BC1080B00F447F7 /* ArrayExtensionTest.swift */; };
@@ -79,8 +79,8 @@
 		3A5A22E21BA4498600025E31 /* BlockReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockReader.swift; sourceTree = "<group>"; };
 		3A5E0BF01B9C80DA0026D8EE /* test.psafe3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.psafe3; sourceTree = "<group>"; };
 		3A686C841C19DD9400247D42 /* FieldsContainerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldsContainerTest.swift; sourceTree = "<group>"; };
-		3A6A39C31C17265E00696EC6 /* PwsafeHeaderRecordTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeHeaderRecordTest.swift; sourceTree = "<group>"; };
-		3A7017E11DCA2BC2002CF67A /* PwsafeRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeRecord.swift; sourceTree = "<group>"; };
+		3A6A39C31C17265E00696EC6 /* HeaderRecordTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderRecordTest.swift; sourceTree = "<group>"; };
+		3A7017E31DCB88CF002CF67A /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		3A76F9DD1C16E41200BE5D40 /* PwsafeError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeError.swift; sourceTree = "<group>"; };
 		3A803A751D8C427A00E19D0B /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		3A803A771D8C428000E19D0B /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
@@ -89,8 +89,8 @@
 		3A8D2CAD1B691AE50030494F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A94418F1BA5520600B00514 /* IntegerTypeUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegerTypeUtilities.swift; sourceTree = "<group>"; };
 		3A9441911BA5A42B00B00514 /* IntegerTypeUtilitiesTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegerTypeUtilitiesTest.swift; sourceTree = "<group>"; };
-		3A9CCC251BB7F5F60032BF26 /* PwsafeHeaderRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeHeaderRecord.swift; sourceTree = "<group>"; };
-		3A9CCC271BB7F6710032BF26 /* PwsafePasswordRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafePasswordRecord.swift; sourceTree = "<group>"; };
+		3A9CCC251BB7F5F60032BF26 /* HeaderRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderRecord.swift; sourceTree = "<group>"; };
+		3A9CCC271BB7F6710032BF26 /* PasswordRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordRecord.swift; sourceTree = "<group>"; };
 		3A9D30B91BAF05D3009A0330 /* DataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
 		3A9D30BB1BAF1038009A0330 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		3A9D30BD1BAF10D4009A0330 /* PwsafeParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeParsing.swift; sourceTree = "<group>"; };
@@ -103,7 +103,7 @@
 		3AB2DAD01B7A39E90051F3A8 /* NSDataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDataExtension.swift; sourceTree = "<group>"; };
 		3AD1BCF21BD2A95200288DA9 /* PwsafeStoring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeStoring.swift; sourceTree = "<group>"; };
 		3AD1BCF41BD2C99A00288DA9 /* PwsafeParsingInternalTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeParsingInternalTest.swift; sourceTree = "<group>"; };
-		3AD1BCF61BD39FC400288DA9 /* PwsafePasswordRecordTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafePasswordRecordTest.swift; sourceTree = "<group>"; };
+		3AD1BCF61BD39FC400288DA9 /* PasswordRecordTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordRecordTest.swift; sourceTree = "<group>"; };
 		3AD1BCF81BD3E6F100288DA9 /* OutputStreamExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputStreamExtension.swift; sourceTree = "<group>"; };
 		3AFFBAE11BC1072C00F447F7 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		3AFFBAE31BC1080B00F447F7 /* ArrayExtensionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTest.swift; sourceTree = "<group>"; };
@@ -185,9 +185,9 @@
 				EA32B6AB1CF076A900DFAB9D /* FieldKey.swift */,
 				3A9EF3011B6E5FC8002E3689 /* Pwsafe.swift */,
 				3A76F9DD1C16E41200BE5D40 /* PwsafeError.swift */,
-				3A7017E11DCA2BC2002CF67A /* PwsafeRecord.swift */,
-				3A9CCC251BB7F5F60032BF26 /* PwsafeHeaderRecord.swift */,
-				3A9CCC271BB7F6710032BF26 /* PwsafePasswordRecord.swift */,
+				3A7017E31DCB88CF002CF67A /* Record.swift */,
+				3A9CCC251BB7F5F60032BF26 /* HeaderRecord.swift */,
+				3A9CCC271BB7F6710032BF26 /* PasswordRecord.swift */,
 				3A9D30BD1BAF10D4009A0330 /* PwsafeParsing.swift */,
 				3AD1BCF21BD2A95200288DA9 /* PwsafeStoring.swift */,
 				3A8D2CA21B691AE50030494F /* Info.plist */,
@@ -205,8 +205,8 @@
 				3A1ADF151BB464540091C376 /* FieldValueSerializersTest.swift */,
 				3A2AA15B1B6E0F2E009E0422 /* PwsafeTest.swift */,
 				3AD1BCF41BD2C99A00288DA9 /* PwsafeParsingInternalTest.swift */,
-				3AD1BCF61BD39FC400288DA9 /* PwsafePasswordRecordTest.swift */,
-				3A6A39C31C17265E00696EC6 /* PwsafeHeaderRecordTest.swift */,
+				3AD1BCF61BD39FC400288DA9 /* PasswordRecordTest.swift */,
+				3A6A39C31C17265E00696EC6 /* HeaderRecordTest.swift */,
 				3A686C841C19DD9400247D42 /* FieldsContainerTest.swift */,
 				3A8D2CAD1B691AE50030494F /* Info.plist */,
 			);
@@ -377,7 +377,7 @@
 			files = (
 				3A9441921BA5A42B00B00514 /* IntegerTypeUtilitiesTest.swift in Sources */,
 				3A1ADF161BB464540091C376 /* FieldValueSerializersTest.swift in Sources */,
-				3AD1BCF71BD39FC400288DA9 /* PwsafePasswordRecordTest.swift in Sources */,
+				3AD1BCF71BD39FC400288DA9 /* PasswordRecordTest.swift in Sources */,
 				3AFFBAE41BC1080B00F447F7 /* ArrayExtensionTest.swift in Sources */,
 				3A686C851C19DD9400247D42 /* FieldsContainerTest.swift in Sources */,
 				3AFFBAEA1BC1741800F447F7 /* CipherBlockModeTest.swift in Sources */,
@@ -385,7 +385,7 @@
 				3AD1BCF51BD2C99A00288DA9 /* PwsafeParsingInternalTest.swift in Sources */,
 				3A03FED81BAD89BD00741D62 /* BlockWriterTest.swift in Sources */,
 				3A9D30B81BAF0571009A0330 /* NSDataExtension.swift in Sources */,
-				3A6A39C41C17265E00696EC6 /* PwsafeHeaderRecordTest.swift in Sources */,
+				3A6A39C41C17265E00696EC6 /* HeaderRecordTest.swift in Sources */,
 				3A2AA15C1B6E0F2E009E0422 /* PwsafeTest.swift in Sources */,
 				3A9EF3081B6E6D23002E3689 /* NSStreamExtensionTest.swift in Sources */,
 				58AAA7355D8C4B7C8C55727A /* BlockReaderTest.swift in Sources */,
@@ -399,23 +399,23 @@
 			files = (
 				3A20A86F1BCBC2E400241946 /* Twofish.swift in Sources */,
 				3AA5E6CB1BB994E6003C164D /* BlockReader.swift in Sources */,
-				3A7017E21DCA2BC2002CF67A /* PwsafeRecord.swift in Sources */,
 				3A20A86E1BCBC2E400241946 /* TwofishTables.swift in Sources */,
 				3AA5E6CE1BB994E6003C164D /* DataExtension.swift in Sources */,
-				3AA5E6D21BB994E6003C164D /* PwsafeHeaderRecord.swift in Sources */,
+				3AA5E6D21BB994E6003C164D /* HeaderRecord.swift in Sources */,
 				EA32B6AC1CF076A900DFAB9D /* FieldKey.swift in Sources */,
 				3A20A87A1BCC1D7C00241946 /* Hmac.swift in Sources */,
 				3AD1BCF31BD2A95200288DA9 /* PwsafeStoring.swift in Sources */,
 				3AA5E6CF1BB994E6003C164D /* StringExtension.swift in Sources */,
 				3A76F9DE1C16E41200BE5D40 /* PwsafeError.swift in Sources */,
 				3AA5E6CD1BB994E6003C164D /* IntegerTypeUtilities.swift in Sources */,
+				3A7017E41DCB88CF002CF67A /* Record.swift in Sources */,
 				3AA5E6CC1BB994E6003C164D /* BlockWriter.swift in Sources */,
 				3AA5E6D11BB994E6003C164D /* Pwsafe.swift in Sources */,
 				3AA5E6CA1BB994E6003C164D /* InputStreamExtension.swift in Sources */,
 				3AA5E6D31BB994E6003C164D /* PwsafeParsing.swift in Sources */,
 				3AFFBAE71BC16F9A00F447F7 /* CipherBlockMode.swift in Sources */,
 				3AA5E6D01BB994E6003C164D /* ValueSerializer.swift in Sources */,
-				3AA5E6D41BB994E6003C164D /* PwsafePasswordRecord.swift in Sources */,
+				3AA5E6D41BB994E6003C164D /* PasswordRecord.swift in Sources */,
 				3AFFBAE21BC1072C00F447F7 /* ArrayExtension.swift in Sources */,
 				3AD1BCF91BD3E6F100288DA9 /* OutputStreamExtension.swift in Sources */,
 				3A20A8711BCBC54800241946 /* ByteUtils.swift in Sources */,

@@ -69,24 +69,7 @@ public enum PwsafePasswordFieldType: UInt8 {
     case entryKeyboardShortcut = 0x19
 }
 
-public struct PwsafePasswordRecord: PwsafeRecordExt {
-    public let uuid: UUID
-    var fields: FieldsContainer<PwsafePasswordRecord>
-    
-    public init(uuid: UUID = UUID()) {
-        self.uuid = uuid
-        self.fields = FieldsContainer(fields: [])
-    }
-    
-    init(rawFields: [RawField]) {
-        var fields = FieldsContainer<PwsafePasswordRecord>(fields: rawFields)
-        self.uuid = fields.valueForKey(PwsafePasswordRecord.uuid) ?? UUID()
-        fields.setValue(nil, forKey: PwsafePasswordRecord.uuid)
-        self.fields = fields
-    }
-}
-
-public extension PwsafePasswordRecord {
+public struct Password: RecordType {
     public static let uuid = key(.uuid, ValueSerializers.uuids)
     public static let group = key(.group, ValueSerializers.strings)
     public static let title = key(.title, ValueSerializers.strings)
@@ -98,77 +81,71 @@ public extension PwsafePasswordRecord {
 }
 
 private func key<Value>
-    (_ code: PwsafePasswordFieldType, _ serializer: ValueSerializer<Value>) -> FieldKey<PwsafePasswordRecord, Value> {
+    (_ code: PwsafePasswordFieldType, _ serializer: ValueSerializer<Value>) -> FieldKey<Password, Value> {
     return FieldKey(code: code.rawValue, serializer: serializer)
 }
 
-public extension PwsafePasswordRecord {
+public extension RecordProtocol where Type == Password {
     public var group: String? {
         get {
-            return valueForKey(PwsafePasswordRecord.group)
+            return value(forKey: Password.group)
         }
         set {
-            setValue(newValue, forKey: PwsafePasswordRecord.group)
+            setValue(newValue, forKey: Password.group)
         }
     }
     
     public var title: String? {
         get {
-            return valueForKey(PwsafePasswordRecord.title)
+            return value(forKey: Password.title)
         }
         set {
-            setValue(newValue, forKey: PwsafePasswordRecord.title)
+            setValue(newValue, forKey: Password.title)
         }
     }
     
     public var username: String? {
         get {
-            return valueForKey(PwsafePasswordRecord.username)
+            return value(forKey: Password.username)
         }
         set {
-            setValue(newValue, forKey: PwsafePasswordRecord.username)
+            setValue(newValue, forKey: Password.username)
         }
     }
 
     public var notes: String? {
         get {
-            return valueForKey(PwsafePasswordRecord.notes)
+            return value(forKey: Password.notes)
         }
         set {
-            setValue(newValue, forKey: PwsafePasswordRecord.notes)
+            setValue(newValue, forKey: Password.notes)
         }
     }
 
     public var password: String? {
         get {
-            return valueForKey(PwsafePasswordRecord.password)
+            return value(forKey: Password.password)
         }
         set {
-            setValue(newValue, forKey: PwsafePasswordRecord.password)
+            setValue(newValue, forKey: Password.password)
         }
     }
     
     public var url: String? {
         get {
-            return valueForKey(PwsafePasswordRecord.url)
+            return value(forKey: Password.url)
         }
         set {
-            setValue(newValue, forKey: PwsafePasswordRecord.url)
+            setValue(newValue, forKey: Password.url)
         }
     }
     
     public var email: String? {
         get {
-            return valueForKey(PwsafePasswordRecord.email)
+            return value(forKey: Password.email)
         }
         set {
-            setValue(newValue, forKey: PwsafePasswordRecord.email)
+            setValue(newValue, forKey: Password.email)
         }
     }
-}
-
-extension PwsafePasswordRecord: Equatable {}
-public func ==(lhs: PwsafePasswordRecord, rhs: PwsafePasswordRecord) -> Bool {
-    return lhs.uuid == rhs.uuid
-        && lhs.fields.fields == rhs.fields.fields
 }

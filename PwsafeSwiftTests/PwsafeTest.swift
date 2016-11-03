@@ -47,17 +47,17 @@ class PwsafeTest: QuickSpec {
         
         describe("Pwsafe storing") {
             it("should create new structure with required fields") {
-                var header = PwsafeHeaderRecord(uuid: UUID())
+                var header = HeaderRecord(uuid: UUID())
                 header.version = 0x030b
                 header.databaseName = "Database Name"
                 
-                var record0 = PwsafePasswordRecord(uuid: UUID())
+                var record0 = PasswordRecord(uuid: UUID())
                 record0.group = "group 0"
                 record0.title = "title 0"
                 record0.username = "username 0"
                 record0.password = "password 0"
 
-                var record1 = PwsafePasswordRecord(uuid: UUID())
+                var record1 = PasswordRecord(uuid: UUID())
                 record1.group = "group 1"
                 record1.title = "title 1"
                 record1.username = "username 1"
@@ -77,17 +77,17 @@ class PwsafeTest: QuickSpec {
             let recordUUID0 = UUID()
             let recordUUID1 = UUID()
             
-            var header = PwsafeHeaderRecord(uuid: UUID())
+            var header = HeaderRecord(uuid: UUID())
             header.version = 0x030b
             header.databaseName = "Database Name"
             
-            var record0 = PwsafePasswordRecord(uuid: recordUUID0)
+            var record0 = PasswordRecord(uuid: recordUUID0)
             record0.group = "group 0"
             record0.title = "title 0"
             record0.username = "username 0"
             record0.password = "password 0"
             
-            var record1 = PwsafePasswordRecord(uuid: recordUUID1)
+            var record1 = PasswordRecord(uuid: recordUUID1)
             record1.group = "group 1"
             record1.title = "title 1"
             record1.username = "username 1"
@@ -105,7 +105,7 @@ class PwsafeTest: QuickSpec {
             }
 
             it("should update record") {
-                var updateRecord = PwsafePasswordRecord(uuid: recordUUID0)
+                var updateRecord = PasswordRecord(uuid: recordUUID0)
                 updateRecord.group = "update group"
                 updateRecord.title = "update title"
                 updateRecord.username = "update username"

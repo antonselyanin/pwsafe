@@ -12,13 +12,13 @@ import Quick
 import Nimble
 import PwsafeSwift
 
-class PwsafeHeaderRecordTest: QuickSpec {
+class HeaderRecordTest: QuickSpec {
     override func spec() {
-        describe("PwsafeHeaderRecord") {
-            var record: PwsafeHeaderRecord!
+        describe("HeaderRecord") {
+            var record: HeaderRecord!
             
             beforeEach {
-                record = PwsafeHeaderRecord(uuid: UUID())
+                record = HeaderRecord(uuid: UUID())
             }
             
             //todo: clean up

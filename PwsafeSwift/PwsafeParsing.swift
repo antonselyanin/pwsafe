@@ -21,10 +21,10 @@ public extension Pwsafe {
             throw PwsafeError.corruptedData
         }
         
-        self.header = PwsafeHeaderRecord(rawFields: headerFields)
+        self.header = HeaderRecord(rawFields: headerFields)
         
         self.passwordRecords = pwsafeRecords[1..<pwsafeRecords.count].map {
-            PwsafePasswordRecord(rawFields: $0)
+            PasswordRecord(rawFields: $0)
         }
     }
 }
