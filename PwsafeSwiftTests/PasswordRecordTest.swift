@@ -93,7 +93,7 @@ class PasswordRecordTest: QuickSpec {
             it("should add UUID to rawFields") {
                 let uuid = UUID()
                 let uuidRawField = RawField(
-                    typeCode: PwsafePasswordFieldType.uuid.rawValue,
+                    typeCode: Password.uuid.code,
                     bytes: Password.uuid.serializer.toByteArray(uuid))
                 let record = PasswordRecord(rawFields: [uuidRawField])
                 //todo: expect uuid in rawFields

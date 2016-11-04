@@ -40,49 +40,45 @@ Entry keyboard shortcut     0x19        4 bytes       Y              [20]
 End of Entry                0xff        [empty]       Y              [21]
 */
 
+//TODO: remove
+//public enum PwsafePasswordFieldType: UInt8 {
+//    case uuid = 0x01
+//    case group = 0x02
+//    case title = 0x03
+//    case username = 0x04
+//    case notes = 0x05
+//    case password = 0x06
+//    case creationTime = 0x07
+//    case passwordModificationTime = 0x08
+//    case lastAccessTime = 0x09
+//    case passwordExpiryTime = 0x0a
+//    case reserved = 0x0b
+//    case lastModificationTime = 0x0c
+//    case url = 0x0d
+//    case autotype = 0x0e
+//    case passwordHistory = 0x0f
+//    case passwordPolicy = 0x10
+//    case passwordExpiryInterval = 0x11
+//    case runCommand = 0x12
+//    case doubleClickAction = 0x13
+//    case emailAddress = 0x14
+//    case protectedEntry = 0x15
+//    case ownSymbolsForPassword = 0x16
+//    case shiftDoubleClickAction = 0x17
+//    case passwordPolicyName = 0x18
+//    case entryKeyboardShortcut = 0x19
+//}
 
-public enum PwsafePasswordFieldType: UInt8 {
-    case uuid = 0x01
-    case group = 0x02
-    case title = 0x03
-    case username = 0x04
-    case notes = 0x05
-    case password = 0x06
-    case creationTime = 0x07
-    case passwordModificationTime = 0x08
-    case lastAccessTime = 0x09
-    case passwordExpiryTime = 0x0a
-    case reserved = 0x0b
-    case lastModificationTime = 0x0c
-    case url = 0x0d
-    case autotype = 0x0e
-    case passwordHistory = 0x0f
-    case passwordPolicy = 0x10
-    case passwordExpiryInterval = 0x11
-    case runCommand = 0x12
-    case doubleClickAction = 0x13
-    case emailAddress = 0x14
-    case protectedEntry = 0x15
-    case ownSymbolsForPassword = 0x16
-    case shiftDoubleClickAction = 0x17
-    case passwordPolicyName = 0x18
-    case entryKeyboardShortcut = 0x19
-}
-
-public struct Password: RecordType {
-    public static let uuid = key(.uuid, ValueSerializers.uuids)
-    public static let group = key(.group, ValueSerializers.strings)
-    public static let title = key(.title, ValueSerializers.strings)
-    public static let username = key(.username, ValueSerializers.strings)
-    public static let notes = key(.notes, ValueSerializers.strings)
-    public static let password = key(.password, ValueSerializers.strings)
-    public static let url = key(.url, ValueSerializers.strings)
-    public static let email = key(.emailAddress, ValueSerializers.strings)
-}
-
-private func key<Value>
-    (_ code: PwsafePasswordFieldType, _ serializer: ValueSerializer<Value>) -> FieldKey<Password, Value> {
-    return FieldKey(code: code.rawValue, serializer: serializer)
+public enum Password: RecordType {
+    public static let uuid = key(0x01, ValueSerializers.uuids)
+    public static let group = key(0x02, ValueSerializers.strings)
+    public static let title = key(0x03, ValueSerializers.strings)
+    public static let username = key(0x04, ValueSerializers.strings)
+    public static let notes = key(0x05, ValueSerializers.strings)
+    public static let password = key(0x06, ValueSerializers.strings)
+    
+    public static let url = key(0x0d, ValueSerializers.strings)
+    public static let email = key(0x14, ValueSerializers.strings)
 }
 
 public extension RecordProtocol where Type == Password {

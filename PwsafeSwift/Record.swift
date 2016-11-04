@@ -13,8 +13,15 @@ public typealias PasswordRecord = Record<Password>
 
 public protocol RecordType {
     static var uuid: FieldKey<Self, UUID> { get }
+
+    static func key<Value> (_ code: UInt8, _ serializer: ValueSerializer<Value>) -> FieldKey<Self, Value>
 }
 
+extension RecordType {
+    public static func key<Value> (_ code: UInt8, _ serializer: ValueSerializer<Value>) -> FieldKey<Self, Value> {
+        return FieldKey(code: code, serializer: serializer)
+    }
+}
 
 public protocol RecordProtocol {
     associatedtype `Type`: RecordType
