@@ -30,24 +30,14 @@ struct BlockReader {
         return result
     }
     
-    mutating func readUInt32LE() -> UInt32? {
-        guard let bytes = readBytes(4) else { return nil }
+    mutating func read<T: ByteArrayConvertible>() -> T? {
+        let size = MemoryLayout<T>.size
+        guard let bytes = readBytes(size) else { return nil }
         
-        return UInt32(littleEndianBytes: bytes)
+        return T(littleEndianBytes: bytes)
     }
     
-    mutating func readUInt16LE() -> UInt16? {
-        guard let bytes = readBytes(2) else { return nil }
-        
-        return UInt16(littleEndianBytes: bytes)
-    }
-
-    mutating func readUInt8() -> UInt8? {
-        guard let bytes = readBytes(1) else { return nil }
-
-        return UInt8(bytes[0])
-    }
-    
+    @discardableResult
     mutating func nextBlock() -> Bool {
         guard hasMoreData else { return false }
         

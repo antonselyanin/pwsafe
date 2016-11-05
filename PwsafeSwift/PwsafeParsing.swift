@@ -91,11 +91,11 @@ func decryptPwsafeRecords(_ pwsafe: EncryptedPwsafe, password: String) throws ->
         throw PwsafeError.corruptedData
     }
     
-    let recordsKeyCryptor = Twofish(key: stretchedKey, blockMode: ECBMode())!
+    let recordsKeyCryptor = try! Twofish(key: stretchedKey, blockMode: ECBMode())
     let recordsKey = try recordsKeyCryptor.decrypt(pwsafe.b12)
     let hmacKey = try recordsKeyCryptor.decrypt(pwsafe.b34)
     
-    let recordsCryptor = Twofish(key: recordsKey, iv: pwsafe.iv, blockMode: CBCMode())!
+    let recordsCryptor = try! Twofish(key: recordsKey, iv: pwsafe.iv, blockMode: CBCMode())
     
     let decryptedData = try recordsCryptor.decrypt(pwsafe.encryptedData)
     let pwsafeRecords = try parseRawPwsafeRecords(decryptedData)
@@ -118,15 +118,9 @@ func parseRawPwsafeRecords(_ data: [UInt8]) throws -> [[RawField]] {
     var rawRecords = [[RawField]]()
     var rawFields = [RawField]()
     while reader.hasMoreData {
-        guard let fieldLength = reader.readUInt32LE() else {
-            throw PwsafeError.corruptedData
-        }
-        
-        guard let fieldType = reader.readUInt8() else {
-            throw PwsafeError.corruptedData
-        }
-        
-        guard let fieldData = reader.readBytes(Int(fieldLength)) else {
+        guard let fieldLength: UInt32 = reader.read(),
+            let fieldType: UInt8 = reader.read(),
+            let fieldData = reader.readBytes(Int(fieldLength)) else {
             throw PwsafeError.corruptedData
         }
         

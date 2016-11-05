@@ -24,29 +24,29 @@ class BlockReaderTest: QuickSpec {
                 let data:[UInt8] = [0x04, 0x03, 0x02, 0x01, 0xFF]
                 var reader = BlockReader(data: data)
                 
-                let result: UInt32? = reader.readUInt32LE()
+                let result: UInt32? = reader.read()
                 
                 expect(result) == 0x01020304
-                expect(reader.readUInt32LE()).to(beNil())
+                expect(reader.read() as UInt32?).to(beNil())
             }
             
             it("should read UInt16 little-endian") {
                 let data:[UInt8] = [0x02, 0x01, 0xFF]
                 var reader = BlockReader(data: data)
                 
-                let result: UInt16? = reader.readUInt16LE()
+                let result: UInt16? = reader.read()
                 
                 expect(result) == 0x0102
-                expect(reader.readUInt16LE()).to(beNil())
+                expect(reader.read() as UInt16?).to(beNil())
             }
             
             it("should read UInt8") {
                 let data:[UInt8] = [1, 23]
                 var reader = BlockReader(data: data)
                 
-                expect(reader.readUInt8()) == 0x01
-                expect(reader.readUInt8()) == 23
-                expect(reader.readUInt8()).to(beNil())
+                expect(reader.read() as UInt8?) == 0x01
+                expect(reader.read() as UInt8?) == 23
+                expect(reader.read() as UInt8?).to(beNil())
             }
             
             it("should read block") {

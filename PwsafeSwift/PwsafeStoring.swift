@@ -37,19 +37,6 @@ extension Pwsafe {
     }
 }
 
-//protocol RawFieldsArrayConvertible {
-//    var rawFields: [RawField] { get }
-//}
-
-//todo: add tests
-//extension Record: RawFieldsArrayConvertible {
-//    var rawFields: [RawField] {
-//        var outputFields = self.fields
-//        outputFields.setValue(uuid, forKey: Type.uuid)
-//        return outputFields.fields
-//    }
-//}
-
 func encryptPwsafeRecords(_ records: [[RawField]], password: String) throws -> EncryptedPwsafe {
     let salt = generateRandomBytes(32)
     let iter: UInt32 = PwsafeKeyStretchIterations
@@ -60,14 +47,14 @@ func encryptPwsafeRecords(_ records: [[RawField]], password: String) throws -> E
     
     let keyHash = sha256(stretchedKey)
     
-    let recordsKeyCryptor = Twofish(key: stretchedKey, blockMode: ECBMode())!
+    let recordsKeyCryptor = try! Twofish(key: stretchedKey, blockMode: ECBMode())
     let recordsKey = generateRandomBytes(32)
     let b12 = try recordsKeyCryptor.encrypt(recordsKey)
     let hmacKey = generateRandomBytes(32)
     let b34 = try recordsKeyCryptor.encrypt(hmacKey)
     
     let iv = generateRandomBytes(16)
-    let recordsCryptor = Twofish(key: recordsKey, iv: iv, blockMode: CBCMode())!
+    let recordsCryptor = try! Twofish(key: recordsKey, iv: iv, blockMode: CBCMode())
     let encryptedData = try recordsCryptor.encrypt(pwsafeRecordsToBlockData(records))
     
     let hmacer = Hmac(key: hmacKey)

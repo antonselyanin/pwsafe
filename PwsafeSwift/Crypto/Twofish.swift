@@ -38,13 +38,13 @@ final class Twofish {
     
     fileprivate var skey:twofish_key
 
-    init?(key:[UInt8], iv:[UInt8], blockMode:BlockMode = CBCMode()) {
+    init(key: [UInt8], iv: [UInt8], blockMode: BlockMode = CBCMode()) throws {
         self.key = key
         self.iv = iv
         self.blockMode = blockMode
         
         self.skey = twofish_key()
-        twofish_setup(key, keylen: key.count, num_rounds: 0, skey: skey)
+        try twofish_setup(key, keylen: key.count, num_rounds: 0, skey: skey)
         
 //        if (blockMode.needIV && iv.count != Twofish.blockSize) {
 //            assert(false, "Block size and Initialization Vector must be the same length!")
@@ -52,10 +52,10 @@ final class Twofish {
 //        }
     }
     
-    convenience init?(key:[UInt8], blockMode:BlockMode = CBCMode()) {
+    convenience init(key: [UInt8], blockMode: BlockMode = CBCMode()) throws {
         // default IV is all 0x00...
         let defaultIV = [UInt8](repeating: 0, count: Twofish.blockSize)
-        self.init(key: key, iv: defaultIV, blockMode: blockMode)
+        try self.init(key: key, iv: defaultIV, blockMode: blockMode)
     }
         
     /**
@@ -100,8 +100,8 @@ final class Twofish {
 
 }
 
-enum CryptResult:Int {
-    case crypt_OK = 0           /* Result OK */
+enum CryptResult: Error {
+//    case crypt_OK               /* Result OK */
     case crypt_ERROR            /* Generic Error */
     case crypt_NOP              /* Not a failure but no operation was performed */
     
@@ -114,7 +114,7 @@ enum CryptResult:Int {
     case crypt_MEM              /* Out of memory */
     
     case crypt_INVALID_ARG      /* Generic invalid argument */
-};
+}
 
 /**
 Implementation of Twofish by Tom St Denis
@@ -149,7 +149,7 @@ let qord:[[UInt8]] = [
     [ 0, 1, 1, 0, 0 ],
     [ 0, 0, 0, 1, 1 ],
     [ 1, 0, 1, 1, 0 ]
-];
+]
 
 func sbox(_ i:Int, _ x:Int) -> UInt8 {
     return SBOX[i][x & 255]
@@ -213,9 +213,9 @@ func h_func(_ inp:[UInt8], _ out:inout [UInt8],_ M:[UInt8],_ k:Int,_ offset:Int)
         y[2] = (sbox(1, Int(sbox(1, Int(sbox(0, Int(y[2])) ^ M[4 * (2 + offset) + 2])) ^ M[4 * (0 + offset) + 2])))
         y[3] = (sbox(0, Int(sbox(1, Int(sbox(1, Int(y[3])) ^ M[4 * (2 + offset) + 3])) ^ M[4 * (0 + offset) + 3])))
     default:
-        break;
+        break
     }
-    mds_mult(y, &out);
+    mds_mult(y, &out)
 }
 
 func byte(_ x: UInt32, n: Int) -> Int {
@@ -246,7 +246,7 @@ Initialize the Twofish block cipher
 @param skey The key in as scheduled by this function.
 @return CRYPT_OK if successful
 */
-func twofish_setup(_ key:[UInt8], keylen:Int, num_rounds:Int, skey:twofish_key) -> CryptResult
+func twofish_setup(_ key:[UInt8], keylen:Int, num_rounds:Int, skey:twofish_key) throws
 {
     var S:[[UInt8]] = [[UInt8]](repeating: [UInt8](repeating: 0, count: 4), count: 4)
     var M = [UInt8](repeating: 0, count: 32)
@@ -255,25 +255,25 @@ func twofish_setup(_ key:[UInt8], keylen:Int, num_rounds:Int, skey:twofish_key) 
     
     /* invalid arguments? */
     if (num_rounds != 16 && num_rounds != 0) {
-        return .crypt_INVALID_ROUNDS
+        throw CryptResult.crypt_INVALID_ROUNDS
     }
     
     if (keylen != 16 && keylen != 24 && keylen != 32) {
-        return .crypt_INVALID_KEYSIZE
+        throw CryptResult.crypt_INVALID_KEYSIZE
     }
     
     /* k = keysize/64 [but since our keysize is in bytes...] */
-    let k = keylen / 8;
+    let k = keylen / 8
     
     /* copy the key into M */
     for x in 0..<keylen {
-        M[x] = key[x];
+        M[x] = key[x]
     }
     
     /* create the S[..] words */
     for x in 0..<k {
-//        rs_mult(M+(x*8), S+(x*4));
-        rs_mult(M, inputStartIndex:x * 8, &S[x], startIndex:0);
+//        rs_mult(M+(x*8), S+(x*4))
+        rs_mult(M, inputStartIndex:x * 8, &S[x], startIndex:0)
     }
     
     /* make subkeys */
@@ -284,7 +284,7 @@ func twofish_setup(_ key:[UInt8], keylen:Int, num_rounds:Int, skey:twofish_key) 
         for y in 0..<4 {
             tmp[y] = UInt8(x + x)
         }
-        h_func(tmp, &tmp2, M, k, 0);
+        h_func(tmp, &tmp2, M, k, 0)
         A = loadUInt32(tmp2)
         
         /* B = ROL(h(p * (2x + 1), Mo), 8) */
@@ -339,7 +339,6 @@ func twofish_setup(_ key:[UInt8], keylen:Int, num_rounds:Int, skey:twofish_key) 
             skey.S[3][x] = mds_column_mult(sbox(0, (sbox(1, sbox(1, sbox(0, tmpx1 ^ S_(3)) ^ S_(7)) ^ S_(11)) ^ S_(15))),3)
         }
     }
-    return .crypt_OK;
 }
 
 /*
@@ -425,15 +424,15 @@ func twofish_ecb_decrypt(_ ct:[UInt8], pt:inout [UInt8], skey:twofish_key)
     td = loadUInt32(ct, startIndex: 12)
     
     /* undo undo final swap */
-    a = tc ^ skey.K[6];
-    b = td ^ skey.K[7];
-    c = ta ^ skey.K[4];
-    d = tb ^ skey.K[5];
+    a = tc ^ skey.K[6]
+    b = td ^ skey.K[7]
+    c = ta ^ skey.K[4]
+    d = tb ^ skey.K[5]
     
     var kShift = 36
     for _ in 0..<8 {
-        t2 = g1_func(d, skey);
-        t1 = g_func(c, skey) &+ t2;
+        t2 = g1_func(d, skey)
+        t1 = g_func(c, skey) &+ t2
         a = rotateLeft(a, n:1) ^ (t1 &+ K[2 + kShift])
         b = rotateRight(b ^ (t2 &+ t1 &+ K[3 + kShift]), n: 1)
         
