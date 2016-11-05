@@ -36,7 +36,13 @@ public protocol RecordProtocol {
 public struct Record<Type: RecordType>: RecordProtocol {
     public var uuid: UUID
     
-    var fields: FieldsContainer<Type>
+    internal var fields: FieldsContainer<Type>
+    
+    internal var rawFields: [RawField] {
+        var outputFields = self.fields
+        outputFields.setValue(uuid, forKey: Type.uuid)
+        return outputFields.fields
+    }
     
     public init(uuid: UUID = UUID()) {
         self.uuid = uuid

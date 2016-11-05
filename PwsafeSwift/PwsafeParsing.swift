@@ -47,7 +47,7 @@ func readEncryptedPwsafe(_ data: Data) throws -> EncryptedPwsafe {
     
     let tag = stream.readBytes(4)!
     
-    if PwsafeStartTag.utf8Bytes() != tag {
+    guard PwsafeStartTag.utf8Bytes() == tag else {
         throw PwsafeError.corruptedData
     }
     
@@ -63,7 +63,8 @@ func readEncryptedPwsafe(_ data: Data) throws -> EncryptedPwsafe {
     
     let encryptedData = [UInt8](remainder[0..<(remainder.count - tailLength)])
     let eof = [UInt8](remainder[encryptedData.count..<(remainder.count - 32)])
-    if eof != PwsafeEndTag.utf8Bytes() {
+    
+    guard eof == PwsafeEndTag.utf8Bytes() else {
         throw PwsafeError.corruptedData
     }
     
@@ -86,7 +87,7 @@ func decryptPwsafeRecords(_ pwsafe: EncryptedPwsafe, password: String) throws ->
     
     let keyHash = sha256(stretchedKey)
     
-    if keyHash != pwsafe.passwordHash {
+    guard keyHash == pwsafe.passwordHash else {
         throw PwsafeError.corruptedData
     }
     
@@ -105,7 +106,7 @@ func decryptPwsafeRecords(_ pwsafe: EncryptedPwsafe, password: String) throws ->
     }
     let hmac = hmacer.final()
     
-    if hmac != pwsafe.hmac {
+    guard hmac == pwsafe.hmac else {
         throw PwsafeError.corruptedData
     }
     

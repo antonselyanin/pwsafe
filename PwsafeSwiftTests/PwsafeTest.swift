@@ -11,17 +11,17 @@ class PwsafeTest: QuickSpec {
                 
                 let header = pwsafe.header
                 
-                expect(header.version).to(equal(0x030d))
-                expect(header.uuid).to(equal(UUID(uuidString: "CFE1BCD4-6A0E-4BF5-8BF8-E5F1991515E2")))
+                expect(header.version) == 0x030d
+                expect(header.uuid) == UUID(uuidString: "CFE1BCD4-6A0E-4BF5-8BF8-E5F1991515E2")
                 
                 let record = pwsafe.passwordRecords[0]
                 
-                expect(record.uuid).to(equal(UUID(uuidString: "CA1051B0-B42E-6241-1656-A874D307CCD1")))
-                expect(record.group).to(equal("group"))
-                expect(record.title).to(equal("Title"))
-                expect(record.username).to(equal("user"))
-                expect(record.notes).to(equal("Notes 😜"))
-                expect(record.password).to(equal("password"))
+                expect(record.uuid) == UUID(uuidString: "CA1051B0-B42E-6241-1656-A874D307CCD1")
+                expect(record.group) == "group"
+                expect(record.title) == "Title"
+                expect(record.username) == "user"
+                expect(record.notes) == "Notes 😜"
+                expect(record.password) == "password"
             }
             
             it("should throw error if password is incorrect") {
@@ -69,7 +69,7 @@ class PwsafeTest: QuickSpec {
                 
                 let parsedPwsafe = try! Pwsafe(data: data, password: "test")
                 
-                expect(parsedPwsafe).to(equal(pwsafe))
+                expect(parsedPwsafe) == pwsafe
             }
         }
         
@@ -95,13 +95,13 @@ class PwsafeTest: QuickSpec {
 
             it("should get records by UUID") {
                 let pwsafe = Pwsafe(header: header, passwordRecords: [record0])
-                expect(pwsafe[recordUUID0]).to(equal(record0))
+                expect(pwsafe[recordUUID0]) == record0
             }
             
             it("should add new record with UUID") {
                 var pwsafe = Pwsafe(header: header, passwordRecords: [record0])
                 pwsafe[recordUUID1] = record1
-                expect(pwsafe[recordUUID1]).to(equal(record1))
+                expect(pwsafe[recordUUID1]) == record1
             }
 
             it("should update record") {
@@ -114,7 +114,7 @@ class PwsafeTest: QuickSpec {
                 var pwsafe = Pwsafe(header: header, passwordRecords: [record0])
                 pwsafe[recordUUID0] = updateRecord
                 
-                expect(pwsafe[recordUUID0]).to(equal(updateRecord))
+                expect(pwsafe[recordUUID0]) == updateRecord
             }
             
             it("should remove record") {

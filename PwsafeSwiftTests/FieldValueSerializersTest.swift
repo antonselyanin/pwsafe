@@ -20,10 +20,10 @@ class FieldValueSerializersTest: QuickSpec {
                 let expectedBytes = [UInt8](repeating: 0x12, count: 16)
                 
                 let value = serializer.fromByteArray(expectedBytes)!
-                expect(value).to(equal(expectedValue))
+                expect(value) == expectedValue
                 
                 let bytes: [UInt8] = serializer.toByteArray(expectedValue)
-                expect(bytes).to(equal(expectedBytes))
+                expect(bytes) == expectedBytes
             }
             
             it("should fill with zeros if not enough bytes") {
@@ -33,10 +33,10 @@ class FieldValueSerializersTest: QuickSpec {
                 let expectedBytes = inputBytes + [UInt8](repeating: 0, count: 12)
                 
                 let value = serializer.fromByteArray(inputBytes)!
-                expect(value).to(equal(expectedValue))
+                expect(value) == expectedValue
                 
                 let bytes: [UInt8] = serializer.toByteArray(expectedValue)
-                expect(bytes).to(equal(expectedBytes))
+                expect(bytes) == expectedBytes
 
             }
         }
@@ -47,7 +47,7 @@ class FieldValueSerializersTest: QuickSpec {
                 let testString = "test string 😎"
                 let bytes = testString.utf8Bytes()
                 let extracted = serializer.fromByteArray(bytes)
-                expect(extracted).to(equal(testString))
+                expect(extracted) == testString
             }
         }
     }

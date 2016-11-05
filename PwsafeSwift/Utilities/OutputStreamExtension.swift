@@ -12,7 +12,7 @@ extension OutputStream {
     //todo: handle errors?
     
     func write(_ data: ByteArrayConvertible) {
-        write(data.toLittleEndianBytes())
+        write(data.littleEndianBytes())
     }
     
     func write(_ data: [UInt8]) {

@@ -24,11 +24,11 @@ class CipherBlockModeTest: QuickSpec {
                 let input: [[UInt8]] = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
                 let encrypted = try! mode.encryptInput(input, iv: nil, cipherOperation: invert)
                 
-                expect(encrypted).to(equal([255, 254, 253, 252, 251, 250, 249, 248, 247]))
+                expect(encrypted) == [255, 254, 253, 252, 251, 250, 249, 248, 247]
                 
                 let decrypted = try! mode.decryptInput(encrypted.toChunks(3), iv: nil, cipherOperation: invert)
                 
-                expect(decrypted).to(equal(Array(input.joined())))
+                expect(decrypted) == Array(input.joined())
             }
         }
     }

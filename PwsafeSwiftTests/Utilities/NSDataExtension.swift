@@ -7,14 +7,6 @@
 //
 
 import Foundation
-//@testable import PwsafeSwift
-
-// import from PwsafeSwift
-extension Data {
-    init(bytes: [UInt8]) {
-        self.init(bytes: bytes, count: bytes.count)
-    }
-}
 
 extension Data {
     static func loadResourceFile(_ resource: String) -> Data? {

@@ -8,23 +8,26 @@
 
 import Foundation
 
-private let BlockSize = 16
-
 struct BlockWriter {
     fileprivate(set) var data = [UInt8]()
+    private let blockSize: Int
+    
+    init(blockSize: Int = 16) {
+        self.blockSize = blockSize
+    }
     
     mutating func write(_ bytes: [UInt8]) {
         data.append(contentsOf: bytes)
     }
     
     mutating func write<T: ByteArrayConvertible>(_ value: T) {
-        write(value.toLittleEndianBytes())
+        write(value.littleEndianBytes())
     }
     
     mutating func finishBlock() {
-        let remainder = data.count % BlockSize
+        let remainder = data.count % blockSize
         if remainder > 0 {
-            data.append(contentsOf: generateRandomBytes(BlockSize - remainder))
+            data.append(contentsOf: generateRandomBytes(blockSize - remainder))
         }
     }
 }
