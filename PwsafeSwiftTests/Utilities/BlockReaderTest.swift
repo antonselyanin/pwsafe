@@ -11,18 +11,18 @@ import Nimble
 class BlockReaderTest: QuickSpec {
     override func spec() {
         describe("BlockReader") {
-            it("should read data to array") {
+            it("reads data to array") {
                 let data:[UInt8] = [1, 2, 3, 4, 5, 6, 7]
-                var reader = BlockReader(data: data)
+                let reader = BlockReader(data: data)
                 
                 expect(reader.readBytes(3)) == [1, 2, 3]
                 expect(reader.readBytes(4)) == [4, 5, 6, 7]
                 expect(reader.readBytes(1)).to(beNil())
             }
             
-            it("should read UInt32 little-endian") {
+            it("reads UInt32 little-endian") {
                 let data:[UInt8] = [0x04, 0x03, 0x02, 0x01, 0xFF]
-                var reader = BlockReader(data: data)
+                let reader = BlockReader(data: data)
                 
                 let result: UInt32? = reader.read()
                 
@@ -30,9 +30,9 @@ class BlockReaderTest: QuickSpec {
                 expect(reader.read() as UInt32?).to(beNil())
             }
             
-            it("should read UInt16 little-endian") {
+            it("reads UInt16 little-endian") {
                 let data:[UInt8] = [0x02, 0x01, 0xFF]
-                var reader = BlockReader(data: data)
+                let reader = BlockReader(data: data)
                 
                 let result: UInt16? = reader.read()
                 
@@ -40,26 +40,37 @@ class BlockReaderTest: QuickSpec {
                 expect(reader.read() as UInt16?).to(beNil())
             }
             
-            it("should read UInt8") {
+            it("reads UInt8") {
                 let data:[UInt8] = [1, 23]
-                var reader = BlockReader(data: data)
+                let reader = BlockReader(data: data)
                 
                 expect(reader.read() as UInt8?) == 0x01
                 expect(reader.read() as UInt8?) == 23
                 expect(reader.read() as UInt8?).to(beNil())
             }
             
-            it("should read block") {
+            it("reads block") {
                 let data:[UInt8] = [
                     1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                     2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 ]
-                var reader = BlockReader(data: data)
+                let reader = BlockReader(data: data)
                 
                 expect(reader.readBytes(1)) == [1]
                 expect(reader.nextBlock()) == true
                 expect(reader.readBytes(1)) == [2]
                 expect(reader.nextBlock()) == false
+            }
+            
+            it("reads all bytes") {
+                let data: [UInt8] = Array(0..<16)
+                let reader = BlockReader(data: data)
+                
+                _ = reader.readBytes(5)
+                
+                expect(reader.readAll()) == Array(5..<16)
+                expect(reader.nextBlock()) == false
+                expect(reader.readAll()) == []
             }
 
             it("should not skip next block if we read a whole block") {
@@ -68,7 +79,7 @@ class BlockReaderTest: QuickSpec {
                     1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                     2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                     ]
-                var reader = BlockReader(data: data, blockSize: 16)
+                let reader = BlockReader(data: data, blockSize: 16)
                 
                 // When
                 let _ = reader.readBytes(16)

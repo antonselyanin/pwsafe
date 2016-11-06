@@ -8,17 +8,16 @@
 
 import Foundation
 
-let PwsafeKeyStretchIterations: UInt32 = 2048
+let keyStretchIterations: UInt32 = 2048
 
 extension Pwsafe {
     public func toData(withPassword password: String) throws -> Data {
-        let output = OutputStream.toMemory()
-        output.open()
+        let output = BlockWriter()
         
-        let records = [header.rawFields] + passwordRecords.map {$0.rawFields}
+        let records = [header.rawFields] + passwordRecords.map({ $0.rawFields })
         let encryptedPwsafe = try encryptPwsafeRecords(records, password: password)
         
-        output.write(PwsafeStartTag.utf8Bytes())
+        output.write(PwsafeFormat.startTag)
         output.write(encryptedPwsafe.salt)
         output.write(encryptedPwsafe.iter)
         output.write(encryptedPwsafe.passwordHash)
@@ -26,20 +25,16 @@ extension Pwsafe {
         output.write(encryptedPwsafe.b34)
         output.write(encryptedPwsafe.iv)
         output.write(encryptedPwsafe.encryptedData)
-        output.write(PwsafeEndTag.utf8Bytes())
+        output.write(PwsafeFormat.endTag)
         output.write(encryptedPwsafe.hmac)
         
-        guard let data = output.property(forKey: Stream.PropertyKey.dataWrittenToMemoryStreamKey) as? Data else {
-            throw PwsafeError.internalError
-        }
-        
-        return data
+        return Data(bytes: output.data)
     }
 }
 
 func encryptPwsafeRecords(_ records: [[RawField]], password: String) throws -> EncryptedPwsafe {
     let salt = generateRandomBytes(32)
-    let iter: UInt32 = PwsafeKeyStretchIterations
+    let iter: UInt32 = keyStretchIterations
     
     let stretchedKey = stretchKey(password.utf8Bytes(),
         salt: salt,
@@ -47,14 +42,14 @@ func encryptPwsafeRecords(_ records: [[RawField]], password: String) throws -> E
     
     let keyHash = sha256(stretchedKey)
     
-    let recordsKeyCryptor = try! Twofish(key: stretchedKey, blockMode: ECBMode())
+    let recordsKeyCryptor = try Twofish(key: stretchedKey, blockMode: ECBMode())
     let recordsKey = generateRandomBytes(32)
     let b12 = try recordsKeyCryptor.encrypt(recordsKey)
     let hmacKey = generateRandomBytes(32)
     let b34 = try recordsKeyCryptor.encrypt(hmacKey)
     
     let iv = generateRandomBytes(16)
-    let recordsCryptor = try! Twofish(key: recordsKey, iv: iv, blockMode: CBCMode())
+    let recordsCryptor = try Twofish(key: recordsKey, iv: iv, blockMode: CBCMode())
     let encryptedData = try recordsCryptor.encrypt(pwsafeRecordsToBlockData(records))
     
     let hmacer = Hmac(key: hmacKey)
@@ -74,14 +69,14 @@ func encryptPwsafeRecords(_ records: [[RawField]], password: String) throws -> E
 }
 
 func pwsafeRecordsToBlockData(_ records: [[RawField]]) -> [UInt8] {
-    var blockWriter = BlockWriter()
+    let writer = BlockWriter()
     
     for record in records {
-        for field in record {
-            blockWriter.writeRawField(type: field.typeCode, data: field.bytes)
+        record.forEach {
+            writer.writeRawField(type: $0.typeCode, data: $0.bytes)
         }
-        blockWriter.writeRawField(type: PwsafeEndRecordTypeCode)
+        writer.writeRawField(type: PwsafeFormat.endRecordTypeCode)
     }
     
-    return blockWriter.data
+    return writer.data
 }

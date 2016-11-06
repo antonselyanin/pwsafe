@@ -26,7 +26,7 @@ public struct Pwsafe {
         }
         
         set {
-            let index = passwordRecords.index { $0.uuid == uuid }
+            let index = passwordRecords.index(where: { $0.uuid == uuid })
             
             if let newValue = newValue {
                 if let index = index {

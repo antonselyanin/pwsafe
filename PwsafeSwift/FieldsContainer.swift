@@ -14,7 +14,7 @@ struct FieldsContainer<RecordType> {
     func valueForKey<ValueType>(_ key: FieldKey<RecordType, ValueType>) -> ValueType? {
         return fields.lazy
             .filter({ $0.typeCode == key.code })
-            .flatMap({key.serializer.fromByteArray($0.bytes) })
+            .flatMap({ key.serializer.fromByteArray($0.bytes) })
             .first
     }
     

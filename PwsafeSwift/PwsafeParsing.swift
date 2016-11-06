@@ -8,9 +8,11 @@
 
 import Foundation
 
-let PwsafeStartTag = "PWS3"
-let PwsafeEndTag = "PWS3-EOFPWS3-EOF"
-let PwsafeEndRecordTypeCode: UInt8 = 0xff
+enum PwsafeFormat {
+    static let startTag = "PWS3".utf8Bytes()
+    static let endTag = "PWS3-EOFPWS3-EOF".utf8Bytes()
+    static let endRecordTypeCode: UInt8 = 0xff
+}
 
 public extension Pwsafe {
     init(data: Data, password: String) throws {
@@ -23,9 +25,8 @@ public extension Pwsafe {
         
         self.header = HeaderRecord(rawFields: headerFields)
         
-        self.passwordRecords = pwsafeRecords[1..<pwsafeRecords.count].map {
-            PasswordRecord(rawFields: $0)
-        }
+        self.passwordRecords = pwsafeRecords[1..<pwsafeRecords.count]
+            .map(PasswordRecord.init(rawFields:))
     }
 }
 
@@ -42,29 +43,32 @@ struct EncryptedPwsafe {
 
 //todo: write tests, clean up
 func readEncryptedPwsafe(_ data: Data) throws -> EncryptedPwsafe {
-    let stream = InputStream(data: data)
-    stream.open()
+    let bytes = data.withUnsafeBytes {
+        [UInt8](UnsafeBufferPointer(start: $0, count: data.count))
+    }
+    
+    let stream = BlockReader(data: bytes)
     
     let tag = stream.readBytes(4)!
     
-    guard PwsafeStartTag.utf8Bytes() == tag else {
+    guard PwsafeFormat.startTag == tag else {
         throw PwsafeError.corruptedData
     }
     
     let salt = stream.readBytes(32)!
-    let iter = stream.readUInt32LE()!
+    let iter: UInt32 = stream.read()!
     let passwordHash = stream.readBytes(32)!
     let b12 = stream.readBytes(32)!
     let b34 = stream.readBytes(32)!
     let iv = stream.readBytes(16)!
     
-    let remainder = stream.readAllAvailable()
-    let tailLength = PwsafeEndTag.utf8.count + 32
+    let remainder = stream.readAll()
+    let tailLength = PwsafeFormat.endTag.count + 32
     
     let encryptedData = [UInt8](remainder[0..<(remainder.count - tailLength)])
     let eof = [UInt8](remainder[encryptedData.count..<(remainder.count - 32)])
     
-    guard eof == PwsafeEndTag.utf8Bytes() else {
+    guard PwsafeFormat.endTag == eof else {
         throw PwsafeError.corruptedData
     }
     
@@ -91,17 +95,17 @@ func decryptPwsafeRecords(_ pwsafe: EncryptedPwsafe, password: String) throws ->
         throw PwsafeError.corruptedData
     }
     
-    let recordsKeyCryptor = try! Twofish(key: stretchedKey, blockMode: ECBMode())
+    let recordsKeyCryptor = try Twofish(key: stretchedKey, blockMode: ECBMode())
     let recordsKey = try recordsKeyCryptor.decrypt(pwsafe.b12)
     let hmacKey = try recordsKeyCryptor.decrypt(pwsafe.b34)
     
-    let recordsCryptor = try! Twofish(key: recordsKey, iv: pwsafe.iv, blockMode: CBCMode())
+    let recordsCryptor = try Twofish(key: recordsKey, iv: pwsafe.iv, blockMode: CBCMode())
     
     let decryptedData = try recordsCryptor.decrypt(pwsafe.encryptedData)
     let pwsafeRecords = try parseRawPwsafeRecords(decryptedData)
     
     let hmacer = Hmac(key: hmacKey)
-    for field in pwsafeRecords.lazy.joined() {
+    for field in pwsafeRecords.joined() {
         hmacer.update(field.bytes)
     }
     let hmac = hmacer.final()
@@ -114,7 +118,7 @@ func decryptPwsafeRecords(_ pwsafe: EncryptedPwsafe, password: String) throws ->
 }
 
 func parseRawPwsafeRecords(_ data: [UInt8]) throws -> [[RawField]] {
-    var reader = BlockReader(data: data)
+    let reader = BlockReader(data: data)
     var rawRecords = [[RawField]]()
     var rawFields = [RawField]()
     while reader.hasMoreData {
@@ -124,7 +128,7 @@ func parseRawPwsafeRecords(_ data: [UInt8]) throws -> [[RawField]] {
             throw PwsafeError.corruptedData
         }
         
-        if fieldType == PwsafeEndRecordTypeCode {
+        if fieldType == PwsafeFormat.endRecordTypeCode {
             rawRecords.append(rawFields)
             rawFields = [RawField]()
         } else {

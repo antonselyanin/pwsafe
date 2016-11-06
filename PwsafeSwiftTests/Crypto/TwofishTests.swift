@@ -81,7 +81,7 @@ func hexStringToUInt8Array(_ input: String) -> [UInt8] {
 }
 
 func parseKeyValue(_ input: String) -> [String:String] {
-    return ("I=" + input).components(separatedBy: "\r\n").reduce([String:String]()) {
+    return ("I=" + input).components(separatedBy: "\r\n").reduce([String: String]()) {
         (record, line) in
         var outputRecord = record
         
@@ -96,14 +96,14 @@ func parseKeyValue(_ input: String) -> [String:String] {
 }
 
 func parseTestData(_ record: [String:String]) -> TwofishTestData? {
-    if let id = record["I"], let key = record["KEY"], let ct = record["CT"], let pt = record["PT"] {
-        return TwofishTestData(
-            id: id,
-            key: hexStringToUInt8Array(key),
-            cipherText: hexStringToUInt8Array(ct),
-            plainText: hexStringToUInt8Array(pt)
-        )
+    guard let id = record["I"], let key = record["KEY"], let ct = record["CT"], let pt = record["PT"] else {
+        return nil
     }
     
-    return nil
+    return TwofishTestData(
+        id: id,
+        key: hexStringToUInt8Array(key),
+        cipherText: hexStringToUInt8Array(ct),
+        plainText: hexStringToUInt8Array(pt)
+    )
 }

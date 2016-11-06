@@ -9,7 +9,7 @@
 import Foundation
 
 class Hmac {
-    var context: CCHmacContext = CCHmacContext()
+    private var context: CCHmacContext = CCHmacContext()
     
     init(key: [UInt8]) {
         CCHmacInit(&context, UInt32(kCCHmacAlgSHA256), key, key.count);

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct BlockReader {
+class BlockReader {
     private let data: [UInt8]
     private var position: Int = 0
     private let blockSize: Int
@@ -22,7 +22,7 @@ struct BlockReader {
         self.blockSize = blockSize
     }
     
-    mutating func readBytes(_ count:Int) -> [UInt8]? {
+    func readBytes(_ count:Int) -> [UInt8]? {
         guard position + count <= data.count else { return nil }
         
         let result = [UInt8](data[position ..< position + count])
@@ -30,15 +30,19 @@ struct BlockReader {
         return result
     }
     
-    mutating func read<T: ByteArrayConvertible>() -> T? {
+    func read<T: ByteArrayConvertible>() -> T? {
         let size = MemoryLayout<T>.size
         guard let bytes = readBytes(size) else { return nil }
         
         return T(littleEndianBytes: bytes)
     }
     
+    func readAll() -> [UInt8] {
+        return readBytes(data.count - position) ?? []
+    }
+    
     @discardableResult
-    mutating func nextBlock() -> Bool {
+    func nextBlock() -> Bool {
         guard hasMoreData else { return false }
         
         guard position % blockSize != 0 else { return true }
