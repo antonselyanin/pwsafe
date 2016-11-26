@@ -13,6 +13,13 @@ import Quick
 
 class ParsingTest: QuickSpec {
     override func spec() {
+        let twoBytesReader: Parser<[UInt8]> = Parser { input in
+            guard input.count >= 2 else { return nil }
+            let parsed: [UInt8] = Array(input.prefix(2))
+            let remainder: Data = Data(input.suffix(from: 2))
+            return (remainder, parsed)
+        }
+        
         describe("reads bytes from data") {
             // Given
             let data: Data = Data(bytes: [0, 1, 2, 3, 4, 5, 6])
@@ -176,6 +183,56 @@ class ParsingTest: QuickSpec {
                 // Then
                 expect(result).to(beNil())
             }
+        }
+        
+        describe("ParserProtocol.many") {
+            it("returns array") {
+                // When
+                let parser = twoBytesReader.many
+                let result = parser.parse(Data(bytes: [0, 1, 2, 3, 4]))
+                
+                // Then
+                expect(result!.parsed.count) == 2
+                expect(result!.parsed[0]) == [0, 1]
+                expect(result!.parsed[1]) == [2, 3]
+                
+                expect(result!.remainder) == Data(bytes: [4])
+            }
+            
+            it("return empty if can't parse") {
+                // When
+                let parser = twoBytesReader.many
+                let result = parser.parse(Data(bytes: [1]))
+                
+                // Then
+                expect(result!.parsed.count) == 0
+                expect(result!.remainder) == Data(bytes: [1])
+            }
+        }
+        
+        describe("ParserProtocol.aligned(blockSize:)") {
+            let data = Data(bytes: [0, 1, 2, 3, 4])
+            
+            it("ensures that data is read in blocks of specified size") {
+                // When
+                let parser = twoBytesReader.aligned(blockSize: 3)
+                let result = parser.parse(data)
+                
+                // Then
+                expect(result!.remainder) == Data(bytes: [3, 4])
+                expect(result!.parsed) == [0, 1]
+            }
+            
+            it("doesn't align if reading already aligned") {
+                // When
+                let parser = twoBytesReader.aligned(blockSize: 2)
+                let result = parser.parse(data)
+                
+                // Then
+                expect(result!.remainder) == Data(bytes: [2, 3, 4])
+                expect(result!.parsed) == [0, 1]
+            }
+            
         }
     }
 }

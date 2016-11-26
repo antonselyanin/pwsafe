@@ -24,7 +24,7 @@ struct Parser<Parsed>: ParserProtocol {
     let parse: (Data) -> ParserResult<Parsed>
 }
 
-extension Parser {
+extension ParserProtocol {
     static func pure<T>(_ t: T) -> Parser<T> {
         return Parser<T> { (input) -> ParserResult<T> in
             return (input, t)
@@ -47,6 +47,37 @@ extension Parser {
         return Parser<T> { (input) -> ParserResult<T> in
             return self.parse(input).flatMap { (remainder: Data, parsed: Parsed) -> (Data, T)? in
                 return f(parsed).parse(remainder)
+            }
+        }
+    }
+}
+
+extension ParserProtocol {
+    var many: Parser<[Parsed]> {
+        return Parser { initialInput in
+            var input = initialInput
+            var result: [Parsed] = []
+            
+            while let (remainder, parsed) = self.parse(input) {
+                result.append(parsed)
+                input = remainder
+            }
+            
+            return (input, result)
+        }
+    }
+    
+    func aligned(blockSize: Int) -> Parser<Parsed> {
+        return Parser { input in
+            return self.parse(input).flatMap {
+                let (remainder, parsed) = $0
+                let readSize = input.count - remainder.count
+                
+                guard readSize % blockSize != 0 else { return $0 }
+                
+                let unaligned = blockSize - readSize % blockSize
+                let alignedRemainder = Data(remainder.suffix(remainder.count - unaligned))
+                return (alignedRemainder, parsed)
             }
         }
     }
@@ -90,7 +121,7 @@ enum Parsers {
             return (remainder, parsed)
         }
     }
-
+    
     static func expect(_ bytes: [UInt8]) -> Parser<Data> {
         return read(bytes.count).flatMap {
             guard $0 == Data(bytes: bytes) else { return .empty() }
@@ -98,6 +129,7 @@ enum Parsers {
         }
     }
     
+    //TODO: Remove this? We don't need string version
     static func expect(_ value: String) -> Parser<String> {
         return expect(value.utf8Bytes()).map({ _ in value })
     }

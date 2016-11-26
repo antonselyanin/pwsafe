@@ -29,12 +29,12 @@
 		3A7E7FB81DE34689007B9482 /* ParsingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E7FB71DE34689007B9482 /* ParsingTest.swift */; };
 		3A7E7FBA1DE49795007B9482 /* ParserMonadTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E7FB91DE49795007B9482 /* ParserMonadTest.swift */; };
 		3A7E7FBC1DE5D51F007B9482 /* ParserOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E7FBB1DE5D51F007B9482 /* ParserOperators.swift */; };
+		3A7E7FBE1DE9D00D007B9482 /* EncryptedPwsafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E7FBD1DE9D00D007B9482 /* EncryptedPwsafe.swift */; };
 		3A803A791D8C443500E19D0B /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A803A771D8C428000E19D0B /* Quick.framework */; };
 		3A803A7A1D8C443900E19D0B /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A803A751D8C427A00E19D0B /* Nimble.framework */; };
 		3A9441921BA5A42B00B00514 /* IntegerTypeUtilitiesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9441911BA5A42B00B00514 /* IntegerTypeUtilitiesTest.swift */; };
 		3A9D30B81BAF0571009A0330 /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB2DAD01B7A39E90051F3A8 /* DataExtension.swift */; };
 		3AA5E6BE1BB994BA003C164D /* PwsafeSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA5E6BD1BB994BA003C164D /* PwsafeSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3AA5E6CB1BB994E6003C164D /* BlockReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A22E21BA4498600025E31 /* BlockReader.swift */; };
 		3AA5E6CC1BB994E6003C164D /* BlockWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A03FED51BAD894F00741D62 /* BlockWriter.swift */; };
 		3AA5E6CD1BB994E6003C164D /* IntegerTypeUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A94418F1BA5520600B00514 /* IntegerTypeUtilities.swift */; };
 		3AA5E6CF1BB994E6003C164D /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9D30BB1BAF1038009A0330 /* StringExtension.swift */; };
@@ -51,7 +51,6 @@
 		3AFFBAE41BC1080B00F447F7 /* ArrayExtensionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFBAE31BC1080B00F447F7 /* ArrayExtensionTest.swift */; };
 		3AFFBAE71BC16F9A00F447F7 /* CipherBlockMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFBAE61BC16F9A00F447F7 /* CipherBlockMode.swift */; };
 		3AFFBAEA1BC1741800F447F7 /* CipherBlockModeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFBAE91BC1741800F447F7 /* CipherBlockModeTest.swift */; };
-		58AAA7355D8C4B7C8C55727A /* BlockReaderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA3D501354728866A8906 /* BlockReaderTest.swift */; };
 		EA32B6AC1CF076A900DFAB9D /* FieldKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA32B6AB1CF076A900DFAB9D /* FieldKey.swift */; };
 /* End PBXBuildFile section */
 
@@ -79,7 +78,6 @@
 		3A2AA15B1B6E0F2E009E0422 /* PwsafeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeTest.swift; sourceTree = "<group>"; };
 		3A556A621B73B1EE00E45151 /* libcommonCrypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcommonCrypto.tbd; path = usr/lib/system/libcommonCrypto.tbd; sourceTree = SDKROOT; };
 		3A556A781B73B5A400E45151 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		3A5A22E21BA4498600025E31 /* BlockReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockReader.swift; sourceTree = "<group>"; };
 		3A5E0BF01B9C80DA0026D8EE /* test.psafe3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.psafe3; sourceTree = "<group>"; };
 		3A686C841C19DD9400247D42 /* FieldsContainerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldsContainerTest.swift; sourceTree = "<group>"; };
 		3A6A39C31C17265E00696EC6 /* HeaderRecordTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderRecordTest.swift; sourceTree = "<group>"; };
@@ -93,6 +91,7 @@
 		3A7E7FB71DE34689007B9482 /* ParsingTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsingTest.swift; sourceTree = "<group>"; };
 		3A7E7FB91DE49795007B9482 /* ParserMonadTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserMonadTest.swift; sourceTree = "<group>"; };
 		3A7E7FBB1DE5D51F007B9482 /* ParserOperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserOperators.swift; sourceTree = "<group>"; };
+		3A7E7FBD1DE9D00D007B9482 /* EncryptedPwsafe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptedPwsafe.swift; sourceTree = "<group>"; };
 		3A803A751D8C427A00E19D0B /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		3A803A771D8C428000E19D0B /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		3A8D2CA21B691AE50030494F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -115,7 +114,6 @@
 		3AFFBAE31BC1080B00F447F7 /* ArrayExtensionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTest.swift; sourceTree = "<group>"; };
 		3AFFBAE61BC16F9A00F447F7 /* CipherBlockMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherBlockMode.swift; sourceTree = "<group>"; };
 		3AFFBAE91BC1741800F447F7 /* CipherBlockModeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherBlockModeTest.swift; sourceTree = "<group>"; };
-		58AAA3D501354728866A8906 /* BlockReaderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockReaderTest.swift; sourceTree = "<group>"; };
 		67F0581AD2048530C3C74999 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA32B6AB1CF076A900DFAB9D /* FieldKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -145,7 +143,6 @@
 			isa = PBXGroup;
 			children = (
 				3AFFBAE31BC1080B00F447F7 /* ArrayExtensionTest.swift */,
-				58AAA3D501354728866A8906 /* BlockReaderTest.swift */,
 				3A03FED71BAD89BD00741D62 /* BlockWriterTest.swift */,
 				3A9441911BA5A42B00B00514 /* IntegerTypeUtilitiesTest.swift */,
 				3AB2DAD01B7A39E90051F3A8 /* DataExtension.swift */,
@@ -168,6 +165,7 @@
 				EA32B6AB1CF076A900DFAB9D /* FieldKey.swift */,
 				3A7017F81DCE26F5002CF67A /* FieldsContainer.swift */,
 				3A7017FA1DCE2728002CF67A /* RawField.swift */,
+				3A7E7FBD1DE9D00D007B9482 /* EncryptedPwsafe.swift */,
 			);
 			name = Structure;
 			sourceTree = "<group>";
@@ -251,7 +249,6 @@
 			isa = PBXGroup;
 			children = (
 				3AFFBAE11BC1072C00F447F7 /* ArrayExtension.swift */,
-				3A5A22E21BA4498600025E31 /* BlockReader.swift */,
 				3A03FED51BAD894F00741D62 /* BlockWriter.swift */,
 				3A94418F1BA5520600B00514 /* IntegerTypeUtilities.swift */,
 				3A9D30BB1BAF1038009A0330 /* StringExtension.swift */,
@@ -422,7 +419,6 @@
 				3A6A39C41C17265E00696EC6 /* HeaderRecordTest.swift in Sources */,
 				3A2AA15C1B6E0F2E009E0422 /* PwsafeTest.swift in Sources */,
 				3A7E7FB81DE34689007B9482 /* ParsingTest.swift in Sources */,
-				58AAA7355D8C4B7C8C55727A /* BlockReaderTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,13 +427,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A20A86F1BCBC2E400241946 /* Twofish.swift in Sources */,
-				3AA5E6CB1BB994E6003C164D /* BlockReader.swift in Sources */,
 				3A20A86E1BCBC2E400241946 /* TwofishTables.swift in Sources */,
 				3AA5E6D21BB994E6003C164D /* HeaderRecord.swift in Sources */,
 				EA32B6AC1CF076A900DFAB9D /* FieldKey.swift in Sources */,
 				3A20A87A1BCC1D7C00241946 /* Hmac.swift in Sources */,
 				3AD1BCF31BD2A95200288DA9 /* PwsafeStoring.swift in Sources */,
 				3AA5E6CF1BB994E6003C164D /* StringExtension.swift in Sources */,
+				3A7E7FBE1DE9D00D007B9482 /* EncryptedPwsafe.swift in Sources */,
 				3A76F9DE1C16E41200BE5D40 /* PwsafeError.swift in Sources */,
 				3A7017F91DCE26F5002CF67A /* FieldsContainer.swift in Sources */,
 				3A7E7FBC1DE5D51F007B9482 /* ParserOperators.swift in Sources */,

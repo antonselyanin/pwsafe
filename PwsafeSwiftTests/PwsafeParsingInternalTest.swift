@@ -13,8 +13,44 @@ import Nimble
 @testable import PwsafeSwift
 
 class PwsafeParsingInternalTest: QuickSpec {
-        //todo: add test for failures!
+    //todo: add test for failures!
+    
     override func spec() {
+        describe("RawField parser") {
+            it("parses RawField") {
+                // Given
+                let writer = BlockWriter()
+                writer.write(UInt32(5))
+                writer.write(UInt8(1))
+                writer.write([])
+
+                // When
+                let result = RawField.parser.parse(Data(bytes: writer.data))
+                
+                // Then
+                expect(result).to(beNil())
+            }
+            
+            it("fails if not enough data") {
+                let fieldData: [UInt8] = [1, 2, 3, 4]
+                
+                let writer = BlockWriter()
+                writer.write(UInt32(fieldData.count))
+                writer.write(UInt8(1))
+                writer.write(fieldData)
+                
+                var data = Data(bytes: writer.data)
+                data.append(5)
+                data.append(6)
+                data.append(7)
+                
+                let result = RawField.parser.parse(data)
+                
+                expect(result!.remainder) == Data(bytes: [5, 6, 7])
+                expect(result!.parsed) == RawField(typeCode: 1, bytes: [1, 2, 3, 4])
+            }
+        }
+        
         describe("parseRawPwsafeRecords") {
             it ("parses multiple records") {
                 // Given
