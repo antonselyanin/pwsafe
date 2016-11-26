@@ -41,47 +41,27 @@ struct EncryptedPwsafe {
     let hmac: [UInt8]
 }
 
+private let encryptedSafeParser: Parser<EncryptedPwsafe> =
+    curry(EncryptedPwsafe.init)
+        <^> Parsers.expect(PwsafeFormat.startTag)
+        *> Parsers.read(32).bytes // salt
+        <*> Parsers.read() // iter
+        <*> Parsers.read(32).bytes // passwordHash
+        <*> Parsers.read(32).bytes // b12
+        <*> Parsers.read(32).bytes // b34
+        <*> Parsers.read(16).bytes // IV
+        <*> Parsers.readAll(leave: 32) // encryptedData
+            .cut(requiredSuffix: PwsafeFormat.endTag) // eof
+            .bytes
+        <*> Parsers.read(32).bytes // HMAC
+
 //todo: write tests, clean up
 func readEncryptedPwsafe(_ data: Data) throws -> EncryptedPwsafe {
-    let bytes = data.withUnsafeBytes {
-        [UInt8](UnsafeBufferPointer(start: $0, count: data.count))
-    }
-    
-    let stream = BlockReader(data: bytes)
-    
-    let tag = stream.readBytes(4)!
-    
-    guard PwsafeFormat.startTag == tag else {
+    guard let encrypted = encryptedSafeParser.parse(data)?.parsed else {
         throw PwsafeError.corruptedData
     }
     
-    let salt = stream.readBytes(32)!
-    let iter: UInt32 = stream.read()!
-    let passwordHash = stream.readBytes(32)!
-    let b12 = stream.readBytes(32)!
-    let b34 = stream.readBytes(32)!
-    let iv = stream.readBytes(16)!
-    
-    let remainder = stream.readAll()
-    let tailLength = PwsafeFormat.endTag.count + 32
-    
-    let encryptedData = [UInt8](remainder[0..<(remainder.count - tailLength)])
-    let eof = [UInt8](remainder[encryptedData.count..<(remainder.count - 32)])
-    
-    guard PwsafeFormat.endTag == eof else {
-        throw PwsafeError.corruptedData
-    }
-    
-    let hmac = [UInt8](remainder[remainder.count - 32 ..< remainder.count])
-    
-    return EncryptedPwsafe(
-        salt: salt,
-        iter: iter,
-        passwordHash: passwordHash,
-        b12: b12, b34: b34,
-        iv: iv,
-        encryptedData: encryptedData,
-        hmac: hmac)
+    return encrypted
 }
 
 func decryptPwsafeRecords(_ pwsafe: EncryptedPwsafe, password: String) throws -> [[RawField]] {
