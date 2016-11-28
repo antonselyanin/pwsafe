@@ -15,14 +15,14 @@ func <^> <A, B>(f: @escaping (A) -> B, p: Parser<A>) -> Parser<B> {
 }
 
 //TODO: test!
-//TODO: simplify!
 // Applicative sequential application
 func <*> <A, B>(p: Parser<(A) -> B>, q: Parser<A>) -> Parser<B> {
     return Parser<B> { (input) -> ParserResult<B> in
-        guard case .success(let parsed1) = p.parse(input),
-            case .success(let parsed2) = q.parse(parsed1.remainder) else { return .failure(ParserError.error) }
-        
-        return .success(Parsed(remainder: parsed2.remainder, value: parsed1.value(parsed2.value)))
+        return p.parse(input).flatMap { result1 in
+            return q.parse(result1.remainder).map { result2 in
+                return Parsed(remainder: result2.remainder, value: result1.value(result2.value))
+            }
+        }
     }
 }
 
@@ -36,10 +36,11 @@ func <*> <A, B>(p: Parser<(A) -> B>, q: Parser<A>) -> Parser<B> {
 //TODO: simplify!
 func <* <A, B>(p: Parser<A>, q: Parser<B>) -> Parser<A> {
     return Parser<A> { (input: Data) -> ParserResult<A> in
-        guard case .success(let result) = p.parse(input),
-            case .success(let result2) = q.parse(result.remainder) else { return .failure(ParserError.error) }
-        
-        return .success(Parsed(remainder: result2.remainder, value: result.value))
+        return p.parse(input).flatMap { result1 in
+            return q.parse(result1.remainder).map { result2 in
+                return Parsed(remainder: result2.remainder, value: result1.value)
+            }
+        }
     }
 }
 
