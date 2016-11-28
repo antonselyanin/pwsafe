@@ -22,6 +22,7 @@
 		3A7017E41DCB88CF002CF67A /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7017E31DCB88CF002CF67A /* Record.swift */; };
 		3A7017F91DCE26F5002CF67A /* FieldsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7017F81DCE26F5002CF67A /* FieldsContainer.swift */; };
 		3A7017FB1DCE2728002CF67A /* RawField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7017FA1DCE2728002CF67A /* RawField.swift */; };
+		3A73FCED1DEA94A900AECE5C /* ResultTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A73FCEC1DEA94A900AECE5C /* ResultTest.swift */; };
 		3A76F9DE1C16E41200BE5D40 /* PwsafeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A76F9DD1C16E41200BE5D40 /* PwsafeError.swift */; };
 		3A7E7FB01DE07BB8007B9482 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E7FAF1DE07BB8007B9482 /* Parser.swift */; };
 		3A7E7FB31DE1F9EB007B9482 /* Curry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E7FB21DE1F9EB007B9482 /* Curry.swift */; };
@@ -30,6 +31,7 @@
 		3A7E7FBA1DE49795007B9482 /* ParserMonadTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E7FB91DE49795007B9482 /* ParserMonadTest.swift */; };
 		3A7E7FBC1DE5D51F007B9482 /* ParserOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E7FBB1DE5D51F007B9482 /* ParserOperators.swift */; };
 		3A7E7FBE1DE9D00D007B9482 /* EncryptedPwsafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E7FBD1DE9D00D007B9482 /* EncryptedPwsafe.swift */; };
+		3A7E7FC01DE9E4DF007B9482 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E7FBF1DE9E4DF007B9482 /* Result.swift */; };
 		3A803A791D8C443500E19D0B /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A803A771D8C428000E19D0B /* Quick.framework */; };
 		3A803A7A1D8C443900E19D0B /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A803A751D8C427A00E19D0B /* Nimble.framework */; };
 		3A9441921BA5A42B00B00514 /* IntegerTypeUtilitiesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9441911BA5A42B00B00514 /* IntegerTypeUtilitiesTest.swift */; };
@@ -84,6 +86,7 @@
 		3A7017E31DCB88CF002CF67A /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		3A7017F81DCE26F5002CF67A /* FieldsContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldsContainer.swift; sourceTree = "<group>"; };
 		3A7017FA1DCE2728002CF67A /* RawField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawField.swift; sourceTree = "<group>"; };
+		3A73FCEC1DEA94A900AECE5C /* ResultTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultTest.swift; sourceTree = "<group>"; };
 		3A76F9DD1C16E41200BE5D40 /* PwsafeError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeError.swift; sourceTree = "<group>"; };
 		3A7E7FAF1DE07BB8007B9482 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		3A7E7FB21DE1F9EB007B9482 /* Curry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Curry.swift; sourceTree = "<group>"; };
@@ -92,6 +95,7 @@
 		3A7E7FB91DE49795007B9482 /* ParserMonadTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserMonadTest.swift; sourceTree = "<group>"; };
 		3A7E7FBB1DE5D51F007B9482 /* ParserOperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserOperators.swift; sourceTree = "<group>"; };
 		3A7E7FBD1DE9D00D007B9482 /* EncryptedPwsafe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptedPwsafe.swift; sourceTree = "<group>"; };
+		3A7E7FBF1DE9E4DF007B9482 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		3A803A751D8C427A00E19D0B /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		3A803A771D8C428000E19D0B /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		3A8D2CA21B691AE50030494F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 				3A03FED71BAD89BD00741D62 /* BlockWriterTest.swift */,
 				3A9441911BA5A42B00B00514 /* IntegerTypeUtilitiesTest.swift */,
 				3AB2DAD01B7A39E90051F3A8 /* DataExtension.swift */,
+				3A73FCEC1DEA94A900AECE5C /* ResultTest.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 				3A7E7FBB1DE5D51F007B9482 /* ParserOperators.swift */,
 			);
 			name = Parsing;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		3A7E7FB61DE344EB007B9482 /* Parsing */ = {
@@ -210,7 +216,6 @@
 		3A8D2C951B691AE50030494F /* PwsafeSwift */ = {
 			isa = PBXGroup;
 			children = (
-				3A7E7FAE1DE07B93007B9482 /* Parsing */,
 				3A7017F71DCE26D8002CF67A /* Structure */,
 				3AFFBAE51BC16DFF00F447F7 /* Crypto */,
 				3A9D30BF1BAF239B009A0330 /* Utilities */,
@@ -248,12 +253,14 @@
 		3A9D30BF1BAF239B009A0330 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				3A7E7FAE1DE07B93007B9482 /* Parsing */,
 				3AFFBAE11BC1072C00F447F7 /* ArrayExtension.swift */,
 				3A03FED51BAD894F00741D62 /* BlockWriter.swift */,
 				3A94418F1BA5520600B00514 /* IntegerTypeUtilities.swift */,
 				3A9D30BB1BAF1038009A0330 /* StringExtension.swift */,
 				3A7E7FB21DE1F9EB007B9482 /* Curry.swift */,
 				3A7E7FB41DE1FA6C007B9482 /* Operators.swift */,
+				3A7E7FBF1DE9E4DF007B9482 /* Result.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -411,6 +418,7 @@
 				3AD1BCF71BD39FC400288DA9 /* PasswordRecordTest.swift in Sources */,
 				3AFFBAE41BC1080B00F447F7 /* ArrayExtensionTest.swift in Sources */,
 				3A686C851C19DD9400247D42 /* FieldsContainerTest.swift in Sources */,
+				3A73FCED1DEA94A900AECE5C /* ResultTest.swift in Sources */,
 				3AFFBAEA1BC1741800F447F7 /* CipherBlockModeTest.swift in Sources */,
 				3A20A8741BCBD65400241946 /* TwofishTests.swift in Sources */,
 				3AD1BCF51BD2C99A00288DA9 /* PwsafeParsingInternalTest.swift in Sources */,
@@ -440,6 +448,7 @@
 				3AA5E6CD1BB994E6003C164D /* IntegerTypeUtilities.swift in Sources */,
 				3A7E7FB31DE1F9EB007B9482 /* Curry.swift in Sources */,
 				3A7017E41DCB88CF002CF67A /* Record.swift in Sources */,
+				3A7E7FC01DE9E4DF007B9482 /* Result.swift in Sources */,
 				3A7E7FB01DE07BB8007B9482 /* Parser.swift in Sources */,
 				3AA5E6CC1BB994E6003C164D /* BlockWriter.swift in Sources */,
 				3AA5E6D11BB994E6003C164D /* Pwsafe.swift in Sources */,

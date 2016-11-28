@@ -15,13 +15,14 @@ func <^> <A, B>(f: @escaping (A) -> B, p: Parser<A>) -> Parser<B> {
 }
 
 //TODO: test!
+//TODO: simplify!
 // Applicative sequential application
 func <*> <A, B>(p: Parser<(A) -> B>, q: Parser<A>) -> Parser<B> {
-    return Parser<B> { (input) -> (Data, B)? in
-        guard let (inp, out) = p.parse(input),
-            let (inp2, out2) = q.parse(inp) else { return nil }
+    return Parser<B> { (input) -> ParserResult<B> in
+        guard case .success(let parsed1) = p.parse(input),
+            case .success(let parsed2) = q.parse(parsed1.remainder) else { return .failure(ParserError.error) }
         
-        return (inp2, out(out2))
+        return .success(Parsed(remainder: parsed2.remainder, value: parsed1.value(parsed2.value)))
     }
 }
 
@@ -32,12 +33,13 @@ func <*> <A, B>(p: Parser<(A) -> B>, q: Parser<A>) -> Parser<B> {
  Expected function type: `f a -> f b -> f a`
  Haskell `infixl 4`
  */
+//TODO: simplify!
 func <* <A, B>(p: Parser<A>, q: Parser<B>) -> Parser<A> {
     return Parser<A> { (input: Data) -> ParserResult<A> in
-        guard let result = p.parse(input),
-            let result2 = q.parse(result.remainder) else { return nil }
+        guard case .success(let result) = p.parse(input),
+            case .success(let result2) = q.parse(result.remainder) else { return .failure(ParserError.error) }
         
-        return (result2.remainder, result.parsed)
+        return .success(Parsed(remainder: result2.remainder, value: result.value))
     }
 }
 

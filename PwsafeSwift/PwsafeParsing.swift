@@ -66,7 +66,7 @@ func decryptPwsafeRecords(_ pwsafe: EncryptedPwsafe, password: String) throws ->
 }
 
 func parseRawPwsafeRecords(_ data: [UInt8]) throws -> [[RawField]] {
-    guard let (remainder, result) = RawField.allFieldsParser.parse(Data(bytes: data)) else {
+    guard let result = RawField.allFieldsParser.parse(Data(bytes: data)).value?.value else {
         throw PwsafeError.corruptedData
     }
   

@@ -8,82 +8,90 @@
 
 import Foundation
 
-typealias ParserResult<Parsed> = (remainder: Data, parsed: Parsed)?
-
-protocol ParserProtocol {
-    associatedtype Parsed
-    
-    var parse: (Data) -> ParserResult<Parsed> { get }
-    
-    func map<T>(_ f: @escaping (Parsed) -> T) -> Parser<T>
-    
-    func flatMap<T>(_ f: @escaping (Parsed) -> Parser<T>) -> Parser<T>
+enum ParserError: Error {
+    case error
 }
 
-struct Parser<Parsed>: ParserProtocol {
-    let parse: (Data) -> ParserResult<Parsed>
+struct Parsed<Value> {
+    let remainder: Data
+    let value: Value
+}
+
+typealias ParserResult<Value> = Result<Parsed<Value>>
+
+protocol ParserProtocol {
+    associatedtype Value
+    
+    var parse: (Data) -> ParserResult<Value> { get }
+    
+    func map<T>(_ f: @escaping (Value) -> T) -> Parser<T>
+    
+    func flatMap<T>(_ f: @escaping (Value) -> Parser<T>) -> Parser<T>
+}
+
+struct Parser<Value>: ParserProtocol {
+    let parse: (Data) -> ParserResult<Value>
 }
 
 extension ParserProtocol {
     static func pure<T>(_ t: T) -> Parser<T> {
         return Parser<T> { (input) -> ParserResult<T> in
-            return (input, t)
+            return .success(Parsed(remainder: input, value: t))
         }
     }
     
     static func empty<T>() -> Parser<T> {
         return Parser<T> { (input) -> ParserResult<T> in
-            return nil
+            return .failure(ParserError.error)
         }
     }
     
-    func map<T>(_ f: @escaping (Parsed) -> T) -> Parser<T> {
+    func map<T>(_ f: @escaping (Value) -> T) -> Parser<T> {
         //TODO: function composition here
         return flatMap({ .pure(f($0)) })
     }
     
-    func flatMap<T>(_ f: @escaping (Parsed) -> Parser<T>) -> Parser<T> {
+    func flatMap<T>(_ f: @escaping (Value) -> Parser<T>) -> Parser<T> {
         // TODO: simplify
         return Parser<T> { (input) -> ParserResult<T> in
-            return self.parse(input).flatMap { (remainder: Data, parsed: Parsed) -> (Data, T)? in
-                return f(parsed).parse(remainder)
+            return self.parse(input).flatMap { (parsed: Parsed) -> ParserResult<T> in
+                return f(parsed.value).parse(parsed.remainder)
             }
         }
     }
 }
 
 extension ParserProtocol {
-    var many: Parser<[Parsed]> {
+    var many: Parser<[Value]> {
         return Parser { initialInput in
             var input = initialInput
-            var result: [Parsed] = []
+            var result: [Value] = []
             
-            while let (remainder, parsed) = self.parse(input) {
-                result.append(parsed)
-                input = remainder
+            while let value = self.parse(input).value {
+                result.append(value.value)
+                input = value.remainder
             }
             
-            return (input, result)
+            return .success(Parsed(remainder: input, value: result))
         }
     }
     
-    func aligned(blockSize: Int) -> Parser<Parsed> {
+    func aligned(blockSize: Int) -> Parser<Value> {
         return Parser { input in
-            return self.parse(input).flatMap {
-                let (remainder, parsed) = $0
-                let readSize = input.count - remainder.count
+            return self.parse(input).flatMap { parsed in
+                let readSize = input.count - parsed.remainder.count
                 
-                guard readSize % blockSize != 0 else { return $0 }
+                guard readSize % blockSize != 0 else { return .success(parsed) }
                 
                 let unaligned = blockSize - readSize % blockSize
-                let alignedRemainder = Data(remainder.suffix(remainder.count - unaligned))
-                return (alignedRemainder, parsed)
+                let alignedRemainder = Data(parsed.remainder.suffix(parsed.remainder.count - unaligned))
+                return .success(Parsed(remainder: alignedRemainder, value: parsed.value))
             }
         }
     }
 }
 
-extension ParserProtocol where Parsed == Data {
+extension ParserProtocol where Value == Data {
     var bytes: Parser<[UInt8]> {
         return map { (data: Data) -> [UInt8] in
             //TODO: extract function or var
@@ -96,14 +104,14 @@ extension ParserProtocol where Parsed == Data {
     func cut(requiredSuffix: [UInt8]) -> Parser<Data> {
         return Parser<Data> { input in
             return self.parse(input).flatMap { result in
-                let potentialSuffix = result.parsed.suffix(requiredSuffix.count)
+                let potentialSuffix = result.value.suffix(requiredSuffix.count)
                 guard Data(bytes: requiredSuffix) == Data(potentialSuffix) else {
-                    return nil
+                    return .failure(ParserError.error)
                 }
                 
-                let prefix = result.parsed.prefix(upTo: potentialSuffix.startIndex)
+                let prefix = result.value.prefix(upTo: potentialSuffix.startIndex)
                 
-                return (result.remainder, Data(prefix))
+                return .success(Parsed(remainder: result.remainder, value: Data(prefix)))
             }
         }
     }
@@ -113,12 +121,12 @@ enum Parsers {
     //TODO: rename
     static func read(_ bytesToRead: Int) -> Parser<Data> {
         return Parser<Data> { (input) -> ParserResult<Data> in
-            guard bytesToRead <=  input.count else { return nil }
+            guard bytesToRead <= input.count else { return .failure(ParserError.error) }
             
             let remainder = input.subdata(in: bytesToRead ..< input.endIndex)
-            let parsed = input.subdata(in: 0 ..< bytesToRead)
+            let value = input.subdata(in: 0 ..< bytesToRead)
             
-            return (remainder, parsed)
+            return .success(Parsed(remainder: remainder, value: value))
         }
     }
     
@@ -136,9 +144,12 @@ enum Parsers {
     
     static func readAll(leave tailSize: Int = 0) -> Parser<Data> {
         return Parser<Data> { input in
-            guard tailSize <= input.count else { return nil }
+            guard tailSize <= input.count else { return .failure(ParserError.error) }
             
-            return (Data(input.suffix(tailSize)), Data(input.prefix(input.count - tailSize)))
+            let remainder = Data(input.suffix(tailSize))
+            let value = Data(input.prefix(input.count - tailSize))
+            
+            return .success(Parsed(remainder: remainder, value: value))
         }
     }
     

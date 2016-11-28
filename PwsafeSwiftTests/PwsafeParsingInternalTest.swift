@@ -22,13 +22,12 @@ class PwsafeParsingInternalTest: QuickSpec {
                 let writer = BlockWriter()
                 writer.write(UInt32(5))
                 writer.write(UInt8(1))
-                writer.write([])
 
                 // When
                 let result = RawField.parser.parse(Data(bytes: writer.data))
                 
                 // Then
-                expect(result).to(beNil())
+                expect(result.value).to(beNil())
             }
             
             it("fails if not enough data") {
@@ -44,10 +43,10 @@ class PwsafeParsingInternalTest: QuickSpec {
                 data.append(6)
                 data.append(7)
                 
-                let result = RawField.parser.parse(data)
+                let parsed = RawField.parser.parse(data).value!
                 
-                expect(result!.remainder) == Data(bytes: [5, 6, 7])
-                expect(result!.parsed) == RawField(typeCode: 1, bytes: [1, 2, 3, 4])
+                expect(parsed.remainder) == Data(bytes: [5, 6, 7])
+                expect(parsed.value) == RawField(typeCode: 1, bytes: [1, 2, 3, 4])
             }
         }
         

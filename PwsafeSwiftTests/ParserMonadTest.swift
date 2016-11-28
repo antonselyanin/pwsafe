@@ -19,10 +19,10 @@ class ParserMonadTest: QuickSpec {
                 let parser = Parser<String>.pure("abc").map({ $0.uppercased() })
                 
                 // When
-                let (_, result) = parser.parse(Data())!
+                let result = parser.parse(Data()).value!
                 
                 // Then
-                expect(result) == "ABC"
+                expect(result.value) == "ABC"
             }
             
             it("returns nil when parser result is nil") {
@@ -34,7 +34,7 @@ class ParserMonadTest: QuickSpec {
                 let result = parser.parse(Data())
                 
                 // Then
-                expect(result).to(beNil())
+                expect(result.value).to(beNil())
             }
         }
         
@@ -47,10 +47,10 @@ class ParserMonadTest: QuickSpec {
                 }
                 
                 // When
-                let (_, result) = parser.parse(Data())!
+                let parsed = parser.parse(Data()).value!
                 
                 // Then
-                expect(result) == 1
+                expect(parsed.value) == 1
             }
             
             it("returns nil when parser result is nil") {
@@ -64,7 +64,7 @@ class ParserMonadTest: QuickSpec {
                 let result = parser.parse(Data())
                 
                 // Then
-                expect(result).to(beNil())
+                expect(result.value).to(beNil())
             }
             
             it("returns nil when flatMap result is nil") {
@@ -78,7 +78,7 @@ class ParserMonadTest: QuickSpec {
                 let result = parser.parse(Data())
                 
                 // Then
-                expect(result).to(beNil())
+                expect(result.value).to(beNil())
             }
         }
         
@@ -88,10 +88,10 @@ class ParserMonadTest: QuickSpec {
             it("discards right") {
                 let parser = Parsers.read(2) <* Parsers.read(3)
                 
-                let result = parser.parse(data)
+                let result = parser.parse(data).value!
                 
-                expect(result!.parsed) == Data(bytes: [0, 1])
-                expect(result!.remainder) == Data(bytes: [5, 6])
+                expect(result.value) == Data(bytes: [0, 1])
+                expect(result.remainder) == Data(bytes: [5, 6])
             }
         }
 
@@ -101,10 +101,10 @@ class ParserMonadTest: QuickSpec {
             it("discard left") {
                 let parser = Parsers.read(2) *> Parsers.read(3)
                 
-                let result = parser.parse(data)
+                let parsed = parser.parse(data).value!
                 
-                expect(result!.parsed) == Data(bytes: [2, 3, 4])
-                expect(result!.remainder) == Data(bytes: [5, 6])
+                expect(parsed.value) == Data(bytes: [2, 3, 4])
+                expect(parsed.remainder) == Data(bytes: [5, 6])
             }
         }
     }

@@ -33,8 +33,7 @@ extension RawField {
         
         //recursive generics are not supported, this could be a generic method in ParserProtocol
         return p.parse(input).flatMap { metaResult in
-            let (_, result) = metaResult
-            return result
+            return metaResult.value
         }
     }
     
@@ -47,12 +46,12 @@ extension RawField {
     }
     
     private static func read(length: UInt32, type: UInt8, data: [UInt8]) -> ParserResult<RawField> {
-        guard data.count >= Int(length) else { return nil }
+        guard data.count >= Int(length) else { return .failure(ParserError.error) }
         
         let remainder = Data(bytes: data.suffix(from: Int(length)))
         let parsed = RawField(typeCode: type, bytes: Array(data.prefix(Int(length))))
         
-        return (remainder, parsed)
+        return .success(Parsed(remainder: remainder, value: parsed))
     }
 }
 

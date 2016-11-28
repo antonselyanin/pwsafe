@@ -14,10 +14,10 @@ import Quick
 class ParsingTest: QuickSpec {
     override func spec() {
         let twoBytesReader: Parser<[UInt8]> = Parser { input in
-            guard input.count >= 2 else { return nil }
+            guard input.count >= 2 else { return .failure(ParserError.error) }
             let parsed: [UInt8] = Array(input.prefix(2))
             let remainder: Data = Data(input.suffix(from: 2))
-            return (remainder, parsed)
+            return .success(Parsed(remainder: remainder, value: parsed))
         }
         
         describe("reads bytes from data") {
@@ -26,20 +26,20 @@ class ParsingTest: QuickSpec {
             
             it("reads 3 bytes") {
                 // When
-                let result = Parsers.read(3).parse(data)!
+                let parsed = Parsers.read(3).parse(data).value!
                 
                 // Then
-                expect(result.remainder) == Data(bytes:[3, 4, 5, 6])
-                expect(result.parsed) == Data(bytes:[0, 1, 2])
+                expect(parsed.remainder) == Data(bytes:[3, 4, 5, 6])
+                expect(parsed.value) == Data(bytes:[0, 1, 2])
             }
             
             it("reads 0 bytes") {
                 // When
-                let result = Parsers.read(0).parse(data)!
+                let parsed = Parsers.read(0).parse(data).value!
                 
                 // Then
-                expect(result.remainder) == data
-                expect(result.parsed) == Data(bytes:[])
+                expect(parsed.remainder) == data
+                expect(parsed.value) == Data()
             }
 
             it("returns nil if not enough bytes") {
@@ -47,7 +47,7 @@ class ParsingTest: QuickSpec {
                 let result = Parsers.read(data.count + 1).parse(data)
                 
                 // Then
-                expect(result).to(beNil())
+                expect(result.value).to(beNil())
             }
         }
 
@@ -56,11 +56,11 @@ class ParsingTest: QuickSpec {
             
             it("returns bytes when equal to requested") {
                 // When
-                let result = Parsers.expect([0, 1, 2]).parse(data)!
+                let parsed = Parsers.expect([0, 1, 2]).parse(data).value!
                 
                 // Then
-                expect(result.remainder) == Data(bytes:[3, 4, 5, 6])
-                expect(result.parsed) == Data(bytes:[0, 1, 2])
+                expect(parsed.remainder) == Data(bytes:[3, 4, 5, 6])
+                expect(parsed.value) == Data(bytes:[0, 1, 2])
             }
             
             it("returns nil sequence don't match") {
@@ -68,7 +68,7 @@ class ParsingTest: QuickSpec {
                 let result = Parsers.expect([2, 1, 0]).parse(data)
                 
                 // Then
-                expect(result).to(beNil())
+                expect(result.value).to(beNil())
             }
         }
         
@@ -77,11 +77,11 @@ class ParsingTest: QuickSpec {
             
             it("returns bytes when equal to requested") {
                 // When
-                let result = Parsers.expect("PWS").parse(data)!
+                let parsed = Parsers.expect("PWS").parse(data).value!
                 
                 // Then
-                expect(result.remainder) == Data(bytes:[3, 4, 5, 6])
-                expect(result.parsed) == "PWS"
+                expect(parsed.remainder) == Data(bytes:[3, 4, 5, 6])
+                expect(parsed.value) == "PWS"
             }
             
             it("returns nil sequence don't match") {
@@ -89,7 +89,7 @@ class ParsingTest: QuickSpec {
                 let result = Parsers.expect("ABC").parse(data)
                 
                 // Then
-                expect(result).to(beNil())
+                expect(result.value).to(beNil())
             }
         }
         
@@ -98,25 +98,25 @@ class ParsingTest: QuickSpec {
             
             it("reads all") {
                 // When
-                let result = Parsers.readAll().parse(data)
+                let parsed = Parsers.readAll().parse(data).value!
                 
                 // Then
-                expect(result!.remainder) == Data(bytes:[])
-                expect(result!.parsed) == data
+                expect(parsed.remainder) == Data(bytes:[])
+                expect(parsed.value) == data
             }
             
             it("reads and leave last N bytes") {
                 // When
-                let result = Parsers.readAll(leave: 2).parse(data)
+                let parsed = Parsers.readAll(leave: 2).parse(data).value!
                 
                 // Then
-                expect(result!.remainder) == Data(bytes:[5, 6])
-                expect(result!.parsed) == Data(bytes: [0, 1, 2, 3, 4])
+                expect(parsed.remainder) == Data(bytes:[5, 6])
+                expect(parsed.value) == Data(bytes: [0, 1, 2, 3, 4])
             }
             
-            it("return nil if suffix is too small") {
+            it("returns error if suffix is too small") {
                 // When
-                let result = Parsers.readAll(leave: data.count + 1).parse(data)
+                let result = Parsers.readAll(leave: data.count + 1).parse(data).value
                 
                 // Then
                 expect(result).to(beNil())
@@ -128,11 +128,11 @@ class ParsingTest: QuickSpec {
 
             it("reads UInt32") {
                 // When
-                let result: ParserResult<UInt32> = Parsers.read().parse(data)
+                let parsed: Parsed<UInt32> = Parsers.read().parse(data).value!
                 
                 // Then
-                expect(result!.remainder) == Data(bytes: [0xFF])
-                expect(result!.parsed) == 0x01020304
+                expect(parsed.remainder) == Data(bytes: [0xFF])
+                expect(parsed.value) == 0x01020304
             }
             
             it("returns nil if not enough bytes") {
@@ -141,7 +141,7 @@ class ParsingTest: QuickSpec {
                     .read().parse(Data(bytes: [0x01]))
                 
                 // Then
-                expect(result).to(beNil())
+                expect(result.value).to(beNil())
             }
         }
         
@@ -151,10 +151,10 @@ class ParsingTest: QuickSpec {
                 let parser = Parser<Data>.pure(Data(bytes: [0x01, 0x02, 0x03]))
                 
                 // When
-                let result = parser.bytes.parse(Data())
+                let parsed = parser.bytes.parse(Data()).value!
                 
                 // Then
-                expect(result!.parsed) == [0x01, 0x02, 0x03]
+                expect(parsed.value) == [0x01, 0x02, 0x03]
             }
         }
         
@@ -163,14 +163,14 @@ class ParsingTest: QuickSpec {
             
             it("cuts required suffix") {
                 // When
-                let result = Parser<Data>
+                let parsed = Parser<Data>
                     .pure(data)
                     .cut(requiredSuffix: [5, 6])
-                    .parse(Data())
+                    .parse(Data()).value!
                 
                 // Then
-                expect(result!.remainder) == Data()
-                expect(result!.parsed) == Data(bytes: [0, 1, 2, 3, 4])
+                expect(parsed.remainder) == Data()
+                expect(parsed.value) == Data(bytes: [0, 1, 2, 3, 4])
             }
             
             it("returns nil when no suffix") {
@@ -181,7 +181,7 @@ class ParsingTest: QuickSpec {
                     .parse(Data())
                 
                 // Then
-                expect(result).to(beNil())
+                expect(result.value).to(beNil())
             }
         }
         
@@ -189,24 +189,24 @@ class ParsingTest: QuickSpec {
             it("returns array") {
                 // When
                 let parser = twoBytesReader.many
-                let result = parser.parse(Data(bytes: [0, 1, 2, 3, 4]))
+                let parsed = parser.parse(Data(bytes: [0, 1, 2, 3, 4])).value!
                 
                 // Then
-                expect(result!.parsed.count) == 2
-                expect(result!.parsed[0]) == [0, 1]
-                expect(result!.parsed[1]) == [2, 3]
+                expect(parsed.value.count) == 2
+                expect(parsed.value[0]) == [0, 1]
+                expect(parsed.value[1]) == [2, 3]
                 
-                expect(result!.remainder) == Data(bytes: [4])
+                expect(parsed.remainder) == Data(bytes: [4])
             }
             
             it("return empty if can't parse") {
                 // When
                 let parser = twoBytesReader.many
-                let result = parser.parse(Data(bytes: [1]))
+                let parsed = parser.parse(Data(bytes: [1])).value!
                 
                 // Then
-                expect(result!.parsed.count) == 0
-                expect(result!.remainder) == Data(bytes: [1])
+                expect(parsed.value.count) == 0
+                expect(parsed.remainder) == Data(bytes: [1])
             }
         }
         
@@ -216,21 +216,21 @@ class ParsingTest: QuickSpec {
             it("ensures that data is read in blocks of specified size") {
                 // When
                 let parser = twoBytesReader.aligned(blockSize: 3)
-                let result = parser.parse(data)
+                let parsed = parser.parse(data).value!
                 
                 // Then
-                expect(result!.remainder) == Data(bytes: [3, 4])
-                expect(result!.parsed) == [0, 1]
+                expect(parsed.remainder) == Data(bytes: [3, 4])
+                expect(parsed.value) == [0, 1]
             }
             
             it("doesn't align if reading already aligned") {
                 // When
                 let parser = twoBytesReader.aligned(blockSize: 2)
-                let result = parser.parse(data)
+                let parsed = parser.parse(data).value!
                 
                 // Then
-                expect(result!.remainder) == Data(bytes: [2, 3, 4])
-                expect(result!.parsed) == [0, 1]
+                expect(parsed.remainder) == Data(bytes: [2, 3, 4])
+                expect(parsed.value) == [0, 1]
             }
             
         }
