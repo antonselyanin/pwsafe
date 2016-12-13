@@ -49,6 +49,7 @@
 		3AD1BCF31BD2A95200288DA9 /* PwsafeStoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1BCF21BD2A95200288DA9 /* PwsafeStoring.swift */; };
 		3AD1BCF51BD2C99A00288DA9 /* PwsafeParsingInternalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1BCF41BD2C99A00288DA9 /* PwsafeParsingInternalTest.swift */; };
 		3AD1BCF71BD39FC400288DA9 /* PasswordRecordTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1BCF61BD39FC400288DA9 /* PasswordRecordTest.swift */; };
+		3AFDB13E1E00482C009FA9D9 /* UUIDExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDB13D1E00482C009FA9D9 /* UUIDExtension.swift */; };
 		3AFFBAE21BC1072C00F447F7 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFBAE11BC1072C00F447F7 /* ArrayExtension.swift */; };
 		3AFFBAE41BC1080B00F447F7 /* ArrayExtensionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFBAE31BC1080B00F447F7 /* ArrayExtensionTest.swift */; };
 		3AFFBAE71BC16F9A00F447F7 /* CipherBlockMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFBAE61BC16F9A00F447F7 /* CipherBlockMode.swift */; };
@@ -114,6 +115,7 @@
 		3AD1BCF21BD2A95200288DA9 /* PwsafeStoring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeStoring.swift; sourceTree = "<group>"; };
 		3AD1BCF41BD2C99A00288DA9 /* PwsafeParsingInternalTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeParsingInternalTest.swift; sourceTree = "<group>"; };
 		3AD1BCF61BD39FC400288DA9 /* PasswordRecordTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordRecordTest.swift; sourceTree = "<group>"; };
+		3AFDB13D1E00482C009FA9D9 /* UUIDExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UUIDExtension.swift; sourceTree = "<group>"; };
 		3AFFBAE11BC1072C00F447F7 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		3AFFBAE31BC1080B00F447F7 /* ArrayExtensionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTest.swift; sourceTree = "<group>"; };
 		3AFFBAE61BC16F9A00F447F7 /* CipherBlockMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CipherBlockMode.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				3A7E7FB21DE1F9EB007B9482 /* Curry.swift */,
 				3A7E7FB41DE1FA6C007B9482 /* Operators.swift */,
 				3A7E7FBF1DE9E4DF007B9482 /* Result.swift */,
+				3AFDB13D1E00482C009FA9D9 /* UUIDExtension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -457,6 +460,7 @@
 				3AFFBAE71BC16F9A00F447F7 /* CipherBlockMode.swift in Sources */,
 				3AA5E6D01BB994E6003C164D /* ValueSerializer.swift in Sources */,
 				3AA5E6D41BB994E6003C164D /* PasswordRecord.swift in Sources */,
+				3AFDB13E1E00482C009FA9D9 /* UUIDExtension.swift in Sources */,
 				3AFFBAE21BC1072C00F447F7 /* ArrayExtension.swift in Sources */,
 				3A20A8711BCBC54800241946 /* ByteUtils.swift in Sources */,
 				3A7017FB1DCE2728002CF67A /* RawField.swift in Sources */,

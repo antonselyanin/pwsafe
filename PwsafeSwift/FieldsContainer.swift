@@ -8,17 +8,17 @@
 
 import Foundation
 
-struct FieldsContainer<RecordType> {
-    var fields: [RawField]
+internal struct FieldsContainer<RecordType> {
+    internal var fields: [RawField]
     
-    func valueForKey<ValueType>(_ key: FieldKey<RecordType, ValueType>) -> ValueType? {
+    internal func valueForKey<ValueType>(_ key: FieldKey<RecordType, ValueType>) -> ValueType? {
         return fields.lazy
             .filter({ $0.typeCode == key.code })
             .flatMap({ key.serializer.fromByteArray($0.bytes) })
             .first
     }
     
-    mutating func setValue<ValueType>(_ value: ValueType?, forKey key: FieldKey<RecordType, ValueType>) {
+    internal mutating func setValue<ValueType>(_ value: ValueType?, forKey key: FieldKey<RecordType, ValueType>) {
         let index = fields.index(where: { $0.typeCode == key.code })
         
         if let value = value {

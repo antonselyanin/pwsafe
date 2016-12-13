@@ -90,13 +90,18 @@ class PasswordRecordTest: QuickSpec {
         }
         
         describe("PasswordRecord: RawFieldsArrayConvertible") {
-            it("should add UUID to rawFields") {
+            it("adds UUID to rawFields") {
+                // Given
                 let uuid = UUID()
-                let uuidRawField = RawField(
-                    typeCode: Password.uuid.code,
-                    bytes: Password.uuid.serializer.toByteArray(uuid))
+                let uuidBytes = Password.uuid.serializer.toByteArray(uuid)
+                let uuidRawField = RawField(typeCode: Password.uuid.code, bytes: uuidBytes)
                 let record = PasswordRecord(rawFields: [uuidRawField])
-                //todo: expect uuid in rawFields
+                
+                // When
+                let uuidField = record.rawFields.filter({ $0.typeCode == Password.uuid.code }).first!
+                
+                // Then
+                expect(uuidField.bytes) == uuidBytes
             }
         }
     }

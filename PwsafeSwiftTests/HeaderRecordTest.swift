@@ -15,16 +15,12 @@ import PwsafeSwift
 class HeaderRecordTest: QuickSpec {
     override func spec() {
         describe("HeaderRecord") {
-            var record: HeaderRecord!
+            var header: HeaderRecord!
             
             beforeEach {
-                record = HeaderRecord(uuid: UUID())
+                header = HeaderRecord()
             }
             
-            //todo: clean up
-//            it("should be initialized with default uuid") {
-//                expect(record.uuid).notTo(beNil())
-//            }
         }
     }
 }

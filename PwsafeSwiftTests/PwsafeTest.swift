@@ -41,7 +41,10 @@ class PwsafeTest: QuickSpec {
         describe("Pwsafe creation") {
             it("should create new structure with required fields") {
                 let pwsafe = Pwsafe()
-                expect(pwsafe.header.uuid).notTo(beNil())
+                let header = pwsafe.header
+                
+                expect(header.uuid).notTo(beNil())
+                expect(header.version) == Pwsafe.defaultFormatVersion
             }
         }
         

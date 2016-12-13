@@ -49,7 +49,7 @@ public struct Record<Type: RecordType>: RecordProtocol {
         self.fields = FieldsContainer(fields: [])
     }
     
-    init(rawFields: [RawField]) {
+    public init(rawFields: [RawField]) {
         var fields = FieldsContainer<Type>(fields: rawFields)
         self.uuid = fields.valueForKey(Type.uuid) ?? UUID()
         fields.setValue(nil, forKey: Type.uuid)
