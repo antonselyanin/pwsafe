@@ -34,32 +34,10 @@ Yubico                      0x12        Text                         [13]
 End of Entry                0xff        [empty]       Y              [17]
 */
 
-//TODO: remove
-//enum PwsafeHeaderFieldType: UInt8 {
-//    case version = 0x00
-//    case uuid = 0x01
-//    case nonDefaultPreferences = 0x03
-//    case treeDisplayStatus = 0x04
-//    case whoPerformedLastSave = 0x05 // deprecated by the specification
-//    case whatPerformedLastSave = 0x06
-//    case lastSavedByUser = 0x07
-//    case lastSavedOnHost = 0x08
-//    case databaseName = 0x09
-//    case databaseDescription = 0x0a
-//    case databaseFilters = 0x0b
-//    //case Reserved1 = 0x0c
-//    //case Reserved2 = 0x0d
-//    //case Reserved3 = 0x0e
-//    case recentlyUsedEntries = 0x0f
-//    case namedPasswordPolicies = 0x10
-//    case emptyGroups = 0x11
-//    case yubico = 0x12
-//}
-
 public enum Header: RecordType {
     public static let version = key(0x00, ValueSerializers.uint16Values)
     public static let uuid = key(0x01, ValueSerializers.uuids)
-    
+    public static let timestampOfLastSave = key(0x04, ValueSerializers.date)
     public static let whatPerformedLastSave = key(0x06, ValueSerializers.strings)
     public static let databaseName = key(0x09, ValueSerializers.strings)
     public static let databaseDescription = key(0x0a, ValueSerializers.strings)
@@ -72,6 +50,15 @@ public extension RecordProtocol where Type == Header {
         }
         set {
             setValue(newValue, forKey: Header.version)
+        }
+    }
+    
+    public var timestampOfLastSave: Date? {
+        get {
+            return value(forKey: Header.timestampOfLastSave)
+        }
+        set {
+            setValue(newValue, forKey: Header.timestampOfLastSave)
         }
     }
     

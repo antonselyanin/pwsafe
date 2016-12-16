@@ -8,6 +8,7 @@
 
 import Foundation
 
+//TODO: use special protocol for serializing?
 
 public struct ValueSerializer<Value> {
     public let toByteArray: (Value) -> [UInt8]
@@ -16,30 +17,57 @@ public struct ValueSerializer<Value> {
 
 public enum ValueSerializers {
     public static let strings: ValueSerializer<String> = ValueSerializer(
-        toByteArray: stringToByteArray,
-        fromByteArray: stringFromByteArray)
+        toByteArray: String.toByteArray,
+        fromByteArray: String.fromByteArray)
 
     public static let uuids: ValueSerializer<UUID> = ValueSerializer(
         toByteArray: UUID.toBytes,
         fromByteArray: UUID.init(bytes:))
     
-    public static let uint16Values: ValueSerializer<UInt16> = ValueSerializer(
-        toByteArray: byteArrayConvertiblesToByteArray,
-        fromByteArray: byteArrayConvertiblesFromByteArray)
+    /*
+     
+     3.1.3 Time
+     Timestamps are stored as 32 bit, little endian, unsigned integers,
+     representing the number of seconds since Midnight, January 1, 1970, GMT.
+     (This is equivalent to the time_t type on Windows and POSIX. On the
+     Macintosh, the value needs to be adjusted by the constant value 2082844800
+     to account for the different epoch of its time_t type.)
+     Note that future versions of this format may allow time to be
+     specified in 64 bits as well.
+
+     */
+    
+    public static let date: ValueSerializer<Date> = ValueSerializer(
+        toByteArray: Date.toByteArray,
+        fromByteArray: Date.fromByteArray)
+    
+    public static let uint16Values: ValueSerializer<UInt16> = ValueSerializers.byteArrayConvertibles()
+    
+    internal static func byteArrayConvertibles<T: ByteArrayConvertible>() -> ValueSerializer<T> {
+        return ValueSerializer(
+            toByteArray: { $0.littleEndianBytes() },
+            fromByteArray: { T(littleEndianBytes: $0) })
+    }
 }
 
-private func byteArrayConvertiblesToByteArray<T: ByteArrayConvertible>(_ value: T) -> [UInt8] {
-    return value.littleEndianBytes()
+private extension String {
+    static func toByteArray(_ value: String) -> [UInt8] {
+        return value.utf8Bytes()
+    }
+
+    static func fromByteArray(_ array: [UInt8]) -> String? {
+        return String(bytes: array, encoding: .utf8)
+    }
 }
 
-private func byteArrayConvertiblesFromByteArray<T: ByteArrayConvertible>(_ array: [UInt8]) -> T? {
-    return T(littleEndianBytes: array)
-}
-
-private func stringToByteArray(_ value: String) -> [UInt8] {
-    return value.utf8Bytes()
-}
-
-private func stringFromByteArray(_ array: [UInt8]) -> String? {
-    return String(bytes: array, encoding: .utf8)
+private extension Date {
+    static func toByteArray(_ value: Date) -> [UInt8] {
+        let uint32 = UInt32(min(value.timeIntervalSince1970, TimeInterval(UInt32.max)))
+        return uint32.littleEndianBytes()
+    }
+    
+    static func fromByteArray(_ array: [UInt8]) -> Date? {
+        let seconds = TimeInterval(UInt32(littleEndianBytes: array))
+        return Date(timeIntervalSince1970: seconds)
+    }
 }
