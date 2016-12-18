@@ -40,108 +40,28 @@ Entry keyboard shortcut     0x19        4 bytes       Y              [20]
 End of Entry                0xff        [empty]       Y              [21]
 */
 
-//TODO: remove
-//public enum PwsafePasswordFieldType: UInt8 {
-//    case uuid = 0x01
-//    case group = 0x02
-//    case title = 0x03
-//    case username = 0x04
-//    case notes = 0x05
-//    case password = 0x06
-//    case creationTime = 0x07
-//    case passwordModificationTime = 0x08
-//    case lastAccessTime = 0x09
-//    case passwordExpiryTime = 0x0a
-//    case reserved = 0x0b
-//    case lastModificationTime = 0x0c
-//    case url = 0x0d
-//    case autotype = 0x0e
-//    case passwordHistory = 0x0f
-//    case passwordPolicy = 0x10
-//    case passwordExpiryInterval = 0x11
-//    case runCommand = 0x12
-//    case doubleClickAction = 0x13
-//    case emailAddress = 0x14
-//    case protectedEntry = 0x15
-//    case ownSymbolsForPassword = 0x16
-//    case shiftDoubleClickAction = 0x17
-//    case passwordPolicyName = 0x18
-//    case entryKeyboardShortcut = 0x19
-//}
-
 public enum Password: RecordType {
-    public static let uuid = key(0x01, ValueSerializers.uuids)
-    public static let group = key(0x02, ValueSerializers.strings)
-    public static let title = key(0x03, ValueSerializers.strings)
-    public static let username = key(0x04, ValueSerializers.strings)
-    public static let notes = key(0x05, ValueSerializers.strings)
-    public static let password = key(0x06, ValueSerializers.strings)
     
-    public static let url = key(0x0d, ValueSerializers.strings)
-    public static let email = key(0x14, ValueSerializers.strings)
-}
-
-public extension RecordProtocol where Type == Password {
-    public var group: String? {
-        get {
-            return value(forKey: Password.group)
-        }
-        set {
-            setValue(newValue, forKey: Password.group)
-        }
-    }
+    public static let uuid: FieldKey<Password, UUID> = key(0x01, ValueSerializers.uuid)
     
-    public var title: String? {
-        get {
-            return value(forKey: Password.title)
-        }
-        set {
-            setValue(newValue, forKey: Password.title)
-        }
-    }
+    /// sourcery: type = String
+    public static let group: FieldKey<Password, String> = key(0x02, ValueSerializers.strings)
     
-    public var username: String? {
-        get {
-            return value(forKey: Password.username)
-        }
-        set {
-            setValue(newValue, forKey: Password.username)
-        }
-    }
-
-    public var notes: String? {
-        get {
-            return value(forKey: Password.notes)
-        }
-        set {
-            setValue(newValue, forKey: Password.notes)
-        }
-    }
-
-    public var password: String? {
-        get {
-            return value(forKey: Password.password)
-        }
-        set {
-            setValue(newValue, forKey: Password.password)
-        }
-    }
+    /// sourcery: type = String
+    public static let title: FieldKey<Password, String> = key(0x03, ValueSerializers.strings)
     
-    public var url: String? {
-        get {
-            return value(forKey: Password.url)
-        }
-        set {
-            setValue(newValue, forKey: Password.url)
-        }
-    }
+    /// sourcery: type = String
+    public static let username: FieldKey<Password, String> = key(0x04, ValueSerializers.strings)
     
-    public var email: String? {
-        get {
-            return value(forKey: Password.email)
-        }
-        set {
-            setValue(newValue, forKey: Password.email)
-        }
-    }
+    /// sourcery: type = String
+    public static let notes: FieldKey<Password, String> = key(0x05, ValueSerializers.strings)
+    
+    /// sourcery: type = String
+    public static let password: FieldKey<Password, String> = key(0x06, ValueSerializers.strings)
+    
+    /// sourcery: type = String
+    public static let url: FieldKey<Password, String> = key(0x0d, ValueSerializers.strings)
+    
+    /// sourcery: type = String
+    public static let email: FieldKey<Password, String> = key(0x14, ValueSerializers.strings)
 }

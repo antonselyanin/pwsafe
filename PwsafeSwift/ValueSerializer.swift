@@ -20,7 +20,7 @@ public enum ValueSerializers {
         toByteArray: String.toByteArray,
         fromByteArray: String.fromByteArray)
 
-    public static let uuids: ValueSerializer<UUID> = ValueSerializer(
+    public static let uuid: ValueSerializer<UUID> = ValueSerializer(
         toByteArray: UUID.toBytes,
         fromByteArray: UUID.init(bytes:))
     

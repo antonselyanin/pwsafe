@@ -35,39 +35,21 @@ End of Entry                0xff        [empty]       Y              [17]
 */
 
 public enum Header: RecordType {
-    public static let version = key(0x00, ValueSerializers.uint16Values)
-    public static let uuid = key(0x01, ValueSerializers.uuids)
-    public static let timestampOfLastSave = key(0x04, ValueSerializers.date)
-    public static let whatPerformedLastSave = key(0x06, ValueSerializers.strings)
-    public static let databaseName = key(0x09, ValueSerializers.strings)
-    public static let databaseDescription = key(0x0a, ValueSerializers.strings)
-}
+    
+    public static let uuid: FieldKey<Header, UUID> = key(0x01, ValueSerializers.uuid)
 
-public extension RecordProtocol where Type == Header {
-    public var version: UInt16? {
-        get {
-            return value(forKey: Header.version)
-        }
-        set {
-            setValue(newValue, forKey: Header.version)
-        }
-    }
+    /// sourcery: type = UInt16
+    public static let version: FieldKey<Header, UInt16> = key(0x00, ValueSerializers.uint16Values)
+
+    /// sourcery: type = Date
+    public static let timestampOfLastSave: FieldKey<Header, Date> = key(0x04, ValueSerializers.date)
+
+    /// sourcery: type = String
+    public static let whatPerformedLastSave: FieldKey<Header, String> = key(0x06, ValueSerializers.strings)
     
-    public var timestampOfLastSave: Date? {
-        get {
-            return value(forKey: Header.timestampOfLastSave)
-        }
-        set {
-            setValue(newValue, forKey: Header.timestampOfLastSave)
-        }
-    }
+    /// sourcery: type = String
+    public static let databaseName: FieldKey<Header, String> = key(0x09, ValueSerializers.strings)
     
-    public var databaseName: String? {
-        get {
-            return value(forKey: Header.databaseName)
-        }
-        set {
-            setValue(newValue, forKey: Header.databaseName)
-        }
-    }
+    /// sourcery: type = String
+    public static let databaseDescription: FieldKey<Header, String> = key(0x0a, ValueSerializers.strings)
 }

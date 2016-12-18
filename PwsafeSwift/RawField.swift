@@ -11,11 +11,6 @@ import Foundation
 public struct RawField {
     public let typeCode: UInt8
     public let bytes: [UInt8]
-    
-    public init(typeCode: UInt8, bytes: [UInt8]) {
-        self.typeCode = typeCode
-        self.bytes = bytes
-    }
 }
 
 extension RawField {
@@ -31,7 +26,7 @@ extension RawField {
             <*> Parsers.read() // type
             <*> Parsers.readAll().bytes // data
         
-        //recursive generics are not supported, this could be a generic method in ParserProtocol
+        //"nested" generics are not supported yet, this could be a generic method in ParserProtocol
         return p.parse(input).flatMap { metaResult in
             return metaResult.value
         }

@@ -15,7 +15,7 @@ class FieldValueSerializersTest: QuickSpec {
     override func spec() {
         describe("UUID serializer") {
             it("should extract UUID from bytes") {
-                let serializer = ValueSerializers.uuids
+                let serializer = ValueSerializers.uuid
                 let expectedValue = UUID(uuidString: "12121212-1212-1212-1212-121212121212")!
                 let expectedBytes = [UInt8](repeating: 0x12, count: 16)
                 
@@ -27,7 +27,7 @@ class FieldValueSerializersTest: QuickSpec {
             }
             
             it("should fill with zeros if not enough bytes") {
-                let serializer = ValueSerializers.uuids
+                let serializer = ValueSerializers.uuid
                 let expectedValue = UUID(uuidString: "12121212-0000-0000-0000-000000000000")!
                 let inputBytes = [UInt8](repeating: 0x12, count: 4)
                 let expectedBytes = inputBytes + [UInt8](repeating: 0, count: 12)

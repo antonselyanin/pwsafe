@@ -1,0 +1,14 @@
+public extension RecordProtocol where Type == Password {
+{% for param in type.Password.staticVariables %}
+	{% if param.annotations.type %}
+    public var {{ param.name }}: {{ param.annotations.type }}? {
+        get {
+            return value(forKey: Password.{{ param.name }})
+        }
+        set {
+            setValue(newValue, forKey: Password.{{ param.name }})
+        }
+    }
+    {% endif %}
+{% endfor %}
+}

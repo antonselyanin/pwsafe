@@ -1,0 +1,14 @@
+public extension RecordProtocol where Type == Header {
+{% for param in type.Header.staticVariables %}
+    {% if param.annotations.type %}
+    public var {{ param.name }}: {{ param.annotations.type }}? {
+        get {
+            return value(forKey: Header.{{ param.name }})
+        }
+        set {
+            setValue(newValue, forKey: Header.{{ param.name }})
+        }
+    }
+    {% endif %}
+{% endfor %}
+}
