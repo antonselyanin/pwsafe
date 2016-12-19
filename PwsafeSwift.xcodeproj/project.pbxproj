@@ -18,8 +18,6 @@
 		3A2AA15C1B6E0F2E009E0422 /* PwsafeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2AA15B1B6E0F2E009E0422 /* PwsafeTest.swift */; };
 		3A3CDADC1E06D7510019EEDF /* RecordFields.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3CDADA1E06D7510019EEDF /* RecordFields.generated.swift */; };
 		3A3CDAE11E06D75A0019EEDF /* RecordFields.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 3A3CDADF1E06D75A0019EEDF /* RecordFields.stencil */; };
-		3A3CDAE31E06D8980019EEDF /* HeaderFields.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 3A3CDAE21E06D8980019EEDF /* HeaderFields.stencil */; };
-		3A3CDAE51E06D8E00019EEDF /* HeaderFields.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3CDAE41E06D8E00019EEDF /* HeaderFields.generated.swift */; };
 		3A5E0BF11B9C95520026D8EE /* test.psafe3 in Resources */ = {isa = PBXBuildFile; fileRef = 3A5E0BF01B9C80DA0026D8EE /* test.psafe3 */; };
 		3A686C851C19DD9400247D42 /* FieldsContainerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A686C841C19DD9400247D42 /* FieldsContainerTest.swift */; };
 		3A6A39C41C17265E00696EC6 /* HeaderRecordTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6A39C31C17265E00696EC6 /* HeaderRecordTest.swift */; };
@@ -85,8 +83,6 @@
 		3A2AA15B1B6E0F2E009E0422 /* PwsafeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeTest.swift; sourceTree = "<group>"; };
 		3A3CDADA1E06D7510019EEDF /* RecordFields.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordFields.generated.swift; sourceTree = "<group>"; };
 		3A3CDADF1E06D75A0019EEDF /* RecordFields.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RecordFields.stencil; sourceTree = "<group>"; };
-		3A3CDAE21E06D8980019EEDF /* HeaderFields.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HeaderFields.stencil; sourceTree = "<group>"; };
-		3A3CDAE41E06D8E00019EEDF /* HeaderFields.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderFields.generated.swift; sourceTree = "<group>"; };
 		3A556A621B73B1EE00E45151 /* libcommonCrypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcommonCrypto.tbd; path = usr/lib/system/libcommonCrypto.tbd; sourceTree = SDKROOT; };
 		3A556A781B73B5A400E45151 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3A5E0BF01B9C80DA0026D8EE /* test.psafe3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.psafe3; sourceTree = "<group>"; };
@@ -176,7 +172,6 @@
 		3A3CDAD81E06D7510019EEDF /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-				3A3CDAE41E06D8E00019EEDF /* HeaderFields.generated.swift */,
 				3A3CDADA1E06D7510019EEDF /* RecordFields.generated.swift */,
 			);
 			path = Generated;
@@ -186,7 +181,6 @@
 			isa = PBXGroup;
 			children = (
 				3A3CDADF1E06D75A0019EEDF /* RecordFields.stencil */,
-				3A3CDAE21E06D8980019EEDF /* HeaderFields.stencil */,
 			);
 			path = Templates;
 			sourceTree = "<group>";
@@ -433,7 +427,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A3CDAE31E06D8980019EEDF /* HeaderFields.stencil in Resources */,
 				3A3CDAE11E06D75A0019EEDF /* RecordFields.stencil in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,7 +460,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A3CDAE51E06D8E00019EEDF /* HeaderFields.generated.swift in Sources */,
 				3A20A86F1BCBC2E400241946 /* Twofish.swift in Sources */,
 				3A3CDADC1E06D7510019EEDF /* RecordFields.generated.swift in Sources */,
 				3A20A86E1BCBC2E400241946 /* TwofishTables.swift in Sources */,
