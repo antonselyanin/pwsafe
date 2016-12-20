@@ -50,28 +50,29 @@ import Foundation
  End of Entry                0xff        [empty]       Y              [28]
 */
 
+public typealias PasswordKey<FieldType> = FieldKey<Password, FieldType>
+
 public enum Password: RecordType {
-    
-    public static let uuid: FieldKey<Password, UUID> = key(0x01, ValueSerializers.uuid)
-    
-    /// sourcery: type = String
-    public static let group: FieldKey<Password, String> = key(0x02, ValueSerializers.strings)
+    public static let uuid: PasswordKey<UUID> = key(0x01, ValueSerializers.uuid)
     
     /// sourcery: type = String
-    public static let title: FieldKey<Password, String> = key(0x03, ValueSerializers.strings)
+    public static let group: PasswordKey<String> = key(0x02, ValueSerializers.strings)
     
     /// sourcery: type = String
-    public static let username: FieldKey<Password, String> = key(0x04, ValueSerializers.strings)
+    public static let title: PasswordKey<String> = key(0x03, ValueSerializers.strings)
     
     /// sourcery: type = String
-    public static let notes: FieldKey<Password, String> = key(0x05, ValueSerializers.strings)
+    public static let username: PasswordKey<String> = key(0x04, ValueSerializers.strings)
     
     /// sourcery: type = String
-    public static let password: FieldKey<Password, String> = key(0x06, ValueSerializers.strings)
+    public static let notes: PasswordKey<String> = key(0x05, ValueSerializers.strings)
     
     /// sourcery: type = String
-    public static let url: FieldKey<Password, String> = key(0x0d, ValueSerializers.strings)
+    public static let password: PasswordKey<String> = key(0x06, ValueSerializers.strings)
     
     /// sourcery: type = String
-    public static let email: FieldKey<Password, String> = key(0x14, ValueSerializers.strings)
+    public static let url: PasswordKey<String> = key(0x0d, ValueSerializers.strings)
+    
+    /// sourcery: type = String
+    public static let email: PasswordKey<String> = key(0x14, ValueSerializers.strings)
 }

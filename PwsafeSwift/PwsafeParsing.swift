@@ -25,12 +25,13 @@ public extension Pwsafe {
         
         self.header = HeaderRecord(rawFields: headerFields)
         
-        self.passwordRecords = pwsafeRecords[1..<pwsafeRecords.count]
+        self.passwordRecords = pwsafeRecords
+            .dropFirst()
             .map(PasswordRecord.init(rawFields:))
     }
 }
 
-func decryptPwsafeRecords(_ pwsafe: EncryptedPwsafe, password: String) throws -> [[RawField]] {
+internal func decryptPwsafeRecords(_ pwsafe: EncryptedPwsafe, password: String) throws -> [[RawField]] {
     let stretchedKey = stretchKey(password.utf8Bytes(),
         salt: pwsafe.salt,
         iterations: Int(pwsafe.iter + 1)) // todo: why +1 ?????
@@ -65,7 +66,7 @@ func decryptPwsafeRecords(_ pwsafe: EncryptedPwsafe, password: String) throws ->
     return pwsafeRecords
 }
 
-func parseRawPwsafeRecords(_ data: [UInt8]) throws -> [[RawField]] {
+internal func parseRawPwsafeRecords(_ data: [UInt8]) throws -> [[RawField]] {
     guard let result = RawField.allFieldsParser.parse(Data(bytes: data)).value?.value else {
         throw PwsafeError.corruptedData
     }
@@ -73,11 +74,11 @@ func parseRawPwsafeRecords(_ data: [UInt8]) throws -> [[RawField]] {
     return result
 }
 
-func stretchKey(_ password: [UInt8], salt: [UInt8], iterations: Int) -> [UInt8] {
+internal func stretchKey(_ password: [UInt8], salt: [UInt8], iterations: Int) -> [UInt8] {
     return sha256(password + salt, iterations: iterations)
 }
 
-func sha256(_ input: [UInt8], iterations: Int = 1) -> [UInt8] {
+internal func sha256(_ input: [UInt8], iterations: Int = 1) -> [UInt8] {
     //todo: check CC error? status?
     
     var inputData = input

@@ -35,22 +35,27 @@ import Foundation
  End of Entry                0xff        [empty]       Y              [17]
 */
 
+public typealias HeaderKey<FieldType> = FieldKey<Header, FieldType>
+
 public enum Header: RecordType {
     
-    public static let uuid: FieldKey<Header, UUID> = key(0x01, ValueSerializers.uuid)
+    public static let uuid: HeaderKey<UUID> = key(0x01, ValueSerializers.uuid)
 
     /// sourcery: type = UInt16
-    public static let version: FieldKey<Header, UInt16> = key(0x00, ValueSerializers.uint16Values)
+    public static let version: HeaderKey<UInt16> = key(0x00, ValueSerializers.uint16Values)
 
     /// sourcery: type = Date
-    public static let timestampOfLastSave: FieldKey<Header, Date> = key(0x04, ValueSerializers.date)
+    public static let timestampOfLastSave: HeaderKey<Date> = key(0x04, ValueSerializers.date)
 
     /// sourcery: type = String
-    public static let whatPerformedLastSave: FieldKey<Header, String> = key(0x06, ValueSerializers.strings)
+    public static let whoPerformedLastSave: HeaderKey<String> = key(0x05, ValueSerializers.strings)
     
     /// sourcery: type = String
-    public static let databaseName: FieldKey<Header, String> = key(0x09, ValueSerializers.strings)
+    public static let whatPerformedLastSave: HeaderKey<String> = key(0x06, ValueSerializers.strings)
     
     /// sourcery: type = String
-    public static let databaseDescription: FieldKey<Header, String> = key(0x0a, ValueSerializers.strings)
+    public static let databaseName: HeaderKey<String> = key(0x09, ValueSerializers.strings)
+    
+    /// sourcery: type = String
+    public static let databaseDescription: HeaderKey<String> = key(0x0a, ValueSerializers.strings)
 }

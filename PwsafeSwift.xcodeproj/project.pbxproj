@@ -18,6 +18,8 @@
 		3A2AA15C1B6E0F2E009E0422 /* PwsafeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2AA15B1B6E0F2E009E0422 /* PwsafeTest.swift */; };
 		3A3CDADC1E06D7510019EEDF /* RecordFields.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3CDADA1E06D7510019EEDF /* RecordFields.generated.swift */; };
 		3A3CDAE11E06D75A0019EEDF /* RecordFields.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 3A3CDADF1E06D75A0019EEDF /* RecordFields.stencil */; };
+		3A3CDAE71E082C0D0019EEDF /* SafeUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3CDAE61E082C0D0019EEDF /* SafeUpdater.swift */; };
+		3A3CDAE91E096AF30019EEDF /* SafeUpdaterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3CDAE81E096AF30019EEDF /* SafeUpdaterTest.swift */; };
 		3A5E0BF11B9C95520026D8EE /* test.psafe3 in Resources */ = {isa = PBXBuildFile; fileRef = 3A5E0BF01B9C80DA0026D8EE /* test.psafe3 */; };
 		3A686C851C19DD9400247D42 /* FieldsContainerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A686C841C19DD9400247D42 /* FieldsContainerTest.swift */; };
 		3A6A39C41C17265E00696EC6 /* HeaderRecordTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6A39C31C17265E00696EC6 /* HeaderRecordTest.swift */; };
@@ -83,6 +85,8 @@
 		3A2AA15B1B6E0F2E009E0422 /* PwsafeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeTest.swift; sourceTree = "<group>"; };
 		3A3CDADA1E06D7510019EEDF /* RecordFields.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordFields.generated.swift; sourceTree = "<group>"; };
 		3A3CDADF1E06D75A0019EEDF /* RecordFields.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RecordFields.stencil; sourceTree = "<group>"; };
+		3A3CDAE61E082C0D0019EEDF /* SafeUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeUpdater.swift; sourceTree = "<group>"; };
+		3A3CDAE81E096AF30019EEDF /* SafeUpdaterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeUpdaterTest.swift; sourceTree = "<group>"; };
 		3A556A621B73B1EE00E45151 /* libcommonCrypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcommonCrypto.tbd; path = usr/lib/system/libcommonCrypto.tbd; sourceTree = SDKROOT; };
 		3A556A781B73B5A400E45151 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3A5E0BF01B9C80DA0026D8EE /* test.psafe3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.psafe3; sourceTree = "<group>"; };
@@ -250,6 +254,7 @@
 				3A9CCC271BB7F6710032BF26 /* PasswordRecord.swift */,
 				3A9D30BD1BAF10D4009A0330 /* PwsafeParsing.swift */,
 				3AD1BCF21BD2A95200288DA9 /* PwsafeStoring.swift */,
+				3A3CDAE61E082C0D0019EEDF /* SafeUpdater.swift */,
 				3A8D2CA21B691AE50030494F /* Info.plist */,
 				3AA5E6BD1BB994BA003C164D /* PwsafeSwift.h */,
 			);
@@ -269,6 +274,7 @@
 				3AD1BCF61BD39FC400288DA9 /* PasswordRecordTest.swift */,
 				3A6A39C31C17265E00696EC6 /* HeaderRecordTest.swift */,
 				3A686C841C19DD9400247D42 /* FieldsContainerTest.swift */,
+				3A3CDAE81E096AF30019EEDF /* SafeUpdaterTest.swift */,
 				3A8D2CAD1B691AE50030494F /* Info.plist */,
 			);
 			path = PwsafeSwiftTests;
@@ -442,6 +448,7 @@
 				3A9441921BA5A42B00B00514 /* IntegerTypeUtilitiesTest.swift in Sources */,
 				3A1ADF161BB464540091C376 /* FieldValueSerializersTest.swift in Sources */,
 				3AD1BCF71BD39FC400288DA9 /* PasswordRecordTest.swift in Sources */,
+				3A3CDAE91E096AF30019EEDF /* SafeUpdaterTest.swift in Sources */,
 				3AFFBAE41BC1080B00F447F7 /* ArrayExtensionTest.swift in Sources */,
 				3A686C851C19DD9400247D42 /* FieldsContainerTest.swift in Sources */,
 				3A73FCED1DEA94A900AECE5C /* ResultTest.swift in Sources */,
@@ -478,6 +485,7 @@
 				3A7E7FC01DE9E4DF007B9482 /* Result.swift in Sources */,
 				3A7E7FB01DE07BB8007B9482 /* Parser.swift in Sources */,
 				3AA5E6CC1BB994E6003C164D /* BlockWriter.swift in Sources */,
+				3A3CDAE71E082C0D0019EEDF /* SafeUpdater.swift in Sources */,
 				3AA5E6D11BB994E6003C164D /* Pwsafe.swift in Sources */,
 				3AA5E6D31BB994E6003C164D /* PwsafeParsing.swift in Sources */,
 				3A7E7FB51DE1FA6C007B9482 /* Operators.swift in Sources */,

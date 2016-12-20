@@ -10,6 +10,7 @@ import Foundation
 
 public struct Pwsafe {
     public static let defaultFormatVersion: UInt16 = 0x030d
+    public static let defaultSaver: String = "PwsafeKit library for Swift"
     
     public internal(set) var header: HeaderRecord
     public internal(set) var passwordRecords: [PasswordRecord]
@@ -17,12 +18,7 @@ public struct Pwsafe {
     public init(header: HeaderRecord = HeaderRecord(uuid: UUID()),
                 passwordRecords: [PasswordRecord] = []) {
         
-        var validatedHeader = header
-        if validatedHeader.version == nil {
-            validatedHeader.version = Pwsafe.defaultFormatVersion
-        }
-        
-        self.header = validatedHeader
+        self.header = header
         self.passwordRecords = passwordRecords
     }
     

@@ -29,6 +29,17 @@ public extension RecordProtocol where Type == Header {
         
     
         
+    public var whoPerformedLastSave: String? {
+        get {
+            return value(forKey: Header.whoPerformedLastSave)
+        }
+        set {
+            setValue(newValue, forKey: Header.whoPerformedLastSave)
+        }
+    }
+        
+    
+        
     public var whatPerformedLastSave: String? {
         get {
             return value(forKey: Header.whatPerformedLastSave)

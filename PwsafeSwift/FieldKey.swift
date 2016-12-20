@@ -11,9 +11,10 @@ import Foundation
 public struct FieldKey<RecordType, Value> {
     public let code: UInt8
     public let serializer: ValueSerializer<Value>
-    
-    public init(code: UInt8, serializer: ValueSerializer<Value>) {
-        self.code = code
-        self.serializer = serializer
-    }
 }
+
+public struct ListFieldKey<RecordType, Value> {
+    public let code: UInt8
+    public let serializer: ValueSerializer<Value>
+}
+

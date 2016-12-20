@@ -33,4 +33,16 @@ internal struct FieldsContainer<RecordType> {
             fields.remove(at: index)
         }
     }
+    
+    internal func values<ValueType>(forKey key: ListFieldKey<RecordType, ValueType>) -> [ValueType] {
+        fatalError()
+    }
+    
+    internal mutating func add<ValueType>(listValue: ValueType, forKey key: ListFieldKey<RecordType, ValueType>) {
+        fatalError()
+    }
+    
+    internal mutating func remove<ValueType>(listValue: ValueType, forKey key: ListFieldKey<RecordType, ValueType>) {
+        fatalError()
+    }
 }

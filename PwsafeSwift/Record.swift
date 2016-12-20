@@ -31,6 +31,12 @@ public protocol RecordProtocol {
     func value<ValueType>(forKey key: FieldKey<Type, ValueType>) -> ValueType?
     
     mutating func setValue<ValueType>(_ value: ValueType?, forKey key: FieldKey<Type, ValueType>)
+    
+    func values<ValueType>(forKey key: ListFieldKey<Type, ValueType>) -> [ValueType]
+    
+    mutating func add<ValueType>(listValue: ValueType, forKey key: ListFieldKey<Type, ValueType>)
+
+    mutating func remove<ValueType>(listValue: ValueType, forKey key: ListFieldKey<Type, ValueType>)
 }
 
 public struct Record<Type: RecordType>: RecordProtocol {
@@ -62,6 +68,18 @@ public struct Record<Type: RecordType>: RecordProtocol {
     
     public mutating func setValue<ValueType>(_ value: ValueType?, forKey key: FieldKey<Type, ValueType>) {
         fields.setValue(value, forKey: key)
+    }
+    
+    public func values<ValueType>(forKey key: ListFieldKey<Type, ValueType>) -> [ValueType] {
+        return fields.values(forKey: key)
+    }
+    
+    public mutating func add<ValueType>(listValue: ValueType, forKey key: ListFieldKey<Type, ValueType>) {
+        fields.add(listValue: listValue, forKey: key)
+    }
+    
+    public mutating func remove<ValueType>(listValue: ValueType, forKey key: ListFieldKey<Type, ValueType>) {
+        fields.remove(listValue: listValue, forKey: key)
     }
 }
 

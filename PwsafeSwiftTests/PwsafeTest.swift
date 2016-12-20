@@ -38,16 +38,6 @@ class PwsafeTest: QuickSpec {
         
         //todo: add test for failures!
         
-        describe("Pwsafe creation") {
-            it("should create new structure with required fields") {
-                let pwsafe = Pwsafe()
-                let header = pwsafe.header
-                
-                expect(header.uuid).notTo(beNil())
-                expect(header.version) == Pwsafe.defaultFormatVersion
-            }
-        }
-        
         describe("Pwsafe storing") {
             it("should create new structure with required fields") {
                 var header = HeaderRecord(uuid: UUID())

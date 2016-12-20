@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct EncryptedPwsafe {
+internal struct EncryptedPwsafe {
     let salt: [UInt8]
     let iter: UInt32
     let passwordHash: [UInt8]
@@ -20,7 +20,7 @@ struct EncryptedPwsafe {
 }
 
 extension EncryptedPwsafe {
-    static let parser: Parser<EncryptedPwsafe> =
+    internal static let parser: Parser<EncryptedPwsafe> =
         curry(EncryptedPwsafe.init)
             <^> Parsers.expect(PwsafeFormat.startTag)
             *> Parsers.read(32).bytes // salt
@@ -35,7 +35,7 @@ extension EncryptedPwsafe {
             <*> Parsers.read(32).bytes // HMAC
     
     //TODO: write tests
-    static func read(from data: Data) throws -> EncryptedPwsafe {
+    internal static func read(from data: Data) throws -> EncryptedPwsafe {
         guard let encrypted = EncryptedPwsafe.parser.parse(data).value?.value else {
             throw PwsafeError.corruptedData
         }
@@ -44,7 +44,7 @@ extension EncryptedPwsafe {
     }
     
     //TODO: write tests
-    static func parse(_ data: Data) throws -> Result<EncryptedPwsafe> {
+    internal static func parse(_ data: Data) throws -> Result<EncryptedPwsafe> {
         return EncryptedPwsafe
             .parser.parse(data)
             .map { $0.value }

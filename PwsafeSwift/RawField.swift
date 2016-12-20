@@ -14,13 +14,13 @@ public struct RawField {
 }
 
 extension RawField {
-    static let allFieldsParser: Parser<[[RawField]]> = RawField
+    internal static let allFieldsParser: Parser<[[RawField]]> = RawField
         .parser
         .aligned(blockSize: 16)
         .many
         .map(RawField.splitByEndOfRecord)
     
-    static let parser: Parser<RawField> = Parser { input in
+    internal static let parser: Parser<RawField> = Parser { input in
         let p = curry(RawField.read)
             <^> Parsers.read() // length
             <*> Parsers.read() // type
