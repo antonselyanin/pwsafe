@@ -48,7 +48,7 @@ public class SafeUpdater {
 
 extension RecordProtocol {
     //TODO: ugly name
-    mutating func setIfNil<FieldType>(forKey key: FieldKey<Type, FieldType>, value fieldValue: FieldType) {
+    internal mutating func setIfNil<FieldType>(forKey key: FieldKey<Type, FieldType>, value fieldValue: FieldType) {
         guard value(forKey: key) == nil else { return }
         
         setValue(fieldValue, forKey: key)
