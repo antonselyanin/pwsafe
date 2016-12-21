@@ -48,9 +48,6 @@ public enum Header: RecordType {
     public static let timestampOfLastSave: HeaderKey<Date> = key(0x04, ValueSerializers.date)
 
     /// sourcery: type = String
-    public static let whoPerformedLastSave: HeaderKey<String> = key(0x05, ValueSerializers.strings)
-    
-    /// sourcery: type = String
     public static let whatPerformedLastSave: HeaderKey<String> = key(0x06, ValueSerializers.strings)
     
     /// sourcery: type = String
@@ -58,4 +55,24 @@ public enum Header: RecordType {
     
     /// sourcery: type = String
     public static let databaseDescription: HeaderKey<String> = key(0x0a, ValueSerializers.strings)
+    
+    public static let emptyGroups: ListFieldKey<Header, String> = listKey(0x11, ValueSerializers.strings)
+}
+
+extension RecordProtocol where Type == Header {
+    public var emptyGroups: [String] {
+        return values(forKey: Header.emptyGroups)
+    }
+    
+    mutating func addEmptyGroup(_ group: String) {
+        add(value: group, forKey: Header.emptyGroups)
+    }
+
+    mutating func removeEmptyGroup(_ group: String) {
+        remove(value: group, forKey: Header.emptyGroups)
+    }
+    
+    mutating func removeAllEmptyGroups() {
+        removeAll(forKey: Header.emptyGroups)
+    }
 }

@@ -11,14 +11,12 @@ import Foundation
 internal struct FieldsContainer<RecordType> {
     internal var fields: [RawField]
     
-    internal func valueForKey<ValueType>(_ key: FieldKey<RecordType, ValueType>) -> ValueType? {
-        return fields.lazy
-            .filter({ $0.typeCode == key.code })
-            .flatMap({ key.serializer.fromByteArray($0.bytes) })
+    internal func valueForKey<Value>(_ key: FieldKey<RecordType, Value>) -> Value? {
+        return values(by: key.code, serializer: key.serializer.fromByteArray)
             .first
     }
     
-    internal mutating func setValue<ValueType>(_ value: ValueType?, forKey key: FieldKey<RecordType, ValueType>) {
+    internal mutating func setValue<Value>(_ value: Value?, forKey key: FieldKey<RecordType, Value>) {
         let index = fields.index(where: { $0.typeCode == key.code })
         
         if let value = value {
@@ -34,15 +32,31 @@ internal struct FieldsContainer<RecordType> {
         }
     }
     
-    internal func values<ValueType>(forKey key: ListFieldKey<RecordType, ValueType>) -> [ValueType] {
-        fatalError()
+    internal func values<Value>(forKey key: ListFieldKey<RecordType, Value>) -> [Value] {
+        return values(by: key.code, serializer: key.serializer.fromByteArray)
     }
     
-    internal mutating func add<ValueType>(listValue: ValueType, forKey key: ListFieldKey<RecordType, ValueType>) {
-        fatalError()
+    internal mutating func add<Value>(value: Value, forKey key: ListFieldKey<RecordType, Value>) {
+        let field = RawField(typeCode: key.code, bytes: key.serializer.toByteArray(value))
+        
+        guard !fields.contains(field) else { return }
+        
+        fields.append(RawField(typeCode: key.code, bytes: key.serializer.toByteArray(value)))
     }
     
-    internal mutating func remove<ValueType>(listValue: ValueType, forKey key: ListFieldKey<RecordType, ValueType>) {
-        fatalError()
+    internal mutating func remove<Value>(value: Value, forKey key: ListFieldKey<RecordType, Value>) {
+        let field = RawField(typeCode: key.code, bytes: key.serializer.toByteArray(value))
+        
+        fields = fields.filter({ $0 != field })
+    }
+    
+    internal mutating func removeAll<Value>(forKey key: ListFieldKey<RecordType, Value>) {
+        fields = fields.filter({ $0.typeCode != key.code })
+    }
+    
+    private func values<Value>(by typeCode: UInt8, serializer: ([UInt8]) -> Value?) -> [Value] {
+        return fields.lazy
+            .filter({ $0.typeCode == typeCode })
+            .flatMap({ serializer($0.bytes) })
     }
 }

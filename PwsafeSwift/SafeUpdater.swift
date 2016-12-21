@@ -25,7 +25,7 @@ public class SafeUpdater {
         return self
     }
     
-    public func set(whoPerformedSafe: String, whatPerformedSave: String) -> SafeUpdater {
+    public func set(whatPerformedSave: String) -> SafeUpdater {
         return self
     }
     
@@ -39,7 +39,6 @@ public class SafeUpdater {
     
     public func updated() -> Pwsafe {
         safe.header.setIfNil(forKey: Header.version, value: Pwsafe.defaultFormatVersion)
-        safe.header.setIfNil(forKey: Header.whoPerformedLastSave, value: Pwsafe.defaultSaver)
         safe.header.setIfNil(forKey: Header.whatPerformedLastSave, value: Pwsafe.defaultSaver)
         safe.header.setIfNil(forKey: Header.timestampOfLastSave, value: Date())
         

@@ -21,7 +21,6 @@ class SafeUpdaterTest: QuickSpec {
                 let header = result.header
                 
                 expect(header.version) == Pwsafe.defaultFormatVersion
-                expect(header.whoPerformedLastSave) == Pwsafe.defaultSaver
                 expect(header.whatPerformedLastSave) == Pwsafe.defaultSaver
                 expect(header.timestampOfLastSave).notTo(beNil())                
             }

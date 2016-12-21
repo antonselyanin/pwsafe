@@ -15,11 +15,17 @@ public protocol RecordType {
     static var uuid: FieldKey<Self, UUID> { get }
 
     static func key<Value> (_ code: UInt8, _ serializer: ValueSerializer<Value>) -> FieldKey<Self, Value>
+
+    static func listKey<Value> (_ code: UInt8, _ serializer: ValueSerializer<Value>) -> ListFieldKey<Self, Value>
 }
 
 extension RecordType {
     public static func key<Value> (_ code: UInt8, _ serializer: ValueSerializer<Value>) -> FieldKey<Self, Value> {
         return FieldKey(code: code, serializer: serializer)
+    }
+
+    public static func listKey<Value> (_ code: UInt8, _ serializer: ValueSerializer<Value>) -> ListFieldKey<Self, Value> {
+        return ListFieldKey(code: code, serializer: serializer)
     }
 }
 
@@ -34,9 +40,11 @@ public protocol RecordProtocol {
     
     func values<ValueType>(forKey key: ListFieldKey<Type, ValueType>) -> [ValueType]
     
-    mutating func add<ValueType>(listValue: ValueType, forKey key: ListFieldKey<Type, ValueType>)
+    mutating func add<ValueType>(value: ValueType, forKey key: ListFieldKey<Type, ValueType>)
 
-    mutating func remove<ValueType>(listValue: ValueType, forKey key: ListFieldKey<Type, ValueType>)
+    mutating func remove<ValueType>(value: ValueType, forKey key: ListFieldKey<Type, ValueType>)
+    
+    mutating func removeAll<ValueType>(forKey key: ListFieldKey<Type, ValueType>)
 }
 
 public struct Record<Type: RecordType>: RecordProtocol {
@@ -74,12 +82,16 @@ public struct Record<Type: RecordType>: RecordProtocol {
         return fields.values(forKey: key)
     }
     
-    public mutating func add<ValueType>(listValue: ValueType, forKey key: ListFieldKey<Type, ValueType>) {
-        fields.add(listValue: listValue, forKey: key)
+    public mutating func add<ValueType>(value: ValueType, forKey key: ListFieldKey<Type, ValueType>) {
+        fields.add(value: value, forKey: key)
     }
     
-    public mutating func remove<ValueType>(listValue: ValueType, forKey key: ListFieldKey<Type, ValueType>) {
-        fields.remove(listValue: listValue, forKey: key)
+    public mutating func remove<ValueType>(value: ValueType, forKey key: ListFieldKey<Type, ValueType>) {
+        fields.remove(value: value, forKey: key)
+    }
+    
+    public mutating func removeAll<ValueType>(forKey key: ListFieldKey<Type, ValueType>) {
+        fields.removeAll(forKey: key)
     }
 }
 

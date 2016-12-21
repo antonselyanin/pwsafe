@@ -9,7 +9,7 @@
 import Foundation
 import Quick
 import Nimble
-import PwsafeSwift
+@testable import PwsafeSwift
 
 class HeaderRecordTest: QuickSpec {
     override func spec() {
@@ -34,6 +34,20 @@ class HeaderRecordTest: QuickSpec {
                     
                     record.timestampOfLastSave = date
                     expect(record.value(forKey: Header.timestampOfLastSave)) == date
+                }
+            }
+            
+            describe("emptyGroups") {
+                it("gets empty groups") {
+                    let group1 = "group1"
+                    let group2 = "group2"
+                    
+                    let record: HeaderRecord = HeaderRecord(rawFields: [
+                        RawField(typeCode: Header.emptyGroups.code, bytes: group1.utf8Bytes()),
+                        RawField(typeCode: Header.emptyGroups.code, bytes: group2.utf8Bytes())
+                        ])
+                    
+                    expect(record.emptyGroups) == [group1, group2]
                 }
             }
         }
