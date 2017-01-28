@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class SafeUpdater {
+public struct SafeUpdater {
     private static let defaultSaver: String = "PwsafeSwift"
     
     public private(set) var safe: Pwsafe
@@ -17,32 +17,34 @@ public class SafeUpdater {
         self.safe = safe
     }
     
-    public func dontUpgradeVersion() -> SafeUpdater {
-        return self
-    }
-    
-    public func set(lastSaveDate: Date) -> SafeUpdater {
-        return self
-    }
-    
-    public func set(whatPerformedSave: String) -> SafeUpdater {
-        return self
-    }
-    
-    public func removePassword(by: UUID) -> SafeUpdater {
-        return self
-    }
-    
-    public func add(password: PasswordRecord) -> SafeUpdater {
-        return self
-    }
+//    public func dontUpgradeVersion() -> SafeUpdater {
+//        return self
+//    }
+//    
+//    public func set(lastSaveDate: Date) -> SafeUpdater {
+//        return self
+//    }
+//    
+//    public func set(whatPerformedSave: String) -> SafeUpdater {
+//        return self
+//    }
+//    
+//    public func removePassword(by: UUID) -> SafeUpdater {
+//        return self
+//    }
+//    
+//    public func add(password: PasswordRecord) -> SafeUpdater {
+//        return self
+//    }
     
     public func updated() -> Pwsafe {
-        safe.header.setIfNil(forKey: Header.version, value: Pwsafe.defaultFormatVersion)
-        safe.header.setIfNil(forKey: Header.whatPerformedLastSave, value: Pwsafe.defaultSaver)
-        safe.header.setIfNil(forKey: Header.timestampOfLastSave, value: Date())
+        var resultSafe = safe
         
-        return safe
+        resultSafe.header.setIfNil(forKey: Header.version, value: Pwsafe.defaultFormatVersion)
+        resultSafe.header.setIfNil(forKey: Header.whatPerformedLastSave, value: Pwsafe.defaultSaver)
+        resultSafe.header.setIfNil(forKey: Header.timestampOfLastSave, value: Date())
+        
+        return resultSafe
     }
 }
 
