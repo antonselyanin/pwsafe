@@ -40,6 +40,8 @@
 		3A803A7A1D8C443900E19D0B /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A803A751D8C427A00E19D0B /* Nimble.framework */; };
 		3A9441921BA5A42B00B00514 /* IntegerTypeUtilitiesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9441911BA5A42B00B00514 /* IntegerTypeUtilitiesTest.swift */; };
 		3A9D30B81BAF0571009A0330 /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB2DAD01B7A39E90051F3A8 /* DataExtension.swift */; };
+		3AA263A41E4F394B009B8F26 /* DataExtensionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA263A31E4F394B009B8F26 /* DataExtensionTest.swift */; };
+		3AA263A61E4F3C86009B8F26 /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA263A51E4F3C86009B8F26 /* DataExtension.swift */; };
 		3AA5E6BE1BB994BA003C164D /* PwsafeSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA5E6BD1BB994BA003C164D /* PwsafeSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AA5E6CC1BB994E6003C164D /* BlockWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A03FED51BAD894F00741D62 /* BlockWriter.swift */; };
 		3AA5E6CD1BB994E6003C164D /* IntegerTypeUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A94418F1BA5520600B00514 /* IntegerTypeUtilities.swift */; };
@@ -117,6 +119,8 @@
 		3A9D30BB1BAF1038009A0330 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		3A9D30BD1BAF10D4009A0330 /* PwsafeParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeParsing.swift; sourceTree = "<group>"; };
 		3A9EF3011B6E5FC8002E3689 /* Pwsafe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pwsafe.swift; sourceTree = "<group>"; };
+		3AA263A31E4F394B009B8F26 /* DataExtensionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtensionTest.swift; sourceTree = "<group>"; };
+		3AA263A51E4F3C86009B8F26 /* DataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
 		3AA5E6BB1BB994BA003C164D /* PwsafeSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PwsafeSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AA5E6BD1BB994BA003C164D /* PwsafeSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PwsafeSwift.h; sourceTree = "<group>"; };
 		3AB2DAD01B7A39E90051F3A8 /* DataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
@@ -161,6 +165,7 @@
 				3A9441911BA5A42B00B00514 /* IntegerTypeUtilitiesTest.swift */,
 				3AB2DAD01B7A39E90051F3A8 /* DataExtension.swift */,
 				3A73FCEC1DEA94A900AECE5C /* ResultTest.swift */,
+				3AA263A31E4F394B009B8F26 /* DataExtensionTest.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -292,6 +297,7 @@
 				3A7E7FB41DE1FA6C007B9482 /* Operators.swift */,
 				3A7E7FBF1DE9E4DF007B9482 /* Result.swift */,
 				3AFDB13D1E00482C009FA9D9 /* UUIDExtension.swift */,
+				3AA263A51E4F3C86009B8F26 /* DataExtension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -460,6 +466,7 @@
 				3A6A39C41C17265E00696EC6 /* HeaderRecordTest.swift in Sources */,
 				3A2AA15C1B6E0F2E009E0422 /* PwsafeTest.swift in Sources */,
 				3A7E7FB81DE34689007B9482 /* ParsingTest.swift in Sources */,
+				3AA263A41E4F394B009B8F26 /* DataExtensionTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,6 +493,7 @@
 				3A7E7FB01DE07BB8007B9482 /* Parser.swift in Sources */,
 				3AA5E6CC1BB994E6003C164D /* BlockWriter.swift in Sources */,
 				3A3CDAE71E082C0D0019EEDF /* SafeUpdater.swift in Sources */,
+				3AA263A61E4F3C86009B8F26 /* DataExtension.swift in Sources */,
 				3AA5E6D11BB994E6003C164D /* Pwsafe.swift in Sources */,
 				3AA5E6D31BB994E6003C164D /* PwsafeParsing.swift in Sources */,
 				3A7E7FB51DE1FA6C007B9482 /* Operators.swift in Sources */,

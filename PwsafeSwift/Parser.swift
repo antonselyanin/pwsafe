@@ -84,7 +84,7 @@ extension ParserProtocol {
                 guard readSize % blockSize != 0 else { return .success(parsed) }
                 
                 let unaligned = blockSize - readSize % blockSize
-                let alignedRemainder = Data(parsed.remainder.suffix(parsed.remainder.count - unaligned))
+                let alignedRemainder = parsed.remainder.suffixData(parsed.remainder.count - unaligned)
                 return .success(Parsed(remainder: alignedRemainder, value: parsed.value))
             }
         }
@@ -104,14 +104,14 @@ extension ParserProtocol where Value == Data {
     func cut(requiredSuffix: [UInt8]) -> Parser<Data> {
         return Parser<Data> { input in
             return self.parse(input).flatMap { result in
-                let potentialSuffix = result.value.suffix(requiredSuffix.count)
-                guard Data(bytes: requiredSuffix) == Data(potentialSuffix) else {
+                let potentialSuffix = result.value.suffixData(requiredSuffix.count)
+                guard Data(bytes: requiredSuffix) == potentialSuffix else {
                     return .failure(ParserError.error)
                 }
                 
-                let prefix = result.value.prefix(upTo: potentialSuffix.startIndex)
+                let prefix = result.value.prefixData(result.value.count - requiredSuffix.count)
                 
-                return .success(Parsed(remainder: result.remainder, value: Data(prefix)))
+                return .success(Parsed(remainder: result.remainder, value: prefix))
             }
         }
     }
@@ -123,8 +123,8 @@ enum Parsers {
         return Parser<Data> { (input) -> ParserResult<Data> in
             guard bytesToRead <= input.count else { return .failure(ParserError.error) }
             
-            let remainder = input.subdata(in: bytesToRead ..< input.endIndex)
-            let value = input.subdata(in: 0 ..< bytesToRead)
+            let value = input.prefixData(bytesToRead)
+            let remainder = input.suffixData(input.count - bytesToRead)
             
             return .success(Parsed(remainder: remainder, value: value))
         }
@@ -146,8 +146,8 @@ enum Parsers {
         return Parser<Data> { input in
             guard tailSize <= input.count else { return .failure(ParserError.error) }
             
-            let remainder = Data(input.suffix(tailSize))
-            let value = Data(input.prefix(input.count - tailSize))
+            let remainder = input.suffixData(tailSize)
+            let value = input.prefixData(input.count - tailSize)
             
             return .success(Parsed(remainder: remainder, value: value))
         }
