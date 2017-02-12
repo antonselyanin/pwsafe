@@ -70,3 +70,6 @@ xcuserdata
 *.xccheckout
 *.moved-aside
 *.xcuserstate
+
+## AppCode
+\.idea
