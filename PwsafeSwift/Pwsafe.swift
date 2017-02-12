@@ -1,5 +1,5 @@
 //
-//  PwsafeHeader.swift
+//  Pwsafe.swift
 //  PwsafeSwift
 //
 //  Created by Anton Selyanin on 02/08/15.
@@ -12,48 +12,44 @@ public struct Pwsafe {
     public static let defaultFormatVersion: UInt16 = 0x030d
     public static let defaultSaver: String = "PwsafeKit library for Swift"
     
-    public internal(set) var header: HeaderRecord
-    public internal(set) var passwordRecords: [PasswordRecord]
+    public var header: Header
+    public internal(set) var records: [Record]
     
-    public init(header: HeaderRecord = HeaderRecord(uuid: UUID()),
-                passwordRecords: [PasswordRecord] = []) {
-        
+    public init(header: Header = Header(uuid: UUID()),
+                records: [Record] = []) {
         self.header = header
-        self.passwordRecords = passwordRecords
+        self.records = records
     }
     
-    public subscript(uuid: UUID) -> PasswordRecord? {
+    public subscript(uuid: UUID) -> Record? {
         get {
-            return passwordRecords
+            return records
                 .lazy
                 .filter({ $0.uuid == uuid })
                 .first
         }
         
         set {
-            let index = passwordRecords.index(where: { $0.uuid == uuid })
+            let index = records.index(where: { $0.uuid == uuid })
             
             if let newValue = newValue {
                 if let index = index {
-                    passwordRecords[index] = newValue
+                    records[index] = newValue
                 } else {
-                    passwordRecords.append(newValue)
+                    records.append(newValue)
                 }
             } else {
                 if let index = index {
-                    passwordRecords.remove(at: index)
+                    records.remove(at: index)
                 }
             }
         }
     }
-    
-    public mutating func addOrUpdateRecord(_ record: PasswordRecord) {
-        self[record.uuid] = record
-    }
 }
 
-extension Pwsafe: Equatable {}
-public func ==(lhs: Pwsafe, rhs: Pwsafe) -> Bool {
-    return lhs.header == rhs.header
-        && lhs.passwordRecords == rhs.passwordRecords
+extension Pwsafe: Equatable {
+    public static func ==(lhs: Pwsafe, rhs: Pwsafe) -> Bool {
+        return lhs.header == rhs.header
+            && lhs.records == rhs.records
+    }
 }

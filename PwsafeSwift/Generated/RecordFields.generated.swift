@@ -2,17 +2,17 @@
 // DO NOT EDIT
 
 
-public extension RecordProtocol where Type == Header {
+public extension RecordProtocol where Type == HeaderKey {
     
         
     
         
     public var version: UInt16? {
         get {
-            return value(forKey: Header.version)
+            return value(forKey: HeaderKey.version)
         }
         set {
-            setValue(newValue, forKey: Header.version)
+            setValue(newValue, forKey: HeaderKey.version)
         }
     }
         
@@ -20,10 +20,10 @@ public extension RecordProtocol where Type == Header {
         
     public var timestampOfLastSave: Date? {
         get {
-            return value(forKey: Header.timestampOfLastSave)
+            return value(forKey: HeaderKey.timestampOfLastSave)
         }
         set {
-            setValue(newValue, forKey: Header.timestampOfLastSave)
+            setValue(newValue, forKey: HeaderKey.timestampOfLastSave)
         }
     }
         
@@ -31,10 +31,10 @@ public extension RecordProtocol where Type == Header {
         
     public var whatPerformedLastSave: String? {
         get {
-            return value(forKey: Header.whatPerformedLastSave)
+            return value(forKey: HeaderKey.whatPerformedLastSave)
         }
         set {
-            setValue(newValue, forKey: Header.whatPerformedLastSave)
+            setValue(newValue, forKey: HeaderKey.whatPerformedLastSave)
         }
     }
         
@@ -42,10 +42,10 @@ public extension RecordProtocol where Type == Header {
         
     public var databaseName: String? {
         get {
-            return value(forKey: Header.databaseName)
+            return value(forKey: HeaderKey.databaseName)
         }
         set {
-            setValue(newValue, forKey: Header.databaseName)
+            setValue(newValue, forKey: HeaderKey.databaseName)
         }
     }
         
@@ -53,10 +53,10 @@ public extension RecordProtocol where Type == Header {
         
     public var databaseDescription: String? {
         get {
-            return value(forKey: Header.databaseDescription)
+            return value(forKey: HeaderKey.databaseDescription)
         }
         set {
-            setValue(newValue, forKey: Header.databaseDescription)
+            setValue(newValue, forKey: HeaderKey.databaseDescription)
         }
     }
         
@@ -65,17 +65,17 @@ public extension RecordProtocol where Type == Header {
     
 }
 
-public extension RecordProtocol where Type == Password {
+public extension RecordProtocol where Type == RecordKey {
     
         
     
         
     public var group: String? {
         get {
-            return value(forKey: Password.group)
+            return value(forKey: RecordKey.group)
         }
         set {
-            setValue(newValue, forKey: Password.group)
+            setValue(newValue, forKey: RecordKey.group)
         }
     }
         
@@ -83,10 +83,10 @@ public extension RecordProtocol where Type == Password {
         
     public var title: String? {
         get {
-            return value(forKey: Password.title)
+            return value(forKey: RecordKey.title)
         }
         set {
-            setValue(newValue, forKey: Password.title)
+            setValue(newValue, forKey: RecordKey.title)
         }
     }
         
@@ -94,10 +94,10 @@ public extension RecordProtocol where Type == Password {
         
     public var username: String? {
         get {
-            return value(forKey: Password.username)
+            return value(forKey: RecordKey.username)
         }
         set {
-            setValue(newValue, forKey: Password.username)
+            setValue(newValue, forKey: RecordKey.username)
         }
     }
         
@@ -105,10 +105,10 @@ public extension RecordProtocol where Type == Password {
         
     public var notes: String? {
         get {
-            return value(forKey: Password.notes)
+            return value(forKey: RecordKey.notes)
         }
         set {
-            setValue(newValue, forKey: Password.notes)
+            setValue(newValue, forKey: RecordKey.notes)
         }
     }
         
@@ -116,10 +116,10 @@ public extension RecordProtocol where Type == Password {
         
     public var password: String? {
         get {
-            return value(forKey: Password.password)
+            return value(forKey: RecordKey.password)
         }
         set {
-            setValue(newValue, forKey: Password.password)
+            setValue(newValue, forKey: RecordKey.password)
         }
     }
         
@@ -127,10 +127,10 @@ public extension RecordProtocol where Type == Password {
         
     public var url: String? {
         get {
-            return value(forKey: Password.url)
+            return value(forKey: RecordKey.url)
         }
         set {
-            setValue(newValue, forKey: Password.url)
+            setValue(newValue, forKey: RecordKey.url)
         }
     }
         
@@ -138,10 +138,10 @@ public extension RecordProtocol where Type == Password {
         
     public var email: String? {
         get {
-            return value(forKey: Password.email)
+            return value(forKey: RecordKey.email)
         }
         set {
-            setValue(newValue, forKey: Password.email)
+            setValue(newValue, forKey: RecordKey.email)
         }
     }
         

@@ -14,7 +14,7 @@ extension Pwsafe {
     public func toData(withPassword password: String) throws -> Data {
         let output = BlockWriter()
         
-        let records = [header.rawFields] + passwordRecords.map({ $0.rawFields })
+        let records = [header.rawFields] + self.records.map({ $0.rawFields })
         let encryptedPwsafe = try encryptPwsafeRecords(records, password: password)
         
         output.write(PwsafeFormat.startTag)

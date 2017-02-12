@@ -14,7 +14,7 @@ class PwsafeTest: QuickSpec {
                 expect(header.version) == 0x030d
                 expect(header.uuid) == UUID(uuidString: "CFE1BCD4-6A0E-4BF5-8BF8-E5F1991515E2")
                 
-                let record = pwsafe.passwordRecords[0]
+                let record = pwsafe.records[0]
                 
                 expect(record.uuid) == UUID(uuidString: "CA1051B0-B42E-6241-1656-A874D307CCD1")
                 expect(record.group) == "group"
@@ -40,23 +40,23 @@ class PwsafeTest: QuickSpec {
         
         describe("Pwsafe storing") {
             it("should create new structure with required fields") {
-                var header = HeaderRecord(uuid: UUID())
+                var header = Header(uuid: UUID())
                 header.version = 0x030b
                 header.databaseName = "Database Name"
                 
-                var record0 = PasswordRecord(uuid: UUID())
+                var record0 = Record(uuid: UUID())
                 record0.group = "group 0"
                 record0.title = "title 0"
                 record0.username = "username 0"
                 record0.password = "password 0"
 
-                var record1 = PasswordRecord(uuid: UUID())
+                var record1 = Record(uuid: UUID())
                 record1.group = "group 1"
                 record1.title = "title 1"
                 record1.username = "username 1"
                 record1.password = "password 1"
                 
-                let pwsafe = Pwsafe(header: header, passwordRecords: [record0, record1])
+                let pwsafe = Pwsafe(header: header, records: [record0, record1])
                 
                 let data = try! pwsafe.toData(withPassword: "test")
                 
@@ -70,48 +70,48 @@ class PwsafeTest: QuickSpec {
             let recordUUID0 = UUID()
             let recordUUID1 = UUID()
             
-            var header = HeaderRecord(uuid: UUID())
+            var header = Header(uuid: UUID())
             header.version = 0x030b
             header.databaseName = "Database Name"
             
-            var record0 = PasswordRecord(uuid: recordUUID0)
+            var record0 = Record(uuid: recordUUID0)
             record0.group = "group 0"
             record0.title = "title 0"
             record0.username = "username 0"
             record0.password = "password 0"
             
-            var record1 = PasswordRecord(uuid: recordUUID1)
+            var record1 = Record(uuid: recordUUID1)
             record1.group = "group 1"
             record1.title = "title 1"
             record1.username = "username 1"
             record1.password = "password 1"
 
             it("should get records by UUID") {
-                let pwsafe = Pwsafe(header: header, passwordRecords: [record0])
+                let pwsafe = Pwsafe(header: header, records: [record0])
                 expect(pwsafe[recordUUID0]) == record0
             }
             
             it("should add new record with UUID") {
-                var pwsafe = Pwsafe(header: header, passwordRecords: [record0])
+                var pwsafe = Pwsafe(header: header, records: [record0])
                 pwsafe[recordUUID1] = record1
                 expect(pwsafe[recordUUID1]) == record1
             }
 
             it("should update record") {
-                var updateRecord = PasswordRecord(uuid: recordUUID0)
+                var updateRecord = Record(uuid: recordUUID0)
                 updateRecord.group = "update group"
                 updateRecord.title = "update title"
                 updateRecord.username = "update username"
                 updateRecord.password = "update username"
 
-                var pwsafe = Pwsafe(header: header, passwordRecords: [record0])
+                var pwsafe = Pwsafe(header: header, records: [record0])
                 pwsafe[recordUUID0] = updateRecord
                 
                 expect(pwsafe[recordUUID0]) == updateRecord
             }
             
             it("should remove record") {
-                var pwsafe = Pwsafe(header: header, passwordRecords: [record0])
+                var pwsafe = Pwsafe(header: header, records: [record0])
                 pwsafe[recordUUID0] = nil
                 
                 expect(pwsafe[recordUUID0]).to(beNil())

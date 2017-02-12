@@ -86,10 +86,13 @@ class ParserMonadTest: QuickSpec {
             let data: Data = Data(bytes: [0, 1, 2, 3, 4, 5, 6])
             
             it("discards right") {
+                // Given
                 let parser = Parsers.read(2) <* Parsers.read(3)
                 
+                // When
                 let result = parser.parse(data).value!
                 
+                // Then
                 expect(result.value) == Data(bytes: [0, 1])
                 expect(result.remainder) == Data(bytes: [5, 6])
             }
@@ -99,10 +102,13 @@ class ParserMonadTest: QuickSpec {
             let data: Data = Data(bytes: [0, 1, 2, 3, 4, 5, 6])
             
             it("discard left") {
+                // Given
                 let parser = Parsers.read(2) *> Parsers.read(3)
                 
+                // When
                 let parsed = parser.parse(data).value!
                 
+                // Then
                 expect(parsed.value) == Data(bytes: [2, 3, 4])
                 expect(parsed.remainder) == Data(bytes: [5, 6])
             }

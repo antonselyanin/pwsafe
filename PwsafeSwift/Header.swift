@@ -1,5 +1,5 @@
 //
-//  PwsafeHeader.swift
+//  Header.swift
 //  PwsafeSwift
 //
 //  Created by Anton Selyanin on 27/09/15.
@@ -35,44 +35,45 @@ import Foundation
  End of Entry                0xff        [empty]       Y              [17]
 */
 
-public typealias HeaderKey<FieldType> = FieldKey<Header, FieldType>
+public typealias Header = RecordData<HeaderKey>
 
-public enum Header: RecordType {
+public enum HeaderKey: RecordType {
+    public typealias Key<FieldType> = FieldKey<HeaderKey, FieldType>
     
-    public static let uuid: HeaderKey<UUID> = key(0x01, ValueSerializers.uuid)
+    public static let uuid: Key<UUID> = key(0x01, ValueSerializers.uuid)
 
     /// sourcery: type = UInt16
-    public static let version: HeaderKey<UInt16> = key(0x00, ValueSerializers.uint16Values)
+    public static let version: Key<UInt16> = key(0x00, ValueSerializers.uint16Values)
 
     /// sourcery: type = Date
-    public static let timestampOfLastSave: HeaderKey<Date> = key(0x04, ValueSerializers.date)
+    public static let timestampOfLastSave: Key<Date> = key(0x04, ValueSerializers.date)
 
     /// sourcery: type = String
-    public static let whatPerformedLastSave: HeaderKey<String> = key(0x06, ValueSerializers.strings)
+    public static let whatPerformedLastSave: Key<String> = key(0x06, ValueSerializers.strings)
     
     /// sourcery: type = String
-    public static let databaseName: HeaderKey<String> = key(0x09, ValueSerializers.strings)
+    public static let databaseName: Key<String> = key(0x09, ValueSerializers.strings)
     
     /// sourcery: type = String
-    public static let databaseDescription: HeaderKey<String> = key(0x0a, ValueSerializers.strings)
+    public static let databaseDescription: Key<String> = key(0x0a, ValueSerializers.strings)
     
-    public static let emptyGroups: ListFieldKey<Header, String> = listKey(0x11, ValueSerializers.strings)
+    public static let emptyGroups: ListFieldKey<HeaderKey, String> = listKey(0x11, ValueSerializers.strings)
 }
 
-extension RecordProtocol where Type == Header {
+extension RecordProtocol where Type == HeaderKey {
     public var emptyGroups: [String] {
-        return values(forKey: Header.emptyGroups)
+        return values(forKey: HeaderKey.emptyGroups)
     }
     
     mutating func addEmptyGroup(_ group: String) {
-        add(value: group, forKey: Header.emptyGroups)
+        add(value: group, forKey: HeaderKey.emptyGroups)
     }
 
     mutating func removeEmptyGroup(_ group: String) {
-        remove(value: group, forKey: Header.emptyGroups)
+        remove(value: group, forKey: HeaderKey.emptyGroups)
     }
     
     mutating func removeAllEmptyGroups() {
-        removeAll(forKey: Header.emptyGroups)
+        removeAll(forKey: HeaderKey.emptyGroups)
     }
 }

@@ -33,16 +33,16 @@ public struct SafeUpdater {
 //        return self
 //    }
 //    
-//    public func add(password: PasswordRecord) -> SafeUpdater {
+//    public func add(record: Record) -> SafeUpdater {
 //        return self
 //    }
     
     public func updated() -> Pwsafe {
         var resultSafe = safe
         
-        resultSafe.header.setIfNil(forKey: Header.version, value: Pwsafe.defaultFormatVersion)
-        resultSafe.header.setIfNil(forKey: Header.whatPerformedLastSave, value: Pwsafe.defaultSaver)
-        resultSafe.header.setIfNil(forKey: Header.timestampOfLastSave, value: Date())
+        resultSafe.header.setIfNil(forKey: HeaderKey.version, value: Pwsafe.defaultFormatVersion)
+        resultSafe.header.setIfNil(forKey: HeaderKey.whatPerformedLastSave, value: Pwsafe.defaultSaver)
+        resultSafe.header.setIfNil(forKey: HeaderKey.timestampOfLastSave, value: Date())
         
         return resultSafe
     }

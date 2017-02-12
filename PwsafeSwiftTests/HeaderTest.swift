@@ -1,5 +1,5 @@
 //
-//  PwsafeHeaderRecord.swift
+//  PwsafeHeader.swift
 //  PwsafeSwift
 //
 //  Created by Anton Selyanin on 08/12/15.
@@ -11,9 +11,9 @@ import Quick
 import Nimble
 @testable import PwsafeSwift
 
-class HeaderRecordTest: QuickSpec {
+class HeaderTest: QuickSpec {
     override func spec() {
-        describe("HeaderRecord") {
+        describe("Header") {
             
             describe("timestampOfLastSave") {
                 let rfc3339DateFormatter = DateFormatter()
@@ -23,17 +23,17 @@ class HeaderRecordTest: QuickSpec {
                 let date = rfc3339DateFormatter.date(from: "1996-12-19T16:39:57-08:00")!
 
                 it("gets timestamp of last save") {
-                    var record: HeaderRecord = HeaderRecord()
+                    var record: Header = Header()
                     
-                    record.setValue(date, forKey: Header.timestampOfLastSave)
+                    record.setValue(date, forKey: HeaderKey.timestampOfLastSave)
                     expect(record.timestampOfLastSave) == date
                 }
                 
                 it("sets timestamp of last save") {
-                    var record: HeaderRecord = HeaderRecord()
+                    var record: Header = Header()
                     
                     record.timestampOfLastSave = date
-                    expect(record.value(forKey: Header.timestampOfLastSave)) == date
+                    expect(record.value(forKey: HeaderKey.timestampOfLastSave)) == date
                 }
             }
             
@@ -42,9 +42,9 @@ class HeaderRecordTest: QuickSpec {
                     let group1 = "group1"
                     let group2 = "group2"
                     
-                    let record: HeaderRecord = HeaderRecord(rawFields: [
-                        RawField(typeCode: Header.emptyGroups.code, bytes: group1.utf8Bytes()),
-                        RawField(typeCode: Header.emptyGroups.code, bytes: group2.utf8Bytes())
+                    let record: Header = Header(rawFields: [
+                        RawField(typeCode: HeaderKey.emptyGroups.code, bytes: group1.utf8Bytes()),
+                        RawField(typeCode: HeaderKey.emptyGroups.code, bytes: group2.utf8Bytes())
                         ])
                     
                     expect(record.emptyGroups) == [group1, group2]
