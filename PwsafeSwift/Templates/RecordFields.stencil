@@ -10,7 +10,9 @@ public extension RecordProtocol where Type == {{ record.name }} {
             setValue(newValue, forKey: {{ record.name }}.{{ param.name }})
         }
     }
+
         {% endif %}
     {% endfor %}
 }
+
 {% endfor %}

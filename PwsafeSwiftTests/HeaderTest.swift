@@ -47,7 +47,7 @@ class HeaderTest: QuickSpec {
                         RawField(typeCode: HeaderKey.emptyGroups.code, bytes: group2.utf8Bytes())
                         ])
                     
-                    expect(record.emptyGroups) == [group1, group2]
+                    expect(record.emptyGroups) == [Group(segments: [group1]), Group(segments: [group2])]
                 }
             }
         }

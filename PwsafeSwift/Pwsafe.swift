@@ -12,8 +12,14 @@ public struct Pwsafe {
     public static let defaultFormatVersion: UInt16 = 0x030d
     public static let defaultSaver: String = "PwsafeKit library for Swift"
     
+    public static let rootGroup: Group = Group(segments: [])
+    
     public var header: Header
     public internal(set) var records: [Record]
+    
+    public var groups: [Group] {
+        return Array(Set(records.flatMap({ $0.group }) + header.emptyGroups)).sorted(by: <)
+    }
     
     public init(header: Header = Header(uuid: UUID()),
                 records: [Record] = []) {
@@ -32,24 +38,41 @@ public struct Pwsafe {
         set {
             let index = records.index(where: { $0.uuid == uuid })
             
-            if let newValue = newValue {
-                if let index = index {
-                    records[index] = newValue
-                } else {
-                    records.append(newValue)
-                }
-            } else {
-                if let index = index {
-                    records.remove(at: index)
-                }
+            switch (index, newValue) {
+            case (let index?, let newValue?):
+                records[index] = newValue
+                
+            case (let index?, nil):
+                records.remove(at: index)
+                
+            case (nil, let newValue?):
+                records.append(newValue)
+            
+            case (nil, nil):
+                break
             }
         }
     }
-}
-
-extension Pwsafe: Equatable {
-    public static func ==(lhs: Pwsafe, rhs: Pwsafe) -> Bool {
-        return lhs.header == rhs.header
-            && lhs.records == rhs.records
+    
+    public func subgroups(at level: Group) -> [Group] {
+        let subgroups: [String] = groups
+            .filter({ $0.segments.starts(with: level.segments) })
+            .flatMap { group in
+                let segments = group.segments.suffix(group.segments.count - level.segments.count)
+                return segments.first
+            }
+        
+        let result = Array(Set(subgroups)).sorted(by: <)
+        return result.map { segment in
+            return Group(segments: level.segments + [segment])
+        }
+    }
+    
+    public func records(in group: Group) -> [Record] {
+        guard group != Pwsafe.rootGroup else { return records }
+        
+        return records.filter({ $0.group == group })
     }
 }
+
+extension Pwsafe: AutoEquatable {}

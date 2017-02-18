@@ -57,23 +57,23 @@ public enum HeaderKey: RecordType {
     /// sourcery: type = String
     public static let databaseDescription: Key<String> = key(0x0a, ValueSerializers.strings)
     
-    public static let emptyGroups: ListFieldKey<HeaderKey, String> = listKey(0x11, ValueSerializers.strings)
+    public static let emptyGroups: ListFieldKey<HeaderKey, Group> = listKey(0x11, ValueSerializers.group)
 }
 
 extension RecordProtocol where Type == HeaderKey {
-    public var emptyGroups: [String] {
+    public var emptyGroups: [Group] {
         return values(forKey: HeaderKey.emptyGroups)
     }
     
-    mutating func addEmptyGroup(_ group: String) {
+    public mutating func addEmptyGroup(_ group: Group) {
         add(value: group, forKey: HeaderKey.emptyGroups)
     }
 
-    mutating func removeEmptyGroup(_ group: String) {
+    public mutating func removeEmptyGroup(_ group: Group) {
         remove(value: group, forKey: HeaderKey.emptyGroups)
     }
     
-    mutating func removeAllEmptyGroups() {
+    public mutating func removeAllEmptyGroups() {
         removeAll(forKey: HeaderKey.emptyGroups)
     }
 }

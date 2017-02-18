@@ -57,8 +57,8 @@ public enum RecordKey: RecordType {
 
     public static let uuid: Key<UUID> = key(0x01, ValueSerializers.uuid)
     
-    /// sourcery: type = String
-    public static let group: Key<String> = key(0x02, ValueSerializers.strings)
+    /// sourcery: type = Group
+    public static let group: Key<Group> = key(0x02, ValueSerializers.group)
     
     /// sourcery: type = String
     public static let title: Key<String> = key(0x03, ValueSerializers.strings)

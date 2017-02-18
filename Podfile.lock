@@ -1,0 +1,15 @@
+PODS:
+  - Sourcery (0.5.5)
+  - SwiftLint (0.16.1)
+
+DEPENDENCIES:
+  - Sourcery
+  - SwiftLint
+
+SPEC CHECKSUMS:
+  Sourcery: 273063412accffcd91e654afd3391cac94c2d139
+  SwiftLint: b8b683208cc09640898f16318a7a452274e91f61
+
+PODFILE CHECKSUM: 04aa3ce69f36cd410051628c7972f0666c5f1e56
+
+COCOAPODS: 1.2.0

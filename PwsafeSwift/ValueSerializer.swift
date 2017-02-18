@@ -43,6 +43,19 @@ public enum ValueSerializers {
     
     public static let uint16Values: ValueSerializer<UInt16> = ValueSerializers.byteArrayConvertibles()
     
+    public static let group: ValueSerializer<Group> = ValueSerializer(
+        toByteArray: { (group: Group) -> [UInt8] in
+            return group.segments.joined(separator: ".").utf8Bytes()
+        },
+        fromByteArray: { (bytes: [UInt8]) -> Group? in
+            return String.fromByteArray(bytes)
+                .map { string in
+                    return string.characters.split(separator: ".").map(String.init)
+                }
+                .map(Group.init(segments:))
+        }
+    )
+    
     internal static func byteArrayConvertibles<T: ByteArrayConvertible>() -> ValueSerializer<T> {
         return ValueSerializer(
             toByteArray: { $0.littleEndianBytes() },

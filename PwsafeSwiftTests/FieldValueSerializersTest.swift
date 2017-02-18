@@ -68,5 +68,20 @@ class FieldValueSerializersTest: QuickSpec {
                 expect(deserializedDate) == date
             }
         }
+        
+        describe("Group serializer") {
+            it("deserializes") {
+                let bytes = "level1.level2.level3".utf8Bytes()
+                let group = ValueSerializers.group.fromByteArray(bytes)
+                
+                expect(group?.segments) == ["level1", "level2", "level3"]
+            }
+            it("serializes") {
+                let group = Group(segments: ["level1", "level2", "level3"])
+                let bytes = ValueSerializers.group.toByteArray(group)
+                
+                expect(bytes) == "level1.level2.level3".utf8Bytes()
+            }
+        }
     }
 }
