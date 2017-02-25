@@ -19,16 +19,20 @@ internal struct FieldsContainer<RecordType> {
     internal mutating func setValue<Value>(_ value: Value?, forKey key: FieldKey<RecordType, Value>) {
         let index = fields.index(where: { $0.typeCode == key.code })
         
-        if let value = value {
-            let newValue = RawField(typeCode: key.code, bytes: key.serializer.toByteArray(value))
+        let newValue = value.map({ RawField(typeCode: key.code, bytes: key.serializer.toByteArray($0)) })
+        
+        switch (index, newValue) {
+        case (let index?, let value?):
+            fields[index] = value
             
-            if let index = index {
-                fields[index] = newValue
-            } else {
-                fields.append(newValue)
-            }
-        } else if let index = index {
+        case (nil, let value?):
+            fields.append(value)
+            
+        case (let index?, nil):
             fields.remove(at: index)
+            
+        case (nil, nil):
+            break
         }
     }
     

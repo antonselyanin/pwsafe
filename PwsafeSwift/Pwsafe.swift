@@ -18,7 +18,7 @@ public struct Pwsafe {
     public internal(set) var records: [Record]
     
     public var groups: [Group] {
-        return Array(Set(records.flatMap({ $0.group }) + header.emptyGroups)).sorted(by: <)
+        return (records.flatMap({ $0.group }) + header.emptyGroups).uniqueSorted(by: <)
     }
     
     public init(header: Header = Header(uuid: UUID()),
@@ -62,7 +62,7 @@ public struct Pwsafe {
                 return segments.first
             }
         
-        let result = Array(Set(subgroups)).sorted(by: <)
+        let result = subgroups.uniqueSorted(by: <)
         return result.map { segment in
             return Group(segments: level.segments + [segment])
         }

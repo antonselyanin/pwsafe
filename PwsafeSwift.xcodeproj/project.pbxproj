@@ -16,6 +16,7 @@
 		3A20A8751BCBD65400241946 /* ECB_TBL.TXT in Resources */ = {isa = PBXBuildFile; fileRef = 3A20A8731BCBD65400241946 /* ECB_TBL.TXT */; };
 		3A20A87A1BCC1D7C00241946 /* Hmac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20A8791BCC1D7C00241946 /* Hmac.swift */; };
 		3A2AA15C1B6E0F2E009E0422 /* PwsafeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2AA15B1B6E0F2E009E0422 /* PwsafeTest.swift */; };
+		3A2ED40C1E61573900EF368E /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2ED40B1E61573900EF368E /* CollectionExtension.swift */; };
 		3A3CDADC1E06D7510019EEDF /* RecordFields.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3CDADA1E06D7510019EEDF /* RecordFields.generated.swift */; };
 		3A3CDAE11E06D75A0019EEDF /* RecordFields.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 3A3CDADF1E06D75A0019EEDF /* RecordFields.stencil */; };
 		3A3CDAE71E082C0D0019EEDF /* SafeUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3CDAE61E082C0D0019EEDF /* SafeUpdater.swift */; };
@@ -91,6 +92,7 @@
 		3A20A8731BCBD65400241946 /* ECB_TBL.TXT */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ECB_TBL.TXT; sourceTree = "<group>"; };
 		3A20A8791BCC1D7C00241946 /* Hmac.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hmac.swift; sourceTree = "<group>"; };
 		3A2AA15B1B6E0F2E009E0422 /* PwsafeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeTest.swift; sourceTree = "<group>"; };
+		3A2ED40B1E61573900EF368E /* CollectionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
 		3A3CDADA1E06D7510019EEDF /* RecordFields.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordFields.generated.swift; sourceTree = "<group>"; };
 		3A3CDADF1E06D75A0019EEDF /* RecordFields.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RecordFields.stencil; sourceTree = "<group>"; };
 		3A3CDAE61E082C0D0019EEDF /* SafeUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeUpdater.swift; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 				3AFDB13D1E00482C009FA9D9 /* UUIDExtension.swift */,
 				3AA263A51E4F3C86009B8F26 /* DataExtension.swift */,
 				3AA263AA1E50A662009B8F26 /* AutoEquatable.swift */,
+				3A2ED40B1E61573900EF368E /* CollectionExtension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -613,6 +616,7 @@
 				3A3CDADC1E06D7510019EEDF /* RecordFields.generated.swift in Sources */,
 				3AA263AF1E50A6A3009B8F26 /* AutoEquatable.generated.swift in Sources */,
 				3A20A86E1BCBC2E400241946 /* TwofishTables.swift in Sources */,
+				3A2ED40C1E61573900EF368E /* CollectionExtension.swift in Sources */,
 				3AA5E6D21BB994E6003C164D /* Header.swift in Sources */,
 				EA32B6AC1CF076A900DFAB9D /* FieldKey.swift in Sources */,
 				3A20A87A1BCC1D7C00241946 /* Hmac.swift in Sources */,
