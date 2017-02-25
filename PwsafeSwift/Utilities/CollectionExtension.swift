@@ -8,8 +8,8 @@
 
 import Foundation
 
-internal extension Collection where Iterator.Element: Comparable, Iterator.Element: Hashable {
-    internal func uniqueSorted(by areInIncreasingOrder: (Self.Iterator.Element, Self.Iterator.Element) -> Bool) -> [Self.Iterator.Element] {
+internal extension Collection where Iterator.Element: Comparable & Hashable {
+    internal func uniqueSorted(by areInIncreasingOrder: (Iterator.Element, Iterator.Element) -> Bool) -> [Iterator.Element] {
         return Array(Set(self)).sorted(by: areInIncreasingOrder)
     }
 }
