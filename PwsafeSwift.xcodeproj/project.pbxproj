@@ -415,7 +415,7 @@
 			buildConfigurationList = 3AA5E6C41BB994BA003C164D /* Build configuration list for PBXNativeTarget "PwsafeSwift" */;
 			buildPhases = (
 				AA38AF24F7ED2FBB2485E4A8 /* [CP] Check Pods Manifest.lock */,
-				3AA263A91E50A448009B8F26 /* ShellScript */,
+				3AA263A91E50A448009B8F26 /* Generate Code */,
 				3AA5E6B61BB994BA003C164D /* Sources */,
 				3AA5E6B71BB994BA003C164D /* Frameworks */,
 				3AA5E6B81BB994BA003C164D /* Headers */,
@@ -507,13 +507,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		3AA263A91E50A448009B8F26 /* ShellScript */ = {
+		3AA263A91E50A448009B8F26 /* Generate Code */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Generate Code";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;

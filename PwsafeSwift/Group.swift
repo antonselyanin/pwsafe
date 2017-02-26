@@ -14,12 +14,10 @@ public struct Group {
     public init(segments: [String]) {
         self.segments = segments
     }
-    
-    public func isChild(of group: Group) -> Bool {
-        fatalError()
+
+    public var title: String? {
+        return segments.last
     }
-    
-    //func
 }
 
 extension Group: Hashable {
@@ -35,12 +33,10 @@ extension Group: Comparable {
     public static func <(lhs: Group, rhs: Group) -> Bool {
         let firstNotEqual = zip(lhs.segments, rhs.segments)
             .lazy
-            .filter { (left, right) in
-                return left != right
-            }
+            .filter(!=)
             .first
         
-        let result: Bool? = firstNotEqual.map({ (left, right) in left < right })
+        let result: Bool? = firstNotEqual.map(<)
         
         return result ?? false
     }

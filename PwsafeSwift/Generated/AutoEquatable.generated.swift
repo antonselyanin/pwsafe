@@ -27,6 +27,7 @@ fileprivate func compareArrays<T>(lhs: [T], rhs: [T], compare: (_ lhs: T, _ rhs:
 extension Group: Equatable {} 
 public func == (lhs: Group, rhs: Group) -> Bool {
     guard lhs.segments == rhs.segments else { return false }
+    guard compareOptionals(lhs: lhs.title, rhs: rhs.title, compare: ==) else { return false }
     guard lhs.hashValue == rhs.hashValue else { return false }
     return true
 }
