@@ -35,6 +35,7 @@ Using it offers many benefits:
     - [Format:](#format)
     - [Accessing in templates:](#accessing-in-templates)
   - [Inline code generation](#inline-code-generation)
+  - [Per file code generation](#per-file-code-generation)
 - [Installing](#installing)
 - [Usage](#usage)
 - [Contributing](#contributing)
@@ -296,7 +297,12 @@ XCTMain([
 </details>
 
 ## Writing templates
-*Sourcery templates are powered by [Stencil](https://github.com/kylef/Stencil)*
+
+Sourcery supports several types of templates:
+
+- [Stencil](https://github.com/kylef/Stencil) templates
+- [Swift](https://github.com/krzysztofzablocki/Sourcery/blob/master/SourceryTests/Stub/SwiftTemplates/Equality.swifttemplate) templates
+- [JavaScript](https://github.com/krzysztofzablocki/Sourcery/blob/master/SourceryTests/Stub/JavaScriptTemplates/Equality.js) templates (using [EJS](http://ejs.co))
 
 Make sure you leverage Sourcery built-in daemon to make writing templates a pleasure:
 you can open template side-by-side with generated code and see it change live.
@@ -315,6 +321,17 @@ There are multiple ways to access your types:
 
 All of these properties return `Type` objects.
 
+<details><summary>**What are _known_ and _unknown_ types**</summary>
+
+Currently Sourcery only scans files from a directory that you tell it to scan. This way it can get full information about types _defined_ in these sources. These types are considered _known_ types. For each of known types Sourcery provides `Type` object. You can get it for example by its name from `types` collection. `Type` object contains information about whether type that it describes is a struct, enum, class or a protocol, what are its properties and methods, what protocols it implements and so on. This is done recursively, so if you have a class that inherits from another class (or struct that implements a protocol) and they are both known types you will have information about both of them and you will be able to access parent type's `Type` object using `type.inherits.TypeName` (or `type.implements.ProtocolName`).
+
+Everything _defined_ outside of scanned sources is considered as _unknown_ types. For such types Sourcery doesn't provide `Type` object. For that reason variables (and other "typed" types, like method parameters etc.) of such types will only contain `typeName` property, but their `type` property will be `nil`. 
+
+If you have an extension of unknown type defined in scanned sources Sourcery will create `Type` for it (it's `kind` property will be `extension`). But this object will contain only declarations defined in this extension. Several extensions of unknown type will be merged into one `Type` object the same way as extensions of known types.
+
+See #87 for details.
+</details>
+
 Available types:
 
 <details><summary>**Type**. Properties:</summary>
@@ -329,9 +346,9 @@ Available types:
 - `methods` <- list of all methods defined in this type, excluding those from protocols or inheritance
 - `allMethods` <- same principles as in `allVariables`
 - `initializers` <- list of all initializers
-- `inherits.BaseClass` => info whether type inherits from known base class
-- `implements.Protocol` => info whether type implements known protocol
-- `based.BaseClassOrProtocol` => info whether type implements or inherits from `BaseClassOrProtocol` (all type names encountered, even those that Sourcery didn't scan)
+- `inherits.BaseClass` => if type is a class and it inherits from a known class named `BaseClass` this property returns `Type` object for `BaseClass`, otherwise returns `nil`
+- `implements.Protocol` => if type implements a known protocol named `Protocol` this property returns `Type` object for `Protocol`, otherwise returns `nil`
+- `based.BaseClassOrProtocol` => if type either implements a protocol or inherits from a class named `BaseClassOrProtocol` this property returns `BaseClassOrProtocol` itself, otherwise returns `nil`. All type names encountered, even those that Sourcery didn't scan
 - `containedTypes` <- list of types contained within this type
 - `parentName` <- list of parent type (for contained ones)
 - `attributes` <- type attributes, i.e. `type.attributes.objc`
@@ -367,6 +384,7 @@ Available types:
 - `isImplicitlyUnwrappedOptional` <- shorthand for `typeName. isImplicitlyUnwrappedOptional `
 - `isTuple` <- shorthand for `typeName.isTuple`
 - `isClosure` <- shorthand for `typeName.isClosure`
+- `isArray` <- shorthand for `typeName.isArray`
 
 </details>
 
@@ -383,6 +401,7 @@ Available types:
 - `isStatic` <- whether is static variable
 - `isTuple` <- shorthand for `typeName.isTuple`
 - `isClosure` <- shorthand for `typeName.isClosure`
+- `isArray` <- shorthand for `typeName.isArray`
 - `readAccess` <- what is the protection access for reading?
 - `writeAccess` <- what is the protection access for writing?
 - `attributes` <- variable attributes, i.e. `var.attributes.NSManaged`
@@ -424,6 +443,7 @@ Available types:
 - `isImplicitlyUnwrappedOptional` <- shorthand for `typeName. isImplicitlyUnwrappedOptional `
 - `isTuple` <- shorthand for `typeName.isTuple`
 - `isClosure` <- shorthand for `typeName.isClosure`
+- `isArray` <- shorthand for `typeName.isArray`
 - `typeAttributes` <- parameter's type attributes, shorthand for `typeName.attributes`, i.e. `param.typeAttributes.escaping`
 
 </details>
@@ -439,13 +459,14 @@ Available types:
 - `isTuple` <- whether given type is a tuple
 - `tuple` <- returns information about tuple type (*TupleType*) based on `actualTypeName.unwrappedTypeName`
 - `isClosure` <- shorthand for `typeName.isClosure`
+- `isArray` <- shorthand for `typeName.isArray`
 - `attributes` <- type attributes, i.e. `typeName.attributes.escaping`
 
 </details>
 
 <details><summary>**TupleType**. Properties:</summary>
 
-- `name` <- element name
+- `name` <- type name
 - `elements` <- returns tuple elements information (*TupleElement*)
 
 </details>
@@ -459,6 +480,14 @@ Available types:
 - `isOptional` <- shorthand for `typeName.isOptional`
 - `isTuple` <- shorthand for `typeName.isTuple`
 - `isClosure` <- shorthand for `typeName.isClosure`
+
+</details>
+
+<details><summary>**ArrayType**. Properties:</summary>
+
+- `name` <- type name
+- `elementType` <- array element type, if known
+- `elementTypeName` <- array element type name (*TypeName*)
 
 </details>
 
@@ -517,16 +546,52 @@ If you want to attribute multiple items with same attributes, you can use sectio
 {% endif %}
 ```
 
+#### Checking for existance of at least one annotation:
+
+Sometimes it is desirable to only generate code if there's at least one field annotated.
+
+```swift
+{% if type.variables|annotated:"jsonKey" %}{% for var in type.variables|instance|annotated:"jsonKey" %}
+  var local{{ var.name|capitalize }} = json["{{ var.annotations.jsonKey }}"] as? {{ var.typeName }}
+{% endfor %}{% endif %}
+```
+
 ### Inline code generation
 
 Sourcery supports inline code generation, you just need to put same markup in your code and template, e.g.
 
 ```swift
-// sourcery.inline:TypeName.TemplateName
+// in template:
+
+{% for type in types.all %}
+// sourcery:inline:{{ type.name }}.TemplateName
 // sourcery:end
+{% endfor %}
+
+// in source code:
+
+class MyType {
+
+// sourcery:inline:MyType.TemplateName
+// sourcery:end
+
+}
 ```
 
 Sourcery will generate the template code and then perform replacement in your source file. Inlined generated code is not parsed to avoid chicken-egg problem.
+
+### Per file code generation
+
+Sourcery supports generating code in a separate file per type, you just need to put `file` annotation in a template, e.g.
+
+```swift
+{% for type in types.all %}
+// sourcery:file:Generated/{{ type.name}}+TemplateName
+// sourcery:end
+{% endfor %}
+```
+
+Sourcery will generate the template code and then write its annotated parts to corresponding files. In example above it will create `Generated/<type name>+TemplateName.generated.swift` file for each of scanned types.
 
 ## Installing
 

@@ -8,13 +8,17 @@
 
 import Foundation
 
-public struct FieldKey<RecordType, Value> {
+public protocol FieldCode {
+    var code: UInt8 { get }
+}
+
+public struct FieldKey<RecordType, Value>: FieldCode {
     public let code: UInt8
+    /// sourcery: skipEquality
     public let serializer: ValueSerializer<Value>
 }
 
-public struct ListFieldKey<RecordType, Value> {
+public struct ListFieldKey<RecordType, Value>: FieldCode {
     public let code: UInt8
     public let serializer: ValueSerializer<Value>
 }
-

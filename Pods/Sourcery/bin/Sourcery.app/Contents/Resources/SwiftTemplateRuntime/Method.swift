@@ -20,7 +20,7 @@ final class MethodParameter: NSObject, SourceryModel, Typed {
     var typeAttributes: [String: Attribute] { return typeName.attributes }
 
     /// Underlying parser data, never to be used by anything else
-    // sourcery: skipEquality, skipDescription, skipCoding
+    // sourcery: skipEquality, skipDescription, skipCoding, skipJSExport
     internal var __parserData: Any?
 
     init(argumentLabel: String?, name: String = "", typeName: TypeName, type: Type? = nil) {
@@ -128,7 +128,7 @@ final class Method: NSObject, SourceryModel, Annotated {
     let attributes: [String: Attribute]
 
     /// Underlying parser data, never to be used by anything else
-    // sourcery: skipEquality, skipDescription, skipCoding
+    // sourcery: skipEquality, skipDescription, skipCoding, skipJSExport
     internal var __parserData: Any?
 
     init(name: String,
@@ -163,7 +163,7 @@ final class Method: NSObject, SourceryModel, Annotated {
             guard let parameters: [MethodParameter] = aDecoder.decode(forKey: "parameters") else { NSException.raise(NSExceptionName.parseErrorException, format: "Key '%@' not found.", arguments: getVaList(["parameters"])); fatalError() }; self.parameters = parameters
             guard let returnTypeName: TypeName = aDecoder.decode(forKey: "returnTypeName") else { NSException.raise(NSExceptionName.parseErrorException, format: "Key '%@' not found.", arguments: getVaList(["returnTypeName"])); fatalError() }; self.returnTypeName = returnTypeName
             self.returnType = aDecoder.decode(forKey: "returnType")
-            self.throws = aDecoder.decode(forKey: "throws")
+            self.`throws` = aDecoder.decode(forKey: "`throws`")
             guard let accessLevel: String = aDecoder.decode(forKey: "accessLevel") else { NSException.raise(NSExceptionName.parseErrorException, format: "Key '%@' not found.", arguments: getVaList(["accessLevel"])); fatalError() }; self.accessLevel = accessLevel
             self.isStatic = aDecoder.decode(forKey: "isStatic")
             self.isClass = aDecoder.decode(forKey: "isClass")
@@ -178,7 +178,7 @@ final class Method: NSObject, SourceryModel, Annotated {
             aCoder.encode(self.parameters, forKey: "parameters")
             aCoder.encode(self.returnTypeName, forKey: "returnTypeName")
             aCoder.encode(self.returnType, forKey: "returnType")
-            aCoder.encode(self.throws, forKey: "throws")
+            aCoder.encode(self.`throws`, forKey: "`throws`")
             aCoder.encode(self.accessLevel, forKey: "accessLevel")
             aCoder.encode(self.isStatic, forKey: "isStatic")
             aCoder.encode(self.isClass, forKey: "isClass")

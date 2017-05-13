@@ -9,12 +9,14 @@ import Foundation
 class Type: NSObject, SourceryModel, Annotated {
 
     /// All local typealiases
+    // sourcery: skipJSExport
     var typealiases: [String: Typealias] {
         didSet {
             typealiases.values.forEach { $0.parent = self }
         }
     }
 
+    // sourcery: skipJSExport
     internal var isExtension: Bool
 
     // sourcery: forceEquality
@@ -41,22 +43,37 @@ class Type: NSObject, SourceryModel, Annotated {
     /// All variables associated with this type, including those from parent or protocols
     /// sourcery: skipEquality, skipDescription
     var allVariables: [Variable] {
-        return flattenAll { $0.variables }
+        return flattenAll({
+            return $0.variables
+            //return ($0 is Protocol) ? [] : $0.variables
+        }, filter: { all, extracted in
+            !all.contains(where: { $0.name == extracted.name && $0.isStatic == extracted.isStatic })
+        })
     }
 
     /// All methods associated with this type, including those from parent or protocols
     /// sourcery: skipEquality, skipDescription
     var allMethods: [Method] {
-        return flattenAll { $0.methods }
+        return flattenAll({ $0.methods })
     }
 
-    private func flattenAll<T>(extraction: (Type) -> [T]) -> [T] {
+    private func flattenAll<T>(_ extraction: @escaping (Type) -> [T], filter: (([T], T) -> Bool)? = nil) -> [T] {
         let all = NSMutableOrderedSet()
         all.addObjects(from: extraction(self))
 
-        _ = supertype.flatMap { all.addObjects(from: extraction($0)) }
-        inherits.values.forEach { all.addObjects(from: extraction($0)) }
-        implements.values.forEach { all.addObjects(from: extraction($0)) }
+        let filteredExtraction = { (target: Type) -> [T] in
+            if let filter = filter {
+                // swiftlint:disable:next force_cast
+                let all = all.array as! [T]
+                let extracted = extraction(target).filter({ filter(all, $0) })
+                return extracted
+            } else {
+                return extraction(target)
+            }
+        }
+
+        inherits.values.forEach { all.addObjects(from: filteredExtraction($0)) }
+        implements.values.forEach { all.addObjects(from: filteredExtraction($0)) }
 
         return all.array.flatMap { $0 as? T }
     }
@@ -136,6 +153,7 @@ class Type: NSObject, SourceryModel, Annotated {
         }
     }
 
+    // sourcery: skipJSExport
     var parentTypes: AnyIterator<Type> {
         var next: Type? = self
         return AnyIterator {
@@ -151,9 +169,8 @@ class Type: NSObject, SourceryModel, Annotated {
 
     var attributes: [String: Attribute]
 
-    /// sourcery: skipEquality
     /// Underlying parser data, never to be used by anything else
-    /// sourcery: skipDescription, skipEquality, skipCoding
+    // sourcery: skipDescription, skipEquality, skipCoding, skipJSExport
     internal var __parserData: Any?
 
     init(name: String = "",
@@ -169,6 +186,7 @@ class Type: NSObject, SourceryModel, Annotated {
          annotations: [String: NSObject] = [:],
          isGeneric: Bool = false) {
 
+        let name = name.trimmingCharacters(in: CharacterSet(charactersIn: "`"))
         self.localName = name
         self.accessLevel = accessLevel.rawValue
         self.isExtension = isExtension
@@ -252,7 +270,7 @@ class Type: NSObject, SourceryModel, Annotated {
 
 extension Type {
 
-    // sourcery: skipDescription
+    // sourcery: skipDescription, skipJSExport
     var isClass: Bool {
         let isNotClass = self is Struct || self is Enum || self is Protocol
         return !isNotClass && !isExtension

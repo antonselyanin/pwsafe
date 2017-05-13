@@ -11,6 +11,11 @@ import Foundation
 public struct RawField {
     public let typeCode: UInt8
     public let bytes: [UInt8]
+    
+    public init(typeCode: UInt8, bytes: [UInt8]) {
+        self.typeCode = typeCode
+        self.bytes = bytes
+    }
 }
 
 extension RawField {

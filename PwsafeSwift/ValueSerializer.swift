@@ -56,6 +56,15 @@ public enum ValueSerializers {
         }
     )
     
+    public static let bytes: ValueSerializer<[UInt8]> = ValueSerializer(
+        toByteArray: { (bytes: [UInt8]) -> [UInt8] in
+            return bytes
+        },
+        fromByteArray: { (bytes: [UInt8]) -> [UInt8]? in
+            return bytes
+        }
+    )
+    
     internal static func byteArrayConvertibles<T: ByteArrayConvertible>() -> ValueSerializer<T> {
         return ValueSerializer(
             toByteArray: { $0.littleEndianBytes() },

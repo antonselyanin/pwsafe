@@ -1,6 +1,36 @@
 # Sourcery CHANGELOG
 
 ---
+
+## 0.5.8
+
+### New Features
+
+- Added parsing array types
+- Added support for JavaScript templates (using EJS)
+
+### Bug Fixes
+
+- Fixed escaping variables with reserved names
+- Fixed duplicated methods and variables in `allMethods` and `allVariables`
+- Fixed trimming attributes in type names
+
+## 0.5.7
+
+### Bug Fixes
+- Cache initial file contents, including the inline generated ranges so that they are always up to date
+
+## 0.5.6
+
+### New Features
+
+- Added per file code generation
+
+### Bug Fixes
+
+- Fixed parsing annotations with complex content
+- Fixed inline parser using wrong caching logic
+
 ## 0.5.5
 
 ### New Features
