@@ -519,7 +519,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "SRC_DIR=./PwsafeSwift\n$PODS_ROOT/Sourcery/bin/sourcery $SRC_DIR $SRC_DIR/Templates $SRC_DIR/Generated";
+			shellScript = "SRC_DIR=./PwsafeSwift\n$PODS_ROOT/Sourcery/bin/sourcery --sources $SRC_DIR --templates $SRC_DIR/Templates --output $SRC_DIR/Generated";
 		};
 		54AA5C875731C5C40D8C4C69 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -24,9 +24,9 @@ public protocol XCTestCaseProvider: XCTestCaseProviderStatic, XCTestCaseNameProv
 
 public extension XCTestCaseProvider where Self: XCTestCaseProviderStatic {
     var allTestNames: [String] {
-        return type(of: self).allTests.map({ name, test in
+        return type(of: self).allTests.map { name, _ in
             return name
-        })
+        }
     }
 }
 
@@ -48,5 +48,5 @@ public extension XCTestCaseProvider where Self: XCTestCaseProviderStatic {
             XCTAssert(contains, "Test '\(name)' is missing from the allTests array")
         }
     }
-    
+
 #endif

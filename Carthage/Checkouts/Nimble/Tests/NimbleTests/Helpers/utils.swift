@@ -1,3 +1,4 @@
+import Dispatch
 import Foundation
 @testable import Nimble
 import XCTest
@@ -58,16 +59,14 @@ func failsWithErrorMessageForNil(_ message: String, file: FileString = #file, li
     failsWithErrorMessage("\(message) (use beNil() to match nils)", file: file, line: line, preferOriginalSourceLocation: preferOriginalSourceLocation, closure: closure)
 }
 
-#if _runtime(_ObjC)
     func deferToMainQueue(action: @escaping () -> Void) {
         DispatchQueue.main.async {
             Thread.sleep(forTimeInterval: 0.01)
             action()
         }
     }
-#endif
 
-public class NimbleHelper : NSObject {
+public class NimbleHelper: NSObject {
     public class func expectFailureMessage(_ message: NSString, block: @escaping () -> Void, file: FileString, line: UInt) {
         failsWithErrorMessage(String(describing: message), file: file, line: line, preferOriginalSourceLocation: true, closure: block)
     }

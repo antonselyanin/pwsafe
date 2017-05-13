@@ -5,8 +5,7 @@ import Quick
 
 Quick.QCKMain([
     FunctionalTests_AfterEachSpec.self,
-    FunctionalTests_AfterSuite_AfterSuiteSpec.self,
-    FunctionalTests_AfterSuite_Spec.self,
+    AfterSuiteTests.self,
     FunctionalTests_BeforeEachSpec.self,
     FunctionalTests_BeforeSuite_BeforeSuiteSpec.self,
     FunctionalTests_BeforeSuite_Spec.self,
@@ -19,19 +18,18 @@ Quick.QCKMain([
     Configuration_BeforeEachSpec.self,
     FunctionalTests_CrossReferencingSpecA.self,
     FunctionalTests_CrossReferencingSpecB.self,
-    FunctionalTests_FocusedSpec_Focused.self,
-    FunctionalTests_FocusedSpec_Unfocused.self,
+    _FunctionalTests_FocusedSpec_Focused.self,
+    _FunctionalTests_FocusedSpec_Unfocused.self
 ],
 configurations: [
     FunctionalTests_SharedExamples_BeforeEachTests_SharedExamples.self,
     FunctionalTests_SharedExamplesTests_SharedExamples.self,
     FunctionalTests_Configuration_AfterEach.self,
     FunctionalTests_Configuration_BeforeEach.self,
-    FunctionalTests_FocusedSpec_SharedExamplesConfiguration.self,
+    FunctionalTests_FocusedSpec_SharedExamplesConfiguration.self
 ],
 testCases: [
     testCase(AfterEachTests.allTests),
-    testCase(AfterSuiteTests.allTests),
     testCase(BeforeEachTests.allTests),
     testCase(BeforeSuiteTests.allTests),
     // testCase(DescribeTests.allTests),
@@ -43,5 +41,5 @@ testCases: [
     testCase(Configuration_BeforeEachTests.allTests),
     testCase(FocusedTests.allTests),
     testCase(FunctionalTests_CrossReferencingSpecA.allTests),
-    testCase(FunctionalTests_CrossReferencingSpecB.allTests),
+    testCase(FunctionalTests_CrossReferencingSpecB.allTests)
 ])
