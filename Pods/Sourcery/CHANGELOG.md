@@ -2,6 +2,52 @@
 
 ---
 
+## 0.6.0
+
+### New Features
+
+- Added support for inline code generation without requiring explicit `// sourcery:inline` comments in the source files. To use, use `sourcery:inline:auto` in a template: `// sourcery:inline:auto:MyType.TemplateName`
+- Added `isMutable` property for `Variable`
+- Added support for scanning multiple targets
+- Added access level filters and disabled filtering private declarations
+- Added support for inline comments for annotations with `/*` and `*/`
+- Added annotations for enum case associated values and method parameters
+- Added `isConvenienceInitializer` property for `Method`
+- Added `defaultValue` for variables and method parameters
+- Added docs generated with jazzy
+- Sourcery now will not create empty files and will remove existing generated files with empty content if CLI flag `prune` is set to `true` (`false` by default)
+- Sourcery now will remove inline annotation comments from generated code.
+- Added `rethrows` property to `Method`
+- Allow duplicated annotations to be agregated into array
+- Added ejs-style tags to control whitespaces and new lines in swift templates
+- Added CLI option to provide path to config file
+
+### Bug Fixes
+
+- Inserting multiple inline code block in one file
+- Suppress warnings when compiling swift templates
+- Accessing protocols in Swift templates
+- Crash that would happen sometimes when parsing typealiases
+
+### Internal changes
+
+- Replaced `TypeReflectionBox` and `GenerationContext` types with common `TemplateContext`.
+
+## 0.5.9
+
+### New Features
+
+- Added flag to check if `TypeName` is dictionary
+- Added support for multiple sources and templates paths, sources, templates and output paths now should be provided with `--sources`, `--templates` and `--output` options
+- Added support for YAML file configuration
+- Added generation of non-swift files using `sourcery:file` annotation
+
+### Bug Fixes
+
+- Fixed observing swift and js templates
+- Fixed parsing generic array types
+- Fixed using dictionary in annotations
+
 ## 0.5.8
 
 ### New Features

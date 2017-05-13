@@ -1,183 +1,221 @@
-// Generated using Sourcery 0.5.7 — https://github.com/krzysztofzablocki/Sourcery
+// Generated using Sourcery 0.5.9 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
 extension ArrayType {
-    override var description: String {
+    /// :nodoc:
+    override public var description: String {
         var string = "\(type(of: self)): "
-        string += "name = \(self.name), "
-        string += "elementTypeName = \(self.elementTypeName), "
-        string += "elementType = \(self.elementType)"
+        string += "name = \(String(describing: self.name)), "
+        string += "elementTypeName = \(String(describing: self.elementTypeName))"
         return string
     }
 }
 extension AssociatedValue {
-    override var description: String {
+    /// :nodoc:
+    override public var description: String {
         var string = "\(type(of: self)): "
-        string += "localName = \(self.localName), "
-        string += "externalName = \(self.externalName), "
-        string += "typeName = \(self.typeName)"
+        string += "localName = \(String(describing: self.localName)), "
+        string += "externalName = \(String(describing: self.externalName)), "
+        string += "typeName = \(String(describing: self.typeName)), "
+        string += "annotations = \(String(describing: self.annotations))"
         return string
     }
 }
 extension Class {
-    override var description: String {
+    /// :nodoc:
+    override public var description: String {
         var string = super.description
-        string += "kind = \(self.kind)"
+        string += "kind = \(String(describing: self.kind))"
+        return string
+    }
+}
+extension DictionaryType {
+    /// :nodoc:
+    override public var description: String {
+        var string = "\(type(of: self)): "
+        string += "name = \(String(describing: self.name)), "
+        string += "valueTypeName = \(String(describing: self.valueTypeName)), "
+        string += "keyTypeName = \(String(describing: self.keyTypeName))"
         return string
     }
 }
 extension Enum {
-    override var description: String {
+    /// :nodoc:
+    override public var description: String {
         var string = super.description
-        string += "cases = \(self.cases), "
-        string += "rawTypeName = \(self.rawTypeName), "
-        string += "hasAssociatedValues = \(self.hasAssociatedValues)"
+        string += "cases = \(String(describing: self.cases)), "
+        string += "rawTypeName = \(String(describing: self.rawTypeName)), "
+        string += "hasAssociatedValues = \(String(describing: self.hasAssociatedValues))"
         return string
     }
 }
 extension EnumCase {
-    override var description: String {
+    /// :nodoc:
+    override public var description: String {
         var string = "\(type(of: self)): "
-        string += "name = \(self.name), "
-        string += "rawValue = \(self.rawValue), "
-        string += "associatedValues = \(self.associatedValues), "
-        string += "annotations = \(self.annotations), "
-        string += "hasAssociatedValue = \(self.hasAssociatedValue)"
+        string += "name = \(String(describing: self.name)), "
+        string += "rawValue = \(String(describing: self.rawValue)), "
+        string += "associatedValues = \(String(describing: self.associatedValues)), "
+        string += "annotations = \(String(describing: self.annotations)), "
+        string += "hasAssociatedValue = \(String(describing: self.hasAssociatedValue))"
         return string
     }
 }
 extension FileParserResult {
-    override var description: String {
+    /// :nodoc:
+    override internal var description: String {
         var string = "\(type(of: self)): "
-        string += "path = \(self.path), "
-        string += "types = \(self.types), "
-        string += "typealiases = \(self.typealiases), "
-        string += "inlineRanges = \(self.inlineRanges), "
-        string += "contentSha = \(self.contentSha), "
-        string += "sourceryVersion = \(self.sourceryVersion)"
-        return string
-    }
-}
-extension GenerationContext {
-    override var description: String {
-        var string = "\(type(of: self)): "
-        string += "types = \(self.types), "
-        string += "typeByName = \(self.typeByName), "
-        string += "arguments = \(self.arguments), "
-        string += "classes = \(self.classes), "
-        string += "all = \(self.all), "
-        string += "protocols = \(self.protocols), "
-        string += "structs = \(self.structs), "
-        string += "enums = \(self.enums)"
+        string += "path = \(String(describing: self.path)), "
+        string += "module = \(String(describing: self.module)), "
+        string += "types = \(String(describing: self.types)), "
+        string += "typealiases = \(String(describing: self.typealiases)), "
+        string += "inlineRanges = \(String(describing: self.inlineRanges)), "
+        string += "contentSha = \(String(describing: self.contentSha)), "
+        string += "sourceryVersion = \(String(describing: self.sourceryVersion))"
         return string
     }
 }
 extension Method {
-    override var description: String {
+    /// :nodoc:
+    override public var description: String {
         var string = "\(type(of: self)): "
-        string += "name = \(self.name), "
-        string += "parameters = \(self.parameters), "
-        string += "shortName = \(self.shortName), "
-        string += "returnTypeName = \(self.returnTypeName), "
-        string += "actualReturnTypeName = \(self.actualReturnTypeName), "
-        string += "`throws` = \(self.`throws`), "
-        string += "accessLevel = \(self.accessLevel), "
-        string += "isStatic = \(self.isStatic), "
-        string += "isClass = \(self.isClass), "
-        string += "isInitializer = \(self.isInitializer), "
-        string += "isFailableInitializer = \(self.isFailableInitializer), "
-        string += "annotations = \(self.annotations), "
-        string += "attributes = \(self.attributes)"
+        string += "name = \(String(describing: self.name)), "
+        string += "shortName = \(String(describing: self.shortName)), "
+        string += "callName = \(String(describing: self.callName)), "
+        string += "parameters = \(String(describing: self.parameters)), "
+        string += "returnTypeName = \(String(describing: self.returnTypeName)), "
+        string += "actualReturnTypeName = \(String(describing: self.actualReturnTypeName)), "
+        string += "`throws` = \(String(describing: self.`throws`)), "
+        string += "`rethrows` = \(String(describing: self.`rethrows`)), "
+        string += "accessLevel = \(String(describing: self.accessLevel)), "
+        string += "isStatic = \(String(describing: self.isStatic)), "
+        string += "isClass = \(String(describing: self.isClass)), "
+        string += "isInitializer = \(String(describing: self.isInitializer)), "
+        string += "isFailableInitializer = \(String(describing: self.isFailableInitializer)), "
+        string += "isConvenienceInitialiser = \(String(describing: self.isConvenienceInitialiser)), "
+        string += "annotations = \(String(describing: self.annotations)), "
+        string += "attributes = \(String(describing: self.attributes))"
         return string
     }
 }
 extension MethodParameter {
-    override var description: String {
+    /// :nodoc:
+    override public var description: String {
         var string = "\(type(of: self)): "
-        string += "argumentLabel = \(self.argumentLabel), "
-        string += "name = \(self.name), "
-        string += "typeName = \(self.typeName), "
-        string += "typeAttributes = \(self.typeAttributes)"
+        string += "argumentLabel = \(String(describing: self.argumentLabel)), "
+        string += "name = \(String(describing: self.name)), "
+        string += "typeName = \(String(describing: self.typeName)), "
+        string += "typeAttributes = \(String(describing: self.typeAttributes)), "
+        string += "defaultValue = \(String(describing: self.defaultValue)), "
+        string += "annotations = \(String(describing: self.annotations))"
         return string
     }
 }
 extension Protocol {
-    override var description: String {
+    /// :nodoc:
+    override public var description: String {
         var string = super.description
-        string += "kind = \(self.kind)"
+        string += "kind = \(String(describing: self.kind))"
         return string
     }
 }
 extension Struct {
-    override var description: String {
+    /// :nodoc:
+    override public var description: String {
         var string = super.description
-        string += "kind = \(self.kind)"
+        string += "kind = \(String(describing: self.kind))"
+        return string
+    }
+}
+extension TemplateContext {
+    /// :nodoc:
+    override internal var description: String {
+        var string = "\(type(of: self)): "
+        string += "types = \(String(describing: self.types)), "
+        string += "arguments = \(String(describing: self.arguments)), "
+        string += "stencilContext = \(String(describing: self.stencilContext))"
         return string
     }
 }
 extension TupleElement {
-    override var description: String {
+    /// :nodoc:
+    override public var description: String {
         var string = "\(type(of: self)): "
-        string += "name = \(self.name), "
-        string += "typeName = \(self.typeName)"
+        string += "name = \(String(describing: self.name)), "
+        string += "typeName = \(String(describing: self.typeName))"
         return string
     }
 }
 extension TupleType {
-    override var description: String {
+    /// :nodoc:
+    override public var description: String {
         var string = "\(type(of: self)): "
-        string += "name = \(self.name), "
-        string += "elements = \(self.elements)"
+        string += "name = \(String(describing: self.name)), "
+        string += "elements = \(String(describing: self.elements))"
         return string
     }
 }
 extension Type {
-    override var description: String {
+    /// :nodoc:
+    override public var description: String {
         var string = "\(type(of: self)): "
-        string += "typealiases = \(self.typealiases), "
-        string += "isExtension = \(self.isExtension), "
-        string += "kind = \(self.kind), "
-        string += "accessLevel = \(self.accessLevel), "
-        string += "name = \(self.name), "
-        string += "isGeneric = \(self.isGeneric), "
-        string += "localName = \(self.localName), "
-        string += "variables = \(self.variables), "
-        string += "methods = \(self.methods), "
-        string += "initializers = \(self.initializers), "
-        string += "annotations = \(self.annotations), "
-        string += "staticVariables = \(self.staticVariables), "
-        string += "instanceVariables = \(self.instanceVariables), "
-        string += "computedVariables = \(self.computedVariables), "
-        string += "storedVariables = \(self.storedVariables), "
-        string += "inheritedTypes = \(self.inheritedTypes), "
-        string += "containedTypes = \(self.containedTypes), "
-        string += "parentName = \(self.parentName), "
-        string += "parentTypes = \(self.parentTypes), "
-        string += "attributes = \(self.attributes)"
+        string += "module = \(String(describing: self.module)), "
+        string += "typealiases = \(String(describing: self.typealiases)), "
+        string += "isExtension = \(String(describing: self.isExtension)), "
+        string += "kind = \(String(describing: self.kind)), "
+        string += "accessLevel = \(String(describing: self.accessLevel)), "
+        string += "name = \(String(describing: self.name)), "
+        string += "isGeneric = \(String(describing: self.isGeneric)), "
+        string += "localName = \(String(describing: self.localName)), "
+        string += "variables = \(String(describing: self.variables)), "
+        string += "methods = \(String(describing: self.methods)), "
+        string += "initializers = \(String(describing: self.initializers)), "
+        string += "annotations = \(String(describing: self.annotations)), "
+        string += "staticVariables = \(String(describing: self.staticVariables)), "
+        string += "instanceVariables = \(String(describing: self.instanceVariables)), "
+        string += "computedVariables = \(String(describing: self.computedVariables)), "
+        string += "storedVariables = \(String(describing: self.storedVariables)), "
+        string += "inheritedTypes = \(String(describing: self.inheritedTypes)), "
+        string += "containedTypes = \(String(describing: self.containedTypes)), "
+        string += "parentName = \(String(describing: self.parentName)), "
+        string += "parentTypes = \(String(describing: self.parentTypes)), "
+        string += "attributes = \(String(describing: self.attributes))"
         return string
     }
 }
 extension Typealias {
-    override var description: String {
+    /// :nodoc:
+    override internal var description: String {
         var string = "\(type(of: self)): "
-        string += "aliasName = \(self.aliasName), "
-        string += "typeName = \(self.typeName), "
-        string += "parentName = \(self.parentName), "
-        string += "name = \(self.name)"
+        string += "aliasName = \(String(describing: self.aliasName)), "
+        string += "typeName = \(String(describing: self.typeName)), "
+        string += "parentName = \(String(describing: self.parentName)), "
+        string += "name = \(String(describing: self.name))"
+        return string
+    }
+}
+extension Types {
+    /// :nodoc:
+    override public var description: String {
+        var string = "\(type(of: self)): "
+        string += "types = \(String(describing: self.types))"
         return string
     }
 }
 extension Variable {
-    override var description: String {
+    /// :nodoc:
+    override public var description: String {
         var string = "\(type(of: self)): "
-        string += "name = \(self.name), "
-        string += "typeName = \(self.typeName), "
-        string += "isComputed = \(self.isComputed), "
-        string += "isStatic = \(self.isStatic), "
-        string += "readAccess = \(self.readAccess), "
-        string += "writeAccess = \(self.writeAccess), "
-        string += "annotations = \(self.annotations), "
-        string += "attributes = \(self.attributes)"
+        string += "name = \(String(describing: self.name)), "
+        string += "typeName = \(String(describing: self.typeName)), "
+        string += "isComputed = \(String(describing: self.isComputed)), "
+        string += "isStatic = \(String(describing: self.isStatic)), "
+        string += "readAccess = \(String(describing: self.readAccess)), "
+        string += "writeAccess = \(String(describing: self.writeAccess)), "
+        string += "isMutable = \(String(describing: self.isMutable)), "
+        string += "defaultValue = \(String(describing: self.defaultValue)), "
+        string += "annotations = \(String(describing: self.annotations)), "
+        string += "attributes = \(String(describing: self.attributes))"
         return string
     }
 }

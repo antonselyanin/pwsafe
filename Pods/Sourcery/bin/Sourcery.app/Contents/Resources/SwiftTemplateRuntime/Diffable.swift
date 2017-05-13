@@ -17,7 +17,9 @@ protocol Diffable {
     func diffAgainst(_ object: Any?) -> DiffableResult
 }
 
+/// :nodoc:
 extension NSRange: Diffable, Equatable {
+    /// :nodoc:
     public static func == (lhs: NSRange, rhs: NSRange) -> Bool {
         return NSEqualRanges(lhs, rhs)
     }
@@ -35,6 +37,7 @@ extension NSRange: Diffable, Equatable {
 }
 
 @objc class DiffableResult: NSObject, AutoEquatable {
+    // sourcery: skipEquality
     private var results: [String]
     internal var identifier: String?
 
@@ -73,7 +76,7 @@ extension DiffableResult {
 
     @discardableResult func trackDifference<T: Equatable>(actual: T?, expected: T?) -> DiffableResult {
         if actual != expected {
-            let result = DiffableResult(results: ["<expected: \(expected), received: \(actual)>"])
+            let result = DiffableResult(results: ["<expected: \(String(describing: expected)), received: \(String(describing: actual))>"])
             append(contentsOf: result)
         }
         return self
