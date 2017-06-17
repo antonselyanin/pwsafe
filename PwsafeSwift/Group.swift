@@ -33,10 +33,10 @@ extension Group: Comparable {
     public static func <(lhs: Group, rhs: Group) -> Bool {
         let firstNotEqual = zip(lhs.segments, rhs.segments)
             .lazy
-            .filter(!=)
+            .filter { $0.0 != $0.1 }
             .first
         
-        let result: Bool? = firstNotEqual.map(<)
+        let result: Bool? = firstNotEqual.map { $0.0 < $0.1 }
         
         return result ?? false
     }

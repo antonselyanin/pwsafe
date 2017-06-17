@@ -72,7 +72,7 @@ func hexStringToUInt8Array(_ input: String) -> [UInt8] {
     
     for i in stride(from: 0, to: input.characters.count, by: 2) {
         let range = input.characters.index(input.startIndex, offsetBy: i)...input.characters.index(input.startIndex, offsetBy: i + 1)
-        if let value = UInt8(input[range], radix: 16) {
+        if let value = UInt8(String(input[range]), radix: 16) {
             result.append(value)
         }
     }

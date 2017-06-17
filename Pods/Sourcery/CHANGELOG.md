@@ -2,7 +2,69 @@
 
 ---
 
+## 0.7.0
+
+### Bug fixes
+
+- Fixed inserting generated code inline automatically at wrong position
+- Fixed regression in AutoEquatable & AutoHashable template with private computed variables
+
+### New Features
+
+- Added `inout` flag for `MethodParameter`
+- Added parsing `mutating` and `final` attributes with convenience `isMutating` and `isFinal` properties 
+- Added support for `include` Stencil tag
+- Added support for excluded paths
+
+### Internal changes
+
+- Internal release procedure improvements
+- Improved `TemplatesTests` scheme running
+- Fixed swiftlint warnings (version 0.19.0)
+
+
+## 0.6.1
+
+### New Features
+
+- Paths in config file are now relative to config file path by default, absolute paths should start with `/`
+- Improved logging and error reporting, added `--quiet` CLI option, added runtime errors for using invalid types in `implementing` and `inheriting`
+- Added support for includes in EJS templates (for example: `<%- include('myTemplate.js') %>`)
+- Add the `lowerFirst` filter for Stencil templates.
+- Added `isRequired` property for `Method`
+- Improved parsing of closure types
+- Check if Current Project Version match version in podspec in release task
+- Improved swift templates performance
+- Added `// sourcery:file` annotation for source code
+
+### Bug fixes
+
+- Fixed detecting computed properties
+- Fixed typo in `isConvenienceInitialiser` property
+- Fixed creating cache folder when cache is disabled
+- Fixed parsing multiple enum cases annotations
+- Fixed parsing inline annotations when there is an access level or attribute
+- Fixed parsing `required` attribute
+- Fixed typo in `guides/Writing templates.md`
+
+### Internal changes
+
+- Improved `AutoMockable.stencil` to support protocols with `init` methods
+- Improved `AutoCases.stencil` to use `let` instead of computed `var`
+- Updated StencilSwiftKit to 1.0.2 which includes Stencil 0.9.0
+- Adding docset to release archive
+- Add tests for bundled stencil templates
+- Moved to CocoaPods 1.2.1
+- Made Array.parallelMap's block non-escaping
+
+
 ## 0.6.0
+
+### New Features
+
+- Added some convenience accessors for classic, static and instance methods, and types and contained types grouped by names
+
+## 0.6
 
 ### New Features
 

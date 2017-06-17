@@ -6,7 +6,7 @@
 	<dict>
 		<key>Resources/Info.plist</key>
 		<data>
-		UxsruqqkWGKHJOoaWfsoJOdFuik=
+		Dzf4gsfwIStXk54PTRkPfDNW0GE=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -26,11 +26,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			g4uQRTEaL3DeOFT/Fzj5PIKPDng=
+			kMuHcvRKxeYpVBx4ezec4TIcI1I=
 			</data>
 			<key>hash2</key>
 			<data>
-			sNB7GOwNRCgk0E3+Q3CEFomMOGBe8c4shCDTmqravfg=
+			1PbaRPY81TFpu0rLj0WRVwV6b/rzRMnWy6ZeyKrDutI=
 			</data>
 		</dict>
 		<key>Headers/Yams-umbrella.h</key>
@@ -81,22 +81,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			+Q9Li3aT5JIfKsrkh1hhD5s2ZE4=
+			nJI1SM/WAM7CeeF2jTRS1hxHzho=
 			</data>
 			<key>hash2</key>
 			<data>
-			WWj/5LUvElRwMF1mw5ZtF41eLMC1LY/a5ZkSuPUJNWQ=
+			2KPRiU0L8vzhoHky4z9xd+KENAE9MI2571uF/5JftSI=
 			</data>
 		</dict>
 		<key>Modules/Yams.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+kmWfhGa4rkEE28Whe7aR4CatW0=
+			vFmPeAAQ+OokBSAVohfSnf3dvNg=
 			</data>
 			<key>hash2</key>
 			<data>
-			e1ubSBFhuHGwYRmNAT/T6MHWYhuTuGdgEYbogCBELIc=
+			+5h229T/QGGr/C3ooNrKiccJwD8b21e4gN08/1PrywU=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -114,11 +114,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			UxsruqqkWGKHJOoaWfsoJOdFuik=
+			Dzf4gsfwIStXk54PTRkPfDNW0GE=
 			</data>
 			<key>hash2</key>
 			<data>
-			3IHc+r4ctRjprymWEDYU7eVGNKPmGTehXo0uERPaxwo=
+			cnEcQBxysSVPk42vbIWDZtVrwiqJEo22XYRJVTUQ7zs=
 			</data>
 		</dict>
 	</dict>
