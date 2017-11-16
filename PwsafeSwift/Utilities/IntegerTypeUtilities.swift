@@ -36,10 +36,10 @@ extension UInt32: ByteArrayConvertible {
     
     func littleEndianBytes() -> [UInt8] {
         return [
-            UInt8(extendingOrTruncating: self),
-            UInt8(extendingOrTruncating: self >> 8),
-            UInt8(extendingOrTruncating: self >> 16),
-            UInt8(extendingOrTruncating: self >> 24)
+            UInt8(truncatingIfNeeded: self),
+            UInt8(truncatingIfNeeded: self >> 8),
+            UInt8(truncatingIfNeeded: self >> 16),
+            UInt8(truncatingIfNeeded: self >> 24)
         ]
     }
 }
@@ -55,8 +55,8 @@ extension UInt16: ByteArrayConvertible {
 
     func littleEndianBytes() -> [UInt8] {
         return [
-            UInt8(extendingOrTruncating: self),
-            UInt8(extendingOrTruncating: self >> 8)
+            UInt8(truncatingIfNeeded: self),
+            UInt8(truncatingIfNeeded: self >> 8)
         ]
     }
 }

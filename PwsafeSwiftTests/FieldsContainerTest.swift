@@ -22,7 +22,7 @@ enum MockRecordType: RecordType {
 class FieldsContainerTest: QuickSpec {
     override func spec() {
         describe("FieldsContainer singleton fields") {
-            fit("writes new raw field") {
+            it("writes new raw field") {
                 // Given
                 var container = FieldsContainer<MockRecordType>(fields: [])
                 let value = "value"

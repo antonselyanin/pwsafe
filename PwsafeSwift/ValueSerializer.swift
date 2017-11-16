@@ -50,7 +50,7 @@ public enum ValueSerializers {
         fromByteArray: { (bytes: [UInt8]) -> Group? in
             return String.fromByteArray(bytes)
                 .map { string in
-                    return string.characters.split(separator: ".").map(String.init)
+                    return string.split(separator: ".").map(String.init)
                 }
                 .map(Group.init(segments:))
         }

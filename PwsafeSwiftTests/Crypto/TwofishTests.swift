@@ -70,8 +70,8 @@ struct TwofishTestData {
 func hexStringToUInt8Array(_ input: String) -> [UInt8] {
     var result = [UInt8]()
     
-    for i in stride(from: 0, to: input.characters.count, by: 2) {
-        let range = input.characters.index(input.startIndex, offsetBy: i)...input.characters.index(input.startIndex, offsetBy: i + 1)
+    for i in stride(from: 0, to: input.count, by: 2) {
+        let range = input.index(input.startIndex, offsetBy: i)...input.index(input.startIndex, offsetBy: i + 1)
         if let value = UInt8(String(input[range]), radix: 16) {
             result.append(value)
         }
@@ -85,9 +85,9 @@ func parseKeyValue(_ input: String) -> [String:String] {
         (record, line) in
         var outputRecord = record
         
-        if let splitIndex = line.characters.index(of: "=") {
-            let key = String(line.characters.prefix(upTo: splitIndex))
-            let value = String(line.characters.suffix(from: line.index(after: splitIndex)))
+        if let splitIndex = line.index(of: "=") {
+            let key = String(line.prefix(upTo: splitIndex))
+            let value = String(line.suffix(from: line.index(after: splitIndex)))
             outputRecord[key] = value
         }
         
