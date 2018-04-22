@@ -1,15 +1,20 @@
 PODS:
-  - Sourcery (0.7.0)
-  - SwiftLint (0.19.0)
+  - Sourcery (0.13.0)
+  - SwiftLint (0.25.1)
 
 DEPENDENCIES:
   - Sourcery
   - SwiftLint
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Sourcery
+    - SwiftLint
+
 SPEC CHECKSUMS:
-  Sourcery: 9236327fd0ae9b1cdf9a78e63452cfda021fc0e6
-  SwiftLint: 3537a05b34060e78e7510f04fb7537d738247803
+  Sourcery: d78d3b68aa565a7194e57ccd6995c1368fda9cb0
+  SwiftLint: ce933681be10c3266e82576dad676fa815a602e9
 
 PODFILE CHECKSUM: 04aa3ce69f36cd410051628c7972f0666c5f1e56
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.5.0
