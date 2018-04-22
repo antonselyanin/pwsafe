@@ -8,6 +8,7 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
         return [
             ("testToEventuallyPositiveMatches", testToEventuallyPositiveMatches),
             ("testToEventuallyNegativeMatches", testToEventuallyNegativeMatches),
+            ("testWaitUntilWithCustomDefaultsTimeout", testWaitUntilWithCustomDefaultsTimeout),
             ("testWaitUntilPositiveMatches", testWaitUntilPositiveMatches),
             ("testToEventuallyWithCustomDefaultTimeout", testToEventuallyWithCustomDefaultTimeout),
             ("testWaitUntilTimesOutIfNotCalled", testWaitUntilTimesOutIfNotCalled),
@@ -18,6 +19,7 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
             ("testWaitUntilErrorsIfDoneIsCalledMultipleTimes", testWaitUntilErrorsIfDoneIsCalledMultipleTimes),
             ("testWaitUntilMustBeInMainThread", testWaitUntilMustBeInMainThread),
             ("testToEventuallyMustBeInMainThread", testToEventuallyMustBeInMainThread),
+            ("testSubjectUnderTestIsReleasedFromMemory", testSubjectUnderTestIsReleasedFromMemory),
         ]
     }
 
@@ -45,10 +47,10 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
         failsWithErrorMessage("expected to eventually equal <1>, got <0>") {
             expect { value }.toEventually(equal(1))
         }
-        failsWithErrorMessage("expected to eventually equal <1>, got an unexpected error thrown: <\(errorToThrow)>") {
+        failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
             expect { try self.doThrowError() }.toEventually(equal(1))
         }
-        failsWithErrorMessage("expected to eventually not equal <0>, got an unexpected error thrown: <\(errorToThrow)>") {
+        failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
             expect { try self.doThrowError() }.toEventuallyNot(equal(0))
         }
     }
@@ -83,6 +85,17 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
             DispatchQueue.global(priority: .default).async(execute: asyncOperation)
         }
         expect { value }.toEventuallyNot(equal(1))
+    }
+
+    func testWaitUntilWithCustomDefaultsTimeout() {
+        AsyncDefaults.Timeout = 5
+        defer {
+            AsyncDefaults.Timeout = 1
+        }
+        waitUntil { done in
+            Thread.sleep(forTimeInterval: 4.8)
+            done()
+        }
     }
 
     func testWaitUntilPositiveMatches() {
@@ -172,16 +185,14 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testWaitUntilErrorsIfDoneIsCalledMultipleTimes() {
-#if !SWIFT_PACKAGE
-        waitUntil { done in
-            deferToMainQueue {
-                done()
-                expect {
+        failsWithErrorMessage("waitUntil(..) expects its completion closure to be only called once") {
+            waitUntil { done in
+                deferToMainQueue {
                     done()
-                }.to(raiseException(named: "InvalidNimbleAPIUsage"))
+                    done()
+                }
             }
         }
-#endif
     }
 
     func testWaitUntilMustBeInMainThread() {
@@ -219,4 +230,28 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
         expect(executedAsyncBlock).toEventually(beTruthy())
 #endif
     }
+
+    final class ClassUnderTest {
+        var deinitCalled: (() -> Void)?
+        var count = 0
+        deinit { deinitCalled?() }
+    }
+
+    func testSubjectUnderTestIsReleasedFromMemory() {
+        var subject: ClassUnderTest? = ClassUnderTest()
+
+        if let sub = subject {
+            expect(sub.count).toEventually(equal(0), timeout: 0.1)
+            expect(sub.count).toEventuallyNot(equal(1), timeout: 0.1)
+        }
+
+        waitUntil(timeout: 0.5) { done in
+            subject?.deinitCalled = {
+                done()
+            }
+
+            deferToMainQueue { subject = nil }
+        }
+    }
+
 }

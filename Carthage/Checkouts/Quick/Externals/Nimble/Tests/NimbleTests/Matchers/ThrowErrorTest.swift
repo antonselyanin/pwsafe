@@ -10,7 +10,7 @@ enum EquatableError: Error {
     case parameterized(x: Int)
 }
 
-extension EquatableError : Equatable {
+extension EquatableError: Equatable {
 }
 
 func == (lhs: EquatableError, rhs: EquatableError) -> Bool {
@@ -25,7 +25,7 @@ enum CustomDebugStringConvertibleError: Error {
     case b
 }
 
-extension CustomDebugStringConvertibleError : CustomDebugStringConvertible {
+extension CustomDebugStringConvertibleError: CustomDebugStringConvertible {
     var debugDescription: String {
         return "code=\(_code)"
     }
@@ -49,6 +49,7 @@ final class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
         expect { throw NimbleError.laugh }.to(throwError(NimbleError.laugh))
         expect { throw NimbleError.laugh }.to(throwError(errorType: NimbleError.self))
         expect { throw EquatableError.parameterized(x: 1) }.to(throwError(EquatableError.parameterized(x: 1)))
+        expect { throw EquatableError.parameterized(x: 1) }.toNot(throwError(EquatableError.parameterized(x: 2)))
     }
 
     func testPositiveMatchesWithClosures() {

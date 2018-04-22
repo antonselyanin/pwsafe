@@ -61,6 +61,6 @@ internal struct FieldsContainer<RecordType> {
     private func values<Value>(by typeCode: UInt8, serializer: ([UInt8]) -> Value?) -> [Value] {
         return fields.lazy
             .filter({ $0.typeCode == typeCode })
-            .flatMap({ serializer($0.bytes) })
+            .compactMap({ serializer($0.bytes) })
     }
 }

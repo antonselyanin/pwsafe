@@ -51,7 +51,7 @@ final class EqualTest: XCTestCase, XCTestCaseProvider {
         expect(array1).to(equal([1, 2, 3]))
         expect(array1).toNot(equal([1, 2] as [Int]))
 
-#if _runtime(_ObjC)
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
         expect(NSArray(array: [1, 2, 3])).to(equal(NSArray(array: [1, 2, 3])))
 #endif
 
@@ -121,6 +121,10 @@ final class EqualTest: XCTestCase, XCTestCaseProvider {
         failsWithErrorMessageForNil("expected to not equal <nil>, got <[1: 1]>") {
             expect([1: 1]).toNot(equal(nil as [Int: Int]?))
         }
+
+        failsWithErrorMessageForNil("expected to not equal <nil>, got <1>") {
+            expect(1).toNot(equal(nil))
+        }
     }
 
     func testDictionaryEquality() {
@@ -133,9 +137,9 @@ final class EqualTest: XCTestCase, XCTestCaseProvider {
         expect(actual).to(equal(expected))
         expect(actual).toNot(equal(unexpected))
 
-#if _runtime(_ObjC)
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
         expect(NSDictionary(object: "bar", forKey: "foo" as NSString)).to(equal(["foo": "bar"]))
-        expect(NSDictionary(object: "bar", forKey: "foo" as NSString) as? [String:String]).to(equal(expected))
+        expect(NSDictionary(object: "bar", forKey: "foo" as NSString) as? [String: String]).to(equal(expected))
 #endif
     }
 
@@ -161,10 +165,10 @@ final class EqualTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testNSObjectEquality() {
-        expect(NSNumber(value:1)).to(equal(NSNumber(value:1)))
-        expect(NSNumber(value:1)) == NSNumber(value:1)
-        expect(NSNumber(value:1)) != NSNumber(value:2)
-        expect { NSNumber(value:1) }.to(equal(1))
+        expect(NSNumber(value: 1)).to(equal(NSNumber(value: 1)))
+        expect(NSNumber(value: 1)) == NSNumber(value: 1)
+        expect(NSNumber(value: 1)) != NSNumber(value: 2)
+        expect { NSNumber(value: 1) }.to(equal(1))
     }
 
     func testOperatorEquality() {
@@ -200,8 +204,6 @@ final class EqualTest: XCTestCase, XCTestCaseProvider {
     func testOptionalEquality() {
         expect(1 as CInt?).to(equal(1))
         expect(1 as CInt?).to(equal(1 as CInt?))
-
-        expect(1).toNot(equal(nil))
     }
 
     func testArrayOfOptionalsEquality() {

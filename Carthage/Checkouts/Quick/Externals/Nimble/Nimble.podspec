@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Nimble"
-  s.version      = "6.0.1"
+  s.version      = "7.1.1"
   s.summary      = "A Matcher Framework for Swift and Objective-C"
   s.description  = <<-DESC
                    Use Nimble to express the expected outcomes of Swift or Objective-C expressions. Inspired by Cedar.
@@ -14,26 +14,31 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/Quick/Nimble.git",
                      :tag => "v#{s.version}" }
 
-  s.source_files = "Sources/**/*.{swift,h,m,c}"
+  s.source_files = [
+    "Sources/**/*.{swift,h,m,c}",
+    "Carthage/Checkouts/CwlCatchException/Sources/**/*.{swift,h,m,c}",
+    "Carthage/Checkouts/CwlPreconditionTesting/Sources/**/*.{swift,h,m,c}",
+  ]
 
   s.osx.exclude_files = [
-    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlCatchBadInstructionPOSIX.swift",
+    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlCatchBadInstructionPosix.swift",
+    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/Posix/CwlPreconditionTesting_POSIX.h",
   ]
   s.ios.exclude_files = [
-    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlCatchBadInstructionPOSIX.swift",
+    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlCatchBadInstructionPosix.swift",
+    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/Posix/CwlPreconditionTesting_POSIX.h",
   ]
   s.tvos.exclude_files = [
-    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlCatchBadInstruction.swift",
-    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlCatchBadInstruction.m",
-    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlBadInstructionException.swift",
-    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlDarwinDefinitions.swift",
-    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/mach_excServer.{h,c}",
-    "Sources/Lib/CwlPreconditionTesting/CwlCatchException/CwlCatchException.swift",
-    "Sources/Lib/CwlPreconditionTesting/CwlCatchException/CwlCatchException.m",
+    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/Mach/CwlPreconditionTesting.h",
+    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlCatchBadInstruction.swift",
+    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlBadInstructionException.swift",
+    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlDarwinDefinitions.swift",
+    "Carthage/Checkouts/CwlCatchException/Sources/CwlCatchException/CwlCatchException.swift",
+    "Carthage/Checkouts/CwlCatchException/Sources/CwlCatchExceptionSupport/CwlCatchException.m",
+    "Carthage/Checkouts/CwlCatchException/Sources/CwlCatchExceptionSupport/include/CwlCatchException.h",
   ]
 
   s.private_header_files = "Sources/NimbleObjectiveC/CurrentTestCaseTracker.h"
-  s.tvos.private_header_files = "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/mach_excServer.h"
 
   s.exclude_files = "Sources/Nimble/Adapters/NonObjectiveC/*.swift"
   s.weak_framework = "XCTest"
@@ -42,6 +47,7 @@ Pod::Spec.new do |s|
   s.pod_target_xcconfig = {
     'ENABLE_BITCODE' => 'NO',
     'OTHER_LDFLAGS' => '-weak-lswiftXCTest',
+    'OTHER_SWIFT_FLAGS' => '$(inherited) -suppress-warnings',
     'FRAMEWORK_SEARCH_PATHS' => '$(inherited) "$(PLATFORM_DIR)/Developer/Library/Frameworks"',
   }
 end

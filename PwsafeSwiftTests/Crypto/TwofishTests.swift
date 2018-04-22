@@ -45,7 +45,7 @@ final class TwofishTests: XCTestCase {
         let safeUrl = Bundle(for: type(of: self)).url(forResource: "ECB_TBL", withExtension: "TXT")
         let data = try! String(contentsOf: safeUrl!)
         let items = data.components(separatedBy: "I=")
-        let testSamples = items.map(parseKeyValue).map(parseTestData).flatMap { $0 }
+        let testSamples = items.map(parseKeyValue).map(parseTestData).compactMap { $0 }
         
         for testData in testSamples {
             let cryptor = try! Twofish(key: testData.key, blockMode: ECBMode())

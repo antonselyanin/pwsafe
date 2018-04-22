@@ -18,7 +18,7 @@ public struct Pwsafe {
     public internal(set) var records: [Record]
     
     public var groups: [Group] {
-        return (records.flatMap({ $0.group }) + header.emptyGroups).uniqueSorted(by: <)
+        return (records.compactMap({ $0.group }) + header.emptyGroups).uniqueSorted(by: <)
     }
     
     public init(header: Header = Header(uuid: UUID()),
@@ -57,7 +57,7 @@ public struct Pwsafe {
     public func subgroups(at level: Group) -> [Group] {
         let subgroups: [String] = groups
             .filter({ $0.segments.starts(with: level.segments) })
-            .flatMap { group in
+            .compactMap { group in
                 let segments = group.segments.suffix(group.segments.count - level.segments.count)
                 return segments.first
             }
