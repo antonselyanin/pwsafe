@@ -11,13 +11,13 @@ import Foundation
 typealias CipherOperation = ([UInt8]) -> [UInt8]?
 
 protocol BlockMode {
-    func encryptInput(_ input: [[UInt8]], iv: [UInt8]?, cipherOperation: CipherOperation) throws -> [UInt8]
+    func encryptInput(_ input: [[UInt8]], iv: [UInt8]?, cipherOperation: CipherOperation) -> [UInt8]
 
-    func decryptInput(_ input: [[UInt8]], iv: [UInt8]?, cipherOperation: CipherOperation) throws -> [UInt8]
+    func decryptInput(_ input: [[UInt8]], iv: [UInt8]?, cipherOperation: CipherOperation) -> [UInt8]
 }
 
 struct ECBMode: BlockMode {
-    func encryptInput(_ input: [[UInt8]], iv: [UInt8]?, cipherOperation: CipherOperation) throws -> [UInt8] {
+    func encryptInput(_ input: [[UInt8]], iv: [UInt8]?, cipherOperation: CipherOperation) -> [UInt8] {
         var output = [UInt8]()
         let outputSize = input.count * (input.first?.count ?? 0)
         output.reserveCapacity(outputSize)
@@ -31,14 +31,14 @@ struct ECBMode: BlockMode {
         return output
     }
     
-    func decryptInput(_ input: [[UInt8]], iv: [UInt8]?, cipherOperation: CipherOperation) throws -> [UInt8] {
-        return try encryptInput(input, iv: iv, cipherOperation: cipherOperation)
+    func decryptInput(_ input: [[UInt8]], iv: [UInt8]?, cipherOperation: CipherOperation) -> [UInt8] {
+        return encryptInput(input, iv: iv, cipherOperation: cipherOperation)
     }
 }
 
 struct CBCMode: BlockMode {
     //todo: test?
-    func encryptInput(_ input: [[UInt8]], iv: [UInt8]?, cipherOperation: CipherOperation) throws -> [UInt8] {
+    func encryptInput(_ input: [[UInt8]], iv: [UInt8]?, cipherOperation: CipherOperation) -> [UInt8] {
         let blockSize = input.first?.count ?? 0
         
         var output = [UInt8]()
@@ -60,7 +60,7 @@ struct CBCMode: BlockMode {
     }
     
     //todo: test?
-    func decryptInput(_ input: [[UInt8]], iv: [UInt8]?, cipherOperation: CipherOperation) throws -> [UInt8] {
+    func decryptInput(_ input: [[UInt8]], iv: [UInt8]?, cipherOperation: CipherOperation) -> [UInt8] {
         let blockSize = input.first?.count ?? 0
         
         var output = [UInt8]()

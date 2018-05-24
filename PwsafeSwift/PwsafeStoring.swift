@@ -11,24 +11,27 @@ import Foundation
 let keyStretchIterations: UInt32 = 2048
 
 extension Pwsafe {
-    public func toData(withPassword password: String) throws -> Data {
-        let output = BlockWriter()
-        
-        let records = [header.rawFields] + self.records.map({ $0.rawFields })
-        let encryptedPwsafe = try encryptPwsafeRecords(records, password: password)
-        
-        output.write(PwsafeFormat.startTag)
-        output.write(encryptedPwsafe.salt)
-        output.write(encryptedPwsafe.iter)
-        output.write(encryptedPwsafe.passwordHash)
-        output.write(encryptedPwsafe.b12)
-        output.write(encryptedPwsafe.b34)
-        output.write(encryptedPwsafe.iv)
-        output.write(encryptedPwsafe.encryptedData)
-        output.write(PwsafeFormat.endTag)
-        output.write(encryptedPwsafe.hmac)
-        
-        return Data(bytes: output.data)
+    public func toData(with password: String) -> Data {
+        do {
+            let output = BlockWriter()
+            let records = [header.rawFields] + self.records.map({ $0.rawFields })
+
+            let encryptedPwsafe = try encryptPwsafeRecords(records, password: password)
+            output.write(PwsafeFormat.startTag)
+            output.write(encryptedPwsafe.salt)
+            output.write(encryptedPwsafe.iter)
+            output.write(encryptedPwsafe.passwordHash)
+            output.write(encryptedPwsafe.b12)
+            output.write(encryptedPwsafe.b34)
+            output.write(encryptedPwsafe.iv)
+            output.write(encryptedPwsafe.encryptedData)
+            output.write(PwsafeFormat.endTag)
+            output.write(encryptedPwsafe.hmac)
+
+            return Data(bytes: output.data)
+        } catch {
+            fatalError()
+        }
     }
 }
 

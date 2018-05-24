@@ -68,7 +68,7 @@ final class Twofish {
     
     func encrypt(_ bytes:[UInt8]) throws -> [UInt8] {
         let blocks = bytes.toChunks(Twofish.blockSize)
-        return try blockMode.encryptInput(blocks, iv: self.iv, cipherOperation: encryptBlock)
+        return blockMode.encryptInput(blocks, iv: self.iv, cipherOperation: encryptBlock)
     }
     
     fileprivate func encryptBlock(_ block:[UInt8]) -> [UInt8]? {
@@ -81,12 +81,12 @@ final class Twofish {
     }
     
     func decrypt(_ bytes:[UInt8]) throws -> [UInt8] {
-        if bytes.count % Twofish.blockSize != 0 {
+        guard bytes.count % Twofish.blockSize == 0 else {
             throw Error.blockSizeExceeded
         }
         
         let blocks = bytes.toChunks(Twofish.blockSize)
-        return try blockMode.decryptInput(blocks, iv: self.iv, cipherOperation: decryptBlock)
+        return blockMode.decryptInput(blocks, iv: self.iv, cipherOperation: decryptBlock)
     }
     
     fileprivate func decryptBlock(_ block:[UInt8]) -> [UInt8]? {
