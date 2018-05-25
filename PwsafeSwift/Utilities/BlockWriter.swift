@@ -24,19 +24,19 @@ class BlockWriter {
         write(value.littleEndianBytes())
     }
     
-    func finishBlock() {
+    func finishBlock() throws {
         let remainder = data.count % blockSize
         if remainder > 0 {
-            data.append(contentsOf: generateRandomBytes(blockSize - remainder))
+            data.append(contentsOf: try generateRandomBytes(blockSize - remainder))
         }
     }
 }
 
 extension BlockWriter {
-    func writeRawField(type: UInt8, data: [UInt8] = []) {
+    func writeRawField(type: UInt8, data: [UInt8] = []) throws {
         write(UInt32(data.count))
         write(type)
         write(data)
-        finishBlock()
+        try finishBlock()
     }
 }

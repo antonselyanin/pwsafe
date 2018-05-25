@@ -10,5 +10,5 @@ import Foundation
 
 public enum PwsafeError: Error {
     case corruptedData
-    case internalError
+    case rngFailure
 }

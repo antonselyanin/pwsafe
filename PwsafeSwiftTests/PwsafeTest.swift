@@ -58,7 +58,7 @@ class PwsafeTest: QuickSpec {
                 
                 let pwsafe = Pwsafe(header: header, records: [record0, record1])
                 
-                let data = pwsafe.toData(with: "test")
+                let data = try! pwsafe.toData(with: "test")
                 
                 let parsedPwsafe = try! Pwsafe(data: data, password: "test")
                 

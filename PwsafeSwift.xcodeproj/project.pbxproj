@@ -11,7 +11,7 @@
 		3A1ADF161BB464540091C376 /* FieldValueSerializersTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1ADF151BB464540091C376 /* FieldValueSerializersTest.swift */; };
 		3A20A86E1BCBC2E400241946 /* TwofishTables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20A86C1BCBC2E400241946 /* TwofishTables.swift */; };
 		3A20A86F1BCBC2E400241946 /* Twofish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20A86D1BCBC2E400241946 /* Twofish.swift */; };
-		3A20A8711BCBC54800241946 /* ByteUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20A8701BCBC54800241946 /* ByteUtils.swift */; };
+		3A20A8711BCBC54800241946 /* RotateLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20A8701BCBC54800241946 /* RotateLeft.swift */; };
 		3A20A8741BCBD65400241946 /* TwofishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20A8721BCBD65400241946 /* TwofishTests.swift */; };
 		3A20A8751BCBD65400241946 /* ECB_TBL.TXT in Resources */ = {isa = PBXBuildFile; fileRef = 3A20A8731BCBD65400241946 /* ECB_TBL.TXT */; };
 		3A20A87A1BCC1D7C00241946 /* Hmac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20A8791BCC1D7C00241946 /* Hmac.swift */; };
@@ -27,6 +27,7 @@
 		3A7017E41DCB88CF002CF67A /* RecordData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7017E31DCB88CF002CF67A /* RecordData.swift */; };
 		3A7017F91DCE26F5002CF67A /* FieldsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7017F81DCE26F5002CF67A /* FieldsContainer.swift */; };
 		3A7017FB1DCE2728002CF67A /* RawField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7017FA1DCE2728002CF67A /* RawField.swift */; };
+		3A72D90C20B720D70015FA84 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A72D90B20B720D60015FA84 /* Random.swift */; };
 		3A73FCED1DEA94A900AECE5C /* ResultTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A73FCEC1DEA94A900AECE5C /* ResultTest.swift */; };
 		3A76F9DE1C16E41200BE5D40 /* PwsafeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A76F9DD1C16E41200BE5D40 /* PwsafeError.swift */; };
 		3A7E7FB01DE07BB8007B9482 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E7FAF1DE07BB8007B9482 /* Parser.swift */; };
@@ -87,7 +88,7 @@
 		3A1ADF151BB464540091C376 /* FieldValueSerializersTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldValueSerializersTest.swift; sourceTree = "<group>"; };
 		3A20A86C1BCBC2E400241946 /* TwofishTables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwofishTables.swift; sourceTree = "<group>"; };
 		3A20A86D1BCBC2E400241946 /* Twofish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Twofish.swift; sourceTree = "<group>"; };
-		3A20A8701BCBC54800241946 /* ByteUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ByteUtils.swift; sourceTree = "<group>"; };
+		3A20A8701BCBC54800241946 /* RotateLeft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotateLeft.swift; sourceTree = "<group>"; };
 		3A20A8721BCBD65400241946 /* TwofishTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwofishTests.swift; sourceTree = "<group>"; };
 		3A20A8731BCBD65400241946 /* ECB_TBL.TXT */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ECB_TBL.TXT; sourceTree = "<group>"; };
 		3A20A8791BCC1D7C00241946 /* Hmac.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hmac.swift; sourceTree = "<group>"; };
@@ -105,6 +106,7 @@
 		3A7017E31DCB88CF002CF67A /* RecordData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordData.swift; sourceTree = "<group>"; };
 		3A7017F81DCE26F5002CF67A /* FieldsContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldsContainer.swift; sourceTree = "<group>"; };
 		3A7017FA1DCE2728002CF67A /* RawField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawField.swift; sourceTree = "<group>"; };
+		3A72D90B20B720D60015FA84 /* Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 		3A73FCEC1DEA94A900AECE5C /* ResultTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultTest.swift; sourceTree = "<group>"; };
 		3A76F9DD1C16E41200BE5D40 /* PwsafeError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PwsafeError.swift; sourceTree = "<group>"; };
 		3A7E7FAF1DE07BB8007B9482 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
@@ -331,11 +333,12 @@
 		3AFFBAE51BC16DFF00F447F7 /* Crypto */ = {
 			isa = PBXGroup;
 			children = (
-				3A20A8701BCBC54800241946 /* ByteUtils.swift */,
 				3AFFBAE61BC16F9A00F447F7 /* CipherBlockMode.swift */,
 				3A20A8791BCC1D7C00241946 /* Hmac.swift */,
 				3A20A86D1BCBC2E400241946 /* Twofish.swift */,
 				3A20A86C1BCBC2E400241946 /* TwofishTables.swift */,
+				3A72D90B20B720D60015FA84 /* Random.swift */,
+				3A20A8701BCBC54800241946 /* RotateLeft.swift */,
 			);
 			path = Crypto;
 			sourceTree = "<group>";
@@ -597,12 +600,13 @@
 				3AA5E6D31BB994E6003C164D /* PwsafeParsing.swift in Sources */,
 				3A7E7FB51DE1FA6C007B9482 /* Operators.swift in Sources */,
 				3AFFBAE71BC16F9A00F447F7 /* CipherBlockMode.swift in Sources */,
+				3A72D90C20B720D70015FA84 /* Random.swift in Sources */,
 				3AA5E6D01BB994E6003C164D /* ValueSerializer.swift in Sources */,
 				3AA5E6D41BB994E6003C164D /* Record.swift in Sources */,
 				3AFDB13E1E00482C009FA9D9 /* UUIDExtension.swift in Sources */,
 				3AFFBAE21BC1072C00F447F7 /* ArrayExtension.swift in Sources */,
 				3AA263AB1E50A662009B8F26 /* AutoEquatable.swift in Sources */,
-				3A20A8711BCBC54800241946 /* ByteUtils.swift in Sources */,
+				3A20A8711BCBC54800241946 /* RotateLeft.swift in Sources */,
 				3A7017FB1DCE2728002CF67A /* RawField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

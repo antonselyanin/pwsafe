@@ -54,14 +54,14 @@ class PwsafeParsingInternalTest: QuickSpec {
             it ("parses multiple records") {
                 // Given
                 let writer = BlockWriter()
-                writer.writeRawField(type: 1, data: [1, 2, 3, 4])
-                writer.writeRawField(type: 2, data: [5, 6, 7])
-                writer.writeRawField(type: 0xff)
+                try! writer.writeRawField(type: 1, data: [1, 2, 3, 4])
+                try! writer.writeRawField(type: 2, data: [5, 6, 7])
+                try! writer.writeRawField(type: 0xff)
                 
-                writer.writeRawField(type: 1, data: [1, 2, 3, 4])
-                writer.writeRawField(type: 5)
-                writer.writeRawField(type: 5)
-                writer.writeRawField(type: 0xff)
+                try! writer.writeRawField(type: 1, data: [1, 2, 3, 4])
+                try! writer.writeRawField(type: 5)
+                try! writer.writeRawField(type: 5)
+                try! writer.writeRawField(type: 0xff)
                 
                 // When
                 let rawRecords = try! parseRawPwsafeRecords(writer.data)

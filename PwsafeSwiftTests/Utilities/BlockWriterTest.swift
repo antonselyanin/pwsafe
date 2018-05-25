@@ -19,7 +19,7 @@ class BlockWriterTest: QuickSpec {
                 writer.write([1, 2, 3, 4])
                 expect(writer.data) == [1, 2, 3, 4]
                 
-                writer.finishBlock();
+                try! writer.finishBlock();
                 expect(writer.data.count) == 16
             }
             
@@ -32,16 +32,16 @@ class BlockWriterTest: QuickSpec {
             it("should write byte array size of one block") {
                 let writer = BlockWriter()
                 writer.write([UInt8](repeating: 0, count: 16))
-                writer.finishBlock()
+                try! writer.finishBlock()
                 expect(writer.data.count) == 16
             }
             
             it("should write byte array in one block, UInt32 in next block") {
                 let writer = BlockWriter()
                 writer.write([1, 2, 3, 4])
-                writer.finishBlock()
+                try! writer.finishBlock()
                 writer.write(UInt32(0x05060708))
-                writer.finishBlock()
+                try! writer.finishBlock()
                 
                 expect(writer.data.count) == 32
                 expect(Array(writer.data.prefix(4))) == [1, 2, 3, 4]
@@ -51,7 +51,7 @@ class BlockWriterTest: QuickSpec {
             it ("should write raw field") {
                 let writer = BlockWriter()
                 
-                writer.writeRawField(type: 0x01, data: [0x05, 0x06, 0x07, 0x08])
+                try! writer.writeRawField(type: 0x01, data: [0x05, 0x06, 0x07, 0x08])
                 
                 expect(writer.data.count) == 16
                 expect(Array(writer.data[0..<4])) == [0x04, 0x00, 0x00, 0x00]
@@ -62,7 +62,7 @@ class BlockWriterTest: QuickSpec {
             it ("should write empty raw field") {
                 let writer = BlockWriter()
                 
-                writer.writeRawField(type: 0xff)
+                try! writer.writeRawField(type: 0xff)
                 
                 expect(writer.data.count) == 16
                 expect(Array(writer.data[0..<4])) == [0x00, 0x00, 0x00, 0x00]

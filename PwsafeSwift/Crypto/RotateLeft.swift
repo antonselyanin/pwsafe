@@ -35,10 +35,3 @@ func rotateRight(_ x:UInt32, n:UInt32) -> UInt32 {
 func rotateRight(_ x:UInt64, n:UInt64) -> UInt64 {
     return ((x >> n) | (x << (64 - n)))
 }
-
-//TODO: use better PRNG
-func generateRandomBytes(_ count: Int) -> [UInt8] {
-    var bytes = [UInt8](repeating: 0, count: count)
-    arc4random_buf(&bytes, bytes.count)
-    return bytes
-}

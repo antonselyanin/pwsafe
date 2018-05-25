@@ -11,7 +11,7 @@ import Foundation
 let keyStretchIterations: UInt32 = 2048
 
 extension Pwsafe {
-    public func toData(with password: String) -> Data {
+    public func toData(with password: String) throws -> Data {
         do {
             let output = BlockWriter()
             let records = [header.rawFields] + self.records.map({ $0.rawFields })
@@ -29,14 +29,16 @@ extension Pwsafe {
             output.write(encryptedPwsafe.hmac)
 
             return Data(bytes: output.data)
+        } catch let error as PwsafeError {
+            throw error
         } catch {
             fatalError()
         }
     }
 }
 
-func encryptPwsafeRecords(_ records: [[RawField]], password: String) throws -> EncryptedPwsafe {
-    let salt = generateRandomBytes(32)
+private func encryptPwsafeRecords(_ records: [[RawField]], password: String) throws -> EncryptedPwsafe {
+    let salt = try generateRandomBytes(32)
     let iter: UInt32 = keyStretchIterations
     
     let stretchedKey = stretchKey(password.utf8Bytes(),
@@ -46,12 +48,12 @@ func encryptPwsafeRecords(_ records: [[RawField]], password: String) throws -> E
     let keyHash = sha256(stretchedKey)
     
     let recordsKeyCryptor = try Twofish(key: stretchedKey, blockMode: ECBMode())
-    let recordsKey = generateRandomBytes(32)
+    let recordsKey = try generateRandomBytes(32)
     let b12 = try recordsKeyCryptor.encrypt(recordsKey)
-    let hmacKey = generateRandomBytes(32)
+    let hmacKey = try generateRandomBytes(32)
     let b34 = try recordsKeyCryptor.encrypt(hmacKey)
     
-    let iv = generateRandomBytes(16)
+    let iv = try generateRandomBytes(16)
     let recordsCryptor = try Twofish(key: recordsKey, iv: iv, blockMode: CBCMode())
     let encryptedData = try recordsCryptor.encrypt(pwsafeRecordsToBlockData(records))
     
@@ -71,14 +73,14 @@ func encryptPwsafeRecords(_ records: [[RawField]], password: String) throws -> E
         hmac: hmac)
 }
 
-func pwsafeRecordsToBlockData(_ records: [[RawField]]) -> [UInt8] {
+private func pwsafeRecordsToBlockData(_ records: [[RawField]]) throws -> [UInt8] {
     let writer = BlockWriter()
     
     for record in records {
-        record.forEach {
-            writer.writeRawField(type: $0.typeCode, data: $0.bytes)
+        for field in record {
+            try writer.writeRawField(type: field.typeCode, data: field.bytes)
         }
-        writer.writeRawField(type: PwsafeFormat.endRecordTypeCode)
+        try writer.writeRawField(type: PwsafeFormat.endRecordTypeCode)
     }
     
     return writer.data
