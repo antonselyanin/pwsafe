@@ -110,10 +110,17 @@ class PwsafeTest: QuickSpec {
                 expect(pwsafe[recordUUID0]) == updateRecord
             }
             
-            it("should remove record") {
-                var pwsafe = Pwsafe(header: header, records: [record0])
+            it("removes record via subscript") {
+                var pwsafe = Pwsafe(header: header, records: [record0, record1])
                 pwsafe[recordUUID0] = nil
                 
+                expect(pwsafe[recordUUID0]).to(beNil())
+            }
+
+            it("removes record via subscript") {
+                var pwsafe = Pwsafe(header: header, records: [record0, record1])
+                pwsafe.removeRecord(by: recordUUID0)
+
                 expect(pwsafe[recordUUID0]).to(beNil())
             }
         }

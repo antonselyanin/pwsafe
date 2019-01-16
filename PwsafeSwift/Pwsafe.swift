@@ -53,6 +53,10 @@ public struct Pwsafe {
             }
         }
     }
+
+    public mutating func removeRecord(by uuid: UUID) {
+        self[uuid] = nil
+    }
     
     public func subgroups(at level: Group) -> [Group] {
         let subgroups: [String] = groups

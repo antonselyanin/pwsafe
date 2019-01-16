@@ -24,7 +24,7 @@ class RecordTest: QuickSpec {
                 expect(record.value(forKey: RecordKey.title)) == "title"
             }
             
-            it("setValue should update value") {
+            it("updates value") {
                 record.setValue("title", forKey: RecordKey.title)
                 record.setValue("updated title", forKey: RecordKey.title)
                 expect(record.value(forKey: RecordKey.title)) == "updated title"
@@ -34,6 +34,17 @@ class RecordTest: QuickSpec {
                 record.setValue("title", forKey: RecordKey.title)
                 record.setValue(nil, forKey: RecordKey.title)
                 expect(record.value(forKey: RecordKey.title)).to(beNil())
+            }
+
+            it("removes value") {
+                // Given
+                record.setValue("title", forKey: RecordKey.email)
+
+                // When
+                record.remove(forKey: RecordKey.email)
+
+                // Then
+                expect(record.value(forKey: RecordKey.email)).to(beNil())
             }
         }
         

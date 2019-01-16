@@ -74,6 +74,10 @@ public struct RecordData<Type: RecordType>: RecordProtocol {
     public mutating func setValue<T>(_ value: T?, forKey key: FieldKey<Type, T>) {
         fields.setValue(value, forKey: key)
     }
+
+    public mutating func remove<T>(forKey key: FieldKey<Type, T>) {
+        setValue(nil, forKey: key)
+    }
     
     public func values<T>(forKey key: ListFieldKey<Type, T>) -> [T] {
         return fields.values(forKey: key)
