@@ -77,4 +77,16 @@ public enum RecordKey: RecordType {
     
     /// sourcery: type = String
     public static let email: Key<String> = key(0x14, ValueSerializers.strings)
+
+    /// sourcery: type = String
+    public static let creditCardNumber: Key<String> = key(0x1c, ValueSerializers.strings)
+
+    /// sourcery: type = String
+    public static let creditCardExpiration: Key<String> = key(0x1d, ValueSerializers.strings)
+
+    /// sourcery: type = String
+    public static let creditCardVerificationValue: Key<String> = key(0x1e, ValueSerializers.strings)
+
+    /// sourcery: type = String
+    public static let creditCardPin: Key<String> = key(0x1f, ValueSerializers.strings)
 }

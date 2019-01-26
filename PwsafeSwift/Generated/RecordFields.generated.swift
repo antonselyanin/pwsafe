@@ -114,5 +114,41 @@ public extension RecordProtocol where Type == RecordKey {
         }
     }
 
+    public var creditCardNumber: String? {
+        get {
+            return value(forKey: RecordKey.creditCardNumber)
+        }
+        set {
+            setValue(newValue, forKey: RecordKey.creditCardNumber)
+        }
+    }
+
+    public var creditCardExpiration: String? {
+        get {
+            return value(forKey: RecordKey.creditCardExpiration)
+        }
+        set {
+            setValue(newValue, forKey: RecordKey.creditCardExpiration)
+        }
+    }
+
+    public var creditCardVerificationValue: String? {
+        get {
+            return value(forKey: RecordKey.creditCardVerificationValue)
+        }
+        set {
+            setValue(newValue, forKey: RecordKey.creditCardVerificationValue)
+        }
+    }
+
+    public var creditCardPin: String? {
+        get {
+            return value(forKey: RecordKey.creditCardPin)
+        }
+        set {
+            setValue(newValue, forKey: RecordKey.creditCardPin)
+        }
+    }
+
 }
 
