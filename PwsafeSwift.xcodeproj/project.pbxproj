@@ -44,9 +44,6 @@
 		3A9D30B81BAF0571009A0330 /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB2DAD01B7A39E90051F3A8 /* DataExtension.swift */; };
 		3AA263A41E4F394B009B8F26 /* DataExtensionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA263A31E4F394B009B8F26 /* DataExtensionTest.swift */; };
 		3AA263A61E4F3C86009B8F26 /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA263A51E4F3C86009B8F26 /* DataExtension.swift */; };
-		3AA263AB1E50A662009B8F26 /* AutoEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA263AA1E50A662009B8F26 /* AutoEquatable.swift */; };
-		3AA263AD1E50A691009B8F26 /* AutoEquatable.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 3AA263AC1E50A691009B8F26 /* AutoEquatable.stencil */; };
-		3AA263AF1E50A6A3009B8F26 /* AutoEquatable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA263AE1E50A6A3009B8F26 /* AutoEquatable.generated.swift */; };
 		3AA263B11E50A749009B8F26 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA263B01E50A749009B8F26 /* Group.swift */; };
 		3AA5E6BE1BB994BA003C164D /* PwsafeSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA5E6BD1BB994BA003C164D /* PwsafeSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AA5E6CC1BB994E6003C164D /* BlockWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A03FED51BAD894F00741D62 /* BlockWriter.swift */; };
@@ -131,9 +128,6 @@
 		3A9EF3011B6E5FC8002E3689 /* Pwsafe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pwsafe.swift; sourceTree = "<group>"; };
 		3AA263A31E4F394B009B8F26 /* DataExtensionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtensionTest.swift; sourceTree = "<group>"; };
 		3AA263A51E4F3C86009B8F26 /* DataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
-		3AA263AA1E50A662009B8F26 /* AutoEquatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoEquatable.swift; sourceTree = "<group>"; };
-		3AA263AC1E50A691009B8F26 /* AutoEquatable.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AutoEquatable.stencil; sourceTree = "<group>"; };
-		3AA263AE1E50A6A3009B8F26 /* AutoEquatable.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoEquatable.generated.swift; sourceTree = "<group>"; };
 		3AA263B01E50A749009B8F26 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		3AA5E6BB1BB994BA003C164D /* PwsafeSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PwsafeSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AA5E6BD1BB994BA003C164D /* PwsafeSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PwsafeSwift.h; sourceTree = "<group>"; };
@@ -203,7 +197,6 @@
 		3A3CDAD81E06D7510019EEDF /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-				3AA263AE1E50A6A3009B8F26 /* AutoEquatable.generated.swift */,
 				3A3CDADA1E06D7510019EEDF /* RecordFields.generated.swift */,
 			);
 			path = Generated;
@@ -212,7 +205,6 @@
 		3A3CDADD1E06D75A0019EEDF /* Templates */ = {
 			isa = PBXGroup;
 			children = (
-				3AA263AC1E50A691009B8F26 /* AutoEquatable.stencil */,
 				3A3CDADF1E06D75A0019EEDF /* RecordFields.stencil */,
 			);
 			path = Templates;
@@ -324,7 +316,6 @@
 				3A7E7FBF1DE9E4DF007B9482 /* Result.swift */,
 				3AFDB13D1E00482C009FA9D9 /* UUIDExtension.swift */,
 				3AA263A51E4F3C86009B8F26 /* DataExtension.swift */,
-				3AA263AA1E50A662009B8F26 /* AutoEquatable.swift */,
 				3A2ED40B1E61573900EF368E /* CollectionExtension.swift */,
 			);
 			path = Utilities;
@@ -484,7 +475,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AA263AD1E50A691009B8F26 /* AutoEquatable.stencil in Resources */,
 				3A3CDAE11E06D75A0019EEDF /* RecordFields.stencil in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -576,7 +566,6 @@
 				3AA263B11E50A749009B8F26 /* Group.swift in Sources */,
 				3A20A86F1BCBC2E400241946 /* Twofish.swift in Sources */,
 				3A3CDADC1E06D7510019EEDF /* RecordFields.generated.swift in Sources */,
-				3AA263AF1E50A6A3009B8F26 /* AutoEquatable.generated.swift in Sources */,
 				3A20A86E1BCBC2E400241946 /* TwofishTables.swift in Sources */,
 				3A2ED40C1E61573900EF368E /* CollectionExtension.swift in Sources */,
 				3AA5E6D21BB994E6003C164D /* Header.swift in Sources */,
@@ -605,7 +594,6 @@
 				3AA5E6D41BB994E6003C164D /* Record.swift in Sources */,
 				3AFDB13E1E00482C009FA9D9 /* UUIDExtension.swift in Sources */,
 				3AFFBAE21BC1072C00F447F7 /* ArrayExtension.swift in Sources */,
-				3AA263AB1E50A662009B8F26 /* AutoEquatable.swift in Sources */,
 				3A20A8711BCBC54800241946 /* RotateLeft.swift in Sources */,
 				3A7017FB1DCE2728002CF67A /* RawField.swift in Sources */,
 			);

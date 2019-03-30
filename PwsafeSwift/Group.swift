@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Group {
+public struct Group: Hashable {
     public let segments: [String]
     
     public init(segments: [String]) {
@@ -17,15 +17,6 @@ public struct Group {
 
     public var title: String? {
         return segments.last
-    }
-}
-
-extension Group: Hashable {
-    public var hashValue: Int {
-        let prime = 31
-        return segments.reduce(0) { (result, element) in
-            return result &* prime &+ element.hashValue
-        }
     }
 }
 
@@ -39,5 +30,3 @@ extension Group: Comparable {
         return result ?? false
     }
 }
-
-extension Group: AutoEquatable {}

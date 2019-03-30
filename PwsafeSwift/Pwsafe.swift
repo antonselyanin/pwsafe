@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Pwsafe {
+public struct Pwsafe: Equatable {
     public static let defaultFormatVersion: UInt16 = 0x030d
     public static let defaultSaver: String = "PwsafeKit library for Swift"
     
@@ -78,5 +78,3 @@ public struct Pwsafe {
         return records.filter({ $0.group == group })
     }
 }
-
-extension Pwsafe: AutoEquatable {}
