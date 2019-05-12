@@ -48,7 +48,7 @@ extension RawField {
     private static func read(length: UInt32, type: UInt8, data: [UInt8]) -> ParserResult<RawField> {
         guard data.count >= Int(length) else { return .failure(ParserError.error) }
         
-        let remainder = Data(bytes: data.suffix(from: Int(length)))
+        let remainder = Data(data.suffix(from: Int(length)))
         let parsed = RawField(typeCode: type, bytes: Array(data.prefix(Int(length))))
         
         return .success(Parsed(remainder: remainder, value: parsed))

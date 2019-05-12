@@ -17,13 +17,13 @@ class DataExtensionTest: QuickSpec {
     override func spec() {
         describe("Data.suffixData") {
             it("returns suffix data, up to the end") {
-                let data = Data(bytes: [0, 1, 2, 3, 4])
+                let data = Data([0, 1, 2, 3, 4])
                 
-                expect(data.suffixData(2)) == Data(bytes: [3, 4])
+                expect(data.suffixData(2)) == Data([3, 4])
             }
 
             it("returns suffix data, through the end") {
-                let data = Data(bytes: [0, 1, 2, 3, 4])
+                let data = Data([0, 1, 2, 3, 4])
                 
                 expect(data.suffixData(data.count + 1)) == data
             }
@@ -43,13 +43,13 @@ class DataExtensionTest: QuickSpec {
         
         describe("prefixData") {
             it("returns prefix data") {
-                let data = Data(bytes: [0, 1, 2, 3, 4])
+                let data = Data([0, 1, 2, 3, 4])
                 
-                expect(data.prefixData(2)) == Data(bytes: [0, 1])
+                expect(data.prefixData(2)) == Data([0, 1])
             }
             
             it("returns suffix data") {
-                let data = Data(bytes: [0, 1, 2, 3, 4])
+                let data = Data([0, 1, 2, 3, 4])
                 
                 expect(data.prefixData(data.count + 1)) == data
             }

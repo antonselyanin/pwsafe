@@ -105,7 +105,7 @@ extension ParserProtocol where Value == Data {
         return Parser<Data> { input in
             return self.parse(input).flatMap { result in
                 let potentialSuffix = result.value.suffixData(requiredSuffix.count)
-                guard Data(bytes: requiredSuffix) == potentialSuffix else {
+                guard Data(requiredSuffix) == potentialSuffix else {
                     return .failure(ParserError.error)
                 }
                 
@@ -132,7 +132,7 @@ enum Parsers {
     
     static func expect(_ bytes: [UInt8]) -> Parser<Data> {
         return read(bytes.count).flatMap {
-            guard $0 == Data(bytes: bytes) else { return .empty() }
+            guard $0 == Data(bytes) else { return .empty() }
             return .pure($0)
         }
     }

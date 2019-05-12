@@ -28,7 +28,7 @@ extension Pwsafe {
             output.write(PwsafeFormat.endTag)
             output.write(encryptedPwsafe.hmac)
 
-            return Data(bytes: output.data)
+            return Data(output.data)
         } catch let error as PwsafeError {
             throw error
         } catch {

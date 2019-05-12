@@ -24,7 +24,7 @@ class PwsafeParsingInternalTest: QuickSpec {
                 writer.write(UInt8(1))
 
                 // When
-                let result = RawField.parser.parse(Data(bytes: writer.data))
+                let result = RawField.parser.parse(Data(writer.data))
                 
                 // Then
                 expect(result.value).to(beNil())
@@ -38,14 +38,14 @@ class PwsafeParsingInternalTest: QuickSpec {
                 writer.write(UInt8(1))
                 writer.write(fieldData)
                 
-                var data = Data(bytes: writer.data)
+                var data = Data(writer.data)
                 data.append(5)
                 data.append(6)
                 data.append(7)
                 
                 let parsed = RawField.parser.parse(data).value!
                 
-                expect(parsed.remainder) == Data(bytes: [5, 6, 7])
+                expect(parsed.remainder) == Data([5, 6, 7])
                 expect(parsed.value) == RawField(typeCode: 1, bytes: [1, 2, 3, 4])
             }
         }

@@ -83,7 +83,7 @@ class ParserMonadTest: QuickSpec {
         }
         
         describe("<* discard right operator") {
-            let data: Data = Data(bytes: [0, 1, 2, 3, 4, 5, 6])
+            let data: Data = Data([0, 1, 2, 3, 4, 5, 6])
             
             it("discards right") {
                 // Given
@@ -93,13 +93,13 @@ class ParserMonadTest: QuickSpec {
                 let result = parser.parse(data).value!
                 
                 // Then
-                expect(result.value) == Data(bytes: [0, 1])
-                expect(result.remainder) == Data(bytes: [5, 6])
+                expect(result.value) == Data([0, 1])
+                expect(result.remainder) == Data([5, 6])
             }
         }
 
         describe("*> discard left operator") {
-            let data: Data = Data(bytes: [0, 1, 2, 3, 4, 5, 6])
+            let data: Data = Data([0, 1, 2, 3, 4, 5, 6])
             
             it("discard left") {
                 // Given
@@ -109,8 +109,8 @@ class ParserMonadTest: QuickSpec {
                 let parsed = parser.parse(data).value!
                 
                 // Then
-                expect(parsed.value) == Data(bytes: [2, 3, 4])
-                expect(parsed.remainder) == Data(bytes: [5, 6])
+                expect(parsed.value) == Data([2, 3, 4])
+                expect(parsed.remainder) == Data([5, 6])
             }
         }
     }
