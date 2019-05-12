@@ -3,7 +3,7 @@
 
 
 public extension RecordProtocol where Type == HeaderKey {
-    public var version: UInt16? {
+    var version: UInt16? {
         get {
             return value(forKey: HeaderKey.version)
         }
@@ -12,7 +12,7 @@ public extension RecordProtocol where Type == HeaderKey {
         }
     }
 
-    public var timestampOfLastSave: Date? {
+    var timestampOfLastSave: Date? {
         get {
             return value(forKey: HeaderKey.timestampOfLastSave)
         }
@@ -21,7 +21,7 @@ public extension RecordProtocol where Type == HeaderKey {
         }
     }
 
-    public var whatPerformedLastSave: String? {
+    var whatPerformedLastSave: String? {
         get {
             return value(forKey: HeaderKey.whatPerformedLastSave)
         }
@@ -30,7 +30,7 @@ public extension RecordProtocol where Type == HeaderKey {
         }
     }
 
-    public var databaseName: String? {
+    var databaseName: String? {
         get {
             return value(forKey: HeaderKey.databaseName)
         }
@@ -39,7 +39,7 @@ public extension RecordProtocol where Type == HeaderKey {
         }
     }
 
-    public var databaseDescription: String? {
+    var databaseDescription: String? {
         get {
             return value(forKey: HeaderKey.databaseDescription)
         }
@@ -51,7 +51,7 @@ public extension RecordProtocol where Type == HeaderKey {
 }
 
 public extension RecordProtocol where Type == RecordKey {
-    public var group: Group? {
+    var group: Group? {
         get {
             return value(forKey: RecordKey.group)
         }
@@ -60,7 +60,7 @@ public extension RecordProtocol where Type == RecordKey {
         }
     }
 
-    public var title: String? {
+    var title: String? {
         get {
             return value(forKey: RecordKey.title)
         }
@@ -69,7 +69,7 @@ public extension RecordProtocol where Type == RecordKey {
         }
     }
 
-    public var username: String? {
+    var username: String? {
         get {
             return value(forKey: RecordKey.username)
         }
@@ -78,7 +78,7 @@ public extension RecordProtocol where Type == RecordKey {
         }
     }
 
-    public var notes: String? {
+    var notes: String? {
         get {
             return value(forKey: RecordKey.notes)
         }
@@ -87,7 +87,7 @@ public extension RecordProtocol where Type == RecordKey {
         }
     }
 
-    public var password: String? {
+    var password: String? {
         get {
             return value(forKey: RecordKey.password)
         }
@@ -96,7 +96,7 @@ public extension RecordProtocol where Type == RecordKey {
         }
     }
 
-    public var url: String? {
+    var url: String? {
         get {
             return value(forKey: RecordKey.url)
         }
@@ -105,7 +105,7 @@ public extension RecordProtocol where Type == RecordKey {
         }
     }
 
-    public var email: String? {
+    var email: String? {
         get {
             return value(forKey: RecordKey.email)
         }
@@ -114,7 +114,7 @@ public extension RecordProtocol where Type == RecordKey {
         }
     }
 
-    public var creditCardNumber: String? {
+    var creditCardNumber: String? {
         get {
             return value(forKey: RecordKey.creditCardNumber)
         }
@@ -123,7 +123,7 @@ public extension RecordProtocol where Type == RecordKey {
         }
     }
 
-    public var creditCardExpiration: String? {
+    var creditCardExpiration: String? {
         get {
             return value(forKey: RecordKey.creditCardExpiration)
         }
@@ -132,7 +132,7 @@ public extension RecordProtocol where Type == RecordKey {
         }
     }
 
-    public var creditCardVerificationValue: String? {
+    var creditCardVerificationValue: String? {
         get {
             return value(forKey: RecordKey.creditCardVerificationValue)
         }
@@ -141,7 +141,7 @@ public extension RecordProtocol where Type == RecordKey {
         }
     }
 
-    public var creditCardPin: String? {
+    var creditCardPin: String? {
         get {
             return value(forKey: RecordKey.creditCardPin)
         }

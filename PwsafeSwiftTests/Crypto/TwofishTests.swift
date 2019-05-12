@@ -85,7 +85,7 @@ func parseKeyValue(_ input: String) -> [String:String] {
         (record, line) in
         var outputRecord = record
         
-        if let splitIndex = line.index(of: "=") {
+        if let splitIndex = line.firstIndex(of: "=") {
             let key = String(line.prefix(upTo: splitIndex))
             let value = String(line.suffix(from: line.index(after: splitIndex)))
             outputRecord[key] = value

@@ -2,7 +2,7 @@
 public extension RecordProtocol where Type == {{ record.name }} {
     {% for param in record.staticVariables %}
         {% if param.annotations.type %}
-    public var {{ param.name }}: {{ param.annotations.type }}? {
+    var {{ param.name }}: {{ param.annotations.type }}? {
         get {
             return value(forKey: {{ record.name }}.{{ param.name }})
         }

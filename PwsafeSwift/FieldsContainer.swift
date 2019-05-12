@@ -17,7 +17,7 @@ internal struct FieldsContainer<RecordType> {
     }
     
     internal mutating func setValue<Value>(_ value: Value?, forKey key: FieldKey<RecordType, Value>) {
-        let index = fields.index(where: { $0.typeCode == key.code })
+        let index = fields.firstIndex(where: { $0.typeCode == key.code })
         
         let newValue = value.map({ RawField(typeCode: key.code, bytes: key.serializer.toByteArray($0)) })
         

@@ -36,7 +36,7 @@ public struct Pwsafe: Equatable {
         }
         
         set {
-            let index = records.index(where: { $0.uuid == uuid })
+            let index = records.firstIndex(where: { $0.uuid == uuid })
             
             switch (index, newValue) {
             case (let index?, let newValue?):
