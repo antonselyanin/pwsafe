@@ -359,7 +359,7 @@ func twofish_ecb_encrypt(_ pt:[UInt8], ct:inout [UInt8], skey:twofish_key)
     var td:UInt32
     var t1:UInt32
     var t2:UInt32
-    var K:[UInt32] = skey.K // ?????
+    let K:[UInt32] = skey.K // ?????
     
     a = loadUInt32(pt, startIndex: 0)
     b = loadUInt32(pt, startIndex: 4)
@@ -415,7 +415,7 @@ func twofish_ecb_decrypt(_ ct:[UInt8], pt:inout [UInt8], skey:twofish_key)
     var td:UInt32
     var t1:UInt32
     var t2:UInt32
-    var K:[UInt32] = skey.K // ?????
+    let K:[UInt32] = skey.K // ?????
     
     /* load input */
     ta = loadUInt32(ct, startIndex: 0)

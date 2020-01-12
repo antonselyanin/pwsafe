@@ -95,9 +95,7 @@ extension ParserProtocol where Value == Data {
     var bytes: Parser<[UInt8]> {
         return map { (data: Data) -> [UInt8] in
             //TODO: extract function or var
-            return data.withUnsafeBytes {
-                return [UInt8](UnsafeBufferPointer(start: $0, count: data.count))
-            }
+            return data.withUnsafeBytes(Array<UInt8>.init)
         }
     }
     

@@ -444,10 +444,9 @@
 			};
 			buildConfigurationList = 3A8D2C8E1B691AE50030494F /* Build configuration list for PBXProject "PwsafeSwift" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
