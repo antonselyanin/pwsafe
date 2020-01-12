@@ -98,6 +98,7 @@
 		3A556A621B73B1EE00E45151 /* libcommonCrypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcommonCrypto.tbd; path = usr/lib/system/libcommonCrypto.tbd; sourceTree = SDKROOT; };
 		3A556A781B73B5A400E45151 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3A5E0BF01B9C80DA0026D8EE /* test.psafe3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.psafe3; sourceTree = "<group>"; };
+		3A619FBA23CB08250045F358 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3A686C841C19DD9400247D42 /* FieldsContainerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldsContainerTest.swift; sourceTree = "<group>"; };
 		3A6A39C31C17265E00696EC6 /* HeaderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderTest.swift; sourceTree = "<group>"; };
 		3A7017E31DCB88CF002CF67A /* RecordData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordData.swift; sourceTree = "<group>"; };
@@ -245,6 +246,7 @@
 		3A8D2C8A1B691AE50030494F = {
 			isa = PBXGroup;
 			children = (
+				3A619FBA23CB08250045F358 /* README.md */,
 				527A385101D931EB4205EF17 /* Frameworks */,
 				3A8D2C941B691AE50030494F /* Products */,
 				3A8D2C951B691AE50030494F /* PwsafeSwift */,
