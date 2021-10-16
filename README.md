@@ -19,9 +19,3 @@ expect(record.username) == "user"
 expect(record.notes) == "Notes 😜"
 expect(record.password) == "password"    
 ```
-
-### TODO
-
-* Add documentation
-* Add SPM support
-* Add module map for CommonCrypto
