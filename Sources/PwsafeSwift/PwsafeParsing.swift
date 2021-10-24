@@ -68,11 +68,11 @@ internal func decryptPwsafeRecords(_ pwsafe: EncryptedPwsafe, password: String) 
 }
 
 internal func parseRawPwsafeRecords(_ data: [UInt8]) throws -> [[RawField]] {
-    guard let result = RawField.allFieldsParser.parse(Data(data)).value?.value else {
+    guard let result = try? RawField.allFieldsParser.parse(Data(data)).get() else {
         throw PwsafeError.corruptedData
     }
   
-    return result
+	return result.value
 }
 
 internal func stretchKey(_ password: [UInt8], salt: [UInt8], iterations: Int) -> [UInt8] {

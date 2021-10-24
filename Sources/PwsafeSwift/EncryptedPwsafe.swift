@@ -36,17 +36,18 @@ extension EncryptedPwsafe {
     
     //TODO: write tests
     internal static func read(from data: Data) throws -> EncryptedPwsafe {
-        guard let encrypted = EncryptedPwsafe.parser.parse(data).value?.value else {
+        guard let encrypted = try? EncryptedPwsafe.parser.parse(data).get() else {
             throw PwsafeError.corruptedData
         }
         
-        return encrypted
+        return encrypted.value
     }
     
     //TODO: write tests
-    internal static func parse(_ data: Data) throws -> Result<EncryptedPwsafe> {
+    internal static func parse(_ data: Data) throws -> Result<EncryptedPwsafe, PwsafeError> {
         return EncryptedPwsafe
             .parser.parse(data)
-            .map { $0.value }
+            .mapError({ _ in PwsafeError.corruptedData })
+            .map(\.value)
     }
 }

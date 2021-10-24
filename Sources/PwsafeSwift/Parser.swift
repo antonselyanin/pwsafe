@@ -17,7 +17,7 @@ struct Parsed<Value> {
     let value: Value
 }
 
-typealias ParserResult<Value> = Result<Parsed<Value>>
+typealias ParserResult<Value> = Result<Parsed<Value>, ParserError>
 
 protocol ParserProtocol {
     associatedtype Value
@@ -67,7 +67,7 @@ extension ParserProtocol {
             var input = initialInput
             var result: [Value] = []
             
-            while let value = self.parse(input).value {
+            while let value = try? self.parse(input).get() {
                 result.append(value.value)
                 input = value.remainder
             }
